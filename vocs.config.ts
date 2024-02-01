@@ -2,7 +2,6 @@ import { defineConfig } from 'vocs'
 
 export default defineConfig({
   title: 'Portfolio',
-  rootDir: '/portfolio/',
   sidebar: [
     {
       text: 'Projets',
