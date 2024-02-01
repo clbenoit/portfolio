@@ -2,7 +2,7 @@ import { defineConfig } from 'vocs'
 
 export default defineConfig({
   title: 'Portfolio',
-  baseUrl: 'https://clbenoit.github.io/portfolio/',
+  baseUrl: '/portfolio/',
   sidebar: [
     {
       text: 'Projets',
