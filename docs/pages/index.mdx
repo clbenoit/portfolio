@@ -3,10 +3,16 @@ layout: landing
 ---
 
 import { HomePage } from 'vocs/components'
+import clsx from 'clsx'
 
 <HomePage.Root>
-  <HomePage.Logo />
-  <HomePage.Tagline>L'intitulé de ton job ici bro</HomePage.Tagline>
+  {/* <HomePage.Logo /> */}
+  <HomePage.Tagline>
+  <h1 style={{ fontSize: '32px' }}>I'm Clement BENOIT</h1>
+  <br />
+  I'm a Grenoble based <b>data engineer with a specialty in omics bioinformatics </b>, currently working
+  at <b>Grenoble Alpes University Hospital (CHUGA)</b>, helping build tools to leverage health data for clinical diagnosis.
+  </HomePage.Tagline>
   <HomePage.Buttons>
     <HomePage.Button href="/projects" variant="accent">Voir tous les projets</HomePage.Button>
     <HomePage.Button href="https://github.com/clbenoit">GitHub</HomePage.Button>
