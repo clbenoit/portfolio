@@ -1,19 +1,19 @@
 import { defineConfig } from 'vocs'
 
 export default defineConfig({
-  title: 'Portfolio',
+  title: 'Home',
   topNav: [ 
     { text: 'CV', link: '/CV' }, 
     { text: 'Blog', link: '/blog' }
   ],
   sidebar: [
     {
-      text: 'Projets',
+      text: 'Projects',
       link: '/projects',
     },
     {
-      text: 'Projet n°1',
-      link: '/project1',
-    },
+    text: 'SomaVarDB',
+    link: '/projects/somavardb',
+  }
   ],
 })
