@@ -1,7 +1,7 @@
 import { defineConfig } from 'vocs'
 
 export default defineConfig({
-  title: 'Portfolio',
+  title: 'Home',
   topNav: [ 
     { text: 'CV', link: '/CV', match: '/docs' }, 
     { text: 'Blog', link: '/blog' }
