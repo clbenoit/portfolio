@@ -11,6 +11,7 @@
   "dependencies": {
     "react": "latest",
     "react-dom": "latest",
+    "react-vertical-timeline-component": "^3.6.0",
     "vocs": "latest"
   }
 }
