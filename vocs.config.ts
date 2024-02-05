@@ -8,12 +8,12 @@ export default defineConfig({
   ],
   sidebar: [
     {
-      text: 'Projets',
+      text: 'Projects',
       link: '/projects',
     },
     {
-      text: 'Projet n°1',
-      link: '/project1',
-    },
+    text: 'SomaVarDB',
+    link: '/projects/somavardb',
+  }
   ],
 })
