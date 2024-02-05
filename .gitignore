@@ -22,3 +22,5 @@ yarn-error.log*
 
 # chelou
 packages.microsoft.gpg
+
+vocs.config.ts.timestamp*

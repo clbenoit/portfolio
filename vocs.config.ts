@@ -3,7 +3,7 @@ import { defineConfig } from 'vocs'
 export default defineConfig({
   title: 'Portfolio',
   topNav: [ 
-    { text: 'CV', link: '/CV', match: '/docs' }, 
+    { text: 'CV', link: '/CV' }, 
     { text: 'Blog', link: '/blog' }
   ],
   sidebar: [
