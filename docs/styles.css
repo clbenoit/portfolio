@@ -1,0 +1,36 @@
+/* .vertical-timeline--1-column-left .vertical-timeline-element-icon .flag-size {
+    width: 160px;
+    height: 160px;
+  }
+  
+  @media only screen and (min-width: 1170px) {
+    .vertical-timeline--1-column-left .vertical-timeline-element-icon .flag-size {
+      width: 610px;
+      height: 60px;
+    }
+} */
+
+.flag-size {
+  padding: 0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.flag-sizeT {
+  padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical-timeline-element-title {
+  font-size: 18px;
+}
+.vertical-timeline-element-subtitle{
+  font-size: 16px;
+}
+.vertical-timeline-element-content{
+  font-size: 15px;
+}

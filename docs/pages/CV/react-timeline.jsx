@@ -3,65 +3,90 @@ import 'react-vertical-timeline-component/style.min.css';
 import VerticalTimelineComponent from 'react-vertical-timeline-component';
 const { VerticalTimeline, VerticalTimelineElement } = VerticalTimelineComponent;
 
+import WorkLogo from '../../public/WorkIcon.png'; // with import
+import EducationLogo from '../../public/EducationIcon.png'; // with import
+import InternshipLogo from '../../public/InternshipIcon.png'; // with import
+import TravelingLogo from '../../public/TravelingIcon.png'; // with import
+
+import '../../styles.css';
+
+const listStyle = {
+     listStyleType: 'disc',
+     listStylePosition: 'inside',
+     textJustify: 'auto', 
+    //  height: '0.5em'
+};
 
 const Timeline = () => {
   return (
-    <VerticalTimeline>
+    <VerticalTimeline
+    layout = "1-column-left">
+    {/* layout = "2-columns"> */}
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
-        contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-        date="2011 - present"
-        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      // icon={<WorkIcon />}
+        date="Aug 2022 - Present"
+        iconStyle={{ background: 'rgb(83,104,120)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(83,104,120)', color: '#fff' }}
+        icon={ <img className="flag-size" src ={WorkLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Creative Director</h3>
-        <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+        <h3 className="vertical-timeline-element-title">Clinical Bioinformatics Engineer</h3>
+        <h4 className="vertical-timeline-element-subtitle">Grenoble Alpes University Hospital (CHUGA)</h4>
         <p>
-          Creative Direction, User Experience, Visual Design, Project Management, Team Leading
+        Gathering biologist needs, Training, Automation, Databases, nf-core pipelines, Local Laboratory Information Management Systems,
+        Data Management, High Performance computing, Software maintenance, <br/>
         </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
-        date="2010 - 2011"
-        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      // icon={<WorkIcon />}
+        date="March 2019 - March 2022"
+        iconStyle={{ background: 'rgb(83,104,120)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(83,104,120)', color: '#fff' }}
+        icon={ <img className="flag-size" src ={WorkLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Art Director</h3>
-        <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+        <h3 className="vertical-timeline-element-title">Research Engineer</h3>
+        <h4 className="vertical-timeline-element-subtitle">Institut Curie</h4>
         <p>
-          Creative Direction, User Experience, Visual Design, SEO, Online Marketing
+        Bioinformatics, Data Pipeline development,
+        Statistical analysis, Reporting,
+        Data application development,
+        High Performance Computing,
+        Training,
+        Benchmarking,
+        Data Pipeline development<br/>
         </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
-        date="2008 - 2010"
-        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      // icon={<WorkIcon />}
+        date="March 2019 - March 2022"
+        iconStyle={{ background: 'rgb(128,193,157)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(128,193,157)', color: '#fff' }}        
+        icon={ <img className="flag-sizeT" src ={TravelingLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Web Designer</h3>
-        <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
+        <h3 className="vertical-timeline-element-title">BackPacker</h3>
+        <h4 className="vertical-timeline-element-subtitle">Europe</h4>
         <p>
-          User Experience, Visual Design
+        Blabla,Blili<br/>
         </p>
-      </VerticalTimelineElement>
+      </VerticalTimelineElement>           
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="2006 - 2008"
-        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      // icon={<WorkIcon />}
+        contentStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}
+        iconStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}        
+        icon={ <img className="flag-sizeT" src ={InternshipLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Web Designer</h3>
         <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
         <p>
-          User Experience, Visual Design
+          
         </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="April 2013"
-        iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-      // icon={<SchoolIcon />}
+        contentStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}
+        iconStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}        
+        icon={ <img className="flag-sizeT" src ={InternshipLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
         <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
@@ -72,8 +97,9 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="November 2012"
-        iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-      // icon={<SchoolIcon />}
+        iconStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}   
+        icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
         <h4 className="vertical-timeline-element-subtitle">Certification</h4>
@@ -84,19 +110,42 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="2002 - 2006"
-        iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-      // icon={<SchoolIcon />}
+        iconStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}           
+        icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
         <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
         <p>
-          Creative Direction, Visual Design
+          POLYTECH
         </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
-        iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-      // icon={<StarIcon />}
-      />
+        className="vertical-timeline-element--education"
+        date="2002 - 2006"
+        iconStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}           
+        icon={ <img src ={EducationLogo} />}
+      >
+        <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
+        <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
+        <p>
+          PREPA
+        </p>
+      </VerticalTimelineElement>
+      <VerticalTimelineElement
+        className="vertical-timeline-element--education"
+        date="2002 - 2006"
+        iconStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}
+        contentStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}           
+        icon={ <img src ={EducationLogo} />}
+      >
+        <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
+        <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
+        <p>
+          BACCALAUREATE
+        </p>
+      </VerticalTimelineElement>            
     </VerticalTimeline>
   )
 }
