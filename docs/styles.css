@@ -10,7 +10,7 @@
     }
 } */
 
-.flag-size {
+.flag-sizeL {
   padding: 0em;
   display: flex;
   justify-content: center;
@@ -18,8 +18,14 @@
 }
 
 
-.flag-sizeT {
+.flag-sizeM {
   padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flag-sizeS {
+  padding: 0.3em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,4 +39,8 @@
 }
 .vertical-timeline-element-content{
   font-size: 15px;
+}
+
+.hrefverticalelement{
+  color: black;
 }
