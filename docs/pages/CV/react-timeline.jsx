@@ -30,7 +30,7 @@ const Timeline = () => {
         contentStyle={{ background: 'rgb(128,193,157)', color: '#fff' }}        
         icon={ <img className="flag-sizeS" src ={BlogLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Create Omicsverse and personnal website</h3>
+        <h3 className="vertical-timeline-element-title"><a href="https://www.firalis.com/" target="_blank"  className="hrefverticalelement" >Create Omicsverse</a> and this personnal website</h3>
         <h4 className="vertical-timeline-element-subtitle">Home</h4>
       </VerticalTimelineElement>       
       <VerticalTimelineElement
@@ -82,28 +82,33 @@ const Timeline = () => {
       </VerticalTimelineElement>           
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
-        date="2006 - 2008"
+        date="Feb 2018 - Jul 2018"
         contentStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}
         iconStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}        
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Web Designer</h3>
-        <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+        <h3 className="vertical-timeline-element-title">Research and Development Intern</h3>
+        <h4 className="vertical-timeline-element-subtitle"><a href="https://www.firalis.com/" target="_blank"  className="hrefverticalelement">FIRALIS S.A </a></h4>
         <p>
-          
+        Worked on the design of a <a href="https://www.firalis.com/products/fimics-cardiac-ruo-kit-panel" target="_blank" className="hrefverticalelement">diagnostic test </a>  based on transcriptomic biomarkers (lncRNAs), predicting the development of heart failure within 6 months after a first myocardial infarction.      
         </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
-        date="April 2013"
+        date="May 2017 - Jul 2017"
         contentStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}
         iconStyle={{ background: 'rgb(221,136,86)', color: '#fff' }}        
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
-        <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
+        <h3 className="vertical-timeline-element-title">Fundamental research Intern</h3>
+        <h4 className="vertical-timeline-element-subtitle"> <a href="https://tagc.univ-amu.fr/"  target="_blank" className="hrefverticalelement">TAGC/TGML U1090 </a></h4>
         <p>
-          Strategy, Social Media
+        Benchmarking of a pipeline which combine quantitative and qualitative transcriptome analysis
+        to reveal isoforms expression switchs between two experimental conditions.<br/> <br/>
+
+       Main genomics tools : <br/>
+       <a href="https://pachterlab.github.io/kallisto/" target="_blank" className="hrefverticalelement"> - Kallisto </a> <br/>
+       <a href="https://pachterlab.github.io/sleuth_walkthroughs/trapnell/analysis.html" target="_blank" className="hrefverticalelement"> - Sleuth </a>
         </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
@@ -113,10 +118,10 @@ const Timeline = () => {
         contentStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}   
         icon={ <img src ={EducationLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Dual Master's degree in omics data analysis</h3>
+        <h3 className="vertical-timeline-element-title"><a href="https://formations.univ-amu.fr/fr/master/5SBG" target="_blank" className="hrefverticalelement">Dual Master's degree in omics data analysis </a> </h3>
         <h4 className="vertical-timeline-element-subtitle">Aix-Marseille University</h4>
         <p>
-        <a href="https://formations.univ-amu.fr/fr/master/5SBG" target="_blank" className="hrefverticalelement">This master's </a> program aims to offer biology students a training project that enables them to acquire the necessary skills to pursue a career as a scientist in the field of omics data analysis, both in academia and industry. <br/><br/>
+        This master's program aims to offer biology students a training project that enables them to acquire the necessary skills to pursue a career as a scientist in the field of omics data analysis, both in academia and industry. <br/><br/>
         The skills obtained by the graduate during this training will allow them to implement biochemical or genomic approaches to solve complex molecular problems or design innovative solutions to a range of biological issues. This training project provides students with theoretical, methodological, practical, and interpersonal skills related to the field of genomics.
         </p>
       </VerticalTimelineElement>
@@ -127,7 +132,7 @@ const Timeline = () => {
         contentStyle={{ background: 'rgb(128,0,32)', color: '#fff' }}           
         icon={ <img src ={EducationLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Master’s Degree in Biotechnology Engineering </h3>
+        <h3 className="vertical-timeline-element-title"><a href="https://polytech.univ-amu.fr/fr/formations/cycle-ingenieur/genie-biologique" target="_blank"  className="hrefverticalelement">Master’s Degree in Biotechnology Engineering </a></h3>
         <h4 className="vertical-timeline-element-subtitle">Aix-Marseille University Engineering school (POLYTECH)</h4>
         <p>
         Advanced applications of microbiology and cell biology, such as molecular biology, cell culture, genetic engineering, and bioinformatics. <br/> <br/>

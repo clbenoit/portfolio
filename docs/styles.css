@@ -42,5 +42,13 @@
 }
 
 .hrefverticalelement{
-  color: black;
+  /* color: black; */
+  color: white;
+}
+.hrefverticalelement::after {
+  content: "\2197"; /* Unicode arrow character code for top right arrow */
+  position: relative;
+  top: -5px;
+  right: 0px;
+  font-size: 16px;
 }
