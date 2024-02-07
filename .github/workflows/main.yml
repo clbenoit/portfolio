@@ -10,8 +10,8 @@ on:
 
 jobs:
   Deployment:
-    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' }}
-    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel' }}
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 🐰 Set up bun
