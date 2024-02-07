@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - develop
+      - devel
 
 jobs:
   Deployment:
@@ -20,7 +20,7 @@ jobs:
           bun-version: latest
 
       - name: 📥 Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
 
