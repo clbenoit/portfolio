@@ -11,6 +11,8 @@ import BlogLogo from '../../public/BlogIcon.png'; // with import
 
 import '../../styles.css';
 
+import GroupedList from './react-progress-bar';
+
 const listStyle = {
      listStyleType: 'disc',
      listStylePosition: 'inside',
@@ -20,6 +22,8 @@ const listStyle = {
 
 const Timeline = () => {
   return (
+    <div className="two-column-layout">
+    <div className="main-content">
     <VerticalTimeline
     layout = "1-column-left">
     {/* layout = "2-columns"> */}
@@ -32,6 +36,7 @@ const Timeline = () => {
       >
         <h3 className="vertical-timeline-element-title"><a href="https://www.firalis.com/" target="_blank"  className="hrefverticalelement" >Create Omicsverse</a> and this personnal website</h3>
         <h4 className="vertical-timeline-element-subtitle">Home</h4>
+        <p>Web development, Open source, Blogging, Cloud computing and hosting </p>
       </VerticalTimelineElement>       
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
@@ -164,6 +169,12 @@ const Timeline = () => {
         <h4 className="vertical-timeline-element-subtitle">Mâcon</h4>
       </VerticalTimelineElement>            
     </VerticalTimeline>
+    </div>
+      <div className="sidebarcv">
+         <br />
+          <GroupedList/>
+      </div>
+    </div>
   )
 }
 
