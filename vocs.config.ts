@@ -17,6 +17,10 @@ export default defineConfig({
     {
     text: 'SomaVarDB',
     link: '/projects/somavardb',
-  }
+  },
+  {
+    text: 'GermlineVarDB',
+    link: '/projects/germlinevardb',
+  }  
   ],
 })

@@ -11,7 +11,7 @@ import BlogLogo from '../../public/BlogIcon.png'; // with import
 
 import '../../styles.css';
 
-import GroupedList from './react-progress-bar';
+import GroupedList from './react-groupedlist';
 
 const listStyle = {
      listStyleType: 'disc',
@@ -34,7 +34,7 @@ const Timeline = () => {
         contentStyle={{ background: 'rgb(128,193,157)', color: '#fff' }}        
         icon={ <img className="flag-sizeS" src ={BlogLogo} />}
       >
-        <h3 className="vertical-timeline-element-title"><a href="https://www.firalis.com/" target="_blank"  className="hrefverticalelement" >Create Omicsverse</a> and this personnal website</h3>
+        <h3 className="vertical-timeline-element-title">Creation of <a href="https://www.firalis.com/" target="_blank"  className="hrefverticalelement" >Omicsverse </a> and this personnal website</h3>
         <h4 className="vertical-timeline-element-subtitle">Home</h4>
         <p>Web development, Open source, Blogging, Cloud computing and hosting </p>
       </VerticalTimelineElement>       

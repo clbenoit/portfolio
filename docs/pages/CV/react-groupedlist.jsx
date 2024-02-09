@@ -8,7 +8,7 @@ const GroupedList = () => {
     { name: 'Data management & engineering', items: ['Nextflow','Snakemake','PostgreSQL', 'SQL', 'ETL'], color: 'rgb(44,62,80)'},
     { name: 'Computing systems', items: ['Docker', 'Singularity', 'High performance computing', 'Cloud computing', 'Linux', 'Windows'], color: 'rgb(44,62,80)' },
     { name: 'Life Science', items: ['Molecular Biology', 'Genomics', 'Phylogenetics'], color: 'rgb(44,62,80)'},
-    { name: 'Project Management', items: ['Git'], color: 'rgb(44,62,80)'},
+    { name: 'Project Management', items: ['Git','Teams'], color: 'rgb(44,62,80)'},
     // Add more categories as needed
   ]);
 
