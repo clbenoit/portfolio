@@ -12,6 +12,6 @@
     "react": "latest",
     "react-dom": "latest",
     "react-vertical-timeline-component": "^3.6.0",
-    "vocs": "latest"
+    "vocs": "1.0.0-alpha.38"
   }
 }
