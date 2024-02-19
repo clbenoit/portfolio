@@ -1,6 +1,7 @@
 import { defineConfig } from 'vocs'
 
 export default defineConfig({
+  basePath: '/portfolio', 
   theme: { 
       colorScheme: 'dark'
   }, 
