@@ -1,5 +1,5 @@
-import{d as a,j as e}from"./index-CwX8Fc2b.js";const o={layout:"deafult",title:"GermlineVarDB",description:"undefined"};function i(t){const n={a:"a",div:"div",em:"em",h1:"h1",h2:"h2",header:"header",img:"img",li:"li",ol:"ol",p:"p",section:"section",strong:"strong",sup:"sup",ul:"ul",...a(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"germlinevardb",children:["GermlineVarDB",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#germlinevardb",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
-`,e.jsxs(n.p,{children:[e.jsxs("div",{children:[" ",e.jsx("h3",{children:e.jsx("i",{children:"A graphical interface to explore your germline genomic variation database."})})]}),e.jsx("br",{}),`
+import{d as a,j as e}from"./index-DJt5YIbZ.js";const o={layout:"deafult",title:"SomaVarDB",description:"undefined"};function i(t){const n={a:"a",div:"div",em:"em",h1:"h1",h2:"h2",header:"header",img:"img",li:"li",ol:"ol",p:"p",section:"section",strong:"strong",sup:"sup",ul:"ul",...a(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"somavardb",children:["SomaVarDB",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#somavardb",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
+`,e.jsxs(n.p,{children:[e.jsxs("div",{children:[" ",e.jsx("h3",{children:e.jsx("i",{children:"A graphical interface to explore your somatic genomic variation database."})})]}),`
 `,e.jsx(n.img,{src:"/somavardb.gif",alt:""})]}),`
 `,e.jsxs(n.h2,{id:"why-this-app",children:["Why this app",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-this-app",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx(n.p,{children:"Few hospitals do not outsource their bioinformatics analysis to private partners (at least in France). There are many reasons for this:"}),`
@@ -24,8 +24,8 @@ It's a package that contains both the tools for building the local database from
 and the interface for interacting with this database.`}),`
 `,e.jsxs(n.h2,{id:"open-source",children:["Open-source",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#open-source",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.ul,{children:[`
-`,e.jsx(n.li,{children:e.jsx(n.a,{href:"http://localhost:8080/app/GermlineVarDB",children:"Live demo"})}),`
-`,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://github.com/clbenoit/GermlineVarDB",children:"Source code"})}),`
+`,e.jsx(n.li,{children:e.jsx(n.a,{href:"http://localhost:8080/app/SomaVarDB",children:"Live demo"})}),`
+`,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://github.com/clbenoit/SomaVarDB",children:"Source code"})}),`
 `]}),`
 `,e.jsxs(n.h2,{id:"can-i-use-it-for-clinical-purposes-",children:["Can I use it for clinical purposes ?",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#can-i-use-it-for-clinical-purposes-",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.p,{children:["Unfortunately the answer is no at the moment. ",e.jsx(n.strong,{children:`To do so it would first need to meet the compliance and
