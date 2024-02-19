@@ -1,7 +1,8 @@
 import { defineConfig } from 'vocs'
 
 export default defineConfig({
-  basePath: '/portfolio', 
+  // basePath: '/portfolio', 
+  baseUrl 'https://clbenoit.github.io/portfolio'
   theme: { 
       colorScheme: 'dark'
   }, 
