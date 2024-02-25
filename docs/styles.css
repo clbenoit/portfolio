@@ -19,6 +19,10 @@
   align-items: center;
 }
 
+.vertical-timeline-element {
+  width: 100%;
+}
+
 .vertical-timeline-element-title {
   font-size: 18px;
 }
@@ -49,16 +53,43 @@
 .two-column-layout {
   display: flex; /* Use flexbox for a simple two-column layout */
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .main-content {
   flex:1; /* Take up remaining space in the container */
+  /*margin-right: 50px;*/
   margin-right: 50px;
+  min-width: 350px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-content {
+    flex:1; /* Take up remaining space in the container */
+    margin-right: 0px;
+  }
+ /* .category-box {
+    max-width: 60%; /* Adjust this value as needed */ 
+  /*}
+ */
 }
 
 .sidebarcv {
-  margin-right: -150px;
-  width: 200px; /* Adjust the width of the sidebar as needed */
+  margin-right: 0px;
+  width: '100%'; /* Adjust the width of the sidebar as needed */ 
+  flex-basis: 300px; /* Set the width of the sidebar */
   /* Add any other styling for the sidebar */
 }
 
+.category-box {
+  width: 100%;
+  color: white;
+  background: rgb(44, 62, 80);
+  padding: 10px;
+  margin: 5px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  display: inline-block;
+  borderRadius: 5px;
+  box-sizing: border-box;
+}

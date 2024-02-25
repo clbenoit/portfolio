@@ -29,17 +29,7 @@ const GroupedList = () => {
       {categories.map((category, index) => (
         <div
           key={index}
-          style={{
-            width: '100%',
-            color: 'white',
-            background: category.color,
-            padding: '10px',
-            margin: '5px',
-            'margin-bottom': '25px',
-            cursor: 'pointer',
-            display: 'inline-block',
-            borderRadius: '5px',
-          }}
+          className="category-box"
         >
           <div
             style={{
