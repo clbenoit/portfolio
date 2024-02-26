@@ -1,4 +1,4 @@
-import{d as t,j as e}from"./index-dT2JVpgw.js";const a={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-02-15",title:"A quick overview of GSEA analysis",description:"undefined"};function i(s){const n={a:"a",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",ol:"ol",p:"p",section:"section",strong:"strong",sup:"sup",...t(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"a-quick-overview-of-gsea-analysis",children:["A quick overview of GSEA analysis",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#a-quick-overview-of-gsea-analysis",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
+import{d as i,j as e}from"./index-DDTn0JQN.js";const a={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-02-15",title:"A quick overview of GSEA analysis",description:"undefined"};function s(t){const n={a:"a",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",ol:"ol",p:"p",section:"section",strong:"strong",sup:"sup",ul:"ul",...i(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"a-quick-overview-of-gsea-analysis",children:["A quick overview of GSEA analysis",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#a-quick-overview-of-gsea-analysis",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(n.h2,{id:"why-gsea-analysis-",children:["Why GSEA Analysis ?",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-gsea-analysis-",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.p,{children:[`Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
 They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
@@ -12,10 +12,33 @@ This is why reproducibility is one of the major challenges facing studies involv
 in which case the gene set is correlated with the phenotypic class distinction.`]})}),`
 `,e.jsxs(n.p,{children:[`Of course we will do as many independant tests as we have genes sets to try.
 A `,e.jsx(n.a,{href:"https://www.firalis.com/products/fimics-cardiac-ruo-kit-panel",children:"multiple testing correction"})," should then be considered."]}),`
-`,e.jsxs(n.h3,{id:"the-methods",children:["The Methods",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-methods",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
-`,e.jsxs(n.h3,{id:"to-go-further",children:["To go further",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#to-go-further",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsxs(n.h3,{id:"the-method",children:["The Method",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-method",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsxs(n.p,{children:[e.jsx(n.strong,{children:"Step 1 : Compute an enrichment score (ES)"}),e.jsx("br",{}),`
+This score reflects the degree to which the set S is overrepresented at the extremes top (ES > 0) or bottom (ES < 0) of the ranked list R. It is calculated by walking down the list L,
+increasing the running sum when we encounter a gene in S and decreasing it when we encounter genes not in S. Finally the maximum deviation from zero encountered during the random walk is kept as ES. `,e.jsx("br",{}),e.jsx("br",{}),`
+`,e.jsx(n.strong,{children:"Step 2 : Estimation of significance level of ES"}),e.jsx("br",{}),`
+The nominal P-Value is estimates the statistical significance of the ES by using an empirical phenotype-based permutation test that
+preserves the correlation structure of the gene expression data. Phenotype labels are permuted and the ES recomputed to generate a null distribution for the ES. The empirical nominal P Value of the observed ES is then calculated relative to
+this null distribution. Permutation of class labels preserves gene-gene correlations and thus, provide a more biologically reasonable assessment of significance than would be obtained by permuting genes.`,e.jsx("br",{}),e.jsx("br",{}),`
+`,e.jsx(n.strong,{children:"Step 3 : Adjustment of Multiple Hypothesis Testing."}),e.jsx("br",{}),`
+The enrichment scores for each set are normalized and a false discovery rate is calculated`]}),`
+`,e.jsxs("p",{className:"popacitydanger",children:[e.jsx("div",{style:{textAlign:"center"},children:e.jsx("strong",{children:"It is usefull to keep in mind that"})}),e.jsx("br",{}),e.jsxs(n.ul,{children:[`
+`,e.jsx(n.li,{children:"That the GSEA official software will not complain if you provide them with raw gene expression data. However your results will get totally incorrect results."}),`
+`,e.jsx(n.li,{children:"You can perform a pre ranked GSEA, which can be very helpful for performing gene set enrichment analysis on data that do not conform to the typical GSEA scenario. For example, it can be used when the ranking metric choices provided by GSEA are not appropriate for the data, or when a ranked list of genomic features deviates from traditional gene expression data (e.g., GWAS results, ChIP seq, etc.). Also if you lack computing power and have access to pre-ranked list, this solution can be your best option."}),`
+`,e.jsx(n.li,{children:"Clearly define the question your are trying to address and choose the appropriate ranking metrics."}),`
+`,e.jsx(n.li,{children:"Genes sets curation could be useful as a pre-processing step. Indeed you do not need to perform test on genes set you are not interested in. It will increase your need for computing resources and create supplementary noise for the Adjustment of Multiple Hypothesis Testing procedure."}),`
+`]})]}),`
+`,e.jsxs(n.h3,{id:"to-go-further-with-theory",children:["To go further with theory",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#to-go-further-with-theory",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.p,{children:["There exists a variant of GSEA called FGSEA for ",e.jsx("u",{children:"F"}),"ast ",e.jsx("u",{children:"G"}),"ene ",e.jsx("u",{children:"S"}),"et ",e.jsx("u",{children:"E"}),"nrichment ",e.jsx("u",{children:"A"}),"nalysis.",e.jsx("br",{})]}),`
 `,e.jsxs(n.p,{children:["Another common approach to perform pathways analysis is the ",e.jsx(n.a,{href:"https://geneontology.org/docs/go-enrichment-analysis/",children:"Gene Ontology Enrichment analysis"}),"."]}),`
+`,e.jsxs(n.h2,{id:"available-programs-for-practice",children:["Available programs for practice",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#available-programs-for-practice",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsxs(n.ul,{children:[`
+`,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://www.gsea-msigdb.org/gsea/downloads.jsp",children:"Official Broad institute tools"})}),`
+`,e.jsxs(n.li,{children:[e.jsx(n.strong,{children:"WEB-based GEne SeT AnaLysis Toolkit"}),`
+`,e.jsx(n.a,{href:"https://www.webgestalt.org/",children:"GUI"}),`
+`,e.jsx(n.a,{href:"https://cran.r-project.org/web/packages/WebGestaltR/index.html",children:"R package"})]}),`
+`,e.jsxs(n.li,{children:[e.jsx(n.a,{href:"https://bioconductor.org/packages/release/bioc/html/fgsea.html",children:"Fast Gene Set Enrichment Analysis"})," (Pre-ranked only)"]}),`
+`]}),`
 `,`
 `,e.jsxs(n.section,{"data-footnotes":!0,className:"footnotes",children:[e.jsxs(n.h2,{className:"sr-only",id:"footnote-label",children:["Footnotes",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#footnote-label",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.ol,{children:[`
@@ -30,4 +53,4 @@ and Purvesh Khatri. (2017). `,e.jsx(n.em,{children:"Methods to increase reproduc
 `,e.jsxs(n.p,{children:["Lianbo Yu. (2020). ",e.jsx(n.em,{children:"RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project"}),". ",e.jsx(n.strong,{children:"Cancer Inform"}),", Volume 19 ",e.jsx(n.a,{href:"https://doi.org/10.1177/1176935120922498",children:"DOI"})," ",e.jsx(n.a,{href:"#user-content-fnref-3","data-footnote-backref":"","aria-label":"Back to reference 3",className:"data-footnote-backref",children:"↩"})]}),`
 `]}),`
 `]}),`
-`]})]})}function o(s={}){const{wrapper:n}={...t(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(i,{...s})}):i(s)}export{o as default,a as frontmatter};
+`]})]})}function o(t={}){const{wrapper:n}={...i(),...t.components};return n?e.jsx(n,{...t,children:e.jsx(s,{...t})}):s(t)}export{o as default,a as frontmatter};
