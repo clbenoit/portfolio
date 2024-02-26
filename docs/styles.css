@@ -50,6 +50,11 @@
  padding: 10px;
 }
 
+.popacitydanger {
+  background: #b81d1d;
+  padding: 10px;
+ }
+
 .two-column-layout {
   display: flex; /* Use flexbox for a simple two-column layout */
   justify-content: space-between;
