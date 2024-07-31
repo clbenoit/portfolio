@@ -1,0 +1,80 @@
+---
+layout: minimal
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+date: 2024-08-01
+---
+
+# How data analysis can help to fix genetic disorders
+
+## Introduction
+
+Gene therapy as seen a major breakthrough with the development of **CRISPR-Cas9** technology. 
+This revolutionary tool allows scientists to precisely edit genes, offering new hope for 
+treating genetic disorders and diseases. **With the potential to correct genetic mutations at 
+the source, CRISPR-Cas9 opens up a world of possibilities for personalized medicine and targeted therapies.**
+The future of gene therapy looks brighter than ever,
+ with the promise of improved treatments and even potential cures for a wide range of conditions.
+
+[Autosomal-dominant disorders](https://www.genome.gov/genetics-glossary/Autosomal-Dominant-Disorder) are among the diseases that could see gene treatments in the future. 
+As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for 
+the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele. 
+Only the wild-type allele remains, and the disease is thus cured. 
+Although the effectiveness of this approach looks promising [^1]  [^2]  [^3], a number of issues still need 
+to be addressed, two of which we will try to address in this article : 
+
+<p className="popacitydanger" >
+  <div style={{ textAlign: 'center' }}>
+    <strong>
+    How can the design of these personalized medicine treatments can be effective and quick for each patient ? <br/><br/>
+    How can we specifically target the mutated allele without breaking the functional allele or another part of 
+    the genome ?
+    </strong>
+  </div>
+</p>
+
+## Data analysis can be use to create a list of interesting genomic regions for gene therapy
+
+The targeted genome cleavage is achieved by targeting sequence-specific cleavage of S. pyogenes Cas9 (spCas9) 
+endonuclease with a gRNA. In order for the gRNA to successfully direct Cas9 cleavage, 
+the corresponding target DNA sequence in the genome must be found next to a PAM site, 
+also known as a Protospacer Adjacent Motif. The canonical PAM is associated with the spCas9 nuclease is **5'-NGG-3'**.
+We are therefore going to try to draw up an exhaustive list of all the genomic regions that could be used for this 
+gene therapy.
+1) We start by selecting all the SNPs that are frequent in the population (> 5%), for which we can 
+use the gnomAD database [^4].  We want the list created to be usable to treat as many 
+patients as possible, so we avoid SNPs that are too rare. 
+2) Only SNPs that induce the disappearance or appearance of the **5‘-NGG-3’**
+ motif will allow us to target only the mutated allele while preserving the WT. To do this, we wrote an in-house script in Python.
+3) We used the [jvarkit tools suite](https://github.com/lindenb/jvarkit) to reconstitute the genomic context of these SNPs, i.e. 
+to add the flanking sequences to the left and right of our SNPs of interest, according to the human reference genome.
+4) Finally, we used the [FlashFry](https://github.com/mckennalab/FlashFry) tool to calculate and predict efficiency and specificity 
+scores for each of the positions we selected. We wanted to cut the diseased gene efficiently, 
+without altering other regions of the genome.
+
+Using this method, we were able to draw up a list of genomic positions of interest in the treatment of Ryanodine receptor 
+type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. [^5]
+Thanks to next-generation sequencing, it is possible to obtain both genomic sequences of a patient 
+at a reasonable cost. All the positions on our list for which the patient is heterozygous are therefore 
+candidates for gene therapy!
+
+[Check out the analysis code here !](https://github.com/clbenoit/CutOneStrand)
+
+## Generalization
+
+Of course, the implementation of gene therapy has to deal with other obstacles and questions, 
+but this approach can be generalised to other Autosomal-Dominant-Disorders and enable carers to 
+screen the genome extensively in order to create a short list of regions 
+of interest for this type of gene therapy !
+
+
+[^1]: Anzalone A.V, Koblan L.W and Liu D.R . **Genome editing with CRISPR–Cas nucleases, base editors, transposases and prime editors** [DOI](https://www.nature.com/articles/s41587-020-0561-9)
+[^2]: F Chemello, A.C Chai, H Li, C Rodriguez-Caycedo, E Sanchez-Ortiz, A Atmanli, A.A Mireault, N Liu,
+ R Bassel-Duby, E.N Olson. **Precise correction of Duchenne muscular dystrophy exon
+  deletion mutations by base and prime editing** [DOI](https://pubmed.ncbi.nlm.nih.gov/33931459/)
+[^3]: Kelly Godbout, Joël Rousseau, Jacques P Tremblay. **Successful Correction by Prime Editing of a
+ Mutation in the RYR1 Gene Responsible for a Myopathy** [DOI](https://www.mdpi.com/2073-4409/13/1/31)
+[^4]: [The Genome Aggregation Database (gnomAD)](https://gnomad.broadinstitute.org/about)
+[^5]: Mathilde Beaufils, Margaux Melka, Julie Brocard, Clement Benoit, Nagi Debbah, Kamel Mamchaoui, 
+Norma B. Romero, Anne Frédérique Dalmas-Laurent, Susana Quijano-Roy, Julien Fauré, John Rendu 
+and Isabelle Marty. **Functional benefit of CRISPR-Cas9-induced allele deletion for RYR1 dominant mutation** [DOI](https://doi.org/10.1016/j.omtn.2024.102259)
