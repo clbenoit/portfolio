@@ -116,6 +116,10 @@ export default defineConfig({
           text: 'FilLT3r Shiny App',
           link: '/projects/filtr3r-shiny',
         },
+        {
+          text: 'LRM_Elembio',
+          link: '/projects/lrm-elembio',
+        },
       ],
     },
     {
