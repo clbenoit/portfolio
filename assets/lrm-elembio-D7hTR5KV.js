@@ -1,7 +1,7 @@
-import{d as t,j as e}from"./index-DJFY4wXW.js";const a={layout:"default",title:"LRM_Elembio",description:"undefined"};function s(n){const i={a:"a",div:"div",h1:"h1",h2:"h2",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...t(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(i.header,{children:e.jsxs(i.h1,{id:"lrm_elembio",children:["LRM_Elembio",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#lrm_elembio",children:e.jsx(i.div,{"data-autolink-icon":!0})})]})}),`
+import{d as s,j as e}from"./index-DnOKu1l8.js";const a={layout:"default",title:"LRM_Elembio",description:"undefined"};function t(n){const i={a:"a",div:"div",h1:"h1",h2:"h2",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(i.header,{children:e.jsxs(i.h1,{id:"lrm_elembio",children:["LRM_Elembio",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#lrm_elembio",children:e.jsx(i.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs("div",{children:[" ",e.jsx("h3",{children:e.jsx("i",{children:"A graphical interface for creating standardized Manifests for AVITI sequencing runs."})})]}),`
 `,e.jsx("br",{}),`
-`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/lrm_elembio.webm",type:"video/webm"})}),`
+`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/lrm_elembio.webm",type:"video/webm"})}),`
 `,e.jsxs(i.h2,{id:"why-this-app",children:["Why this app",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-this-app",children:e.jsx(i.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(i.p,{children:["LRM_Elembio is an open-source tool designed to simplify the creation of ",e.jsx(i.strong,{children:"Manifest files"})," required for planning sequencing runs on AVITI platforms by ",e.jsx(i.strong,{children:"Elements Bioscience"}),". Manifest files must follow a strict format, which can be challenging to generate manually, especially when matching sample well positions with barcoded indexes."]}),`
 `,e.jsx(i.p,{children:"In practice, manual Manifest creation often results in:"}),`
@@ -33,4 +33,4 @@ import{d as t,j as e}from"./index-DJFY4wXW.js";const a={layout:"default",title:"
 `,e.jsxs(i.ul,{children:[`
 `,e.jsx(i.li,{children:e.jsx(i.a,{href:"https://github.com/clbenoit/LRM_elembio",children:"Source code"})}),`
 `,e.jsx(i.li,{children:"Contributions and issues are welcome on GitHub"}),`
-`]})]})}function l(n={}){const{wrapper:i}={...t(),...n.components};return i?e.jsx(i,{...n,children:e.jsx(s,{...n})}):s(n)}export{l as default,a as frontmatter};
+`]})]})}function l(n={}){const{wrapper:i}={...s(),...n.components};return i?e.jsx(i,{...n,children:e.jsx(t,{...n})}):t(n)}export{l as default,a as frontmatter};
