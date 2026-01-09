@@ -1,0 +1,168 @@
+.flag-sizeL {
+  padding: 0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.flag-sizeM {
+  padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flag-sizeS {
+  padding: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical-timeline-element {
+  width: 100%;
+}
+
+.vertical-timeline-element-title {
+  font-size: 18px;
+  color: inherit;
+}
+.vertical-timeline-element-subtitle {
+  font-size: 16px;
+  color: inherit;
+}
+.vertical-timeline-element-content {
+  font-size: 15px;
+  color: inherit;
+}
+
+.vertical-timeline-element-content p,
+.vertical-timeline-element-content h3,
+.vertical-timeline-element-content h4 {
+  color: inherit !important;
+}
+
+.vertical-timeline-element-content > * {
+  color: inherit !important;
+}
+
+/* Force text color in timeline - light mode */
+/* :root:not(.dark) .vertical-timeline-element-content,
+:root:not(.dark) .vertical-timeline-element-content *,
+:root:not(.dark) .vertical-timeline-element-content p,
+:root:not(.dark) .vertical-timeline-element-content h3,
+:root:not(.dark) .vertical-timeline-element-content h4 {
+  color: #000 !important;
+}
+
+/* Force text color in timeline - dark mode */
+/* :root.dark .vertical-timeline-element-content,
+:root.dark .vertical-timeline-element-content *,
+:root.dark .vertical-timeline-element-content p,
+:root.dark .vertical-timeline-element-content h3,
+:root.dark .vertical-timeline-element-content h4 {
+  color: #fff !important;
+} */ */
+
+.hrefverticalelement {
+  /* color: black; */
+  color: inherit;
+}
+.hrefverticalelement::after {
+  content: "\2197"; /* Unicode arrow character code for top right arrow */
+  position: relative;
+  top: -5px;
+  right: 0px;
+  font-size: 16px;
+}
+
+.popacity {
+ background: #33475B;
+ padding: 10px;
+}
+
+.popacitydanger {
+  background: #b81d1d;
+  padding: 10px;
+ }
+
+.two-column-layout {
+  display: flex; /* Use flexbox for a simple two-column layout */
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.main-content {
+  flex:1; /* Take up remaining space in the container */
+  /*margin-right: 50px;*/
+  margin-right: 50px;
+  min-width: 350px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-content {
+    flex:1; /* Take up remaining space in the container */
+    margin-right: 0px;
+  }
+ /* .category-box {
+    max-width: 60%; /* Adjust this value as needed */ 
+  /*}
+ */
+}
+
+.sidebarcv {
+  margin-right: 0px;
+  width: '100%'; /* Adjust the width of the sidebar as needed */ 
+  flex-basis: 300px; /* Set the width of the sidebar */
+  /* Add any other styling for the sidebar */
+}
+
+.category-box {
+  width: 100%;
+  color: white;
+  background: rgb(44, 62, 80);
+  padding: 10px;
+  margin: 5px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  display: inline-block;
+  borderRadius: 5px;
+  box-sizing: border-box;
+}
+
+/* Timeline line - light mode */
+.vertical-timeline::before {
+  /* background: #d4d4d8 !important; */
+  /* background: #cbd5e1 !important; slate-300 */
+  background: #a5b0bc !important; /* slate-300 */
+}
+
+/* Timeline line - dark mode */
+:root.dark .vertical-timeline::before,
+[data-theme="dark"] .vertical-timeline::before {
+  background: #6f6d78 !important;
+}
+
+/* Timeline connector - light mode */
+.vertical-timeline-element::before {
+  /* background: #ffffff !important; */
+  background: #f8fafc !important; /* quasi blanc */
+}
+
+/* Timeline connector - dark mode */
+:root.dark .vertical-timeline-element::before,
+[data-theme="dark"] .vertical-timeline-element::before {
+  background: #2b292d !important;
+}
+
+/* Timeline element icon - light mode (border only) */
+.vertical-timeline-element-icon {
+  /* box-shadow: 0 0 0 4px #838284 !important; */
+  box-shadow: 0 0 0 4px #475569 !important; /* slate-600 */
+}
+
+/* Timeline element icon - dark mode (border only) */
+:root.dark .vertical-timeline-element-icon,
+[data-theme="dark"] .vertical-timeline-element-icon {
+  box-shadow: 0 0 0 4px #f6f6f7 !important;
+}

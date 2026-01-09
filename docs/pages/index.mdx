@@ -1,0 +1,28 @@
+---
+layout: landing
+#layout: docs
+
+---
+
+import { HomePage } from "vocs/components";
+
+<HomePage.Root>
+  {/* <HomePage.Logo /> */}
+  <HomePage.Tagline>
+  <h1 style={{ fontSize: '32px' }}>Hi ! <br/><br/>I'm Clement BENOIT</h1>
+  <br />
+  I'm a Grenoble based <b>data engineer with a specialty in omics bioinformatics </b>, currently working
+  at <b>Grenoble Alpes University Hospital (CHUGA)</b>, helping build tools to leverage health data for clinical diagnosis.<br /><br />
+  <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
+  In my free time time, you can catch me training in <strong className="text-stone-100">skateboard</strong>,
+  looking after my <strong className="text-stone-100">plants</strong>, or exploring the beautiful{' '}
+  <strong className="text-stone-100">alpine mountains</strong>.
+  </p><br />
+  </HomePage.Tagline>
+  <HomePage.Buttons>
+    <HomePage.Button href="/projects" variant="accent">See my projects</HomePage.Button>
+    <HomePage.Button href="https://github.com/clbenoit">GitHub</HomePage.Button>
+    <HomePage.Button href="https://linkedin.com/in/clement-benoit">Linkedin</HomePage.Button>
+  </HomePage.Buttons><br />
+    <h2 href="benoitclement.data@gmail.com" variant="email-link">benoitclement.data@gmail.com</h2>
+</HomePage.Root>

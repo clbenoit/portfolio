@@ -1,0 +1,95 @@
+---
+layout: minimal
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+date: 2024-02-15
+---
+
+# A quick overview of Gene sets enrichment analysis
+
+## Why GSEA Analysis ?
+
+Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles. 
+They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible. 
+This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data 
+<a href="#ref-1" class="vocs_Anchor">[1]</a>, 
+<a href="#ref-2" class="vocs_Anchor">[2]</a>, 
+<a href="#ref-3" class="vocs_Anchor">[3]</a>.
+
+Finally, interpreting lists of thousands of differentially expressed genes is a tedious exercise for the biologist. 
+
+The GSEA, by dezooming from the scale of the gene to that of the pathway, improves the reproducibility of studies, 
+while facilitating their interpetation.
+
+## Principles
+
+### What is the question ?
+
+Let's says you have ranked a gene list <b><i>L</i></b> according to your favourite metric. The GSEA tries to answer the following question : <br/>
+<p className="popacity">
+Given a gene set <b><i>S</i></b> : Does the genes belonging to <b><i>S</i></b> tends to occur toward the top (or the bottom) of the list <b><i>L</i></b>, 
+in which case the gene set is correlated with the phenotypic class distinction.
+</p>
+
+Of course we will do as many independant tests as we have genes sets to try.
+A [multiple testing correction](https://www.firalis.com/products/fimics-cardiac-ruo-kit-panel) should then be considered.
+
+### The Method
+
+**Step 1 : Compute an enrichment score (ES)**<br/>
+This score reflects the degree to which the set S is overrepresented at the extremes top (ES > 0) or bottom (ES < 0) of the ranked list R. It is calculated by walking down the list L, 
+increasing the running sum when we encounter a gene in S and decreasing it when we encounter genes not in S. Finally the maximum deviation from zero encountered during the random walk is kept as ES. <br/><br/>
+
+**Step 2 : Estimation of significance level of ES**<br/>
+The nominal P-Value is estimates the statistical significance of the ES by using an empirical phenotype-based permutation test that
+ preserves the correlation structure of the gene expression data. Phenotype labels are permuted and the ES recomputed to generate a null distribution for the ES. The empirical nominal P Value of the observed ES is then calculated relative to
+  this null distribution. Permutation of class labels preserves gene-gene correlations and thus, provide a more biologically reasonable assessment of significance than would be obtained by permuting genes.<br/><br/>
+
+**Step 3 : Adjustment of Multiple Hypothesis Testing.**<br/>
+The enrichment scores for each set are normalized and a false discovery rate is calculated
+
+<p className="popacitydanger" >
+  <div style={{ textAlign: 'center' }}>
+    <strong>It is usefull to keep in mind that</strong>
+  </div><br />
+- That the GSEA official software will not complain if you provide them with raw gene expression data. However your results will get totally incorrect results.
+- You can perform a pre ranked GSEA, which can be very helpful for performing gene set enrichment analysis on data that do not conform to the typical GSEA scenario. For example, it can be used when the ranking metric choices provided by GSEA are not appropriate for the data, or when a ranked list of genomic features deviates from traditional gene expression data (e.g., GWAS results, ChIP seq, etc.). Also if you lack computing power and have access to pre-ranked list, this solution can be your best option.
+- Clearly define the question your are trying to address and choose the appropriate ranking metrics.
+- Genes sets curation could be useful as a pre-processing step. Indeed you do not need to perform test on genes set you are not interested in. It will increase your need for computing resources and create supplementary noise for the Adjustment of Multiple Hypothesis Testing procedure.
+</p>
+
+### To go further with theory
+
+There exists a variant of GSEA called FGSEA for <u>F</u>ast <u>G</u>ene <u>S</u>et <u>E</u>nrichment <u>A</u>nalysis.<br/>
+
+Another common approach to perform pathways analysis is the [Gene Ontology Enrichment analysis](https://geneontology.org/docs/go-enrichment-analysis/).
+
+## Available programs for practice
+- [Official Broad institute tools](https://www.gsea-msigdb.org/gsea/downloads.jsp)
+- **WEB-based GEne SeT AnaLysis Toolkit**  
+  [GUI](https://www.webgestalt.org/)  
+  [R package](https://cran.r-project.org/web/packages/WebGestaltR/index.html)
+- [Fast Gene Set Enrichment Analysis](https://bioconductor.org/packages/release/bioc/html/fgsea.html) (Pre-ranked only)
+
+## References
+
+<p id="ref-1">
+**[1]** Timothy E. Sweeney, Winston A. Haynes, Francesco Vallania, John P. Ioannidis, Purvesh Khatri (2017).  
+<i>Methods to increase reproducibility in differential gene expression via meta-analysis</i>.  
+<b>Nucleic Acids Research</b>.  
+<a href="https://doi.org/10.1093/nar/gkw797" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+**[2]** Steven N Goodman, Daniele Fanelli, John P A Ioannidis (2016).  
+<i>What does research reproducibility mean?</i>.  
+<b>Sci Transl Med</b>.  
+<a href="https://doi.org/10.1126/scitranslmed.aaf5027" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-3">
+**[3]** Lianbo Yu (2020).  
+<i>RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project</i>.  
+<b>Cancer Informatics</b>.  
+<a href="https://doi.org/10.1177/1176935120922498" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>

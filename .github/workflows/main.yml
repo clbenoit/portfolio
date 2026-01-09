@@ -1,0 +1,39 @@
+# .github/workflows/main.yml
+
+name: "🚀 Deployment"
+
+on:
+  push:
+    branches:
+      - main
+      - devel
+
+jobs:
+  Deployment:
+    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel' }}
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: 🐰 Set up bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+
+      - name: 🔗 Install dependencies
+        run: bun i
+
+      - name: 🎨 Build
+        run: bun run build
+
+      - name: 🚀 Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/dist
+          publish_branch: pages

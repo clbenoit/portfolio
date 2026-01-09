@@ -1,0 +1,49 @@
+---
+layout: deafult
+---
+
+# FilLT3r Shiny App
+
+<div> <h3><i>A graphical interface for alignment-free detection, characterization, and quantification of FLT3 internal tandem duplications.</i></h3></div><br/>
+![](/portfolio/filt3r_shiny.gif)
+
+## Why this app
+
+FiLT3r is a lightweight, alignment-free algorithm designed to detect, characterize, and quantify FLT3 internal tandem duplications (FLT3-ITDs) from high-throughput sequencing data, enabling accurate risk stratification and follow-up in [acute myeloid leukemia](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) (AML).
+
+[Access the scientific publication](https://doi.org/10.1186/s12859-022-04983-6)
+
+While powerful, command-line tools remain a barrier for many users, particularly biologists and clinicians who are not familiar with R scripting. In practice, this often leads to:
+
+- A strong dependency on bioinformaticians for routine analyses  
+- Limited exploration of parameter space due to usability constraints  
+- Reduced reproducibility when analyses are manually adapted  
+
+The **FilLT3r Shiny App** was developed to address these issues by providing an intuitive graphical interface that encapsulates the original FilLT3r tool.
+
+## Objectives
+
+The main goals of this application are to:
+
+- Make FilLT3r accessible to non-programmers  
+- Enable interactive parameter tuning and immediate feedback  
+- Improve transparency and reproducibility of filtering strategies  
+- Facilitate data exploration prior to downstream analyses  
+
+By lowering the technical barrier, this application allows users to focus on biological interpretation rather than implementation details.
+
+## What it does
+
+FilLT3r Shiny App provides:
+
+- Interactive loading of input datasets  
+- Graphical configuration of FilLT3r filtering parameters  
+- Real-time visualization of filtering effects  
+- Export of filtered datasets for downstream analyses  
+
+The application strictly relies on the underlying FilLT3r methodology, ensuring consistency with the original published approach.
+
+## Open-source
+
+- [Source code](https://github.com/clbenoit/filt3r.shiny)
+- [FilLT3r publication](https://doi.org/10.1186/s12859-022-04983-6)

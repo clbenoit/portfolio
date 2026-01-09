@@ -1,0 +1,138 @@
+---
+layout: default
+---
+
+# MethylDB
+
+<div>
+  <h3>
+    <i>An open-source platform to explore and interpret DNA methylation data locally.</i>
+  </h3>
+</div>
+
+<br />
+
+![](/portfolio/methyldb.gif)
+
+## Why this app
+
+DNA methylation profiling has become a cornerstone of modern molecular pathology,  
+especially for tumor classification, where reference classifiers (notably those developed at the DKFZ) have profoundly changed diagnostic practices.
+
+For many years, access to these analyses was facilitated by the availability of **free, centralized, online tools**  
+<a href="#ref-1" class="vocs_Anchor">[1]</a>.  
+This model enabled rapid dissemination, harmonization of practices, and massive community adoption.
+
+However, recent shifts towards **restricted access, licensing models, or commercial spin-offs**  
+<a href="#ref-2" class="vocs_Anchor">[2]</a> <a href="#ref-3" class="vocs_Anchor">[3]</a>  
+have revealed a structural weakness of this approach:  
+many laboratories have become **dependent on external infrastructures** for a core diagnostic activity.
+
+As with variant analysis, outsourcing methylome analysis is often driven by:
+
+- Limited local bioinformatics resources.
+- The complexity of maintaining up-to-date analytical pipelines.
+- Regulatory and administrative constraints in clinical environments.
+
+While understandable, this strategy raises long-term issues:
+
+- Loss of autonomy over data and methods.
+- Rising costs for tools that were historically community-driven.
+- Stagnation of local expertise, despite increasing methodological complexity.
+
+MethylDB was born from this observation.
+
+## Project philosophy
+
+MethylDB aims to provide a **local, transparent, and extensible solution** for the exploration of DNA methylation results,  
+without relying on external black-box services.
+
+The goal is **not** to replace existing classifiers or pipelines,  
+but to **re-internalize the interpretation layer**, which is where most of the added value for biologists actually lies.
+
+In short:
+
+- Pipelines can remain standardized (nf-core, in-house, or commercial).
+- Raw or processed methylation outputs remain within the institution.
+- Interpretation, comparison, annotation, and curation are performed locally.
+
+This mirrors the same logic that motivated the development of GermlineVarDB.
+
+## What MethylDB does
+
+MethylDB is designed to:
+
+- Import DNA methylation results (e.g. IDAT-derived matrices, classifier outputs, QC metrics).
+- Build a **local methylation database** across samples, projects, and time.
+- Provide a **graphical interface** to:
+  - Explore sample similarity and clustering.
+  - Inspect classifier scores and confidence metrics.
+  - Compare new cases to historical local cohorts.
+  - Flag ambiguous or borderline classifications.
+
+The focus is deliberately on **usability for molecular biologists and pathologists**,  
+not on replacing notebooks or command-line workflows.
+
+## Open-source and community-driven
+
+MethylDB is released as an **open-source project**, with the same conviction as my previous work:  
+tools used daily in diagnostics should be understandable, auditable, and improvable by their users.
+
+- [Source code](https://github.com/clbenoit/MethylDB)
+- Live demo (coming soon)
+
+The project is intentionally modular, allowing users to adapt it to:
+
+- Different array technologies.
+- Different classifiers or reference datasets.
+- Research versus routine diagnostic contexts.
+
+
+## Call for contributions
+
+If you are:
+
+- A laboratory affected by recent changes in access to methylome classifiers,
+- A bioinformatician tired of re-implementing the same internal tools,
+- Or simply interested in open and sustainable molecular diagnostics,
+
+then contributions, feedback, and discussions are more than welcome.
+
+📩 Contact: [benoitclement.data@gmail.com](mailto:benoitclement.data@gmail.com)
+
+## Acknowledgements
+
+I would like to warmly thank [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5) for his valuable help and contributions throughout the design and development phases of MethylDB.  
+His feedback, technical discussions, and hands-on involvement were instrumental in bringing this project to completion.
+
+This project also benefited from the use of **public datasets** during development and testing, in particular:
+
+This project also benefited from the use of **public datasets** during the development and testing phases, in particular:
+- the **GSE109381** dataset ([NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381))
+- the **GSE225810** dataset ([NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE225810))
+
+---
+
+## References
+
+<p id="ref-1">
+**[1]** Capper D. et al. (2018).  
+<i>DNA methylation-based classification of central nervous system tumours</i>.  
+<b>Nature</b>, 555, 469–474.  
+<a href="https://doi.org/10.1038/nature26000" class="vocs_Anchor" target="_blank"   rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+**[2]** German Cancer Research Center (DKFZ).  
+<i>AI-supported molecular cancer diagnosis for brain tumors</i>.  
+DKFZ press release describing the transition of the methylation classifier towards industrial exploitation via a spin-off.  
+<a href="https://www.dkfz.de/en/news/press-releases/detail/ai-supported-molecular-cancer-diagnosis-for-brain-tumors" class="vocs_Anchor" target="_blank"   rel="noopener noreferrer">URL</a>
+</p>
+
+<p id="ref-3">
+**[3]** Heidelberg Epignostix GmbH.  
+<i>Our Technology – CNS Tumor Classifier</i>.  
+Official commercial portal describing access to the methylation classifier under defined terms of use.  
+<a href="https://epignostix.com/our-technology/our-technology-cns-tumor-classifier/" class="vocs_Anchor" target="_blank"   rel="noopener noreferrer">URL</a>
+</p>
+
