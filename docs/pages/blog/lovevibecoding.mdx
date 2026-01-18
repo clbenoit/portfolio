@@ -1,0 +1,150 @@
+---
+layout: minimal
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+date: 2026-01-19
+---
+
+# How Local Vibe Coding Boosted My Productivity as a Clinical Bioinformatics Data Engineer
+
+## Why Rethinking the Way We Code Matters
+
+In clinical biology, the work of a data engineer sits at the intersection of several strong constraints:
+- large-scale datasets,
+- complex pipelines (ETL, QC, statistical analysis),
+- high requirements for traceability and reproducibility,
+- constant time pressure.
+
+For a long time, I worked with a fairly standard setup: IDE + scripts + scattered documentation + frequent back-and-forth between StackOverflow, docs, and notebooks.  
+It worked — but it came with a high cognitive cost.
+
+With the arrival of LLMs and the emergence of *vibe coding*, I progressively set up a **local**, workflow-oriented environment focused on:
+- fast iteration,
+- continuous feedback,
+- reduced context switching.
+
+The result: a clear productivity boost, but more importantly, better technical clarity.
+
+## What I Mean by *Vibe Coding*
+
+*Vibe coding* is not a tool — it’s a **way of working**.
+
+> It’s about coding in an environment where you can:
+> - explore quickly,
+> - interact with your code,
+> - test ideas with minimal friction,
+> - stay in a continuous flow state.
+
+In my case, it relies on:
+- a **locally running LLM**,
+- a well-integrated editor (VS Code),
+- reproducible scripts,
+- a clear separation between exploration, production, and documentation.
+
+## Why Local Instead of Cloud-Based LLMs?
+
+### 🔐 1. Sensitive data
+
+In clinical biology, data are:
+- often confidential,
+- sometimes regulated,
+- rarely allowed to leave secured environments.
+
+Running everything locally means:
+- no data leakage,
+- no network dependency,
+- easier compliance.
+
+### ⚡ 2. Faster feedback loops
+
+A well-configured local model:
+- responds instantly,
+- enables short *think → code → test* cycles,
+- encourages exploration.
+
+This changes the workflow dramatically:
+you experiment more, and hesitate less.
+
+### 🧠 3. Reduced cognitive load
+
+The LLM becomes:
+- a code reviewer,
+- a boilerplate generator,
+- a refactoring assistant,
+- a translator between biology and code.
+
+I keep the domain expertise — it absorbs the noise.
+
+## What Vibe Coding Brought Me in Practice
+
+### ✅ 1. Cleaner pipelines
+
+- Faster generation of ETL scripts  
+- More consistent structure and logging  
+- Easier testing and refactoring  
+
+Result:  
+➡️ less technical debt  
+➡️ better long-term maintainability  
+
+
+### ✅ 2. Better biological data exploration
+
+For analysis tasks:
+- rapid notebook generation,
+- statistical interpretation support,
+- clearer result explanations.
+
+Especially useful for:
+- RNA-seq
+- cohort analysis
+- QC workflows
+- GSEA / GO analysis preparation
+
+### ✅ 3. Massive gains in documentation
+
+Before:
+- documentation written after the fact (if ever)
+
+Now:
+- documentation generated alongside the code,
+- automatic rephrasing for different audiences (bio / data / clinical),
+- improved traceability.
+
+## What Vibe Coding Is *Not*
+
+⚠️ It is **not**:
+- magical no-code,
+- a replacement for expertise,
+- an excuse to stop understanding your own code.
+
+On the contrary:
+> the better you understand your domain, the more powerful vibe coding becomes.
+
+## Best Practices I’ve Learned
+
+- Always keep a **human in the loop**
+- Version everything
+- Separate clearly:
+  - exploration
+  - production code
+  - documentation
+- Never blindly trust model output
+- Use the LLM as a **pair programmer**, not an oracle
+
+## Conclusion
+
+Local vibe coding helped me:
+- work faster,
+- document better,
+- reduce mental fatigue,
+- improve the overall quality of my pipelines.
+
+In a field like clinical biology — where rigor and reproducibility are critical — it has become a real performance multiplier rather than a gimmick.
+
+---
+
+If you want, I can also share:
+- my exact local setup (LLM, hardware, IDE),
+- how I use it for RNA-seq analysis,
+- or a concrete example of a pipeline improved with vibe coding.

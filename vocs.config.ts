@@ -89,16 +89,17 @@ export default defineConfig({
   ],
   sidebar: [
     {
-      text: 'Featured Work',
-      items: [
-        {
-          text: 'Projects Overview',
-          link: '/projects',
-        },
-      ],
+      text: 'Projects Overview',
+      link: '/projects',
+      // items: [
+      //   {
+      //     text: 'Projects Overview',
+      //     link: '/projects',
+      //   },
+      // ],
     },
     {
-      text: 'Genomics Data Analysis App',
+      text: 'Genomics Data Analysis Apps',
       items: [
         {
           text: 'SomaVarDB',
@@ -123,7 +124,7 @@ export default defineConfig({
       ],
     },
     {
-      text: 'Chartreuse Node Crew',
+      text: 'Web3 Engineering Group (CNC)',
       items: [
         {
           text: 'CNC AI Models',
