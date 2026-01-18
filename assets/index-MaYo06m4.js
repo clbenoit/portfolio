@@ -1,4 +1,4 @@
-import{d as s,j as e}from"./index-CLuh5-jy.js";const t={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
+import{d as s,j as e}from"./index-DxsOJ1_q.js";const t={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(r.h2,{id:"omicsverse",children:["OmicsVerse",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#omicsverse",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(r.p,{children:["The initial aim of the  ",e.jsx(r.a,{href:"https://omicsverse.fr",children:"OmicsVerse portal"})," is to host demo versions of the various data applications I create."]}),`
 `,e.jsxs(r.p,{children:["Application source code and documentation for administrators can be found on my ",e.jsx(r.a,{href:"https://github.com/clbenoit",children:"github"}),"."]}),`
@@ -36,15 +36,14 @@ So if you feel like contributing to the project. Don't hesitate to contact me :
 `,e.jsx(r.li,{children:"Prepare internal validation efforts."}),`
 `,e.jsx(r.li,{children:"Build collective expertise instead of outsourcing it."}),`
 `]}),`
-`,e.jsxs(r.h2,{id:"cnc-web3-developer-crew",children:["CNC Web3 Developer Crew",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-web3-developer-crew",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsxs(r.h2,{id:"chartreuse-node-crew",children:["Chartreuse Node Crew",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#chartreuse-node-crew",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx(r.p,{children:`Co-founder and lead of a collaborative Web3 development team.
 This initiative brings together passionate developers to explore and build decentralized applications.`}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Focus areas:"})," Smart contracts development, DeFi protocols, blockchain architecture"]}),`
-`,e.jsx(r.p,{children:e.jsx(r.a,{href:"https://joecnc.github.io/cnc_website/",children:"Visit CNC Website"})}),`
-`,e.jsxs(r.h2,{id:"cnc-ai-models",children:["CNC AI Models",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-ai-models",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsxs(r.h3,{id:"cnc-ai-models",children:["CNC AI Models",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-ai-models",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.a,{href:"https://ia.fr",children:"Accessible AI models"})," hosted on a dedicated platform for CNC crew members. Users can interact with state-of-the-art language models and machine learning models through an intuitive web interface and scalable REST API for programmatic access."]}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Features:"})," Web interface, REST API, Model management, User authentication"]}),`
-`,e.jsxs(r.h2,{id:"cnc-cloud-services",children:["CNC Cloud Services",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-cloud-services",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsxs(r.h3,{id:"cnc-cloud-services",children:["CNC Cloud Services",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-cloud-services",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.a,{href:"https://cloud.omicsverse.fr",children:"Nextcloud instance"})," providing secure cloud storage and collaboration tools for CNC crew members. Enables file synchronization, sharing, and team collaboration with enterprise-grade security and privacy."]}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Features:"})," File storage & sync, Sharing & collaboration, Privacy-first architecture, Team management"]}),`
 `,e.jsxs(r.h2,{id:"references",children:["References",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#references",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
