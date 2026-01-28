@@ -166,3 +166,57 @@
 [data-theme="dark"] .vertical-timeline-element-icon {
   box-shadow: 0 0 0 4px #f6f6f7 !important;
 }
+
+
+/* Styles pour les boutons de la HomePage (mobile uniquement) */
+@media only screen and (max-width: 600px) {
+  .vocs_HomePage_buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    gap: 10px !important;
+  }
+
+  .vocs_HomePage_button {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Force le centrage du texte en mobile */
+  .vocs_HomePage_button,
+  .vocs_HomePage_button a,
+  .vocs_HomePage_button span,
+  .vocs_HomePage_button .vocs_Link {
+    text-align: center !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Pour desktop (version par défaut) */
+@media only screen and (min-width: 601px) {
+  .vocs_HomePage_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px; /* Espacement réduit */
+  }
+
+  .vocs_HomePage_button {
+    width: auto;
+    text-align: center;
+  }
+}
+
+/* Conteneur parent de la HomePage */
+.vocs_HomePage_Root {
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
