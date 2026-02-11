@@ -1,11 +1,11 @@
-import{u as r,j as e}from"./index-BbksQKi_.js";const a={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-02-15",title:"A quick overview of Gene sets enrichment analysis",description:"undefined"};function i(s){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...r(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"a-quick-overview-of-gene-sets-enrichment-analysis",children:["A quick overview of Gene sets enrichment analysis",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#a-quick-overview-of-gene-sets-enrichment-analysis",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
+import{u as r,j as e}from"./index-CGJSN20D.js";const a={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-02-15",title:"A quick overview of Gene sets enrichment analysis",description:"undefined"};function i(s){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...r(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"a-quick-overview-of-gene-sets-enrichment-analysis",children:["A quick overview of Gene sets enrichment analysis",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#a-quick-overview-of-gene-sets-enrichment-analysis",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(n.h2,{id:"why-gsea-analysis-",children:["Why GSEA Analysis ?",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-gsea-analysis-",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.p,{children:[`Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
 They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
 This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data
-`,e.jsx("a",{href:"#ref-1",class:"vocs_Anchor",children:"[1]"}),`,
-`,e.jsx("a",{href:"#ref-2",class:"vocs_Anchor",children:"[2]"}),`,
-`,e.jsx("a",{href:"#ref-3",class:"vocs_Anchor",children:"[3]"}),"."]}),`
+`,e.jsx("a",{href:"#ref-1",className:"vocs_Anchor",children:"[1]"}),`,
+`,e.jsx("a",{href:"#ref-2",className:"vocs_Anchor",children:"[2]"}),`,
+`,e.jsx("a",{href:"#ref-3",className:"vocs_Anchor",children:"[3]"}),"."]}),`
 `,e.jsx(n.p,{children:"Finally, interpreting lists of thousands of differentially expressed genes is a tedious exercise for the biologist."}),`
 `,e.jsx(n.p,{children:`The GSEA, by dezooming from the scale of the gene to that of the pathway, improves the reproducibility of studies,
 while facilitating their interpetation.`}),`
@@ -47,12 +47,12 @@ The enrichment scores for each set are normalized and a false discovery rate is 
 `,e.jsx("p",{id:"ref-1",children:e.jsxs(n.p,{children:[e.jsx(n.strong,{children:"[1]"})," Timothy E. Sweeney, Winston A. Haynes, Francesco Vallania, John P. Ioannidis, Purvesh Khatri (2017).",e.jsx(n.br,{}),`
 `,e.jsx("i",{children:"Methods to increase reproducibility in differential gene expression via meta-analysis"}),".",e.jsx(n.br,{}),`
 `,e.jsx("b",{children:"Nucleic Acids Research"}),".",e.jsx(n.br,{}),`
-`,e.jsx("a",{href:"https://doi.org/10.1093/nar/gkw797",class:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"DOI"})]})}),`
+`,e.jsx("a",{href:"https://doi.org/10.1093/nar/gkw797",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"DOI"})]})}),`
 `,e.jsx("p",{id:"ref-2",children:e.jsxs(n.p,{children:[e.jsx(n.strong,{children:"[2]"})," Steven N Goodman, Daniele Fanelli, John P A Ioannidis (2016).",e.jsx(n.br,{}),`
 `,e.jsx("i",{children:"What does research reproducibility mean?"}),".",e.jsx(n.br,{}),`
 `,e.jsx("b",{children:"Sci Transl Med"}),".",e.jsx(n.br,{}),`
-`,e.jsx("a",{href:"https://doi.org/10.1126/scitranslmed.aaf5027",class:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"DOI"})]})}),`
+`,e.jsx("a",{href:"https://doi.org/10.1126/scitranslmed.aaf5027",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"DOI"})]})}),`
 `,e.jsx("p",{id:"ref-3",children:e.jsxs(n.p,{children:[e.jsx(n.strong,{children:"[3]"})," Lianbo Yu (2020).",e.jsx(n.br,{}),`
 `,e.jsx("i",{children:"RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project"}),".",e.jsx(n.br,{}),`
 `,e.jsx("b",{children:"Cancer Informatics"}),".",e.jsx(n.br,{}),`
-`,e.jsx("a",{href:"https://doi.org/10.1177/1176935120922498",class:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"DOI"})]})})]})}function o(s={}){const{wrapper:n}={...r(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(i,{...s})}):i(s)}export{o as default,a as frontmatter};
+`,e.jsx("a",{href:"https://doi.org/10.1177/1176935120922498",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"DOI"})]})})]})}function o(s={}){const{wrapper:n}={...r(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(i,{...s})}):i(s)}export{o as default,a as frontmatter};

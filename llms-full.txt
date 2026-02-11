@@ -1,0 +1,976 @@
+# Home
+
+## CNC AI Models
+
+<video autoPlay loop muted playsInline disablePictureInPicture disableRemotePlayback style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/portfolio/ai.webm" type="video/webm" />
+</video>
+
+Accessible AI models hosted on a dedicated platform for *CNC crew members*
+
+[Access the platform CNC AI platform](https://ai.omicsverse.fr)
+
+**Features:**
+
+* Web interface for interactive model testing
+* REST API for programmatic access
+* State-of-the-art language models & ML models
+* User authentication & secure management
+* Fine-tuning & custom model adaptation
+* Scalable LLMOps with Kubernetes & Docker orchestration
+* HPC & Cloud ready (Singularity, High Performance Computing)
+* Advanced Data Science (Inferential statistics & Graph Theory)
+* Blockchain-enabled AI (On-chain data analysis & Smart Contract interaction)
+* High-uptime monitoring and distributed systems reliability
+
+
+## CNC Cloud Services
+
+<video autoPlay loop muted playsInline disablePictureInPicture disableRemotePlayback style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/portfolio/cloud.webm" type="video/webm" />
+</video>
+
+Enterprise-grade Nextcloud instance for secure collaboration.
+
+[Access the platform CNC Cloud Services](https://cloud.omicsverse.fr)
+
+**Features:**
+
+* Secure file storage & synchronization
+* Team collaboration tools
+* Privacy-first architecture
+* Centralized team management
+* Experimental decentralized file storage via IPFS integration
+* Integration with our IA services at [ia.omicsverse.fr](https://ia.omicsverse.fr)
+
+
+## FilLT3r Shiny App
+
+<div> <h3><i>A graphical interface for alignment-free detection, characterization, and quantification of FLT3 internal tandem duplications.</i></h3></div><br />
+![](/portfolio/filt3r_shiny.gif)
+
+### Why this app
+
+FiLT3r is a lightweight, alignment-free algorithm designed to detect, characterize, and quantify FLT3 internal tandem duplications (FLT3-ITDs) from high-throughput sequencing data, enabling accurate risk stratification and follow-up in [acute myeloid leukemia](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) (AML).
+
+[Access the scientific publication](https://doi.org/10.1186/s12859-022-04983-6)
+
+While powerful, command-line tools remain a barrier for many users, particularly biologists and clinicians who are not familiar with R scripting. In practice, this often leads to:
+
+* A strong dependency on bioinformaticians for routine analyses
+* Limited exploration of parameter space due to usability constraints
+* Reduced reproducibility when analyses are manually adapted
+
+The **FilLT3r Shiny App** was developed to address these issues by providing an intuitive graphical interface that encapsulates the original FilLT3r tool.
+
+### Objectives
+
+The main goals of this application are to:
+
+* Make FilLT3r accessible to non-programmers
+* Enable interactive parameter tuning and immediate feedback
+* Improve transparency and reproducibility of filtering strategies
+* Facilitate data exploration prior to downstream analyses
+
+By lowering the technical barrier, this application allows users to focus on biological interpretation rather than implementation details.
+
+### What it does
+
+FilLT3r Shiny App provides:
+
+* Interactive loading of input datasets
+* Graphical configuration of FilLT3r filtering parameters
+* Real-time visualization of filtering effects
+* Export of filtered datasets for downstream analyses
+
+The application strictly relies on the underlying FilLT3r methodology, ensuring consistency with the original published approach.
+
+### Open-source
+
+* [Source code](https://github.com/clbenoit/filt3r.shiny)
+* [FilLT3r publication](https://doi.org/10.1186/s12859-022-04983-6)
+
+
+## GermlineVarDB
+
+<div> <h3><i>A graphical interface to explore your germline genomic variation database.</i></h3></div><br />
+![](/portfolio/somavardb.gif)
+
+### Why this app
+
+Few hospitals do not outsource their bioinformatics analysis to private partners (at least in France). There are many reasons for this:
+
+* Lack of resources and investment capacity to anticipate rapid technological change.
+* The data professions, which are still in their infancy, have not yet fully penetrated these structures.
+* Cumbersome legal and administrative constraints on the accreditation of IT solutions for clinical use.
+
+Turning to an external service provider is therefore a short-term solution. In the long term, however, outsourcing poses two major problems:
+
+* The cost of the outsourced service is ultimately much higher than in-house.
+* Users (clinical biologists) work free of charge to sort the databases built by these external service providers from the raw data sent to them by the hospitals to which these clinicians belong.
+  The hospital will therefore once again pay for access to the Ias that have been trained thanks to its work.
+
+With this in mind, I turned my attention to the question of re-internalising this activity at CHUGA.
+The analytical part will be the subject of another article, but briefly,
+the [nf-core community](https://nf-co.re/) is, in my opinion, the best candidate on which to base this objective.
+
+However, there is another blocking point. Bioinformatics providers provide, along with a pipeline.
+Graphical interfaces enabling biologists to efficiently process genomic variation data for diagnostic rendering. This being the case, even if you internalize an accredited clinical-quality pipeline, it will be difficult to convince them to go back to a much less attractive Excel spreadsheet. This will be perceived as a step backwards.
+
+SomaVarDB therefore aims to plug into the output of a nf-core pipeline, clinically accredited if possible.
+It's a package that contains both the tools for building the local database from nf-core output,
+and the interface for interacting with this database.
+
+### Open-source
+
+* [Live demo](https://omicsverse.fr/app/GermlineVarDB)
+* [Source code](https://github.com/clbenoit/GermlineVarDB)
+
+
+## Here are my projects
+
+### OmicsVerse
+
+<video autoPlay loop muted playsInline disablePictureInPicture disableRemotePlayback style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/portfolio/Omicsverse.webm" type="video/webm" />
+</video>
+
+The initial aim of the  [OmicsVerse portal](https://omicsverse.fr) is to host demo versions of the various data applications I create.
+
+Application source code and documentation for administrators can be found on my [github](https://github.com/clbenoit).
+
+The following sections & pages will host detailed documentation of users.
+
+If you have a genomics-oriented data application to host, don't hesitate to contact me. provided there are resources available.
+
+* [SomaVarDB](somavardb)
+
+* [GermlineVarDB](germlinevardb)
+
+* [FilLT3r Shiny App](filtr3r-shiny)
+
+* [Methyldb](methyldb)
+
+* [LRM\_Elembio](lrm-elembio)
+
+#### Can I use it for clinical purposes?
+
+The honest answer is: **not yet**.
+
+These are **research and exploratory tools**.\
+Using it in routine diagnostics would require compliance with\
+medical device software regulations and formal validation processes\
+<a href="#ref-1" className="vocs_Anchor">\[1]</a> <a href="#ref-2" className="vocs_Anchor">\[2]</a> <a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+
+This is far beyond what a single developer can realistically achieve alone this is an unattainable goal for just one person in their spare time.  <br /><br />
+So if you feel like contributing to the project. Don't hesitate to contact me :
+[benoitclement.data@gmail.com](mailto\:benoitclement.data@gmail.com).
+
+That said, these tools are designed to **lower the barrier** for institutions that want to:
+
+* Reclaim control over their methylation data.
+* Prepare internal validation efforts.
+* Build collective expertise instead of outsourcing it.
+
+### Chartreuse Node Crew
+
+Co-founder and lead of a collaborative Web3 development team.
+This initiative brings together passionate developers to explore and build decentralized applications.
+
+**Focus areas:** Smart contracts development, DeFi protocols, blockchain architecture
+
+#### CNC AI Models
+
+[Accessible AI models](https://ia.fr) hosted on a dedicated platform for CNC crew members. Users can interact with state-of-the-art language models and machine learning models through an intuitive web interface and scalable REST API for programmatic access.
+
+**Features:** Web interface, REST API, Model management, User authentication
+
+#### CNC Cloud Services
+
+[Nextcloud instance](https://cloud.omicsverse.fr) providing secure cloud storage and collaboration tools for CNC crew members. Enables file synchronization, sharing, and team collaboration with enterprise-grade security and privacy.
+
+**Features:** File storage & sync, Sharing & collaboration, Privacy-first architecture, Team management
+
+### References
+
+<p id="ref-1">
+  **\[1]** Tuomas Granlund; Tommi Mikkonen; Vlad Stirbu (2020).\
+  <i>On Medical Device Software CE Compliance and Conformity Assessment</i>.\
+  <b>IEEE</b>.\
+  <a href="https://doi.org/10.1109/ICSA-C50368.2020.00040" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+  **\[2]** Cyrille Michaud (2020).\
+  <i>How to qualify, classify and CE mark software</i>.\
+  <b>MD101</b>.\
+  <a href="https://blog.cm-dm.com/pages/How-to-qualify%2C-classify-and-CE-mark-software" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
+</p>
+
+<p id="ref-3">
+  **\[3]** Małgorzata Kruszynska (2021).\
+  <i>CE marking for Medical Device Software: a step-by-step guide</i>.\
+  <b>Spyrosoft</b>.\
+  <a href="https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
+</p>
+
+
+## LRM\_Elembio
+
+<div> <h3><i>A graphical interface for creating standardized Manifests for AVITI sequencing runs.</i></h3></div><br />
+
+<video autoPlay loop muted playsInline disablePictureInPicture disableRemotePlayback style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/portfolio/lrm_elembio.webm" type="video/webm" />
+</video>
+
+### Why this app
+
+LRM\_Elembio is an open-source tool designed to simplify the creation of **Manifest files** required for planning sequencing runs on AVITI platforms by **Elements Bioscience**. Manifest files must follow a strict format, which can be challenging to generate manually, especially when matching sample well positions with barcoded indexes.
+
+In practice, manual Manifest creation often results in:
+
+* Errors due to mismatched sample positions or indexes
+* A heavy reliance on bioinformaticians for routine sequencing setup
+* Slower workflow integration in clinical or research pipelines
+
+The **LRM\_Elembio** app addresses these issues by providing an intuitive interface that streamlines Manifest generation.
+
+### Objectives
+
+The main goals of LRM\_Elembio are to:
+
+* Enable non-programmers, including lab technicians and clinicians, to generate Manifests
+* Automate the mapping between flowcell well positions and sample indexes
+* Reduce errors and improve reproducibility in run setup
+* Facilitate integration of AVITI sequencing into routine workflows
+
+By lowering the technical barrier, users can focus on experimental design and sample tracking rather than file formatting.
+
+### What it does
+
+LRM\_Elembio provides:
+
+* Interactive loading of sample metadata
+* Automatic mapping of samples to AVITI flowcell positions
+* Validation of Manifest file format against Elements Bioscience specifications
+* Export of ready-to-use Manifest files for direct upload to the AVITI instrument
+
+The application ensures that all generated files are compliant with AVITI requirements while keeping the interface accessible and user-friendly.
+
+### Open-source
+
+* [Source code](https://github.com/clbenoit/LRM_elembio)
+* Contributions and issues are welcome on GitHub
+
+
+## MethylDB
+
+<div>
+  <h3>
+    <i>An open-source platform to explore and interpret DNA methylation data locally.</i>
+  </h3>
+</div>
+
+<br />
+
+![](/portfolio/methyldb.gif)
+
+### Why this app
+
+DNA methylation profiling has become a cornerstone of modern molecular pathology,\
+especially for tumor classification, where reference classifiers (notably those developed at the DKFZ) have profoundly changed diagnostic practices.
+
+For many years, access to these analyses was facilitated by the availability of **free, centralized, online tools**\
+<a href="#ref-1" className="vocs_Anchor">\[1]</a>.\
+This model enabled rapid dissemination, harmonization of practices, and massive community adoption.
+
+However, recent shifts towards **restricted access, licensing models, or commercial spin-offs**\
+<a href="#ref-2" className="vocs_Anchor">\[2]</a> <a href="#ref-3" className="vocs_Anchor">\[3]</a>\
+have revealed a structural weakness of this approach:\
+many laboratories have become **dependent on external infrastructures** for a core diagnostic activity.
+
+As with variant analysis, outsourcing methylome analysis is often driven by:
+
+* Limited local bioinformatics resources.
+* The complexity of maintaining up-to-date analytical pipelines.
+* Regulatory and administrative constraints in clinical environments.
+
+While understandable, this strategy raises long-term issues:
+
+* Loss of autonomy over data and methods.
+* Rising costs for tools that were historically community-driven.
+* Stagnation of local expertise, despite increasing methodological complexity.
+
+MethylDB was born from this observation.
+
+### Project philosophy
+
+MethylDB aims to provide a **local, transparent, and extensible solution** for the exploration of DNA methylation results,\
+without relying on external black-box services.
+
+The goal is **not** to replace existing classifiers or pipelines,\
+but to **re-internalize the interpretation layer**, which is where most of the added value for biologists actually lies.
+
+In short:
+
+* Pipelines can remain standardized (nf-core, in-house, or commercial).
+* Raw or processed methylation outputs remain within the institution.
+* Interpretation, comparison, annotation, and curation are performed locally.
+
+This mirrors the same logic that motivated the development of GermlineVarDB.
+
+### What MethylDB does
+
+MethylDB is designed to:
+
+* Import DNA methylation results (e.g. IDAT-derived matrices, classifier outputs, QC metrics).
+* Build a **local methylation database** across samples, projects, and time.
+* Provide a **graphical interface** to:
+  * Explore sample similarity and clustering.
+  * Inspect classifier scores and confidence metrics.
+  * Compare new cases to historical local cohorts.
+  * Flag ambiguous or borderline classifications.
+
+The focus is deliberately on **usability for molecular biologists and pathologists**,\
+not on replacing notebooks or command-line workflows.
+
+### Open-source and community-driven
+
+MethylDB is released as an **open-source project**, with the same conviction as my previous work:\
+tools used daily in diagnostics should be understandable, auditable, and improvable by their users.
+
+* [Source code](https://github.com/clbenoit/MethylDB)
+* Live demo (coming soon)
+
+The project is intentionally modular, allowing users to adapt it to:
+
+* Different array technologies.
+* Different classifiers or reference datasets.
+* Research versus routine diagnostic contexts.
+
+### Call for contributions
+
+If you are:
+
+* A laboratory affected by recent changes in access to methylome classifiers,
+* A bioinformatician tired of re-implementing the same internal tools,
+* Or simply interested in open and sustainable molecular diagnostics,
+
+then contributions, feedback, and discussions are more than welcome.
+
+📩 Contact: [benoitclement.data@gmail.com](mailto\:benoitclement.data@gmail.com)
+
+### Acknowledgements
+
+I would like to warmly thank [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5) for his valuable help and contributions throughout the design and development phases of MethylDB.\
+His feedback, technical discussions, and hands-on involvement were instrumental in bringing this project to completion.
+
+This project also benefited from the use of **public datasets** during development and testing, in particular:
+
+This project also benefited from the use of **public datasets** during the development and testing phases, in particular:
+
+* the **GSE109381** dataset ([NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381))
+* the **GSE225810** dataset ([NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE225810))
+
+***
+
+### References
+
+<p id="ref-1">
+  **\[1]** Capper D. et al. (2018).\
+  <i>DNA methylation-based classification of central nervous system tumours</i>.\
+  <b>Nature</b>, 555, 469–474.\
+  <a href="https://doi.org/10.1038/nature26000" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+  **\[2]** German Cancer Research Center (DKFZ).\
+  <i>AI-supported molecular cancer diagnosis for brain tumors</i>.\
+  DKFZ press release describing the transition of the methylation classifier towards industrial exploitation via a spin-off.\
+  <a href="https://www.dkfz.de/en/news/press-releases/detail/ai-supported-molecular-cancer-diagnosis-for-brain-tumors" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
+</p>
+
+<p id="ref-3">
+  **\[3]** Heidelberg Epignostix GmbH.\
+  <i>Our Technology – CNS Tumor Classifier</i>.\
+  Official commercial portal describing access to the methylation classifier under defined terms of use.\
+  <a href="https://epignostix.com/our-technology/our-technology-cns-tumor-classifier/" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
+</p>
+
+
+## SomaVarDB
+
+<div> <h3><i>A graphical interface to explore your somatic genomic variation database.</i></h3></div>
+![](/portfolio/somavardb.gif)
+
+### Why this app
+
+Few hospitals do not outsource their bioinformatics analysis to private partners (at least in France). There are many reasons for this:
+
+* Lack of resources and investment capacity to anticipate rapid technological change.
+* The data professions, which are still in their infancy, have not yet fully penetrated these structures.
+* Cumbersome legal and administrative constraints on the accreditation of IT solutions for clinical use.
+
+Turning to an external service provider is therefore a short-term solution. In the long term, however, outsourcing poses two major problems:
+
+* The cost of the outsourced service is ultimately much higher than in-house.
+* Users (clinical biologists) work free of charge to sort the databases built by these external service providers from the raw data sent to them by the hospitals to which these clinicians belong.
+  The hospital will therefore once again pay for access to the Ias that have been trained thanks to its work.
+
+With this in mind, I turned my attention to the question of re-internalising this activity at CHUGA.
+The analytical part will be the subject of another article, but briefly,
+the [nf-core community](https://nf-co.re/) is, in my opinion, the best candidate on which to base this objective.
+
+However, there is another blocking point. Bioinformatics providers provide, along with a pipeline.
+Graphical interfaces enabling biologists to efficiently process genomic variation data for diagnostic rendering. This being the case, even if you internalize an accredited clinical-quality pipeline, it will be difficult to convince them to go back to a much less attractive Excel spreadsheet. This will be perceived as a step backwards.
+
+SomaVarDB therefore aims to plug into the output of a nf-core pipeline, clinically accredited if possible.
+It's a package that contains both the tools for building the local database from nf-core output,
+and the interface for interacting with this database.
+
+### Open-source
+
+* [Live demo](https://omicsverse.fr/app/SomaVarDB)
+* [Source code](https://github.com/clbenoit/SomaVarDB)
+
+
+## Circular RNAs and immune regulation in lung biology: a conceptual overview
+
+### Introduction
+
+During my recent work in transcriptomics and bioinformatics,
+I have had the opportunity to engage with projects exploring the role of non-coding RNA in lung biology and immune regulation.\
+While I cannot share unpublished results due to confidentiality, I can provide an overview of the **biological concepts** that frame this type of research.
+
+In this article, we explore three interconnected domains:
+
+1. basic lung biology and immune landscapes,
+2. circular RNAs (circRNAs) as emerging regulatory molecules,
+3. how circRNAs participate in cellular communication and immune modulation.
+
+This context is essential to understand why transcriptomic analyses in lung systems are both challenging and rewarding.
+
+### Lung structure and immune environment
+
+The lung is a highly specialized organ whose main function is gas exchange.\
+It is composed of a hierarchical architecture of airways and alveoli, lined by epithelial cells and supported by a complex stromal compartment.
+
+#### The pulmonary immune landscape
+
+Although often thought of as a “mechanical” organ, the lung is also an **immunologically active site**.\
+It maintains a balance between:
+
+* tolerance to harmless inhaled particles and commensals,
+* defense against pathogens and harmful insults.
+
+This balance is achieved by the coordinated activity of:
+
+* **[alveolar macrophages](https://en.wikipedia.org/wiki/Alveolar_macrophage)** — first responders in innate defense
+* **[dendritic cells](https://en.wikipedia.org/wiki/Dendritic_cell)** — antigen-presenting sentinels
+* **[T lymphocytes](https://en.wikipedia.org/wiki/T_cell)** — adaptive immune effectors
+* **[structural cells](https://www.ncbi.nlm.nih.gov/books/NBK54199/)** (epithelial, endothelial) that produce cytokines and chemokines
+
+In the context of disease, this balance can be disrupted, leading to chronic inflammation, fibrosis, or impaired anti-tumor immunity.
+
+### Circular RNAs: an emerging class of regulatory RNAs
+
+Circular RNAs (circRNAs) constitute a subclass of RNA molecules characterized by a **covalently closed loop structure**.\
+Unlike linear messenger RNAs, they do not have 5’ caps or 3’ polyadenylated tails, which contributes to **enhanced stability** in cells.
+
+#### Biogenesis
+
+CircRNAs are produced by a process called **back-splicing**, wherein:
+
+* a downstream splice donor site is joined to an upstream splice acceptor
+* this results in a circular transcript that can be derived from **exonic, intronic or exon–intron sequences**
+
+Because of this unique formation, circRNAs display:
+
+* cell-type specific expression
+* developmental regulation
+* often, evolutionary conservation
+
+#### Functional roles (publicly established)
+
+Although initially considered transcriptional noise, circRNAs are now recognized for several biological functions:
+
+* **microRNA sponging**\
+  circRNAs can contain binding sites that sequester microRNAs, modulating their availability and hence downstream repression of target genes.
+
+* **Interaction with RNA-binding proteins**\
+  circRNAs can bind proteins and influence their activity, localization or stability.
+
+* **Regulation of transcription and splicing**\
+  Some circRNAs interact with transcriptional machinery or spliceosome components to influence gene expression programs.
+
+These mechanisms are not mutually exclusive and can depend on cellular context.
+
+### CircRNAs and immune modulation in the lung
+
+Emerging public research indicates that circRNAs can shape immune phenotypes by:
+
+* influencing cytokine production
+* modulating antigen-presentation pathways
+* altering macrophage polarization
+* regulating activation states of immune cells
+
+In the **pulmonary environment**, where immune surveillance and tolerance are finely tuned, circRNAs may participate in:
+
+* responses to infection
+* inflammatory signaling
+* tissue remodeling
+* immune adaptation in chronic conditions
+
+Public studies in model systems have shown examples where circRNAs influence:
+
+* NF-κB signaling pathways
+* cytokine expression profiles
+* cell–cell communication via extracellular vesicles
+
+These findings suggest that circRNAs are not just transcriptional by-products but active **regulators of immune networks**.
+
+### Challenges in transcriptomic analyses in lung systems
+
+Studying circRNAs in the lung — especially in complex conditions like inflammation or therapy resistance — poses specific analytical challenges:
+
+* circRNAs are often **low-abundance** and require dedicated detection algorithms
+* distinguishing true back-spliced reads from technical artefacts
+* integrating circRNA expression with other layers of data (mRNA, proteins)
+* accounting for **cellular heterogeneity** in lung tissues
+
+From a bioinformatics viewpoint, these challenges demand:
+
+* robust quality control
+* careful normalization
+* multi-stage validation strategies
+
+While the analytical details can become quite technical, a recurrent theme is the need for **interpretability and biological plausibility** in downstream models.
+
+### Conclusion
+
+Circular RNAs are a fascinating class of molecules at the intersection of transcriptional regulation and immune modulation.\
+In the context of lung biology, they add another layer of regulatory complexity to an already intricate immune landscape.
+
+Although unpublished results from specific projects cannot be shared here, understanding the **general biological framework** provides insight into why circRNAs are gaining such attention.
+
+{/* > *Note: specifics about ongoing research and unpublished findings are not presented due to confidentiality and publication processes.*
+
+  ## To go further
+
+  - Reviews on circRNA biogenesis and functions  
+  - Public datasets on pulmonary immune transcriptomics  
+  - Tutorials on circRNA detection and analysis */}
+
+
+## How data analysis can help to fix genetic disorders
+
+### Introduction
+
+Gene therapy as seen a major breakthrough with the development of **CRISPR-Cas9** technology.
+This revolutionary tool allows scientists to precisely edit genes, offering new hope for
+treating genetic disorders and diseases. **With the potential to correct genetic mutations at
+the source, CRISPR-Cas9 opens up a world of possibilities for personalized medicine and targeted therapies.**
+The future of gene therapy looks brighter than ever,
+with the promise of improved treatments and even potential cures for a wide range of conditions.
+
+[Autosomal-dominant disorders](https://www.genome.gov/genetics-glossary/Autosomal-Dominant-Disorder) are among the diseases that could see gene treatments in the future.
+As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for
+the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele.
+Only the wild-type allele remains, and the disease is thus cured.
+Although the effectiveness of this approach looks promising <a href="#ref-1" className="vocs_Anchor">\[1]</a> <a href="#ref-2" className="vocs_Anchor">\[2]</a> <a href="#ref-3" className="vocs_Anchor">\[3]</a>, a number of issues still need
+to be addressed, two of which we will try to address in this article :
+
+<p className="popacitydanger">
+  <div style={{ textAlign: 'center' }}>
+    <strong>
+      How can the design of these personalized medicine treatments can be effective and quick for each patient ? <br /><br />
+      How can we specifically target the mutated allele without breaking the functional allele or another part of
+      the genome ?
+    </strong>
+  </div>
+</p>
+
+### Data analysis can be use to create a list of interesting genomic regions for gene therapy
+
+The targeted genome cleavage is achieved by targeting sequence-specific cleavage of S. pyogenes Cas9 (spCas9)
+endonuclease with a gRNA. In order for the gRNA to successfully direct Cas9 cleavage,
+the corresponding target DNA sequence in the genome must be found next to a PAM site,
+also known as a Protospacer Adjacent Motif. The canonical PAM is associated with the spCas9 nuclease is **5'-NGG-3'**.
+We are therefore going to try to draw up an exhaustive list of all the genomic regions that could be used for this
+gene therapy.
+
+1. We start by selecting all the SNPs that are frequent in the population (> 5%), for which we can
+   use the gnomAD database <a href="#ref-4" className="vocs_Anchor">\[4]</a>.  We want the list created to be usable to treat as many
+   patients as possible, so we avoid SNPs that are too rare.
+2. Only SNPs that induce the disappearance or appearance of the **5‘-NGG-3’**
+   motif will allow us to target only the mutated allele while preserving the WT. To do this, we wrote an in-house script in Python.
+3. We used the [jvarkit tools suite](https://github.com/lindenb/jvarkit) to reconstitute the genomic context of these SNPs, i.e.
+   to add the flanking sequences to the left and right of our SNPs of interest, according to the human reference genome.
+4. Finally, we used the [FlashFry](https://github.com/mckennalab/FlashFry) tool to calculate and predict efficiency and specificity
+   scores for each of the positions we selected. We wanted to cut the diseased gene efficiently,
+   without altering other regions of the genome.
+
+Using this method, we were able to draw up a list of genomic positions of interest in the treatment of Ryanodine receptor
+type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. <a href="#ref-5" className="vocs_Anchor">\[5]</a>
+Thanks to next-generation sequencing, it is possible to obtain both genomic sequences of a patient
+at a reasonable cost. All the positions on our list for which the patient is heterozygous are therefore
+candidates for gene therapy!
+
+[Check out the analysis code here !](https://github.com/clbenoit/CutOneStrand)
+
+### Generalization
+
+Of course, the implementation of gene therapy has to deal with other obstacles and questions,
+but this approach can be generalised to other Autosomal-Dominant-Disorders and enable carers to
+screen the genome extensively in order to create a short list of regions
+of interest for this type of gene therapy !
+
+#### References
+
+<p id="ref-1">
+  **\[1]** Anzalone A.V, Koblan L.W and Liu D.R.\
+  <i>Genome editing with CRISPR–Cas nucleases, base editors, transposases and prime editors</i>.\
+  <a href="https://www.nature.com/articles/s41587-020-0561-9" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+  **\[2]** F Chemello, A.C Chai, H Li, C Rodriguez-Caycedo, E Sanchez-Ortiz, A Atmanli, A.A Mireault, N Liu,\
+  R Bassel-Duby, E.N Olson.\
+  <i>Precise correction of Duchenne muscular dystrophy exon deletion mutations by base and prime editing</i>.\
+  <a href="https://pubmed.ncbi.nlm.nih.gov/33931459/" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-3">
+  **\[3]** Kelly Godbout, Joël Rousseau, Jacques P Tremblay.\
+  <i>Successful Correction by Prime Editing of a Mutation in the RYR1 Gene Responsible for a Myopathy</i>.\
+  <a href="https://www.mdpi.com/2073-4409/13/1/31" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-4">
+  **\[4]** The Genome Aggregation Database (gnomAD).\
+  <i>Database and resource for population genomic variation</i>.\
+  <a href="https://gnomad.broadinstitute.org/about" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
+</p>
+
+<p id="ref-5">
+  **\[5]** Mathilde Beaufils, Margaux Melka, Julie Brocard, Clement Benoit, Nagi Debbah, Kamel Mamchaoui,\
+  Norma B. Romero, Anne Frédérique Dalmas-Laurent, Susana Quijano-Roy, Julien Fauré, John Rendu, Isabelle Marty.\
+  <i>Functional benefit of CRISPR-Cas9-induced allele deletion for RYR1 dominant mutation</i>.\
+  <a href="https://doi.org/10.1016/j.omtn.2024.102259" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+
+## Experimental design in the context of next generation sequencing
+
+### Introduction
+
+Coming from a biotechnology background, I was sensitized to the problems of experimental design. I then spent a few years as a bioinformatician, leaving this task to my platform colleagues.
+
+As a bioinformatician, you focus on producing quality pipelines and algorithms for processing sequencer output.
+But we sometimes forget that, without good experimental design, we run the risk of being unable to draw conclusions,
+or even of unwittingly producing false positives. <br />
+
+Here's a brief overview of the main considerations for experience designers.
+
+### Next generation sequencing specificities
+
+We need to bear in mind that everything starts with biological material, from which we want to extract **informative** biological sequences, to answer a precise question.
+The difficulty lies in extracting useful information without confusing it with other factors: background noise, bias...
+
+The sample is first taken from its environment, by which it will have been impacted.
+The interaction of the biological material with its environment,
+as well as the sampling carried out, already constitute a first source of variance.
+
+## Methodology
+
+1. **Clearly define the question posed and the technology chosen to answer it.** <br />
+   Many confounding factors will depend on the technology chosen. They will have a greater or lesser impact depending on the question asked.
+2. **Control the experimental variables** <br />
+   Variables to control can include sample preparation techniques, sequencing parameters and environmental conditions. Ensure that the impact of this factors
+   on your data is minimized and controled to isolate the impact of the specific variables of interest, enhancing ythe reliability of the results.
+3. **Randomization techniques** <br />
+   Applying randomization techniques will prevent your experiment to capture [systemic bias](https://en.wikipedia.org/wiki/Systemic_bias) in your data.
+4. **Replication Strategies**<br />
+   Replicating the experiment with different samples or under different conditions enhances the robustness of the results.
+   It allows for the identification of consistent patterns and aids in generalizing findings to a broader context.
+5. **Factorial design**<br />
+   Factorial design is a statistical experimental method that explores the effects of multiple independent variables simultaneously.
+   It allows researchers to assess the individual effects of each factor and any potential interactions between them, providing a more comprehensive understanding
+   of experimental outcomes.
+
+## Conclusion
+
+Experimental design is not so complicated in terms of methodology, and is essential to get the most out of sequencing your biological samples.
+However, a thorough knowledge of the different technologies available and of experimental design techniques and strategies is required to apply it effectively...
+
+{/* # To go further */}
+
+{/* [^1], [^2], [^3] */}
+
+{/* [^1]: Doe, J., & Smith, A. (Year). *Title of the Publication*. **Journal Name**, Volume(Issue), Page Range. [DOI](https://doi.org/xxxx) */}
+
+
+## A quick overview of Gene sets enrichment analysis
+
+### Why GSEA Analysis ?
+
+Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
+They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
+This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data
+<a href="#ref-1" className="vocs_Anchor">\[1]</a>,
+<a href="#ref-2" className="vocs_Anchor">\[2]</a>,
+<a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+
+Finally, interpreting lists of thousands of differentially expressed genes is a tedious exercise for the biologist.
+
+The GSEA, by dezooming from the scale of the gene to that of the pathway, improves the reproducibility of studies,
+while facilitating their interpetation.
+
+### Principles
+
+#### What is the question ?
+
+Let's says you have ranked a gene list <b><i>L</i></b> according to your favourite metric. The GSEA tries to answer the following question : <br />
+
+<p className="popacity">
+  Given a gene set <b><i>S</i></b> : Does the genes belonging to <b><i>S</i></b> tends to occur toward the top (or the bottom) of the list <b><i>L</i></b>,
+  in which case the gene set is correlated with the phenotypic class distinction.
+</p>
+
+Of course we will do as many independant tests as we have genes sets to try.
+A [multiple testing correction](https://www.firalis.com/products/fimics-cardiac-ruo-kit-panel) should then be considered.
+
+#### The Method
+
+**Step 1 : Compute an enrichment score (ES)**<br />
+This score reflects the degree to which the set S is overrepresented at the extremes top (ES > 0) or bottom (ES \< 0) of the ranked list R. It is calculated by walking down the list L,
+increasing the running sum when we encounter a gene in S and decreasing it when we encounter genes not in S. Finally the maximum deviation from zero encountered during the random walk is kept as ES. <br /><br />
+
+**Step 2 : Estimation of significance level of ES**<br />
+The nominal P-Value is estimates the statistical significance of the ES by using an empirical phenotype-based permutation test that
+preserves the correlation structure of the gene expression data. Phenotype labels are permuted and the ES recomputed to generate a null distribution for the ES. The empirical nominal P Value of the observed ES is then calculated relative to
+this null distribution. Permutation of class labels preserves gene-gene correlations and thus, provide a more biologically reasonable assessment of significance than would be obtained by permuting genes.<br /><br />
+
+**Step 3 : Adjustment of Multiple Hypothesis Testing.**<br />
+The enrichment scores for each set are normalized and a false discovery rate is calculated
+
+<p className="popacitydanger">
+  <div style={{ textAlign: 'center' }}>
+    <strong>It is usefull to keep in mind that</strong>
+  </div>
+
+  <br />
+
+  * That the GSEA official software will not complain if you provide them with raw gene expression data. However your results will get totally incorrect results.
+  * You can perform a pre ranked GSEA, which can be very helpful for performing gene set enrichment analysis on data that do not conform to the typical GSEA scenario. For example, it can be used when the ranking metric choices provided by GSEA are not appropriate for the data, or when a ranked list of genomic features deviates from traditional gene expression data (e.g., GWAS results, ChIP seq, etc.). Also if you lack computing power and have access to pre-ranked list, this solution can be your best option.
+  * Clearly define the question your are trying to address and choose the appropriate ranking metrics.
+  * Genes sets curation could be useful as a pre-processing step. Indeed you do not need to perform test on genes set you are not interested in. It will increase your need for computing resources and create supplementary noise for the Adjustment of Multiple Hypothesis Testing procedure.
+</p>
+
+#### To go further with theory
+
+There exists a variant of GSEA called FGSEA for <u>F</u>ast <u>G</u>ene <u>S</u>et <u>E</u>nrichment <u>A</u>nalysis.<br />
+
+Another common approach to perform pathways analysis is the [Gene Ontology Enrichment analysis](https://geneontology.org/docs/go-enrichment-analysis/).
+
+### Available programs for practice
+
+* [Official Broad institute tools](https://www.gsea-msigdb.org/gsea/downloads.jsp)
+* **WEB-based GEne SeT AnaLysis Toolkit**\
+  [GUI](https://www.webgestalt.org/)\
+  [R package](https://cran.r-project.org/web/packages/WebGestaltR/index.html)
+* [Fast Gene Set Enrichment Analysis](https://bioconductor.org/packages/release/bioc/html/fgsea.html) (Pre-ranked only)
+
+### References
+
+<p id="ref-1">
+  **\[1]** Timothy E. Sweeney, Winston A. Haynes, Francesco Vallania, John P. Ioannidis, Purvesh Khatri (2017).\
+  <i>Methods to increase reproducibility in differential gene expression via meta-analysis</i>.\
+  <b>Nucleic Acids Research</b>.\
+  <a href="https://doi.org/10.1093/nar/gkw797" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+  **\[2]** Steven N Goodman, Daniele Fanelli, John P A Ioannidis (2016).\
+  <i>What does research reproducibility mean?</i>.\
+  <b>Sci Transl Med</b>.\
+  <a href="https://doi.org/10.1126/scitranslmed.aaf5027" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-3">
+  **\[3]** Lianbo Yu (2020).\
+  <i>RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project</i>.\
+  <b>Cancer Informatics</b>.\
+  <a href="https://doi.org/10.1177/1176935120922498" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+
+## Blog
+
+::blog-posts
+
+
+## How Local Vibe Coding Boosted My Productivity as a Clinical Bioinformatics Data Engineer
+
+### Why Rethinking the Way We Code Matters
+
+In clinical biology, the work of a data engineer sits at the intersection of several strong constraints:
+
+* large-scale datasets,
+* complex pipelines (ETL, QC, statistical analysis),
+* high requirements for traceability and reproducibility,
+* constant time pressure.
+
+For a long time, I worked with a fairly standard setup: IDE + scripts + scattered documentation + frequent back-and-forth between StackOverflow, docs, and notebooks.\
+It worked — but it came with a high cognitive cost.
+
+With the arrival of LLMs and the emergence of *vibe coding*, I progressively set up a **local**, workflow-oriented environment focused on:
+
+* fast iteration,
+* continuous feedback,
+* reduced context switching.
+
+The result: a clear productivity boost, but more importantly, better technical clarity.
+
+### What I Mean by *Vibe Coding*
+
+*Vibe coding* is not a tool — it’s a **way of working**.
+
+> It’s about coding in an environment where you can:
+>
+> * explore quickly,
+> * interact with your code,
+> * test ideas with minimal friction,
+> * stay in a continuous flow state.
+
+In my case, it relies on:
+
+* a **locally running LLM**,
+* a well-integrated editor (VS Code),
+* reproducible scripts,
+* a clear separation between exploration, production, and documentation.
+
+### Why Local Instead of Cloud-Based LLMs?
+
+#### 🔐 1. Sensitive data
+
+In clinical biology, data are:
+
+* often confidential,
+* sometimes regulated,
+* rarely allowed to leave secured environments.
+
+Running everything locally means:
+
+* no data leakage,
+* no network dependency,
+* easier compliance.
+
+#### ⚡ 2. Faster feedback loops
+
+A well-configured local model:
+
+* responds instantly,
+* enables short *think → code → test* cycles,
+* encourages exploration.
+
+This changes the workflow dramatically:
+you experiment more, and hesitate less.
+
+#### 🧠 3. Reduced cognitive load
+
+The LLM becomes:
+
+* a code reviewer,
+* a boilerplate generator,
+* a refactoring assistant,
+* a translator between biology and code.
+
+I keep the domain expertise — it absorbs the noise.
+
+### What Vibe Coding Brought Me in Practice
+
+#### ✅ 1. Cleaner pipelines
+
+* Faster generation of ETL scripts
+* More consistent structure and logging
+* Easier testing and refactoring
+
+Result:\
+➡️ less technical debt\
+➡️ better long-term maintainability
+
+#### ✅ 2. Better biological data exploration
+
+For analysis tasks:
+
+* rapid notebook generation,
+* statistical interpretation support,
+* clearer result explanations.
+
+Especially useful for:
+
+* RNA-seq
+* cohort analysis
+* QC workflows
+* GSEA / GO analysis preparation
+
+#### ✅ 3. Massive gains in documentation
+
+Before:
+
+* documentation written after the fact (if ever)
+
+Now:
+
+* documentation generated alongside the code,
+* automatic rephrasing for different audiences (bio / data / clinical),
+* improved traceability.
+
+### What Vibe Coding Is *Not*
+
+⚠️ It is **not**:
+
+* magical no-code,
+* a replacement for expertise,
+* an excuse to stop understanding your own code.
+
+On the contrary:
+
+> the better you understand your domain, the more powerful vibe coding becomes.
+
+### Best Practices I’ve Learned
+
+* Always keep a **human in the loop**
+* Version everything
+* Separate clearly:
+  * exploration
+  * production code
+  * documentation
+* Never blindly trust model output
+* Use the LLM as a **pair programmer**, not an oracle
+
+### Conclusion
+
+Local vibe coding helped me:
+
+* work faster,
+* document better,
+* reduce mental fatigue,
+* improve the overall quality of my pipelines.
+
+In a field like clinical biology — where rigor and reproducibility are critical — it has become a real performance multiplier rather than a gimmick.
+
+***
+
+If you want, I can also share:
+
+* my exact local setup (LLM, hardware, IDE),
+* how I use it for RNA-seq analysis,
+* or a concrete example of a pipeline improved with vibe coding.
+
+
+import  Timeline from "./react-timeline"
+
+<Timeline />
+

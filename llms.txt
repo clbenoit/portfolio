@@ -1,0 +1,37 @@
+# Home
+
+## Docs
+
+- [CNC AI Models](/portfolio/projects/cnc-ai): Accessible AI models hosted on a dedicated platform for *CNC crew members*
+- [CNC Cloud Services](/portfolio/projects/cnc-cloud): Enterprise-grade Nextcloud instance for secure collaboration.
+- [FilLT3r Shiny App](/portfolio/projects/filtr3r-shiny): <div> <h3><i>A graphical interface for alignment-free detection, characterization, and quantification of FLT3 internal tandem duplications.</i></h3></div><br />
+![](/portfolio/filt3r_shiny.gif)
+- [GermlineVarDB](/portfolio/projects/germlinevardb): <div> <h3><i>A graphical interface to explore your germline genomic variation database.</i></h3></div><br />
+![](/portfolio/somavardb.gif)
+- [Here are my projects](/portfolio/projects): The initial aim of the  [OmicsVerse portal](https://omicsverse.fr) is to host demo versions of the various data applications I create.
+- [LRM_Elembio](/portfolio/projects/lrm-elembio): <div> <h3><i>A graphical interface for creating standardized Manifests for AVITI sequencing runs.</i></h3></div><br />
+- [MethylDB](/portfolio/projects/methyldb): <i>An open-source platform to explore and interpret DNA methylation data locally.</i>
+- [SomaVarDB](/portfolio/projects/somavardb): <div> <h3><i>A graphical interface to explore your somatic genomic variation database.</i></h3></div>
+![](/portfolio/somavardb.gif)
+- [Circular RNAs and immune regulation in lung biology: a conceptual overview](/portfolio/blog/circRNAs): During my recent work in transcriptomics and bioinformatics,
+I have had the opportunity to engage with projects exploring the role of non-coding RNA in lung biology and immune regulation.\
+While I cannot share unpublished results due to confidentiality, I can provide an overview of the **biological concepts** that frame this type of research.
+- [How data analysis can help to fix genetic disorders](/portfolio/blog/cutonestrand): Gene therapy as seen a major breakthrough with the development of **CRISPR-Cas9** technology.
+This revolutionary tool allows scientists to precisely edit genes, offering new hope for
+treating genetic disorders and diseases. **With the potential to correct genetic mutations at
+the source, CRISPR-Cas9 opens up a world of possibilities for personalized medicine and targeted therapies.**
+The future of gene therapy looks brighter than ever,
+with the promise of improved treatments and even potential cures for a wide range of conditions.
+- [Experimental design in the context of next generation sequencing](/portfolio/blog/expdesign): Coming from a biotechnology background, I was sensitized to the problems of experimental design. I then spent a few years as a bioinformatician, leaving this task to my platform colleagues.
+- [Methodology](/portfolio/blog/expdesign): **Clearly define the question posed and the technology chosen to answer it.** <br />
+Many confounding factors will depend on the technology chosen. They will have a greater or lesser impact depending on the question asked.
+- [Conclusion](/portfolio/blog/expdesign): **Clearly define the question posed and the technology chosen to answer it.** <br />
+Many confounding factors will depend on the technology chosen. They will have a greater or lesser impact depending on the question asked.
+- [A quick overview of Gene sets enrichment analysis](/portfolio/blog/gsea): Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
+They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
+This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data
+<a href="#ref-1" className="vocs_Anchor">\[1]</a>,
+<a href="#ref-2" className="vocs_Anchor">\[2]</a>,
+<a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+- [Blog](/portfolio/blog)
+- [How Local Vibe Coding Boosted My Productivity as a Clinical Bioinformatics Data Engineer](/portfolio/blog/lovevibecoding): In clinical biology, the work of a data engineer sits at the intersection of several strong constraints:
