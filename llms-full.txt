@@ -181,9 +181,11 @@ This initiative brings together passionate developers to explore and build decen
 
 #### CNC AI Models
 
-Accessible AI models hosted on a dedicated platform for *CNC crew members*
+<video autoPlay loop muted playsInline disablePictureInPicture disableRemotePlayback style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/portfolio/ai.webm" type="video/webm" />
+</video>
 
-[Access the platform CNC AI platform](https://ai.omicsverse.fr)
+Accessible AI models hosted on a [dedicated platform](https://ai.omicsverse.fr) for *CNC crew members*
 
 **Features:**
 
@@ -197,29 +199,15 @@ Accessible AI models hosted on a dedicated platform for *CNC crew members*
 * Advanced Data Science (Inferential statistics & Graph Theory)
 * Blockchain-enabled AI (On-chain data analysis & Smart Contract interaction)
 * High-uptime monitoring and distributed systems reliability
-
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  disablePictureInPicture
-  disableRemotePlayback
-  style={{ 
-  width: "100%", 
-  maxHeight: "25vh",    // Tu bloques la hauteur ici
-  objectFit: "cover",    // Empêche la déformation (essentiel !)
-  height: "auto" 
-}}
->
-  <source src="/portfolio/ai.webm" type="video/webm" />
-</video>
+* Integration with our Cloud services at [cloud.omicsverse.fr](https://cloud.omicsverse.fr)
 
 #### CNC Cloud Services
 
-Enterprise-grade Nextcloud instance for secure collaboration.
+<video autoPlay loop muted playsInline disablePictureInPicture disableRemotePlayback style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/portfolio/cloud.webm" type="video/webm" />
+</video>
 
-[Access the platform CNC Cloud Services](https://cloud.omicsverse.fr)
+Enterprise-grade [Nextcloud instance](https://cloud.omicsverse.fr) for secure collaboration.
 
 **Features:**
 
@@ -228,24 +216,7 @@ Enterprise-grade Nextcloud instance for secure collaboration.
 * Privacy-first architecture
 * Centralized team management
 * Experimental decentralized file storage via IPFS integration
-* Integration with our IA services at [ai.omicsverse.fr](https://ai.omicsverse.fr)
-
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  disablePictureInPicture
-  disableRemotePlayback
-  style={{ 
-  width: "100%", 
-  maxHeight: "25vh",    // Tu bloques la hauteur ici
-  objectFit: "cover",    // Empêche la déformation (essentiel !)
-  height: "auto" 
-}}
->
-  <source src="/portfolio/cloud.webm" type="video/webm" />
-</video>
+* Integration with our IA services at [ia.omicsverse.fr](https://ia.omicsverse.fr)
 
 ### References
 

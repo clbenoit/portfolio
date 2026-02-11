@@ -1,4 +1,4 @@
-import{u as s,j as e}from"./index-0iVlZIEc.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
+import{u as s,j as e}from"./index-CGx518sq.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(r.h2,{id:"omicsverse",children:["OmicsVerse",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#omicsverse",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/Omicsverse.webm",type:"video/webm"})}),`
 `,e.jsxs(r.p,{children:["The initial aim of the  ",e.jsx(r.a,{href:"https://omicsverse.fr",children:"OmicsVerse portal"})," is to host demo versions of the various data applications I create."]}),`
@@ -42,8 +42,8 @@ So if you feel like contributing to the project. Don't hesitate to contact me :
 This initiative brings together passionate developers to explore and build decentralized applications.`}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Focus areas:"})," Smart contracts development, DeFi protocols, blockchain architecture"]}),`
 `,e.jsxs(r.h3,{id:"cnc-ai-models",children:["CNC AI Models",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-ai-models",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
-`,e.jsxs(r.p,{children:["Accessible AI models hosted on a dedicated platform for ",e.jsx(r.em,{children:"CNC crew members"})]}),`
-`,e.jsx(r.p,{children:e.jsx(r.a,{href:"https://ai.omicsverse.fr",children:"Access the platform CNC AI platform"})}),`
+`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/ai.webm",type:"video/webm"})}),`
+`,e.jsxs(r.p,{children:["Accessible AI models hosted on a ",e.jsx(r.a,{href:"https://ai.omicsverse.fr",children:"dedicated platform"})," for ",e.jsx(r.em,{children:"CNC crew members"})]}),`
 `,e.jsx(r.strong,{children:"Features:"}),`
 `,e.jsxs(r.ul,{children:[`
 `,e.jsx(r.li,{children:"Web interface for interactive model testing"}),`
@@ -56,11 +56,11 @@ This initiative brings together passionate developers to explore and build decen
 `,e.jsx(r.li,{children:"Advanced Data Science (Inferential statistics & Graph Theory)"}),`
 `,e.jsx(r.li,{children:"Blockchain-enabled AI (On-chain data analysis & Smart Contract interaction)"}),`
 `,e.jsx(r.li,{children:"High-uptime monitoring and distributed systems reliability"}),`
+`,e.jsxs(r.li,{children:["Integration with our Cloud services at ",e.jsx(r.a,{href:"https://cloud.omicsverse.fr",children:"cloud.omicsverse.fr"})]}),`
 `]}),`
-`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{width:"100%",maxHeight:"25vh",objectFit:"cover",height:"auto"},children:e.jsx("source",{src:"/portfolio/ai.webm",type:"video/webm"})}),`
 `,e.jsxs(r.h3,{id:"cnc-cloud-services",children:["CNC Cloud Services",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-cloud-services",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
-`,e.jsx(r.p,{children:"Enterprise-grade Nextcloud instance for secure collaboration."}),`
-`,e.jsx(r.p,{children:e.jsx(r.a,{href:"https://cloud.omicsverse.fr",children:"Access the platform CNC Cloud Services"})}),`
+`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/cloud.webm",type:"video/webm"})}),`
+`,e.jsxs(r.p,{children:["Enterprise-grade ",e.jsx(r.a,{href:"https://cloud.omicsverse.fr",children:"Nextcloud instance"})," for secure collaboration."]}),`
 `,e.jsx(r.strong,{children:"Features:"}),`
 `,e.jsxs(r.ul,{children:[`
 `,e.jsx(r.li,{children:"Secure file storage & synchronization"}),`
@@ -68,9 +68,8 @@ This initiative brings together passionate developers to explore and build decen
 `,e.jsx(r.li,{children:"Privacy-first architecture"}),`
 `,e.jsx(r.li,{children:"Centralized team management"}),`
 `,e.jsx(r.li,{children:"Experimental decentralized file storage via IPFS integration"}),`
-`,e.jsxs(r.li,{children:["Integration with our IA services at ",e.jsx(r.a,{href:"https://ai.omicsverse.fr",children:"ai.omicsverse.fr"})]}),`
+`,e.jsxs(r.li,{children:["Integration with our IA services at ",e.jsx(r.a,{href:"https://ia.omicsverse.fr",children:"ia.omicsverse.fr"})]}),`
 `]}),`
-`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{width:"100%",maxHeight:"25vh",objectFit:"cover",height:"auto"},children:e.jsx("source",{src:"/portfolio/cloud.webm",type:"video/webm"})}),`
 `,e.jsxs(r.h2,{id:"references",children:["References",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#references",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx("p",{id:"ref-1",children:e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"[1]"})," Tuomas Granlund; Tommi Mikkonen; Vlad Stirbu (2020).",e.jsx(r.br,{}),`
 `,e.jsx("i",{children:"On Medical Device Software CE Compliance and Conformity Assessment"}),".",e.jsx(r.br,{}),`
