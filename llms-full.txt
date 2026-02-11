@@ -216,7 +216,7 @@ Enterprise-grade [Nextcloud instance](https://cloud.omicsverse.fr) for secure co
 * Privacy-first architecture
 * Centralized team management
 * Experimental decentralized file storage via IPFS integration
-* Integration with our IA services at [ia.omicsverse.fr](https://ia.omicsverse.fr)
+* Integration with our IA services at [ai.omicsverse.fr](https://ai.omicsverse.fr)
 
 ### References
 
