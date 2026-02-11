@@ -12,7 +12,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-vertical-timeline-component": "^3.6.0",
-    "vocs": "1.0.0-alpha.38"
+    "vocs": "1.4.1"
   },
   "devDependencies": {
     "browserslist": "latest",

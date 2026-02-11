@@ -21,12 +21,21 @@ const listStyle = {
     //  height: '0.5em'
 };
 
+// const colors = {
+//   work: { light: 'rgb(144,202,249)', dark: '#5B7F9D' },        // Bleu doux
+//   // education: { light: 'rgb(200, 80, 120)', dark: '#7B3F52' },    // Rose/Magenta
+//   education: { light: 'rgb(189,141,220)', dark: '#7B3F52' },  
+//   internship: { light: 'rgb(245, 190, 145)', dark: '#C89070' },  // Orange clair
+//   traveling: { light: 'rgb(120, 180, 140)', dark: '#7FB89F' },   // Vert menthe
+//   blog: { light: 'rgb(205, 180, 150)', dark: '#7FB89F' }         // Tan/Beige
+// };
+
 const colors = {
-  work: { light: 'rgb(100, 150, 200)', dark: '#5B7F9D' },        // Bleu doux
-  education: { light: 'rgb(200, 80, 120)', dark: '#7B3F52' },    // Rose/Magenta
-  internship: { light: 'rgb(240, 160, 100)', dark: '#C89070' },  // Orange clair
-  traveling: { light: 'rgb(120, 180, 140)', dark: '#7FB89F' },   // Vert menthe
-  blog: { light: 'rgb(180, 140, 100)', dark: '#7FB89F' }         // Tan/Beige
+  work: { light: 'rgb(144,202,249)', dark: '#6B9FBF' },      // Bleu pastel doux
+  education: { light: 'rgb(189,141,220)', dark: '#9B7BA8' },  // Mauve pastel
+  internship: { light: 'rgb(245, 190, 145)', dark: '#B8936D' }, // Orange pastel
+  traveling: { light: 'rgb(120, 180, 140)', dark: '#7FA887' }, // Vert menthe doux
+  blog: { light: 'rgb(205, 180, 150)', dark: '#998370' }       // Tan pastel
 };
 
 const Timeline = () => {
@@ -60,7 +69,7 @@ const Timeline = () => {
 
   const getTextColor = () => {
     //return isDark ? '#fff' : '#000';
-    return isDark ? '#EBEBEB' : '#262525ff' ;!important;
+    return isDark ? '#F5F5F5' : '#1A1A1A' ;!important;
     //return isDark ? '#eb1446ff' : '#a51616ff' ;  
   };
 

@@ -47,7 +47,7 @@ const GroupedList = () => {
 
   const getTextColor = () => {
     //return isDark ? '#fff' : '#000';
-    return isDark ? '#EBEBEB' : '#262525ff' ;!important;
+    return isDark ? '#F5F5F5' : '#262525ff' ;!important;
   };
 
   const [categories] = useState([
@@ -150,6 +150,7 @@ const GroupedList = () => {
             padding: '10px',
             margin: '10px 0',
             borderRadius: '5px',
+            fontSize: '18px',
             cursor: 'pointer',
             transition: 'background-color 0.3s ease'
           }}

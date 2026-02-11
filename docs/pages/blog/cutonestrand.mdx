@@ -20,7 +20,7 @@ The future of gene therapy looks brighter than ever,
 As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for 
 the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele. 
 Only the wild-type allele remains, and the disease is thus cured. 
-Although the effectiveness of this approach looks promising <a href="#ref-1" class="vocs_Anchor">[1]</a> <a href="#ref-2" class="vocs_Anchor">[2]</a> <a href="#ref-3" class="vocs_Anchor">[3]</a>, a number of issues still need 
+Although the effectiveness of this approach looks promising <a href="#ref-1" className="vocs_Anchor">[1]</a> <a href="#ref-2" className="vocs_Anchor">[2]</a> <a href="#ref-3" className="vocs_Anchor">[3]</a>, a number of issues still need 
 to be addressed, two of which we will try to address in this article : 
 
 <p className="popacitydanger" >
@@ -42,7 +42,7 @@ also known as a Protospacer Adjacent Motif. The canonical PAM is associated with
 We are therefore going to try to draw up an exhaustive list of all the genomic regions that could be used for this 
 gene therapy.
 1) We start by selecting all the SNPs that are frequent in the population (> 5%), for which we can 
-use the gnomAD database <a href="#ref-4" class="vocs_Anchor">[4]</a>.  We want the list created to be usable to treat as many 
+use the gnomAD database <a href="#ref-4" className="vocs_Anchor">[4]</a>.  We want the list created to be usable to treat as many 
 patients as possible, so we avoid SNPs that are too rare. 
 2) Only SNPs that induce the disappearance or appearance of the **5‘-NGG-3’**
  motif will allow us to target only the mutated allele while preserving the WT. To do this, we wrote an in-house script in Python.
@@ -53,7 +53,7 @@ scores for each of the positions we selected. We wanted to cut the diseased gene
 without altering other regions of the genome.
 
 Using this method, we were able to draw up a list of genomic positions of interest in the treatment of Ryanodine receptor 
-type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. <a href="#ref-5" class="vocs_Anchor">[5]</a>
+type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. <a href="#ref-5" className="vocs_Anchor">[5]</a>
 Thanks to next-generation sequencing, it is possible to obtain both genomic sequences of a patient 
 at a reasonable cost. All the positions on our list for which the patient is heterozygous are therefore 
 candidates for gene therapy!
@@ -72,31 +72,31 @@ of interest for this type of gene therapy !
 <p id="ref-1">
 **[1]** Anzalone A.V, Koblan L.W and Liu D.R.  
 <i>Genome editing with CRISPR–Cas nucleases, base editors, transposases and prime editors</i>.  
-<a href="https://www.nature.com/articles/s41587-020-0561-9" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+<a href="https://www.nature.com/articles/s41587-020-0561-9" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
 </p>
 
 <p id="ref-2">
 **[2]** F Chemello, A.C Chai, H Li, C Rodriguez-Caycedo, E Sanchez-Ortiz, A Atmanli, A.A Mireault, N Liu,  
 R Bassel-Duby, E.N Olson.  
 <i>Precise correction of Duchenne muscular dystrophy exon deletion mutations by base and prime editing</i>.  
-<a href="https://pubmed.ncbi.nlm.nih.gov/33931459/" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+<a href="https://pubmed.ncbi.nlm.nih.gov/33931459/" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
 </p>
 
 <p id="ref-3">
 **[3]** Kelly Godbout, Joël Rousseau, Jacques P Tremblay.  
 <i>Successful Correction by Prime Editing of a Mutation in the RYR1 Gene Responsible for a Myopathy</i>.  
-<a href="https://www.mdpi.com/2073-4409/13/1/31" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+<a href="https://www.mdpi.com/2073-4409/13/1/31" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
 </p>
 
 <p id="ref-4">
 **[4]** The Genome Aggregation Database (gnomAD).  
 <i>Database and resource for population genomic variation</i>.  
-<a href="https://gnomad.broadinstitute.org/about" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
+<a href="https://gnomad.broadinstitute.org/about" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">URL</a>
 </p>
 
 <p id="ref-5">
 **[5]** Mathilde Beaufils, Margaux Melka, Julie Brocard, Clement Benoit, Nagi Debbah, Kamel Mamchaoui,  
 Norma B. Romero, Anne Frédérique Dalmas-Laurent, Susana Quijano-Roy, Julien Fauré, John Rendu, Isabelle Marty.  
 <i>Functional benefit of CRISPR-Cas9-induced allele deletion for RYR1 dominant mutation</i>.  
-<a href="https://doi.org/10.1016/j.omtn.2024.102259" class="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+<a href="https://doi.org/10.1016/j.omtn.2024.102259" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
 </p>
