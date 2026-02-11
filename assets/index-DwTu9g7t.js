@@ -1,4 +1,4 @@
-import{u as s,j as e}from"./index-CGJSN20D.js";const t={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
+import{u as s,j as e}from"./index-C04Ny9s7.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(r.h2,{id:"omicsverse",children:["OmicsVerse",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#omicsverse",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/Omicsverse.webm",type:"video/webm"})}),`
 `,e.jsxs(r.p,{children:["The initial aim of the  ",e.jsx(r.a,{href:"https://omicsverse.fr",children:"OmicsVerse portal"})," is to host demo versions of the various data applications I create."]}),`
@@ -42,11 +42,35 @@ So if you feel like contributing to the project. Don't hesitate to contact me :
 This initiative brings together passionate developers to explore and build decentralized applications.`}),`
 `,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Focus areas:"})," Smart contracts development, DeFi protocols, blockchain architecture"]}),`
 `,e.jsxs(r.h3,{id:"cnc-ai-models",children:["CNC AI Models",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-ai-models",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
-`,e.jsxs(r.p,{children:[e.jsx(r.a,{href:"https://ia.fr",children:"Accessible AI models"})," hosted on a dedicated platform for CNC crew members. Users can interact with state-of-the-art language models and machine learning models through an intuitive web interface and scalable REST API for programmatic access."]}),`
-`,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Features:"})," Web interface, REST API, Model management, User authentication"]}),`
+`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/ai.webm",type:"video/webm"})}),`
+`,e.jsxs(r.p,{children:["Accessible AI models hosted on a dedicated platform for ",e.jsx(r.em,{children:"CNC crew members"})]}),`
+`,e.jsx(r.p,{children:e.jsx(r.a,{href:"https://ai.omicsverse.fr",children:"Access the platform CNC AI platform"})}),`
+`,e.jsx(r.strong,{children:"Features:"}),`
+`,e.jsxs(r.ul,{children:[`
+`,e.jsx(r.li,{children:"Web interface for interactive model testing"}),`
+`,e.jsx(r.li,{children:"REST API for programmatic access"}),`
+`,e.jsx(r.li,{children:"State-of-the-art language models & ML models"}),`
+`,e.jsx(r.li,{children:"User authentication & secure management"}),`
+`,e.jsx(r.li,{children:"Fine-tuning & custom model adaptation"}),`
+`,e.jsx(r.li,{children:"Scalable LLMOps with Kubernetes & Docker orchestration"}),`
+`,e.jsx(r.li,{children:"HPC & Cloud ready (Singularity, High Performance Computing)"}),`
+`,e.jsx(r.li,{children:"Advanced Data Science (Inferential statistics & Graph Theory)"}),`
+`,e.jsx(r.li,{children:"Blockchain-enabled AI (On-chain data analysis & Smart Contract interaction)"}),`
+`,e.jsx(r.li,{children:"High-uptime monitoring and distributed systems reliability"}),`
+`]}),`
 `,e.jsxs(r.h3,{id:"cnc-cloud-services",children:["CNC Cloud Services",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#cnc-cloud-services",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
-`,e.jsxs(r.p,{children:[e.jsx(r.a,{href:"https://cloud.omicsverse.fr",children:"Nextcloud instance"})," providing secure cloud storage and collaboration tools for CNC crew members. Enables file synchronization, sharing, and team collaboration with enterprise-grade security and privacy."]}),`
-`,e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"Features:"})," File storage & sync, Sharing & collaboration, Privacy-first architecture, Team management"]}),`
+`,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/cloud.webm",type:"video/webm"})}),`
+`,e.jsx(r.p,{children:"Enterprise-grade Nextcloud instance for secure collaboration."}),`
+`,e.jsx(r.p,{children:e.jsx(r.a,{href:"https://cloud.omicsverse.fr",children:"Access the platform CNC Cloud Services"})}),`
+`,e.jsx(r.strong,{children:"Features:"}),`
+`,e.jsxs(r.ul,{children:[`
+`,e.jsx(r.li,{children:"Secure file storage & synchronization"}),`
+`,e.jsx(r.li,{children:"Team collaboration tools"}),`
+`,e.jsx(r.li,{children:"Privacy-first architecture"}),`
+`,e.jsx(r.li,{children:"Centralized team management"}),`
+`,e.jsx(r.li,{children:"Experimental decentralized file storage via IPFS integration"}),`
+`,e.jsxs(r.li,{children:["Integration with our IA services at ",e.jsx(r.a,{href:"https://ia.omicsverse.fr",children:"ia.omicsverse.fr"})]}),`
+`]}),`
 `,e.jsxs(r.h2,{id:"references",children:["References",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#references",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx("p",{id:"ref-1",children:e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"[1]"})," Tuomas Granlund; Tommi Mikkonen; Vlad Stirbu (2020).",e.jsx(r.br,{}),`
 `,e.jsx("i",{children:"On Medical Device Software CE Compliance and Conformity Assessment"}),".",e.jsx(r.br,{}),`
@@ -59,4 +83,4 @@ This initiative brings together passionate developers to explore and build decen
 `,e.jsx("p",{id:"ref-3",children:e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"[3]"})," Małgorzata Kruszynska (2021).",e.jsx(r.br,{}),`
 `,e.jsx("i",{children:"CE marking for Medical Device Software: a step-by-step guide"}),".",e.jsx(r.br,{}),`
 `,e.jsx("b",{children:"Spyrosoft"}),".",e.jsx(r.br,{}),`
-`,e.jsx("a",{href:"https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"URL"})]})})]})}function o(n={}){const{wrapper:r}={...s(),...n.components};return r?e.jsx(r,{...n,children:e.jsx(i,{...n})}):i(n)}export{o as default,t as frontmatter};
+`,e.jsx("a",{href:"https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"URL"})]})})]})}function l(n={}){const{wrapper:r}={...s(),...n.components};return r?e.jsx(r,{...n,children:e.jsx(i,{...n})}):i(n)}export{l as default,a as frontmatter};
