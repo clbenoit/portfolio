@@ -1,5 +1,5 @@
-import{u as a,j as e}from"./index-C04Ny9s7.js";const s={layout:"default",title:"SomaVarDB",description:"undefined"};function n(t){const i={a:"a",div:"div",h1:"h1",h2:"h2",header:"header",img:"img",li:"li",p:"p",ul:"ul",...a(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(i.header,{children:e.jsxs(i.h1,{id:"somavardb",children:["SomaVarDB",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#somavardb",children:e.jsx(i.div,{"data-autolink-icon":!0})})]})}),`
-`,e.jsxs(i.p,{children:[e.jsxs("div",{children:[" ",e.jsx("h3",{children:e.jsx("i",{children:"A graphical interface to explore your somatic genomic variation database."})})]}),`
+import{u as r,j as e}from"./index-BBi_B9hb.js";const s={layout:"default",title:"GermlineVarDB",description:"undefined"};function n(t){const i={a:"a",div:"div",h1:"h1",h2:"h2",header:"header",img:"img",li:"li",p:"p",ul:"ul",...r(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(i.header,{children:e.jsxs(i.h1,{id:"germlinevardb",children:["GermlineVarDB",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#germlinevardb",children:e.jsx(i.div,{"data-autolink-icon":!0})})]})}),`
+`,e.jsxs(i.p,{children:[e.jsxs("div",{children:[" ",e.jsx("h3",{children:e.jsx("i",{children:"A graphical interface to explore your germline genomic variation database."})})]}),e.jsx("br",{}),`
 `,e.jsx(i.img,{src:"/portfolio/somavardb.gif",alt:""})]}),`
 `,e.jsxs(i.h2,{id:"why-this-app",children:["Why this app",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-this-app",children:e.jsx(i.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx(i.p,{children:"Few hospitals do not outsource their bioinformatics analysis to private partners (at least in France). There are many reasons for this:"}),`
@@ -24,6 +24,6 @@ It's a package that contains both the tools for building the local database from
 and the interface for interacting with this database.`}),`
 `,e.jsxs(i.h2,{id:"open-source",children:["Open-source",e.jsx(i.a,{"aria-hidden":"true",tabIndex:"-1",href:"#open-source",children:e.jsx(i.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(i.ul,{children:[`
-`,e.jsx(i.li,{children:e.jsx(i.a,{href:"https://omicsverse.fr/app/SomaVarDB",children:"Live demo"})}),`
-`,e.jsx(i.li,{children:e.jsx(i.a,{href:"https://github.com/clbenoit/SomaVarDB",children:"Source code"})}),`
-`]})]})}function o(t={}){const{wrapper:i}={...a(),...t.components};return i?e.jsx(i,{...t,children:e.jsx(n,{...t})}):n(t)}export{o as default,s as frontmatter};
+`,e.jsx(i.li,{children:e.jsx(i.a,{href:"https://omicsverse.fr/app/GermlineVarDB",children:"Live demo"})}),`
+`,e.jsx(i.li,{children:e.jsx(i.a,{href:"https://github.com/clbenoit/GermlineVarDB",children:"Source code"})}),`
+`]})]})}function o(t={}){const{wrapper:i}={...r(),...t.components};return i?e.jsx(i,{...t,children:e.jsx(n,{...t})}):n(t)}export{o as default,s as frontmatter};
