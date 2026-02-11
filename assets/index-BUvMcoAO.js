@@ -1,4 +1,4 @@
-import{u as s,j as e}from"./index-BBi_B9hb.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
+import{u as s,j as e}from"./index-T4tzDYV2.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(r.h2,{id:"omicsverse",children:["OmicsVerse",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#omicsverse",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/Omicsverse.webm",type:"video/webm"})}),`
 `,e.jsxs(r.p,{children:["The initial aim of the  ",e.jsx(r.a,{href:"https://omicsverse.fr",children:"OmicsVerse portal"})," is to host demo versions of the various data applications I create."]}),`
@@ -68,7 +68,7 @@ This initiative brings together passionate developers to explore and build decen
 `,e.jsx(r.li,{children:"Privacy-first architecture"}),`
 `,e.jsx(r.li,{children:"Centralized team management"}),`
 `,e.jsx(r.li,{children:"Experimental decentralized file storage via IPFS integration"}),`
-`,e.jsxs(r.li,{children:["Integration with our IA services at ",e.jsx(r.a,{href:"https://ia.omicsverse.fr",children:"ia.omicsverse.fr"})]}),`
+`,e.jsxs(r.li,{children:["Integration with our IA services at ",e.jsx(r.a,{href:"https://ai.omicsverse.fr",children:"ai.omicsverse.fr"})]}),`
 `]}),`
 `,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{width:"100%",maxHeight:"25vh",objectFit:"cover",height:"auto"},children:e.jsx("source",{src:"/portfolio/cloud.webm",type:"video/webm"})}),`
 `,e.jsxs(r.h2,{id:"references",children:["References",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#references",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
