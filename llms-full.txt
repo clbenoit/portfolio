@@ -22,6 +22,7 @@ Accessible AI models hosted on a dedicated platform for *CNC crew members*
 * Advanced Data Science (Inferential statistics & Graph Theory)
 * Blockchain-enabled AI (On-chain data analysis & Smart Contract interaction)
 * High-uptime monitoring and distributed systems reliability
+* Integration with our Cloud services at [cloud.omicsverse.fr](https://cloud.omicsverse.fr)
 
 
 ## CNC Cloud Services
@@ -41,7 +42,7 @@ Enterprise-grade Nextcloud instance for secure collaboration.
 * Privacy-first architecture
 * Centralized team management
 * Experimental decentralized file storage via IPFS integration
-* Integration with our IA services at [ia.omicsverse.fr](https://ia.omicsverse.fr)
+* Integration with our IA services at [ai.omicsverse.fr](https://ai.omicsverse.fr)
 
 
 ## FilLT3r Shiny App
