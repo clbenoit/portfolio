@@ -1238,6 +1238,17 @@ Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Bouto
 </p>
 
 
+## Test Agent — Vérification du pipeline
+
+Cet article est un **test technique** pour valider le pipeline d'édition de l'agent rédacteur en chef.
+
+* Build local OK ?
+* Push sur devel OK ?
+* CI/CD GitHub Actions OK ?
+
+Si tu lis ceci sur le site, tout fonctionne.
+
+
 import  Timeline from "./react-timeline"
 
 <Timeline />
