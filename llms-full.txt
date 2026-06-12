@@ -998,26 +998,6 @@ If you want, I can also share:
 * or a concrete example of a pipeline improved with vibe coding.
 
 
-<img alt="Interface nanoDx 1" width="800" src="../../public/robin.png" />
-
-<img alt="Interface nanoDx 2 " width="800" src="/portfolio/robin.png" />
-
-<img alt="Interface nanoDx 3" width="800" src="/robin.png" />
-
-<figure>
-  <img src="/robin.png" alt="Description" />
-
-  <figcaption>Fig. 1 — Légende explicativeddadad</figcaption>
-</figure>
-
-<figure>
-  <img src="/portfolio/robin.png" alt="Description" />
-
-  <figcaption>Fig. 1 — Légende explicativeddadad</figcaption>
-</figure>
-
-*Figure 1 — Interface nanoDx après chargement des données de séquençage.*
-
 ## Adaptive Sampling, méthylation et diagnostic temps réel des tumeurs cérébrales : retour sur une aventure Nanopore
 
 ### Introduction
@@ -1101,6 +1081,12 @@ Sur nos échantillons de validation :
 * les modèles Random Forest internes ;
 
 produisaient des classifications concordantes.
+
+<figure>
+  <img src="/portfolio/robin.png" alt="Description" />
+
+  <figcaption>*Figure 1 — Interface nanoDx après chargement des données de séquençage.*</figcaption>
+</figure>
 
 L'Adaptive Sampling retrouvait ainsi sa capacité à alimenter correctement les modèles de méthylation.
 
