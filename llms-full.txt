@@ -998,6 +998,234 @@ If you want, I can also share:
 * or a concrete example of a pipeline improved with vibe coding.
 
 
+<img alt="Interface nanoDx 1" width="800" src="../../public/robin.png" />
+
+<img alt="Interface nanoDx 2 " width="800" src="portfolio/robin.png" />
+
+<img alt="Interface nanoDx 3" width="800" src="/robin.png" />
+
+*Figure 1 — Interface nanoDx après chargement des données de séquençage.*
+
+## Adaptive Sampling, méthylation et diagnostic temps réel des tumeurs cérébrales : retour sur une aventure Nanopore
+
+### Introduction
+
+Depuis plus d'une décennie, la classification moléculaire des tumeurs du système nerveux central repose largement sur les profils de méthylation obtenus à partir des puces Illumina 450K, puis EPIC v1 et plus récemment EPIC v2.
+
+Cette approche a profondément transformé la neuropathologie moderne. En comparant le profil épigénétique d'une tumeur à de vastes bases de référence, il est désormais possible de classifier avec précision des entités parfois difficiles à distinguer sur les seuls critères histologiques. Le classifieur développé à Heidelberg s'est progressivement imposé comme le standard international et est aujourd'hui utilisé par des centaines de centres à travers le monde.
+
+Cette situation a toutefois créé une forme de dépendance technologique : les données sont produites sur des plateformes propriétaires puis interprétées par des outils centralisés. Lorsque le DKFZ a annoncé l'évolution de son classifieur vers un modèle payant, de nombreux laboratoires ont commencé à explorer des alternatives plus ouvertes, plus souveraines et plus facilement intégrables dans leurs propres infrastructures.
+
+Dans le même temps, le séquençage Nanopore a vu émerger une nouvelle génération d'outils de classification basés directement sur les signaux de méthylation de l'ADN natif. Parmi eux, [Sturgeon](https://github.com/UMCUGenetics/sturgeon) a démontré qu'un réseau neuronal entraîné sur des données de séquençage génome entier (Whole Genome Sequencing, WGS) pouvait reproduire une grande partie des performances des approches historiques.
+
+Les auteurs de Sturgeon ont également rapporté que l'utilisation de l'Adaptive Sampling améliorait encore les performances du classifieur. Toutefois, le panel utilisé pour cet enrichissement ciblé n'a jamais été publié.
+
+C'est à partir de cette observation qu'est née notre question :
+
+> Peut-on concevoir un panel d'Adaptive Sampling optimisé pour la classification des tumeurs cérébrales, capable de préserver les performances des classifieurs de méthylation, de maintenir l'information CNV, de fournir le statut MGMT et de s'intégrer dans l'organisation de notre plateforme de biologie moléculaire mutualisée ?
+
+***
+
+Le constat initial : un panel trop peu informatif
+
+Notre point de départ était le panel générique fourni par Oxford Nanopore pour l'Adaptive Sampling.
+
+Le principe de l'Adaptive Sampling est particulièrement séduisant dans le contexte diagnostique : plutôt que de séquencer uniformément l'ensemble du génome, il est possible de concentrer les capacités du séquenceur sur les régions réellement utiles à l'interprétation.
+
+L'objectif est double :
+
+* Augmenter la couverture des régions informatives ;
+* Réduire la quantité totale de données nécessaire pour atteindre un niveau de confiance diagnostique donné.
+
+Autrement dit, obtenir un diagnostic robuste plus rapidement et à moindre coût.
+
+Cependant, lors de nos premiers essais, les résultats se sont révélés décevants.
+
+Le panel utilisé ne couvrait qu'environ 1,5 % du génome humain. Bien que cette stratégie permette effectivement d'augmenter la profondeur sur les régions ciblées, celles-ci ne contenaient pas suffisamment d'information pertinente pour les classifieurs de méthylation.
+
+Le problème n'était donc pas la profondeur de séquençage elle-même.
+
+Le problème était que les régions enrichies n'étaient pas celles dont les modèles de classification avaient réellement besoin.
+
+En pratique, nous observions un paradoxe : davantage de couverture sur les régions ciblées, mais moins d'information utile pour le diagnostic.
+
+Cette expérience a mis en évidence un point essentiel :
+
+### La performance d'un panel d'Adaptive Sampling dépend moins de la quantité de génome ciblée que de la pertinence biologique des régions sélectionnées.
+
+## Repartir de zéro : reconstruire un panel pertinent
+
+Un point important est souvent mal compris : Sturgeon n'a pas été entraîné sur des données issues d'Adaptive Sampling mais sur des données de séquençage génome entier.
+
+Les auteurs ont néanmoins montré qu'un enrichissement ciblé par Adaptive Sampling permettait d'améliorer les performances du modèle en concentrant l'effort de séquençage sur des régions particulièrement informatives pour la classification.
+
+Le problème était simple : le panel utilisé pour obtenir ces résultats n'a jamais été rendu public.
+
+Nous avons donc dû reconstruire notre propre stratégie.
+
+Notre première approche a consisté à repartir des régions historiquement utilisées dans les analyses de méthylation tumorale.
+
+Nous avons construit un panel à partir des quelque 450 000 [CpGs](https://fr.wikipedia.org/wiki/Dinucl%C3%A9otide_CpG) présents sur les puces Illumina 450K, puis ajouté des fenêtres génomiques élargies autour de ces régions afin d'augmenter les chances de capturer des lectures informatives avec les technologies long-read.
+
+La taille de ces fenêtres a fait l'objet de plusieurs itérations afin d'identifier un compromis optimal entre le taux d'enrichissement des zones d'intérêt, les coûts et les temps d'analyse, tout en veillant à ne pas dégrader la qualité diagnostique.
+
+Après plusieurs cycles d'optimisation, nous avons obtenu un panel couvrant près de 30 % du génome humain, soit vingt fois plus que le panel initial.
+
+Ce nouveau design est devenu la fondation de l'ensemble du projet.
+
+***
+
+## Premier succès : retrouver une classification robuste
+
+Les premiers résultats ont montré une amélioration immédiate.
+
+Alors même que la couverture moyenne restait inférieure aux recommandations généralement admises pour certaines analyses, les différents algorithmes convergeaient désormais vers les mêmes conclusions.
+
+Sur nos échantillons de validation :
+
+* [Sturgeon](https://github.com/UMCUGenetics/sturgeon) ;
+* [NanoDX](https://gitlab.com/pesk/nanoDx) ;
+* PanNanoDX (variante pan cancer du classifier NanoDX);
+* les modèles Random Forest internes ;
+
+produisaient des classifications concordantes.
+
+L'Adaptive Sampling retrouvait ainsi sa capacité à alimenter correctement les modèles de méthylation.
+
+Nous avons donc confirmé, dans le cadre de notre environnement clinique et de nos contraintes opérationnelles, qu'un enrichissement ciblé judicieusement conçu permettait de préserver l'information nécessaire à la classification moléculaire.
+
+***
+
+## Préserver les CNV : une exigence diagnostique
+
+La classification seule ne suffisait pas.
+
+Dans la pratique diagnostique moderne, les profils de variations du nombre de copies (CNV) constituent une couche d'information essentielle.
+
+L'un des enjeux majeurs du projet était donc de maintenir une représentation suffisamment homogène du génome pour conserver une qualité de profils compatible avec une interprétation clinique.
+
+Les premières versions du panel ont nécessité plusieurs ajustements afin d'éviter la création de zones sur- ou sous-représentées.
+
+Après optimisation, les profils CNV obtenus sont devenus comparables à ceux observés avec les approches génome entier et permettent d'exploiter pleinement les informations chromosomiques nécessaires à la caractérisation des tumeurs.
+
+***
+
+## Le défi MGMT
+
+L'obtention du statut MGMT représentait un second défi majeur.
+
+Lors des premières expérimentations, plusieurs résultats se sont révélés discordants avec les analyses de référence réalisées par les méthodes conventionnelles.
+
+Cette observation nous a conduit à une conclusion importante :
+
+> Un panel optimisé pour la classification n'est pas nécessairement optimisé pour l'évaluation du promoteur MGMT.
+
+Les régions exploitées par Rapid-CNS2 et les équipes du DKFZ ne correspondaient pas totalement aux zones enrichies par notre premier design.
+
+Bien que le panel initial couvre déjà plusieurs CpGs caractérisés du promoteur de MGMT, une nouvelle phase d'optimisation a été menée afin d'en renforcer la représentativité et la valeur diagnostique, sans compromettre :
+
+* les performances de classification ;
+* la qualité des profils CNV ;
+* l'efficacité de l'Adaptive Sampling.
+
+Cette étape a finalement permis d'obtenir un panel unique capable de répondre simultanément aux trois besoins.
+
+***
+
+## Quand le temps réel devient un outil de pilotage du laboratoire
+
+L'une des découvertes les plus intéressantes du projet n'a finalement pas été biologique mais organisationnelle.
+
+Traditionnellement, le séquençage et l'analyse sont réalisés de manière séquentielle :
+
+1. le séquençage se termine ;
+2. les données sont transférées ;
+3. les pipelines démarrent ;
+4. les résultats sont interprétés.
+
+Grâce à [Robin](https://github.com/UMCUGenetics/sturgeon) nous avons adopté une approche radicalement différente.
+
+Les lectures sont analysées dès leur production.
+
+La classification, les profils CNV et les différents indicateurs de qualité sont mis à jour en continu pendant le séquençage.
+
+Cette architecture permet :
+
+* un suivi en temps réel de la stabilité du diagnostic ;
+* la génération précoce d'alertes ;
+* l'identification rapide du moment où suffisamment d'information a été accumulée.
+
+Dans de nombreux cas, le diagnostic devient robuste bien avant la fin théorique de la run.
+
+Cette information peut alors être utilisée directement par les opérateurs de la plateforme.
+
+Lorsqu'un seuil de confiance prédéfini est atteint :
+
+* une alerte est générée ;
+* le résultat peut être validé ;
+* le séquençage peut être interrompu de manière anticipée.
+
+Dans une plateforme de biologie moléculaire mutualisée où les séquenceurs sont partagés entre plusieurs services, cette approche présente plusieurs avantages :
+
+* réduction des délais diagnostiques ;
+* meilleure disponibilité des équipements ;
+* augmentation du nombre d'analyses réalisables ;
+* optimisation de la planification des runs ;
+* diminution de l'usure des flow cells ;
+* augmentation du nombre de réutilisations possibles ;
+* réduction des coûts d'exploitation.
+
+L'objectif n'est donc pas uniquement d'obtenir un diagnostic plus rapidement.
+
+Il s'agit également d'utiliser plus efficacement des ressources coûteuses dans un environnement où les instruments et les consommables sont partagés entre plusieurs activités.
+
+#### Construire une infrastructure exploitable en routine
+
+Au-delà des performances analytiques, l'intégration en routine a nécessité un travail d'industrialisation de la plateforme. Conformément aux bonnes pratiques DevOps, les outils ont été déployés avec une séparation stricte entre les environnements de développement et de production, permettant de faire évoluer les modèles, les panels et les pipelines tout en garantissant la stabilité des analyses cliniques.
+
+***
+
+## Ce que nous avons appris
+
+Cette aventure nous a appris plusieurs choses.
+
+Premièrement, l'Adaptive Sampling peut être utilisé avec succès pour la classification par méthylation à condition que le panel soit conçu spécifiquement pour cet usage.
+
+Deuxièmement, la localisation des régions ciblées est souvent plus importante que la profondeur brute de séquençage.
+
+Troisièmement, la préservation des profils CNV doit être considérée dès la phase de conception du panel.
+
+Enfin, le véritable potentiel du séquençage Nanopore ne réside pas uniquement dans la lecture longue ou la détection de la méthylation native.
+
+Il réside dans sa capacité à produire une information exploitable en temps réel et à transformer l'organisation même des plateformes de diagnostic moléculaire.
+
+***
+
+## Conclusion
+
+L'objectif n'était pas d'obtenir davantage de séquences, mais davantage d'information diagnostique par heure de séquençage et par flow cell utilisée.
+
+Au départ, nous cherchions simplement à reproduire les performances rapportées pour Sturgeon en Adaptive Sampling.
+
+Au final, nous avons construit bien davantage qu'un nouveau panel.
+
+Nous avons développé une chaîne complète permettant d'associer :
+
+* classification moléculaire par méthylation ;
+* analyse des CNV ;
+* détermination du statut MGMT ;
+* interprétation en temps réel ;
+* optimisation de l'utilisation des séquenceurs.
+
+Dans un contexte où de nombreux laboratoires cherchent à réduire leur dépendance aux solutions centralisées et propriétaires, cette approche démontre qu'il est possible de mettre en place une alternative locale, ouverte et maîtrisée tout en améliorant l'efficacité opérationnelle d'une plateforme de biologie moléculaire moderne.
+
+Plus qu'un projet d'Adaptive Sampling, cette aventure a été une réflexion sur la manière dont le séquençage temps réel peut transformer la production du diagnostic moléculaire.
+
+Et ce n'est, je l'espère, que le début ! De nombreuses perspectives restent encore à explorer.
+
+Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) et en collaboration avec [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) pour la partie wet lab. J'ai été en charge de l'ensemble du volet dry lab : conception des panels, intégration et validation d'outils et de modèles existants, développement des pipelines d'analyse et mise en production de la solution dans un contexte clinique.
+
+
 import  Timeline from "./react-timeline"
 
 <Timeline />
