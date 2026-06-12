@@ -1002,7 +1002,7 @@ If you want, I can also share:
 
 ### Introduction
 
-Depuis plus d'une décennie, la classification moléculaire des tumeurs du système nerveux central repose largement sur les profils de méthylation obtenus à partir des puces Illumina 450K, puis EPIC v1 et plus récemment EPIC v2.
+Depuis plus d'une décennie, la classification moléculaire des tumeurs du système nerveux central repose largement sur les profils de méthylation obtenus à partir des puces Illumina 450K, puis EPIC v1 et plus récemment EPIC v2. <a href="#ref-1" className="vocs_Anchor">\[1]</a>
 
 Cette approche a profondément transformé la neuropathologie moderne. En comparant le profil épigénétique d'une tumeur à de vastes bases de référence, il est désormais possible de classifier avec précision des entités parfois difficiles à distinguer sur les seuls critères histologiques. Le classifieur développé à Heidelberg s'est progressivement imposé comme le standard international et est aujourd'hui utilisé par des centaines de centres à travers le monde.
 
@@ -1018,7 +1018,7 @@ C'est à partir de cette observation qu'est née notre question :
 
 ***
 
-Le constat initial : un panel trop peu informatif
+**Le constat initial** : un panel trop peu informatif
 
 Notre point de départ était le panel générique fourni par Oxford Nanopore pour l'Adaptive Sampling.
 
@@ -1043,7 +1043,7 @@ En pratique, nous observions un paradoxe : davantage de couverture sur les régi
 
 Cette expérience a mis en évidence un point essentiel :
 
-### La performance d'un panel d'Adaptive Sampling dépend moins de la quantité de génome ciblée que de la pertinence biologique des régions sélectionnées.
+**La performance d'un panel d'Adaptive Sampling dépend moins de la quantité de génome ciblée que de la pertinence biologique des régions sélectionnées.**
 
 ## Repartir de zéro : reconstruire un panel pertinent
 
@@ -1080,12 +1080,12 @@ Sur nos échantillons de validation :
 * PanNanoDX (variante pan cancer du classifier NanoDX);
 * les modèles Random Forest internes ;
 
-produisaient des classifications concordantes.
+produisaient des classifications concordantes, bien que les scores de confiance de certain classifiers montrent une marge d'amélioration.
 
 <figure>
   <img src="/portfolio/robin.png" alt="Description" />
 
-  <figcaption>*Figure 1 — Interface nanoDx après chargement des données de séquençage.*</figcaption>
+  <figcaption>*Figure 1 — Résultats des 4 classifiers sur Robin*</figcaption>
 </figure>
 
 L'Adaptive Sampling retrouvait ainsi sa capacité à alimenter correctement les modèles de méthylation.
@@ -1098,7 +1098,7 @@ Nous avons donc confirmé, dans le cadre de notre environnement clinique et de n
 
 La classification seule ne suffisait pas.
 
-Dans la pratique diagnostique moderne, les profils de variations du nombre de copies (CNV) constituent une couche d'information essentielle.
+Dans la pratique diagnostique moderne, les profils de variations du nombre de copies [(CNV)](https://www.genome.gov/genetics-glossary/Copy-Number-Variation-CNV) constituent une couche d'information essentielle.
 
 L'un des enjeux majeurs du projet était donc de maintenir une représentation suffisamment homogène du génome pour conserver une qualité de profils compatible avec une interprétation clinique.
 
@@ -1110,7 +1110,7 @@ Après optimisation, les profils CNV obtenus sont devenus comparables à ceux ob
 
 ## Le défi MGMT
 
-L'obtention du statut MGMT représentait un second défi majeur.
+L'obtention du statut de méthylation du promoteur du gène MGMT, en tant que facteur prédictif  établit de la réponse au traitement standard des glioblastomes <a href="#ref-2" className="vocs_Anchor">\[2]</a>, représentait un second défi majeur.
 
 Lors des premières expérimentations, plusieurs résultats se sont révélés discordants avec les analyses de référence réalisées par les méthodes conventionnelles.
 
@@ -1222,6 +1222,20 @@ Plus qu'un projet d'Adaptive Sampling, cette aventure a été une réflexion sur
 Et ce n'est, je l'espère, que le début ! De nombreuses perspectives restent encore à explorer.
 
 Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) et en collaboration avec [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) pour la partie wet lab. J'ai été en charge de l'ensemble du volet dry lab : conception des panels, intégration et validation d'outils et de modèles existants, développement des pipelines d'analyse et mise en production de la solution dans un contexte clinique.
+
+## Références
+
+<p id="ref-1">
+  **\[1]** [Illumina Methylation Assay](https://en.wikipedia.org/wiki/Illumina_Methylation_Assay)
+  <i>Wikipedia</i>.
+</p>
+
+<p id="ref-2">
+  **\[2]** Veronique Quillien et al (2011).\
+  <i>RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project</i>.\
+  <b>Elsevier</b>.\
+  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0007455115306718" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
 
 
 import  Timeline from "./react-timeline"
