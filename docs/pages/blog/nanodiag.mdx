@@ -16,13 +16,15 @@ Cette approche a profondément transformé la neuropathologie moderne. En compar
 
 Cette situation a toutefois créé une forme de dépendance technologique : les données sont produites sur des plateformes propriétaires puis interprétées par des outils centralisés. Lorsque le DKFZ a annoncé l'évolution de son classifieur vers un modèle payant, de nombreux laboratoires ont commencé à explorer des alternatives plus ouvertes, plus souveraines et plus facilement intégrables dans leurs propres infrastructures.
 
-Dans le même temps, le séquençage Nanopore a vu émerger une nouvelle génération d'outils de classification basés directement sur les signaux de méthylation de l'ADN natif. Parmi eux, [Sturgeon](https://github.com/UMCUGenetics/sturgeon) a démontré qu'un réseau neuronal entraîné sur des données de séquençage génome entier (Whole Genome Sequencing, WGS) pouvait reproduire une grande partie des performances des approches historiques.
+Dans le même temps, le séquençage Nanopore a vu émerger une nouvelle génération d'outils de classification basés directement sur les signaux de méthylation de l'ADN natif. Parmi eux, [Sturgeon](https://github.com/UMCUGenetics/sturgeon) a démontré qu'un réseau neuronal entraîné sur des données de séquençage génome entier (Whole Genome Sequencing, WGS) pouvait reproduire une grande partie des performances des approches historiques <a href="#ref-3" className="vocs_Anchor">[3]</a>.
 
 Les auteurs de Sturgeon ont également rapporté que l'utilisation de l'Adaptive Sampling améliorait encore les performances du classifieur. Toutefois, le panel utilisé pour cet enrichissement ciblé n'a jamais été publié.
 
 C'est à partir de cette observation qu'est née notre question :
 
 > Peut-on concevoir un panel d'Adaptive Sampling optimisé pour la classification des tumeurs cérébrales, capable de préserver les performances des classifieurs de méthylation, de maintenir l'information CNV, de fournir le statut MGMT et de s'intégrer dans l'organisation de notre plateforme de biologie moléculaire mutualisée ?
+
+Ce travail s'inscrit dans un mouvement plus large. Le récent Livre Blanc de la Fédération Française de Génétique Humaine (FFGH) dresse un constat sans appel : la France est à un point d'inflexion de sa médecine génomique. À terme, près de **46 % de la population française** pourrait nécessiter un examen génétique. Le document appelle à développer des infrastructures souveraines, ouvertes et interopérables — précisément l'esprit dans lequel ce projet a été conçu <a href="#ref-4" className="vocs_Anchor">[4]</a>.
 
 ---
 
@@ -160,6 +162,8 @@ Cette architecture permet :
 * la génération précoce d'alertes ;
 * l'identification rapide du moment où suffisamment d'information a été accumulée.
 
+Cette capacité prend tout son sens à la lumière du constat dressé par le Livre Blanc de la FFGH : les délais de consultation en génétique atteignent aujourd'hui **6 à 12 mois** dans de nombreux centres français. Le séquençage temps réel n'est donc pas un simple confort technique — c'est un levier pour réduire structurellement les délais de rendu diagnostique.
+
 Dans de nombreux cas, le diagnostic devient robuste bien avant la fin théorique de la run.
 
 Cette information peut alors être utilisée directement par les opérateurs de la plateforme.
@@ -187,6 +191,8 @@ Il s'agit également d'utiliser plus efficacement des ressources coûteuses dans
 ### Construire une infrastructure exploitable en routine
 
 Au-delà des performances analytiques, l'intégration en routine a nécessité un travail d'industrialisation de la plateforme. Conformément aux bonnes pratiques DevOps, les outils ont été déployés avec une séparation stricte entre les environnements de développement et de production, permettant de faire évoluer les modèles, les panels et les pipelines tout en garantissant la stabilité des analyses cliniques.
+
+Ce travail s'est toutefois heurté à une réalité que le Livre Blanc de la FFGH documente sans détour : la norme ISO 15189, pilier de l'accréditation des laboratoires, a été conçue pour des volumes standards et s'adapte difficilement au séquençage massif. L'absence d'échantillons de contrôle positifs pour les maladies ultra-rares, couplée au rythme d'innovation des outils, crée une tension entre exigence réglementaire et agilité diagnostique — une friction vécue par l'ensemble des laboratoires français.
 
 ---
 
@@ -226,9 +232,11 @@ Dans un contexte où de nombreux laboratoires cherchent à réduire leur dépend
 
 Plus qu'un projet d'Adaptive Sampling, cette aventure a été une réflexion sur la manière dont le séquençage temps réel peut transformer la production du diagnostic moléculaire.
 
+Elle illustre aussi, concrètement, l'un des enjeux identifiés par le Livre Blanc de la FFGH : la nécessité de renforcer les effectifs de bio-informaticiens médicaux en France. Sans ces compétences pour concevoir les panels, intégrer les classifieurs et industrialiser les pipelines, la souveraineté technologique reste un vœu pieux. Ce type de projet démontre qu'une alternative locale, ouverte et maîtrisée est possible — mais aussi qu'elle repose sur des profils hybrides, à l'interface de la biologie, de l'informatique et de la clinique, que la France peine encore à former en nombre suffisant.
+
 Et ce n'est, je l'espère, que le début ! De nombreuses perspectives restent encore à explorer.
 
-Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) et en collaboration avec [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) pour la partie wet lab. J'ai été en charge de l'ensemble du volet dry lab : conception des panels, intégration et validation d'outils et de modèles existants, développement des pipelines d'analyse et mise en production de la solution dans un contexte clinique.
+Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) et en collaboration avec [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) pour la partie wet lab. J'ai été en charge de l'ensemble du volet dry lab : conception des panels, intégration et validation d'outils et de modèles existants, développement des pipelines d'analyse et mise en production de la solution dans ce contexte clinique.
 
 # Références
 
@@ -238,12 +246,23 @@ Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Bouto
 </p>
 
 <p id="ref-2">
-**[2]** Veronique Quillien et al (2011).  
-<i>RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project</i>.  
-<b>Elsevier</b>.  
-<a href="https://www.sciencedirect.com/science/article/abs/pii/S0007455115306718" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+**[2]** Véronique Quillien et al (2011).  
+<i>Intérêt de la MGMT dans les gliomes</i>.  
+<b>Bulletin du Cancer</b>.  
+<a href="https://doi.org/10.1684/bdc.2011.1332" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
 </p>
 
+<p id="ref-3">
+**[3]** Vermeulen C. et al (2023).  
+<i>Ultra-fast deep-learned CNS tumour classification during surgery</i>.  
+<b>Nature</b>.  
+<a href="https://doi.org/10.1038/s41586-023-06615-2" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
 
+<p id="ref-4">
+**[4]** Fédération Française de Génétique Humaine (2026).  
+<i>Livre Blanc de la Génétique Médicale</i>.  
+<a href="https://www.ffgh.fr/" className="vocs_Anchor" target="_blank" rel="noopener noreferrer">FFGH</a>
+</p>
 
 
