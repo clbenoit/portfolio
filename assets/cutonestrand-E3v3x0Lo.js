@@ -1,4 +1,4 @@
-import{u as r,j as e}from"./index-BbvnDw1I.js";const i={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-08-01",title:"How data analysis can help to fix genetic disorders",description:"undefined"};function s(t){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",ol:"ol",p:"p",strong:"strong",...r(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"how-data-analysis-can-help-to-fix-genetic-disorders",children:["How data analysis can help to fix genetic disorders",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#how-data-analysis-can-help-to-fix-genetic-disorders",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
+import{u as r,j as e}from"./index-C8vfnHp3.js";const i={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-08-01",title:"How data analysis can help to fix genetic disorders",description:"undefined"};function s(t){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",ol:"ol",p:"p",strong:"strong",...r(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"how-data-analysis-can-help-to-fix-genetic-disorders",children:["How data analysis can help to fix genetic disorders",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#how-data-analysis-can-help-to-fix-genetic-disorders",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(n.h2,{id:"introduction",children:["Introduction",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#introduction",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.p,{children:["Gene therapy as seen a major breakthrough with the development of ",e.jsx(n.strong,{children:"CRISPR-Cas9"}),` technology.
 This revolutionary tool allows scientists to precisely edit genes, offering new hope for
@@ -10,7 +10,7 @@ with the promise of improved treatments and even potential cures for a wide rang
 As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for
 the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele.
 Only the wild-type allele remains, and the disease is thus cured.
-Although the effectiveness of this approach looks promising `,e.jsx("a",{href:"#ref-1",className:"vocs_Anchor",children:"[1]"})," ",e.jsx("a",{href:"#ref-2",className:"vocs_Anchor",children:"[2]"})," ",e.jsx("a",{href:"#ref-3",className:"vocs_Anchor",children:"[3]"}),`, a number of issues still need
+Although the effectiveness of this approach looks promising `,e.jsx(n.a,{href:"/blog/cutonestrand#ref-1",children:"[1]"})," ",e.jsx(n.a,{href:"/blog/cutonestrand#ref-2",children:"[2]"})," ",e.jsx(n.a,{href:"/blog/cutonestrand#ref-3",children:"[3]"}),`, a number of issues still need
 to be addressed, two of which we will try to address in this article :`]}),`
 `,e.jsx("p",{className:"popacitydanger",children:e.jsx("div",{style:{textAlign:"center"},children:e.jsx("strong",{children:e.jsxs(n.p,{children:["How can the design of these personalized medicine treatments can be effective and quick for each patient ? ",e.jsx("br",{}),e.jsx("br",{}),`
 How can we specifically target the mutated allele without breaking the functional allele or another part of
@@ -24,7 +24,7 @@ We are therefore going to try to draw up an exhaustive list of all the genomic r
 gene therapy.`]}),`
 `,e.jsxs(n.ol,{children:[`
 `,e.jsxs(n.li,{children:[`We start by selecting all the SNPs that are frequent in the population (> 5%), for which we can
-use the gnomAD database `,e.jsx("a",{href:"#ref-4",className:"vocs_Anchor",children:"[4]"}),`.  We want the list created to be usable to treat as many
+use the gnomAD database `,e.jsx(n.a,{href:"/blog/cutonestrand#ref-4",children:"[4]"}),`.  We want the list created to be usable to treat as many
 patients as possible, so we avoid SNPs that are too rare.`]}),`
 `,e.jsxs(n.li,{children:["Only SNPs that induce the disappearance or appearance of the ",e.jsx(n.strong,{children:"5‘-NGG-3’"}),`
 motif will allow us to target only the mutated allele while preserving the WT. To do this, we wrote an in-house script in Python.`]}),`
@@ -35,7 +35,7 @@ scores for each of the positions we selected. We wanted to cut the diseased gene
 without altering other regions of the genome.`]}),`
 `]}),`
 `,e.jsxs(n.p,{children:[`Using this method, we were able to draw up a list of genomic positions of interest in the treatment of Ryanodine receptor
-type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. `,e.jsx("a",{href:"#ref-5",className:"vocs_Anchor",children:"[5]"}),`
+type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. `,e.jsx(n.a,{href:"/blog/cutonestrand#ref-5",children:"[5]"}),`
 Thanks to next-generation sequencing, it is possible to obtain both genomic sequences of a patient
 at a reasonable cost. All the positions on our list for which the patient is heterozygous are therefore
 candidates for gene therapy!`]}),`

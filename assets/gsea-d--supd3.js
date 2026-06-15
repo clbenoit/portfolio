@@ -1,11 +1,11 @@
-import{u as r,j as e}from"./index-BbvnDw1I.js";const a={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-02-15",title:"A quick overview of Gene sets enrichment analysis",description:"undefined"};function i(s){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...r(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"a-quick-overview-of-gene-sets-enrichment-analysis",children:["A quick overview of Gene sets enrichment analysis",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#a-quick-overview-of-gene-sets-enrichment-analysis",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
+import{u as r,j as e}from"./index-C8vfnHp3.js";const a={layout:"minimal",authors:["[cbenoit](www.linkedin.com/in/clement-benoit)"],date:"2024-02-15",title:"A quick overview of Gene sets enrichment analysis",description:"undefined"};function i(s){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...r(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"a-quick-overview-of-gene-sets-enrichment-analysis",children:["A quick overview of Gene sets enrichment analysis",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#a-quick-overview-of-gene-sets-enrichment-analysis",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(n.h2,{id:"why-gsea-analysis-",children:["Why GSEA Analysis ?",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-gsea-analysis-",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsxs(n.p,{children:[`Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
 They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
 This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data
-`,e.jsx("a",{href:"#ref-1",className:"vocs_Anchor",children:"[1]"}),`,
-`,e.jsx("a",{href:"#ref-2",className:"vocs_Anchor",children:"[2]"}),`,
-`,e.jsx("a",{href:"#ref-3",className:"vocs_Anchor",children:"[3]"}),"."]}),`
+`,e.jsx(n.a,{href:"/blog/gsea#ref-1",children:"[1]"}),`,
+`,e.jsx(n.a,{href:"/blog/gsea#ref-2",children:"[2]"}),`,
+`,e.jsx(n.a,{href:"/blog/gsea#ref-3",children:"[3]"}),"."]}),`
 `,e.jsx(n.p,{children:"Finally, interpreting lists of thousands of differentially expressed genes is a tedious exercise for the biologist."}),`
 `,e.jsx(n.p,{children:`The GSEA, by dezooming from the scale of the gene to that of the pathway, improves the reproducibility of studies,
 while facilitating their interpetation.`}),`

@@ -1,4 +1,4 @@
-import{u as r,j as e}from"./index-BbvnDw1I.js";const o={layout:"default",title:"MethylDB",description:"undefined"};function s(i){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",header:"header",hr:"hr",img:"img",li:"li",p:"p",strong:"strong",ul:"ul",...r(),...i.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"methyldb",children:["MethylDB",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#methyldb",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
+import{u as r,j as e}from"./index-C8vfnHp3.js";const o={layout:"default",title:"MethylDB",description:"undefined"};function s(i){const n={a:"a",br:"br",div:"div",h1:"h1",h2:"h2",header:"header",hr:"hr",img:"img",li:"li",p:"p",strong:"strong",ul:"ul",...r(),...i.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.header,{children:e.jsxs(n.h1,{id:"methyldb",children:["MethylDB",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#methyldb",children:e.jsx(n.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsx("div",{children:e.jsx("h3",{children:e.jsx("i",{children:"An open-source platform to explore and interpret DNA methylation data locally."})})}),`
 `,e.jsx("br",{}),`
 `,e.jsx(n.p,{children:e.jsx(n.img,{src:"/portfolio/methyldb.gif",alt:""})}),`
@@ -6,10 +6,10 @@ import{u as r,j as e}from"./index-BbvnDw1I.js";const o={layout:"default",title:"
 `,e.jsxs(n.p,{children:["DNA methylation profiling has become a cornerstone of modern molecular pathology,",e.jsx(n.br,{}),`
 `,"especially for tumor classification, where reference classifiers (notably those developed at the DKFZ) have profoundly changed diagnostic practices."]}),`
 `,e.jsxs(n.p,{children:["For many years, access to these analyses was facilitated by the availability of ",e.jsx(n.strong,{children:"free, centralized, online tools"}),e.jsx(n.br,{}),`
-`,e.jsx("a",{href:"#ref-1",className:"vocs_Anchor",children:"[1]"}),".",e.jsx(n.br,{}),`
+`,e.jsx(n.a,{href:"/projects/methyldb#ref-1",children:"[1]"}),".",e.jsx(n.br,{}),`
 `,"This model enabled rapid dissemination, harmonization of practices, and massive community adoption."]}),`
 `,e.jsxs(n.p,{children:["However, recent shifts towards ",e.jsx(n.strong,{children:"restricted access, licensing models, or commercial spin-offs"}),e.jsx(n.br,{}),`
-`,e.jsx("a",{href:"#ref-2",className:"vocs_Anchor",children:"[2]"})," ",e.jsx("a",{href:"#ref-3",className:"vocs_Anchor",children:"[3]"}),e.jsx(n.br,{}),`
+`,e.jsx(n.a,{href:"/projects/methyldb#ref-2",children:"[2]"})," ",e.jsx(n.a,{href:"/projects/methyldb#ref-3",children:"[3]"}),e.jsx(n.br,{}),`
 `,"have revealed a structural weakness of this approach:",e.jsx(n.br,{}),`
 `,"many laboratories have become ",e.jsx(n.strong,{children:"dependent on external infrastructures"})," for a core diagnostic activity."]}),`
 `,e.jsx(n.p,{children:"As with variant analysis, outsourcing methylome analysis is often driven by:"}),`

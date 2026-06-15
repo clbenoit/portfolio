@@ -30,9 +30,9 @@ Many confounding factors will depend on the technology chosen. They will have a 
 - [A quick overview of Gene sets enrichment analysis](/portfolio/blog/gsea): Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
 They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
 This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data
-<a href="#ref-1" className="vocs_Anchor">\[1]</a>,
-<a href="#ref-2" className="vocs_Anchor">\[2]</a>,
-<a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+[\[1\]](/blog/gsea#ref-1),
+[\[2\]](/blog/gsea#ref-2),
+[\[3\]](/blog/gsea#ref-3).
 - [Blog](/portfolio/blog)
 - [How Local Vibe Coding Boosted My Productivity as a Clinical Bioinformatics Data Engineer](/portfolio/blog/lovevibecoding): In clinical biology, the work of a data engineer sits at the intersection of several strong constraints:
 - [Adaptive Sampling, méthylation et diagnostic temps réel des tumeurs cérébrales : retour sur une aventure Nanopore](/portfolio/blog/nanodiag): Depuis plus d'une décennie, la classification moléculaire des tumeurs du système nerveux central repose largement sur les profils de méthylation obtenus à partir des puces Illumina 450K, puis EPIC v1 et plus récemment EPIC v2. [\[1\]](/blog/nanodiag#ref-1)

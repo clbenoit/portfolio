@@ -161,7 +161,7 @@ The honest answer is: **not yet**.
 These are **research and exploratory tools**.\
 Using it in routine diagnostics would require compliance with\
 medical device software regulations and formal validation processes\
-<a href="#ref-1" className="vocs_Anchor">\[1]</a> <a href="#ref-2" className="vocs_Anchor">\[2]</a> <a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+[\[1\]](/projects#ref-1) [\[2\]](/projects#ref-2) [\[3\]](/projects#ref-3).
 
 This is far beyond what a single developer can realistically achieve alone this is an unattainable goal for just one person in their spare time.  <br /><br />
 So if you feel like contributing to the project. Don't hesitate to contact me :
@@ -309,11 +309,11 @@ DNA methylation profiling has become a cornerstone of modern molecular pathology
 especially for tumor classification, where reference classifiers (notably those developed at the DKFZ) have profoundly changed diagnostic practices.
 
 For many years, access to these analyses was facilitated by the availability of **free, centralized, online tools**\
-<a href="#ref-1" className="vocs_Anchor">\[1]</a>.\
+[\[1\]](/projects/methyldb#ref-1).\
 This model enabled rapid dissemination, harmonization of practices, and massive community adoption.
 
 However, recent shifts towards **restricted access, licensing models, or commercial spin-offs**\
-<a href="#ref-2" className="vocs_Anchor">\[2]</a> <a href="#ref-3" className="vocs_Anchor">\[3]</a>\
+[\[2\]](/projects/methyldb#ref-2) [\[3\]](/projects/methyldb#ref-3)\
 have revealed a structural weakness of this approach:\
 many laboratories have become **dependent on external infrastructures** for a core diagnostic activity.
 
@@ -605,7 +605,7 @@ with the promise of improved treatments and even potential cures for a wide rang
 As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for
 the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele.
 Only the wild-type allele remains, and the disease is thus cured.
-Although the effectiveness of this approach looks promising <a href="#ref-1" className="vocs_Anchor">\[1]</a> <a href="#ref-2" className="vocs_Anchor">\[2]</a> <a href="#ref-3" className="vocs_Anchor">\[3]</a>, a number of issues still need
+Although the effectiveness of this approach looks promising [\[1\]](/blog/cutonestrand#ref-1) [\[2\]](/blog/cutonestrand#ref-2) [\[3\]](/blog/cutonestrand#ref-3), a number of issues still need
 to be addressed, two of which we will try to address in this article :
 
 <p className="popacitydanger">
@@ -628,7 +628,7 @@ We are therefore going to try to draw up an exhaustive list of all the genomic r
 gene therapy.
 
 1. We start by selecting all the SNPs that are frequent in the population (> 5%), for which we can
-   use the gnomAD database <a href="#ref-4" className="vocs_Anchor">\[4]</a>.  We want the list created to be usable to treat as many
+   use the gnomAD database [\[4\]](/blog/cutonestrand#ref-4).  We want the list created to be usable to treat as many
    patients as possible, so we avoid SNPs that are too rare.
 2. Only SNPs that induce the disappearance or appearance of the **5‘-NGG-3’**
    motif will allow us to target only the mutated allele while preserving the WT. To do this, we wrote an in-house script in Python.
@@ -639,7 +639,7 @@ gene therapy.
    without altering other regions of the genome.
 
 Using this method, we were able to draw up a list of genomic positions of interest in the treatment of Ryanodine receptor
-type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. <a href="#ref-5" className="vocs_Anchor">\[5]</a>
+type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. [\[5\]](/blog/cutonestrand#ref-5)
 Thanks to next-generation sequencing, it is possible to obtain both genomic sequences of a patient
 at a reasonable cost. All the positions on our list for which the patient is heterozygous are therefore
 candidates for gene therapy!
@@ -745,9 +745,9 @@ However, a thorough knowledge of the different technologies available and of exp
 Genome wide expression analysis has become become a mainstay of genomics research. However, there is still a wide range of tools for interpreting these gene expression profiles.
 They all have pros, cons, and are still evolving. This, coupled with the fact that these studies rely on the testing of a large number of hypotheses and relatively small sample sizes, lead that whole-genome expression studies in particular, to be often not reproducible.
 This is why reproducibility is one of the major challenges facing studies involving whole-genome expression data
-<a href="#ref-1" className="vocs_Anchor">\[1]</a>,
-<a href="#ref-2" className="vocs_Anchor">\[2]</a>,
-<a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+[\[1\]](/blog/gsea#ref-1),
+[\[2\]](/blog/gsea#ref-2),
+[\[3\]](/blog/gsea#ref-3).
 
 Finally, interpreting lists of thousands of differentially expressed genes is a tedious exercise for the biologist.
 
@@ -1004,19 +1004,11 @@ If you want, I can also share:
 
 Depuis plus d'une décennie, la classification moléculaire des tumeurs du système nerveux central repose largement sur les profils de méthylation obtenus à partir des puces Illumina 450K, puis EPIC v1 et plus récemment EPIC v2. [\[1\]](/blog/nanodiag#ref-1)
 
-[\[1\]](blog/nanodiag#ref-1)
-
-[\[1\]](/blog/nanodiag#ref-1)
-
-[\[1\]](#ref-1)
-
-\[...] [\[1\]](/portfolio/blog/nanodiag#ref-1)
-
 Cette approche a profondément transformé la neuropathologie moderne. En comparant le profil épigénétique d'une tumeur à de vastes bases de référence, il est désormais possible de classifier avec précision des entités parfois difficiles à distinguer sur les seuls critères histologiques. Le classifieur développé à Heidelberg s'est progressivement imposé comme le standard international et est aujourd'hui utilisé par des centaines de centres à travers le monde.
 
 Cette situation a toutefois créé une forme de dépendance technologique : les données sont produites sur des plateformes propriétaires puis interprétées par des outils centralisés. Lorsque le DKFZ a annoncé l'évolution de son classifieur vers un modèle payant, de nombreux laboratoires ont commencé à explorer des alternatives plus ouvertes, plus souveraines et plus facilement intégrables dans leurs propres infrastructures.
 
-Dans le même temps, le séquençage Nanopore a vu émerger une nouvelle génération d'outils de classification basés directement sur les signaux de méthylation de l'ADN natif. Parmi eux, [Sturgeon](https://github.com/UMCUGenetics/sturgeon) a démontré qu'un réseau neuronal entraîné sur des données de séquençage génome entier (Whole Genome Sequencing, WGS) pouvait reproduire une grande partie des performances des approches historiques <a href="#ref-3" className="vocs_Anchor">\[3]</a>.
+Dans le même temps, le séquençage Nanopore a vu émerger une nouvelle génération d'outils de classification basés directement sur les signaux de méthylation de l'ADN natif. Parmi eux, [Sturgeon](https://github.com/UMCUGenetics/sturgeon) a démontré qu'un réseau neuronal entraîné sur des données de séquençage génome entier (Whole Genome Sequencing, WGS) pouvait reproduire une grande partie des performances des approches historiques [\[3\]](/blog/nanodiag#ref-3).
 
 Les auteurs de Sturgeon ont également rapporté que l'utilisation de l'Adaptive Sampling améliorait encore les performances du classifieur. Toutefois, le panel utilisé pour cet enrichissement ciblé n'a jamais été publié.
 
@@ -1024,7 +1016,7 @@ C'est à partir de cette observation qu'est née notre question :
 
 > Peut-on concevoir un panel d'Adaptive Sampling optimisé pour la classification des tumeurs cérébrales, capable de préserver les performances des classifieurs de méthylation, de maintenir l'information CNV, de fournir le statut MGMT et de s'intégrer dans l'organisation de notre plateforme de biologie moléculaire mutualisée ?
 
-Ce travail s'inscrit dans un mouvement plus large. Le récent Livre Blanc de la Fédération Française de Génétique Humaine (FFGH) dresse un constat sans appel : la France est à un point d'inflexion de sa médecine génomique. À terme, près de **46 % de la population française** pourrait nécessiter un examen génétique. Le document appelle à développer des infrastructures souveraines, ouvertes et interopérables — précisément l'esprit dans lequel ce projet a été conçu <a href="#ref-4" className="vocs_Anchor">\[4]</a>.
+Ce travail s'inscrit dans un mouvement plus large. Le récent Livre Blanc de la Fédération Française de Génétique Humaine (FFGH) dresse un constat sans appel : la France est à un point d'inflexion de sa médecine génomique. À terme, près de **46 % de la population française** pourrait nécessiter un examen génétique. Le document appelle à développer des infrastructures souveraines, ouvertes et interopérables — précisément l'esprit dans lequel ce projet a été conçu [\[4\]](/blog/nanodiag#ref-4).
 
 ***
 
@@ -1120,7 +1112,7 @@ Après optimisation, les profils CNV obtenus sont devenus comparables à ceux ob
 
 ## Le défi MGMT
 
-L'obtention du statut de méthylation du promoteur du gène MGMT, en tant que facteur prédictif  établit de la réponse au traitement standard des glioblastomes <a href="#ref-2" className="vocs_Anchor">\[2]</a>, représentait un second défi majeur.
+L'obtention du statut de méthylation du promoteur du gène MGMT, en tant que facteur prédictif  établit de la réponse au traitement standard des glioblastomes [\[2\]](/blog/nanodiag#ref-2), représentait un second défi majeur.
 
 Lors des premières expérimentations, plusieurs résultats se sont révélés discordants avec les analyses de référence réalisées par les méthodes conventionnelles.
 

@@ -1,4 +1,4 @@
-import{u as s,j as e}from"./index-BbvnDw1I.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function i(n){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
+import{u as s,j as e}from"./index-C8vfnHp3.js";const a={layout:"deafult",title:"Here are my projects",description:"undefined"};function n(i){const r={a:"a",br:"br",div:"div",em:"em",h1:"h1",h2:"h2",h3:"h3",header:"header",li:"li",p:"p",strong:"strong",ul:"ul",...s(),...i.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.header,{children:e.jsxs(r.h1,{id:"here-are-my-projects",children:["Here are my projects",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#here-are-my-projects",children:e.jsx(r.div,{"data-autolink-icon":!0})})]})}),`
 `,e.jsxs(r.h2,{id:"omicsverse",children:["OmicsVerse",e.jsx(r.a,{"aria-hidden":"true",tabIndex:"-1",href:"#omicsverse",children:e.jsx(r.div,{"data-autolink-icon":!0})})]}),`
 `,e.jsx("video",{autoPlay:!0,loop:!0,muted:!0,playsInline:!0,disablePictureInPicture:!0,disableRemotePlayback:!0,style:{maxWidth:"100%",height:"auto"},children:e.jsx("source",{src:"/portfolio/Omicsverse.webm",type:"video/webm"})}),`
 `,e.jsxs(r.p,{children:["The initial aim of the  ",e.jsx(r.a,{href:"https://omicsverse.fr",children:"OmicsVerse portal"})," is to host demo versions of the various data applications I create."]}),`
@@ -27,7 +27,7 @@ import{u as s,j as e}from"./index-BbvnDw1I.js";const a={layout:"deafult",title:"
 `,e.jsxs(r.p,{children:["These are ",e.jsx(r.strong,{children:"research and exploratory tools"}),".",e.jsx(r.br,{}),`
 `,"Using it in routine diagnostics would require compliance with",e.jsx(r.br,{}),`
 `,"medical device software regulations and formal validation processes",e.jsx(r.br,{}),`
-`,e.jsx("a",{href:"#ref-1",className:"vocs_Anchor",children:"[1]"})," ",e.jsx("a",{href:"#ref-2",className:"vocs_Anchor",children:"[2]"})," ",e.jsx("a",{href:"#ref-3",className:"vocs_Anchor",children:"[3]"}),"."]}),`
+`,e.jsx(r.a,{href:"/projects#ref-1",children:"[1]"})," ",e.jsx(r.a,{href:"/projects#ref-2",children:"[2]"})," ",e.jsx(r.a,{href:"/projects#ref-3",children:"[3]"}),"."]}),`
 `,e.jsxs(r.p,{children:["This is far beyond what a single developer can realistically achieve alone this is an unattainable goal for just one person in their spare time.  ",e.jsx("br",{}),e.jsx("br",{}),`
 So if you feel like contributing to the project. Don't hesitate to contact me :
 `,e.jsx(r.a,{href:"mailto:benoitclement.data@gmail.com",children:"benoitclement.data@gmail.com"}),"."]}),`
@@ -82,4 +82,4 @@ This initiative brings together passionate developers to explore and build decen
 `,e.jsx("p",{id:"ref-3",children:e.jsxs(r.p,{children:[e.jsx(r.strong,{children:"[3]"})," Małgorzata Kruszynska (2021).",e.jsx(r.br,{}),`
 `,e.jsx("i",{children:"CE marking for Medical Device Software: a step-by-step guide"}),".",e.jsx(r.br,{}),`
 `,e.jsx("b",{children:"Spyrosoft"}),".",e.jsx(r.br,{}),`
-`,e.jsx("a",{href:"https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"URL"})]})})]})}function o(n={}){const{wrapper:r}={...s(),...n.components};return r?e.jsx(r,{...n,children:e.jsx(i,{...n})}):i(n)}export{o as default,a as frontmatter};
+`,e.jsx("a",{href:"https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software",className:"vocs_Anchor",target:"_blank",rel:"noopener noreferrer",children:"URL"})]})})]})}function o(i={}){const{wrapper:r}={...s(),...i.components};return r?e.jsx(r,{...i,children:e.jsx(n,{...i})}):n(i)}export{o as default,a as frontmatter};
