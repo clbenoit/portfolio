@@ -1004,6 +1004,14 @@ If you want, I can also share:
 
 Depuis plus d'une décennie, la classification moléculaire des tumeurs du système nerveux central repose largement sur les profils de méthylation obtenus à partir des puces Illumina 450K, puis EPIC v1 et plus récemment EPIC v2. [\[1\]](/blog/nanodiag#ref-1)
 
+[\[1\]](blog/nanodiag#ref-1)
+
+[\[1\]](/blog/nanodiag#ref-1)
+
+[\[1\]](#ref-1)
+
+\[...] [\[1\]](/portfolio/blog/nanodiag#ref-1)
+
 Cette approche a profondément transformé la neuropathologie moderne. En comparant le profil épigénétique d'une tumeur à de vastes bases de référence, il est désormais possible de classifier avec précision des entités parfois difficiles à distinguer sur les seuls critères histologiques. Le classifieur développé à Heidelberg s'est progressivement imposé comme le standard international et est aujourd'hui utilisé par des centaines de centres à travers le monde.
 
 Cette situation a toutefois créé une forme de dépendance technologique : les données sont produites sur des plateformes propriétaires puis interprétées par des outils centralisés. Lorsque le DKFZ a annoncé l'évolution de son classifieur vers un modèle payant, de nombreux laboratoires ont commencé à explorer des alternatives plus ouvertes, plus souveraines et plus facilement intégrables dans leurs propres infrastructures.
