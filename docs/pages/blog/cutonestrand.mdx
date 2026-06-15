@@ -20,7 +20,7 @@ The future of gene therapy looks brighter than ever,
 As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for 
 the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele. 
 Only the wild-type allele remains, and the disease is thus cured. 
-Although the effectiveness of this approach looks promising <a href="#ref-1" className="vocs_Anchor">[1]</a> <a href="#ref-2" className="vocs_Anchor">[2]</a> <a href="#ref-3" className="vocs_Anchor">[3]</a>, a number of issues still need 
+Although the effectiveness of this approach looks promising [\[1\]](/blog/cutonestrand#ref-1) [\[2\]](/blog/cutonestrand#ref-2) [\[3\]](/blog/cutonestrand#ref-3), a number of issues still need 
 to be addressed, two of which we will try to address in this article : 
 
 <p className="popacitydanger" >
@@ -42,7 +42,7 @@ also known as a Protospacer Adjacent Motif. The canonical PAM is associated with
 We are therefore going to try to draw up an exhaustive list of all the genomic regions that could be used for this 
 gene therapy.
 1) We start by selecting all the SNPs that are frequent in the population (> 5%), for which we can 
-use the gnomAD database <a href="#ref-4" className="vocs_Anchor">[4]</a>.  We want the list created to be usable to treat as many 
+use the gnomAD database [\[4\]](/blog/cutonestrand#ref-4).  We want the list created to be usable to treat as many 
 patients as possible, so we avoid SNPs that are too rare. 
 2) Only SNPs that induce the disappearance or appearance of the **5‘-NGG-3’**
  motif will allow us to target only the mutated allele while preserving the WT. To do this, we wrote an in-house script in Python.
@@ -53,7 +53,7 @@ scores for each of the positions we selected. We wanted to cut the diseased gene
 without altering other regions of the genome.
 
 Using this method, we were able to draw up a list of genomic positions of interest in the treatment of Ryanodine receptor 
-type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. <a href="#ref-5" className="vocs_Anchor">[5]</a>
+type 1-related myopathies (RYR1-RM) of the ‘Autosomal-Dominant-Disorder’ type. [\[5\]](/blog/cutonestrand#ref-5)
 Thanks to next-generation sequencing, it is possible to obtain both genomic sequences of a patient 
 at a reasonable cost. All the positions on our list for which the patient is heterozygous are therefore 
 candidates for gene therapy!
