@@ -86,7 +86,7 @@ const Timeline = () => {
         contentStyle={{ background: getColor('work'), color: getTextColor() }}        
         icon={ <img className="flag-sizeS" src ={WorkLogo} />}
       >
-        <h3 className="vertical-timeline-element-title">Co-founder & Technical Lead - <a href="https://joecnc.github.io/cnc_website/" target="_blank"  className="hrefverticalelement" >CNC Web3 Developer Crew</a></h3>
+        <h3 className="vertical-timeline-element-title">Co-founder & Technical Lead - CNC Web3 Developers Colletive</h3>
         <h4 className="vertical-timeline-element-subtitle">Web3 & Blockchain Development</h4>
         <p>Leading a collaborative developer collective focused on Web3 technologies, smart contracts development, DeFi protocols, and decentralized application architecture. Cross-functional team coordination and technical leadership.</p>
       </VerticalTimelineElement>
