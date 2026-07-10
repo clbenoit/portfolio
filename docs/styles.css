@@ -76,6 +76,27 @@
   font-size: 16px;
 }
 
+/* Scoped link styling for Clinical Bioinformatics Engineer card */
+.clinical-card-link {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+
+.clinical-card-link:hover,
+.clinical-card-link:focus-visible {
+  color: #0f4f8a;
+}
+
+:root.dark .clinical-card-link:hover,
+:root.dark .clinical-card-link:focus-visible,
+[data-theme="dark"] .clinical-card-link:hover,
+[data-theme="dark"] .clinical-card-link:focus-visible {
+  color: #d9ecff;
+}
+
 .popacity {
  background: #33475B;
  padding: 10px;

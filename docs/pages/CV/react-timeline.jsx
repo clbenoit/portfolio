@@ -17,14 +17,14 @@ import GroupedList from './react-groupedlist';
 const listStyle = {
      listStyleType: 'disc',
      listStylePosition: 'inside',
-     textJustify: 'auto', 
+     textJustify: 'auto',
     //  height: '0.5em'
 };
 
 // const colors = {
 //   work: { light: 'rgb(144,202,249)', dark: '#5B7F9D' },        // Bleu doux
 //   // education: { light: 'rgb(200, 80, 120)', dark: '#7B3F52' },    // Rose/Magenta
-//   education: { light: 'rgb(189,141,220)', dark: '#7B3F52' },  
+//   education: { light: 'rgb(189,141,220)', dark: '#7B3F52' },
 //   internship: { light: 'rgb(245, 190, 145)', dark: '#C89070' },  // Orange clair
 //   traveling: { light: 'rgb(120, 180, 140)', dark: '#7FB89F' },   // Vert menthe
 //   blog: { light: 'rgb(205, 180, 150)', dark: '#7FB89F' }         // Tan/Beige
@@ -55,8 +55,8 @@ const Timeline = () => {
     const observer = new MutationObserver(() => {
       checkDarkMode();
     });
-    observer.observe(document.documentElement, { 
-      attributes: true, 
+    observer.observe(document.documentElement, {
+      attributes: true,
       attributeFilter: ['class']
     });
 
@@ -70,7 +70,7 @@ const Timeline = () => {
   const getTextColor = () => {
     //return isDark ? '#fff' : '#000';
     return isDark ? '#F5F5F5' : '#1A1A1A' ;!important;
-    //return isDark ? '#eb1446ff' : '#a51616ff' ;  
+    //return isDark ? '#eb1446ff' : '#a51616ff' ;
   };
 
   return (
@@ -79,29 +79,7 @@ const Timeline = () => {
     <VerticalTimeline
     layout = "1-column-left">
     {/* layout = "2-columns"> */}
-    <VerticalTimelineElement
-        className="vertical-timeline-element--work"
-        date="January 2026"
-        iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}        
-        icon={ <img className="flag-sizeS" src ={WorkLogo} />}
-      >
-        <h3 className="vertical-timeline-element-title">Co-founder & Technical Lead - CNC Web3 Developers Colletive</h3>
-        <h4 className="vertical-timeline-element-subtitle">Web3 & Blockchain Development</h4>
-        <p>Leading a collaborative developer collective focused on Web3 technologies, smart contracts development, DeFi protocols, and decentralized application architecture. Cross-functional team coordination and technical leadership.</p>
-      </VerticalTimelineElement>
-    <VerticalTimelineElement
-        className="vertical-timeline-element--work"
-        date="March 2024"
-        iconStyle={{ background: getColor('blog'), color: '#fff' }}
-        contentStyle={{ background: getColor('blog'), color: getTextColor() }}        
-        icon={ <img className="flag-sizeS" src ={BlogLogo} />}
-      >
-        <h3 className="vertical-timeline-element-title">Creation of <a href="https://omicsverse.fr/" target="_blank"  className="hrefverticalelement" >Omicsverse </a> and this personnal website</h3>
-        <h4 className="vertical-timeline-element-subtitle">Home</h4>
-        <p>Web development, Open source, Blogging, Cloud computing and hosting </p>
-      </VerticalTimelineElement>       
-      <VerticalTimelineElement
+          <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="Aug 2022 - Present"
         iconStyle={{ background: getColor('work'), color: '#fff' }}
@@ -110,10 +88,71 @@ const Timeline = () => {
       >
         <h3 className="vertical-timeline-element-title">Clinical Bioinformatics Engineer</h3>
         <h4 className="vertical-timeline-element-subtitle">Grenoble Alpes University Hospital (CHUGA)</h4>
-        <p>
-        Gathering biologist needs, Training, Automation, Databases, nf-core pipelines, Local Laboratory Information Management Systems,
-        Data Management, High Performance computing, Software maintenance, <br/>
-        </p>
+          <ul style={listStyle}>
+          <li>
+            <b>Designed and operationalized end-to-end clinical-grade bioinformatics workflows</b> from sequencing processing and quality control to variant calling, annotation, interpretation, and reporting - ensuring production-ready, reliable processing of sensitive health data within highly regulated hospital environments.
+          </li>
+          <li>
+            Deployed and operationalized a <b>deep learning-based brain tumor classification pipeline</b> using the model:{' '}
+            <a
+              href="https://github.com/UMCUGenetics/sturgeon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hrefverticalelement clinical-card-link"
+            >
+              Sturgeon
+            </a>
+            {' '}for clinical routine, enabling sovereign, on-premises molecular diagnostics using Oxford Nanopore sequencing as an alternative to external Illumina/DKFZ-based workflows; integrated real-time sequencing data while ensuring compliance with hospital infrastructure, cybersecurity, data governance, and NF ISO 15189 accreditation requirements.
+          </li>
+          <li>
+            <b>Supported multidisciplinary diagnostic activities</b>  across virology, hematology, solid tumors, rare diseases, reproductive medicine &amp; infertility, prenatal diagnostics, and neuro-oncology.
+          </li>
+          <li>
+            <b> Collaborated closely with clinicians, molecular biologists, pathologists</b> , engineers, and laboratory teams to transform complex diagnostic and research requirements into reliable operational solutions.
+          </li>
+          <li>
+            Contributed to workflow validation, standardization, traceability, continuous improvement processes, and quality compliance under NF ISO 15189 and secure infrastructure practices inspired by ISO 27001 standards.
+          </li>
+          <li>
+            Delivered reproducible bioinformatics analyses and{' '}
+            <a
+              href="https://clbenoit.github.io/portfolio/blog/nanodiag"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hrefverticalelement clinical-card-link"
+            >
+              AI-driven workflows
+            </a>
+            {' '}for translational research, generating results that supported{' '}
+            <a
+              href="https://doi.org/10.1016/j.omtn.2024.102259"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hrefverticalelement clinical-card-link"
+            >
+              peer-reviewed publications
+            </a>
+            ,{' '}
+            <a
+              href="https://github.com/clbenoit/CutOneStrand"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hrefverticalelement clinical-card-link"
+            >
+              open-source software
+            </a>
+            , and a{' '}
+            <a
+              href="https://clbenoit.github.io/portfolio/blog/circRNAs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hrefverticalelement clinical-card-link"
+            >
+              doctoral dissertation (coming soon)
+            </a>
+            .
+          </li>
+        </ul>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
@@ -124,48 +163,110 @@ const Timeline = () => {
       >
         <h3 className="vertical-timeline-element-title">Research Engineer</h3>
         <h4 className="vertical-timeline-element-subtitle">Institut Curie</h4>
-        <p>
-        Bioinformatics, Data Pipeline development,
-        Statistical analysis, Reporting,
-        Data application development,
-        High Performance Computing,
-        Training,
-        Benchmarking,
-        Data Pipeline development<br/>
-        </p>
+        <ul style={listStyle}>
+          <li>
+            <b>Developed</b>{' '}
+            <a
+              href="https://clbenoit.github.io/portfolio/projects"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hrefverticalelement clinical-card-link"
+            >
+              R Shiny web applications
+            </a>
+            {' '}for interactive processing and visualization of multi-omics datasets, enabling non-technical researchers and biologists to explore large-scale biological results without computational expertise.
+          </li>
+
+          <li>
+            <b>Built and maintained</b> automated omics analysis pipelines supporting a wide range of research projects: bulk &amp; single-cell RNA-Seq, ChIP-Seq, ATAC-Seq, and targeted gene panels — ensuring reproducibility and scalability.
+          </li>
+
+          <li>
+            <b>Conducted benchmarking of omics analysis tools</b>, evaluated methodological alternatives, and provided structured feedback to support model optimization and pipeline improvement decisions.
+          </li>
+
+          <li>
+            <b>Processed and statistically analyzed</b> large-scale biological datasets in a research environment, ensuring analytical rigor, AI-readiness, and reproducibility across diverse project contexts.
+          </li>
+
+          <li>
+            <b>Collaborated remotely within a multidisciplinary bioinformatics team</b>, providing training, documentation, and technical support to enable effective adoption of computational tools by researchers and project leads.
+          </li>
+        </ul>
+    </VerticalTimelineElement>
+    <VerticalTimelineElement
+        className="vertical-timeline-element--work"
+        date="January 2026"
+        iconStyle={{ background: getColor('work'), color: '#fff' }}
+        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+        icon={ <img className="flag-sizeS" src ={WorkLogo} />}
+      >
+        <h3 className="vertical-timeline-element-title">Co-founder & Technical Lead - CNC Web3 Developers Colletive</h3>
+        <h4 className="vertical-timeline-element-subtitle">Web3 & Blockchain Development</h4>
+        <p>Leading a collaborative developer collective focused on Web3 technologies, smart contracts development, DeFi protocols, and decentralized application architecture. Cross-functional team coordination and technical leadership.</p>
+      </VerticalTimelineElement>
+    <VerticalTimelineElement
+        className="vertical-timeline-element--work"
+        date="March 2024"
+        iconStyle={{ background: getColor('blog'), color: '#fff' }}
+        contentStyle={{ background: getColor('blog'), color: getTextColor() }}
+        icon={ <img className="flag-sizeS" src ={BlogLogo} />}
+      >
+        <h3 className="vertical-timeline-element-title">Creation of <a href="https://omicsverse.fr/" target="_blank"  className="hrefverticalelement" >Omicsverse </a> and this personnal website</h3>
+        <h4 className="vertical-timeline-element-subtitle">Home</h4>
+        <p>Web development, Open source, Blogging, Cloud computing and hosting </p>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="March 2019 - March 2022"
         iconStyle={{ background: getColor('traveling'), color: '#fff' }}
-        contentStyle={{ background: getColor('traveling'), color: getTextColor() }}        
+        contentStyle={{ background: getColor('traveling'), color: getTextColor() }}
         icon={ <img className="flag-sizeM" src ={TravelingLogo} />}
       >
         <h3 className="vertical-timeline-element-title">BackPacker</h3>
         <h4 className="vertical-timeline-element-subtitle">Europe</h4>
         <p>
-        Culture Discovering, Time management, Projects collaboration, Communication, 
+        Culture Discovering, Time management, Projects collaboration, Communication,
         Following ML/DL online courses on my freetime<br/>
         </p>
-      </VerticalTimelineElement>           
+      </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="Feb 2018 - Jul 2018"
         contentStyle={{ background: getColor('internship'), color: getTextColor() }}
-        iconStyle={{ background: getColor('internship'), color: '#fff' }}        
+        iconStyle={{ background: getColor('internship'), color: '#fff' }}
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Research and Development Intern</h3>
         <h4 className="vertical-timeline-element-subtitle"><a href="https://www.firalis.com/" target="_blank"  className="hrefverticalelement">FIRALIS S.A </a></h4>
-        <p>
-        Worked on the design of a <a href="https://www.firalis.com/products/fimics-cardiac-ruo-kit-panel" target="_blank" className="hrefverticalelement">diagnostic test </a>  based on transcriptomic biomarkers (lncRNAs), predicting the development of heart failure within 6 months after a first myocardial infarction.      
-        </p>
+        <ul style={listStyle}>
+        <li>
+          <b>Contributed to the</b>{' '}
+          <a
+            href="https://www.firalis.com/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hrefverticalelement clinical-card-link"
+          >
+            design of a diagnostic test using transcriptomic biomarkers (lncRNAs) to predict heart failure risk within 6 months post-myocardial infarction
+          </a>
+          {' '} bridging genomics and clinical diagnostics.
+        </li>
+
+        <li>
+          <b>Curated, processed, and analyzed</b> high-throughput transcriptomic datasets to support predictive modeling, ensuring data quality and reproducibility throughout the pipeline.
+        </li>
+
+        <li>
+          <b>Collaborated with cross-functional teams</b> to translate biological questions into computational analyses, with thorough documentation for scientific reporting and internal knowledge transfer.
+        </li>
+      </ul>
       </VerticalTimelineElement>
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="May 2017 - Jul 2017"
         contentStyle={{ background: getColor('internship'), color: getTextColor() }}
-        iconStyle={{ background: getColor('internship'), color: '#fff' }}        
+        iconStyle={{ background: getColor('internship'), color: '#fff' }}
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Fundamental research Intern</h3>
@@ -183,7 +284,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2017 - 2018"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}   
+        contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title"><a href="https://formations.univ-amu.fr/fr/master/5SBG" target="_blank" className="hrefverticalelement">Dual Master's degree in omics data analysis </a> </h3>
@@ -197,7 +298,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2015 - 2018"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}           
+        contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title"><a href="https://polytech.univ-amu.fr/fr/formations/cycle-ingenieur/genie-biologique" target="_blank"  className="hrefverticalelement">Master’s Degree in Biotechnology Engineering </a></h3>
@@ -212,7 +313,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2013 - 2015"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}           
+        contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Preparatory class for prestigious engineering schools.</h3>
@@ -225,12 +326,12 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2013"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}           
+        contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Baccalaureate</h3>
         <h4 className="vertical-timeline-element-subtitle">Mâcon</h4>
-      </VerticalTimelineElement>            
+      </VerticalTimelineElement>
     </VerticalTimeline>
     </div>
       <div className="sidebarcv">
