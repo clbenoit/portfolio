@@ -1,5 +1,5 @@
 import 'react-vertical-timeline-component/style.min.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import VerticalTimelineComponent from 'react-vertical-timeline-component';
 const { VerticalTimeline, VerticalTimelineElement } = VerticalTimelineComponent;
@@ -21,56 +21,18 @@ const listStyle = {
     //  height: '0.5em'
 };
 
-// const colors = {
-//   work: { light: 'rgb(144,202,249)', dark: '#5B7F9D' },        // Bleu doux
-//   // education: { light: 'rgb(200, 80, 120)', dark: '#7B3F52' },    // Rose/Magenta
-//   education: { light: 'rgb(189,141,220)', dark: '#7B3F52' },
-//   internship: { light: 'rgb(245, 190, 145)', dark: '#C89070' },  // Orange clair
-//   traveling: { light: 'rgb(120, 180, 140)', dark: '#7FB89F' },   // Vert menthe
-//   blog: { light: 'rgb(205, 180, 150)', dark: '#7FB89F' }         // Tan/Beige
-// };
-
-const colors = {
-  work: { light: 'rgb(144,202,249)', dark: '#6B9FBF' },      // Bleu pastel doux
-  education: { light: 'rgb(189,141,220)', dark: '#9B7BA8' },  // Mauve pastel
-  internship: { light: 'rgb(245, 190, 145)', dark: '#B8936D' }, // Orange pastel
-  traveling: { light: 'rgb(120, 180, 140)', dark: '#7FA887' }, // Vert menthe doux
-  blog: { light: 'rgb(205, 180, 150)', dark: '#998370' }       // Tan pastel
-};
-
 const Timeline = () => {
-  const [isDark, setIsDark] = useState(false);
+  const cardStyle = {
+    background: 'var(--vocs-color_background2)',
+    color: 'var(--vocs-color_text)',
+    border: '1px solid var(--vocs-color_border)',
+    boxShadow: 'none'
+  };
 
-  useEffect(() => {
-    // Function to check if dark mode is active
-    const checkDarkMode = () => {
-      const isDarkMode = document.documentElement.classList.contains('dark');
-      setIsDark(isDarkMode);
-    };
-
-    // Check initial dark mode with a small delay to ensure DOM is ready
-    setTimeout(checkDarkMode, 100);
-
-    // Listen for class changes on the root element
-    const observer = new MutationObserver(() => {
-      checkDarkMode();
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  const getColor = (type) => isDark ? colors[type].dark : colors[type].light;
-
-  const getTextColor = () => {
-    //return isDark ? '#fff' : '#000';
-    return isDark ? '#F5F5F5' : '#1A1A1A' ;!important;
-    //return isDark ? '#eb1446ff' : '#a51616ff' ;
+  const iconStyle = {
+    background: 'var(--vocs-color_background3)',
+    color: 'var(--vocs-color_text)',
+    border: '1px solid var(--vocs-color_border)'
   };
 
   return (
@@ -82,8 +44,8 @@ const Timeline = () => {
           <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="Aug 2022 - Present"
-        iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+            iconStyle={iconStyle}
+            contentStyle={cardStyle}
         icon={ <img className="flag-sizeL" src ={WorkLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Clinical Bioinformatics Engineer</h3>
@@ -157,8 +119,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="March 2019 - March 2022"
-        iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img className="flag-sizeL" src ={WorkLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Research Engineer</h3>
@@ -197,8 +159,8 @@ const Timeline = () => {
     <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="January 2026"
-        iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img className="flag-sizeS" src ={WorkLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Co-founder & Technical Lead - CNC Web3 Developers Colletive</h3>
@@ -208,8 +170,8 @@ const Timeline = () => {
     <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="March 2024"
-        iconStyle={{ background: getColor('blog'), color: '#fff' }}
-        contentStyle={{ background: getColor('blog'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img className="flag-sizeS" src ={BlogLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Creation of <a href="https://omicsverse.fr/" target="_blank"  className="hrefverticalelement" >Omicsverse </a> and this personnal website</h3>
@@ -219,8 +181,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="March 2019 - March 2022"
-        iconStyle={{ background: getColor('traveling'), color: '#fff' }}
-        contentStyle={{ background: getColor('traveling'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img className="flag-sizeM" src ={TravelingLogo} />}
       >
         <h3 className="vertical-timeline-element-title">BackPacker</h3>
@@ -233,8 +195,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="Feb 2018 - Jul 2018"
-        contentStyle={{ background: getColor('internship'), color: getTextColor() }}
-        iconStyle={{ background: getColor('internship'), color: '#fff' }}
+        contentStyle={cardStyle}
+        iconStyle={iconStyle}
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Research and Development Intern</h3>
@@ -265,8 +227,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="May 2017 - Jul 2017"
-        contentStyle={{ background: getColor('internship'), color: getTextColor() }}
-        iconStyle={{ background: getColor('internship'), color: '#fff' }}
+        contentStyle={cardStyle}
+        iconStyle={iconStyle}
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Fundamental research Intern</h3>
@@ -283,8 +245,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="2017 - 2018"
-        iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title"><a href="https://formations.univ-amu.fr/fr/master/5SBG" target="_blank" className="hrefverticalelement">Dual Master's degree in omics data analysis </a> </h3>
@@ -297,8 +259,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="2015 - 2018"
-        iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title"><a href="https://polytech.univ-amu.fr/fr/formations/cycle-ingenieur/genie-biologique" target="_blank"  className="hrefverticalelement">Master’s Degree in Biotechnology Engineering </a></h3>
@@ -312,8 +274,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="2013 - 2015"
-        iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Preparatory class for prestigious engineering schools.</h3>
@@ -325,8 +287,8 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="2013"
-        iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        iconStyle={iconStyle}
+        contentStyle={cardStyle}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Baccalaureate</h3>

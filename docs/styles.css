@@ -69,7 +69,7 @@
   color: inherit;
 }
 .hrefverticalelement::after {
-  content: "\2197"; /* Unicode arrow character code for top right arrow */
+  content: "\2197";
   position: relative;
   top: -5px;
   right: 0px;
@@ -87,14 +87,14 @@
 
 .clinical-card-link:hover,
 .clinical-card-link:focus-visible {
-  color: #0f4f8a;
+  color: inherit;
 }
 
 :root.dark .clinical-card-link:hover,
 :root.dark .clinical-card-link:focus-visible,
 [data-theme="dark"] .clinical-card-link:hover,
 [data-theme="dark"] .clinical-card-link:focus-visible {
-  color: #d9ecff;
+  color: inherit;
 }
 
 .popacity {
@@ -140,52 +140,43 @@
 
 .category-box {
   width: 100%;
-  color: white;
-  background: rgb(44, 62, 80);
+  color: var(--vocs-color_text);
+  background: var(--vocs-color_background2);
   padding: 10px;
   margin: 5px;
   margin-bottom: 25px;
   cursor: pointer;
   display: inline-block;
-  borderRadius: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--vocs-color_border);
   box-sizing: border-box;
 }
 
 /* Timeline line - light mode */
 .vertical-timeline::before {
-  /* background: #d4d4d8 !important; */
-  /* background: #cbd5e1 !important; slate-300 */
-  background: #a5b0bc !important; /* slate-300 */
+  background: var(--vocs-color_border2) !important;
 }
 
 /* Timeline line - dark mode */
 :root.dark .vertical-timeline::before,
 [data-theme="dark"] .vertical-timeline::before {
-  background: #6f6d78 !important;
+  background: var(--vocs-color_border2) !important;
 }
 
 /* Timeline connector - light mode */
 .vertical-timeline-element::before {
-  /* background: #ffffff !important; */
-  background: #f8fafc !important; /* quasi blanc */
+  background: var(--vocs-color_background2) !important;
 }
 
 /* Timeline connector - dark mode */
 :root.dark .vertical-timeline-element::before,
 [data-theme="dark"] .vertical-timeline-element::before {
-  background: #2b292d !important;
+  background: var(--vocs-color_background2) !important;
 }
 
-/* Timeline element icon - light mode (border only) */
 .vertical-timeline-element-icon {
-  /* box-shadow: 0 0 0 4px #838284 !important; */
-  box-shadow: 0 0 0 4px #475569 !important; /* slate-600 */
-}
-
-/* Timeline element icon - dark mode (border only) */
-:root.dark .vertical-timeline-element-icon,
-[data-theme="dark"] .vertical-timeline-element-icon {
-  box-shadow: 0 0 0 4px #f6f6f7 !important;
+  box-shadow: 0 0 0 4px var(--vocs-color_background2) !important;
+  border: 1px solid var(--vocs-color_border);
 }
 
 
