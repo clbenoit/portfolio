@@ -52,40 +52,33 @@ const GroupedList = () => {
 
   const [categories] = useState([
     { 
-      name: 'Programming Languages',
-      items: ['TypeScript', 'Python', 'R']
+      name: 'Languages',
+      items: ['Python', 'R', 'TypeScript', 'Bash/Shell', 'SQL']
     },
-    { 
+        { 
       name: 'Data Engineering',
       items: [
         'ETL',
         'Nextflow',
         'Snakemake',
-        'PostgreSQL',
-        'SQL'
+        'Airflow',
+        'n8n'
       ]
     },
     { 
       name: 'Computing Systems',
       items: [
-        'Docker',
-        'Kubernetes',
-        'Singularity',
-        'High Performance Computing',
+        'Docker / Singularity / Kubernetes',
+        'High Performance Computing (Slurm, Torque, PBS, OAR)',
         'Cloud Computing',
-        'Linux',
-        'Windows'
-      ]
+        'Linux / Windows'      ]
     },
     {
       name: 'LLM & AI Engineering',
       items: [
-        'LLM integration',
-        'Light fine-tuning',
-        'LLMOps',
-        'AI services deployment',
-        'API-based models',
-        'Monitoring & scalability'
+        'LLMDev : feature engineering - fine tuning',
+        'LLM Ops : deployment and integration in data workflows (n8n)',
+        'Monitoring & scalability (grafana / prometheus)'
       ]
     },
     { 
@@ -98,10 +91,25 @@ const GroupedList = () => {
       ]
     },
     { 
+      name: 'Project Management',
+      items: ['Git', 'CI / CD', 'Teams', "DevOps", "Agile", "Scrum", "Kanban"]
+    },
+    { 
+      name: 'Life Science',
+      items: ['Molecular Biology', 'Genomics', 'Phylogenetics']
+    },
+    { 
+      name: 'Web',
+      items: ['Shiny', 'Flask', 'Django', 'FastAPI']
+    },
+    {
+      name: 'Data & Viz Libraries',
+      items: ['Pandas', 'NumPy', 'SciPy', 'Matplotlib', 'Plotly', 'ggplot2', 'Spark']
+    },
+        { 
       name: 'Blockchain & Web3 Engineering',
       items: [
-        'Blockchain infrastructure (home staking)',
-        'Validator node operations',
+        'Blockchain infrastructure operations',
         'Distributed systems & consensus',
         'Smart contract interaction',
         'On-chain data analysis',
@@ -111,18 +119,6 @@ const GroupedList = () => {
         'Monitoring & uptime management',
         'DeFi & Web3 ecosystem knowledge'
       ]
-    },
-    { 
-      name: 'Web',
-      items: ['React', 'CSS', 'HTML']
-    },
-    { 
-      name: 'Project Management',
-      items: ['Git', 'CI / CD', 'Teams']
-    },
-    { 
-      name: 'Life Science',
-      items: ['Molecular Biology', 'Genomics', 'Phylogenetics']
     }
   ]);
 
@@ -145,8 +141,11 @@ const GroupedList = () => {
           key={index}
           className="category-box"
           style={{
-            backgroundColor: getColor(category.name),
-            color: getTextColor(),
+            //backgroundColor: getColor(category.name),
+            //color: getTextColor(),
+            backgroundColor: 'var(--vocs-color_background2)',
+            color: 'var(--vocs-color_text)',
+            border: '1px solid var(--vocs-color_border)',
             padding: '10px',
             margin: '10px 0',
             borderRadius: '5px',

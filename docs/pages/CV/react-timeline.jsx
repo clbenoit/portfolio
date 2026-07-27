@@ -83,7 +83,7 @@ const Timeline = () => {
         className="vertical-timeline-element--work"
         date="Aug 2022 - Present"
         iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('work'), color: getTextColor() }}
         icon={ <img className="flag-sizeL" src ={WorkLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Clinical Bioinformatics Engineer</h3>
@@ -158,7 +158,7 @@ const Timeline = () => {
         className="vertical-timeline-element--work"
         date="March 2019 - March 2022"
         iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('work'), color: getTextColor() }}
         icon={ <img className="flag-sizeL" src ={WorkLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Research Engineer</h3>
@@ -198,7 +198,7 @@ const Timeline = () => {
         className="vertical-timeline-element--work"
         date="January 2026"
         iconStyle={{ background: getColor('work'), color: '#fff' }}
-        contentStyle={{ background: getColor('work'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('work'), color: getTextColor() }}
         icon={ <img className="flag-sizeS" src ={WorkLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Co-founder & Technical Lead - CNC Web3 Developers Colletive</h3>
@@ -209,7 +209,7 @@ const Timeline = () => {
         className="vertical-timeline-element--work"
         date="March 2024"
         iconStyle={{ background: getColor('blog'), color: '#fff' }}
-        contentStyle={{ background: getColor('blog'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('blog'), color: getTextColor() }}
         icon={ <img className="flag-sizeS" src ={BlogLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Creation of <a href="https://omicsverse.fr/" target="_blank"  className="hrefverticalelement" >Omicsverse </a> and this personnal website</h3>
@@ -220,7 +220,7 @@ const Timeline = () => {
         className="vertical-timeline-element--work"
         date="March 2019 - March 2022"
         iconStyle={{ background: getColor('traveling'), color: '#fff' }}
-        contentStyle={{ background: getColor('traveling'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('traveling'), color: getTextColor() }}
         icon={ <img className="flag-sizeM" src ={TravelingLogo} />}
       >
         <h3 className="vertical-timeline-element-title">BackPacker</h3>
@@ -233,7 +233,7 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="Feb 2018 - Jul 2018"
-        contentStyle={{ background: getColor('internship'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('internship'), color: getTextColor() }}
         iconStyle={{ background: getColor('internship'), color: '#fff' }}
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
@@ -265,7 +265,7 @@ const Timeline = () => {
       <VerticalTimelineElement
         className="vertical-timeline-element--education"
         date="May 2017 - Jul 2017"
-        contentStyle={{ background: getColor('internship'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('internship'), color: getTextColor() }}
         iconStyle={{ background: getColor('internship'), color: '#fff' }}
         icon={ <img className="flag-sizeS" src ={InternshipLogo} />}
       >
@@ -284,7 +284,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2017 - 2018"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title"><a href="https://formations.univ-amu.fr/fr/master/5SBG" target="_blank" className="hrefverticalelement">Dual Master's degree in omics data analysis </a> </h3>
@@ -298,7 +298,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2015 - 2018"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title"><a href="https://polytech.univ-amu.fr/fr/formations/cycle-ingenieur/genie-biologique" target="_blank"  className="hrefverticalelement">Master’s Degree in Biotechnology Engineering </a></h3>
@@ -313,7 +313,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2013 - 2015"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Preparatory class for prestigious engineering schools.</h3>
@@ -326,7 +326,7 @@ const Timeline = () => {
         className="vertical-timeline-element--education"
         date="2013"
         iconStyle={{ background: getColor('education'), color: '#fff' }}
-        contentStyle={{ background: getColor('education'), color: getTextColor() }}
+        //contentStyle={{ background: getColor('education'), color: getTextColor() }}
         icon={ <img src ={EducationLogo} />}
       >
         <h3 className="vertical-timeline-element-title">Baccalaureate</h3>

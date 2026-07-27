@@ -188,7 +188,6 @@
   box-shadow: 0 0 0 4px #f6f6f7 !important;
 }
 
-
 /* Styles pour les boutons de la HomePage (mobile uniquement) */
 @media only screen and (max-width: 600px) {
   .vocs_HomePage_buttons {
