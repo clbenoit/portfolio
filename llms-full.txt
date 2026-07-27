@@ -1259,7 +1259,12 @@ Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Bouto
 </p>
 
 
-import  Timeline from "./react-timeline"
+import SkillsGrid from "./react-skills-grid"
+import HorizontalTimeline from "./react-horizontal-timeline"
 
-<Timeline />
+<div className="cv-page">
+  <SkillsGrid />
+
+  <HorizontalTimeline />
+</div>
 
