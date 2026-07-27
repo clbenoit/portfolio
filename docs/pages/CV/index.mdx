@@ -1,10 +1,15 @@
 ---
 layout: minimal
 content:
-     width : 90%
+     width: 100%
      horizontalPadding: 0px
+     verticalPadding: 0px
 ---
 
-import  Timeline from "./react-timeline"
+import SkillsGrid from "./react-skills-grid"
+import HorizontalTimeline from "./react-horizontal-timeline"
 
-<Timeline />
+<div className="cv-page">
+  <SkillsGrid />
+  <HorizontalTimeline />
+</div>

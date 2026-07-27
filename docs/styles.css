@@ -240,3 +240,413 @@
   box-sizing: border-box;
 }
 
+/* =====================================================
+   NEW CV PAGE — Skills Grid + Horizontal Timeline
+   ===================================================== */
+
+/* --- Page wrapper --- */
+.cv-page {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* --- Skills Grid --- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 20px 24px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.skill-card {
+  background: var(--vocs-color_background2);
+  border: 1px solid var(--vocs-color_border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-card:hover {
+  border-color: var(--vocs-color_border2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.skill-card-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--vocs-color_heading);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.skill-card-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill-tag {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--vocs-color_text2);
+  background: var(--vocs-color_background3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* --- Horizontal Timeline --- */
+.ht-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 60px;
+}
+
+/* --- Scroll container with visible scrollbar --- */
+.ht-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+  position: relative;
+  /* Visible scrollbar */
+  scrollbar-width: auto;
+  scrollbar-color: #888898 #e8e8ee;
+}
+
+.ht-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.ht-scroll::-webkit-scrollbar-track {
+  background: #e8e8ee;
+  border-radius: 5px;
+  margin: 0 20px;
+}
+
+.ht-scroll::-webkit-scrollbar-thumb {
+  background: #888898;
+  border-radius: 5px;
+  border: 2px solid #e8e8ee;
+}
+
+.ht-scroll::-webkit-scrollbar-thumb:hover {
+  background: #6e6e7e;
+}
+
+/* --- Track (flex container) --- */
+.ht-track {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 1;
+  padding: 6px calc(50vw - 190px) 20px;
+}
+
+/* --- Timeline ruler line (width set by JS, below dots) --- */
+.ht-line {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(to right, 
+    #7c3aed 0%, 
+    #6366f1 20%, 
+    #3b82f6 40%, 
+    #0ea5e9 60%, 
+    #64748b 80%, 
+    #94a3b8 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --- Station (snap point) --- */
+.ht-station {
+  flex: 0 0 auto;
+  width: 380px;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Dot (sits on the line, above it) --- */
+.ht-dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 0 0 5px var(--vocs-color_background);
+  border: 2px solid;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.ht-dot-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #1a1a1a;
+}
+
+.ht-dot-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Connector (dot → card) --- */
+.ht-connector {
+  width: 2px;
+  height: 22px;
+  background: #b8b8c8;
+  flex-shrink: 0;
+}
+
+/* --- Cards --- */
+.ht-card {
+  width: 340px;
+  background: var(--vocs-color_background2);
+  border: 1px solid var(--vocs-color_border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  z-index: 2;
+  cursor: default;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ht-card:hover {
+  border-color: var(--vocs-color_border2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ht-card-date {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  background: #5b5bd6;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.ht-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--vocs-color_heading);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.ht-card-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vocs-color_text2);
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+/* --- Bullet list inside cards --- */
+.ht-bullets {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 18px;
+  margin: 0;
+}
+
+.ht-bullets li {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--vocs-color_text);
+  margin-bottom: 6px;
+}
+
+.ht-bullets li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Links inside timeline cards --- */
+.ht-link {
+  color: var(--vocs-color_textAccent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ht-link:hover {
+  color: var(--vocs-color_textAccentHover);
+}
+
+/* --- Navigation dots --- */
+.ht-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 0 8px;
+}
+
+.ht-nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--vocs-color_border2);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.2s ease;
+  outline: none;
+}
+
+.ht-nav-dot:hover {
+  background: var(--vocs-color_border);
+  transform: scale(1.3);
+}
+
+.ht-nav-dot-active {
+  background: #5b5bd6;
+  border-color: #5b5bd6;
+  transform: scale(1.2);
+}
+
+.ht-nav-dot-active:hover {
+  background: #4a4ac4;
+  border-color: #4a4ac4;
+}
+
+/* =====================================================
+   RESPONSIVE — Mobile
+   ===================================================== */
+@media only screen and (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 14px 12px 10px;
+  }
+
+  .skill-card {
+    padding: 10px 12px;
+  }
+
+  .skill-card-title {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .skill-tag {
+    font-size: 11px;
+    padding: 1px 6px;
+  }
+
+  /* Timeline */
+  .ht-track {
+    padding: 6px calc(50vw - 150px) 16px;
+  }
+
+  .ht-station {
+    width: 300px;
+  }
+
+  .ht-card {
+    width: 270px;
+    padding: 14px 16px;
+  }
+
+  .ht-card-title {
+    font-size: 15px;
+  }
+
+  .ht-card-subtitle {
+    font-size: 13px;
+  }
+
+  .ht-bullets li {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .ht-dot {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ht-dot-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ht-connector {
+    height: 18px;
+  }
+
+  .ht-nav {
+    gap: 6px;
+    padding: 12px 0 4px;
+  }
+
+  .ht-nav-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .ht-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 10px 8px 8px;
+  }
+
+  .skill-card-title {
+    font-size: 11px;
+  }
+
+  .skill-tag {
+    font-size: 10px;
+  }
+
+  .ht-track {
+    padding: 6px calc(50vw - 140px) 14px;
+  }
+
+  .ht-station {
+    width: 280px;
+  }
+
+  .ht-card {
+    width: 252px;
+    padding: 12px 14px;
+  }
+
+  .ht-card-title {
+    font-size: 14px;
+  }
+
+  .ht-bullets li {
+    font-size: 12px;
+  }
+
+  .ht-scroll::-webkit-scrollbar {
+    height: 7px;
+  }
+}
+
