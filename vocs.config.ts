@@ -6,6 +6,7 @@ export default defineConfig({
   basePath: '/portfolio', 
   theme: { 
     // colorScheme: 'auto',
+    colorScheme: 'light',
     variables: { 
       color: { 
         white: { light: '#ffffff', dark: 'rgba(255 255 255 / 100%)' },
