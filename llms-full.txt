@@ -607,18 +607,10 @@ with the promise of improved treatments and even potential cures for a wide rang
 As the name dominant implies, the presence of a single pathogenic mutated allele is sufficient for
 the disease to appear, so some researchers are counting on crispr-cas9 technology to break the mutated allele.
 Only the wild-type allele remains, and the disease is thus cured.
-Although the effectiveness of this approach looks promising [\[1\]](/blog/cutonestrand#ref-1) [\[2\]](/blog/cutonestrand#ref-2) [\[3\]](/blog/cutonestrand#ref-3), a number of issues still need
-to be addressed, two of which we will try to address in this article :
+Although the effectiveness of this approach looks promising [\[1\]](/blog/cutonestrand#ref-1) [\[2\]](/blog/cutonestrand#ref-2) [\[3\]](/blog/cutonestrand#ref-3), a number of issues still need to be addressed, two of which we will try to address in this article :
 
-<p className="popacitydanger">
-  <div style={{ textAlign: 'center' }}>
-    <strong>
-      How can the design of these personalized medicine treatments can be effective and quick for each patient ? <br /><br />
-      How can we specifically target the mutated allele without breaking the functional allele or another part of
-      the genome ?
-    </strong>
-  </div>
-</p>
+**How can the design of these personalized medicine treatments can be effective and quick for each patient ?** <br />
+**How can we specifically target the mutated allele without breaking the functional allele or another part of the genome ?**
 
 ### Data analysis can be use to create a list of interesting genomic regions for gene therapy
 
