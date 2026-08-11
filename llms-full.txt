@@ -590,7 +590,9 @@ Although unpublished results from specific projects cannot be shared here, under
   - Tutorials on circRNA detection and analysis */}
 
 
-## How data analysis can help to fix genetic disorders
+## A reproducible pipeline for screening CRISPR-targetable genomic sites in autosomal dominant disorders, providing evidence to evaluate potential therapeutic candidates and inform subsequent medical decision-making.
+
+[https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531(24)00146-X](https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531\(24\)00146-X)
 
 ### Introduction
 

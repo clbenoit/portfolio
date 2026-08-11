@@ -16,12 +16,7 @@
 - [Circular RNAs and immune regulation in lung biology: a conceptual overview](/portfolio/blog/circRNAs): During my recent work in transcriptomics and bioinformatics,
 I have had the opportunity to engage with projects exploring the role of non-coding RNA in lung biology and immune regulation.\
 While I cannot share unpublished results due to confidentiality, I can provide an overview of the **biological concepts** that frame this type of research.
-- [How data analysis can help to fix genetic disorders](/portfolio/blog/cutonestrand): Gene therapy as seen a major breakthrough with the development of **CRISPR-Cas9** technology.
-This revolutionary tool allows scientists to precisely edit genes, offering new hope for
-treating genetic disorders and diseases. **With the potential to correct genetic mutations at
-the source, CRISPR-Cas9 opens up a world of possibilities for personalized medicine and targeted therapies.**
-The future of gene therapy looks brighter than ever,
-with the promise of improved treatments and even potential cures for a wide range of conditions.
+- [A reproducible pipeline for screening CRISPR-targetable genomic sites in autosomal dominant disorders, providing evidence to evaluate potential therapeutic candidates and inform subsequent medical decision-making.](/portfolio/blog/cutonestrand): [https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531(24)00146-X](https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531\(24\)00146-X)
 - [Experimental design in the context of next generation sequencing](/portfolio/blog/expdesign): Coming from a biotechnology background, I was sensitized to the problems of experimental design. I then spent a few years as a bioinformatician, leaving this task to my platform colleagues.
 - [Methodology](/portfolio/blog/expdesign): **Clearly define the question posed and the technology chosen to answer it.** <br />
 Many confounding factors will depend on the technology chosen. They will have a greater or lesser impact depending on the question asked.
