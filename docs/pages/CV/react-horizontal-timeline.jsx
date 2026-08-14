@@ -78,6 +78,7 @@ function getGradientColor(pct) {
 
 
 const experiences = [
+  {/*
   {
     date: 'January 2026',
     title: 'Co-founder & Technical Lead',
@@ -90,6 +91,7 @@ const experiences = [
       </ul>
     ),
   },
+  */}
   {
     date: 'Aug 2022 - Present',
     title: 'Clinical Bioinformatics Engineer',
