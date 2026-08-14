@@ -78,19 +78,18 @@ function getGradientColor(pct) {
 
 
 const experiences = [
-  /*{
+  {
     date: 'January 2026',
-    title: 'Co-founder & Technical Lead',
-    subtitle: 'CNC Web3 Developers Collective',
+    title: 'Coordinator',
+    subtitle: 'CNC Collective',
     type: 'work',
     content: (
       <ul className="ht-bullets">
-        <li>Leading a collaborative developer collective focused on Web3 technologies, smart contracts development, DeFi protocols, and decentralized application architecture.</li>
+        <li>Collaborative developer collective focused on distributed technologies, software engineering, and scalable application architecture.</li>
         <li>Cross-functional team coordination and technical leadership.</li>
       </ul>
     ),
   },
-  }*/
   {
     date: 'Aug 2022 - Present',
     title: 'Clinical Bioinformatics Engineer',
