@@ -1,45 +1,69 @@
 import React from 'react';
 
 const skillsData = [
-  { 
+  {
+    name: 'Blockchain & Web3',
+      items: [
+        'Infrastructures for distributed systems & consensus operations',
+        'Smart contract interaction',
+        'RPC & API-based services',
+        'Security & key management',
+        'Monitoring & uptime management'      ]
+  },
+  {
+    name: 'Libraries &  Frameworks',
+    items: ['Shiny', 'Flask', 'Django', 'FastAPI','Pandas', 'NumPy', 'SciPy',
+           'Matplotlib', 'Plotly', 'Spark', 'Pytorch', 'OpenCV', 'scikit-learn' ,
+          'LangGraph', 'LangChain', 'LlamaIndex', 'Haystack','OpenAI API']
+  },
+  {
     name: 'Languages',
     items: ['Python', 'R', 'TypeScript', 'Bash/Shell', 'SQL']
   },
-  { 
-    name: 'Data Engineering',
-    items: ['ETL', 'Nextflow', 'Snakemake', 'Airflow', 'n8n']
-  },
-  { 
+  {
     name: 'Computing Systems',
-    items: ['Docker / Singularity / K8s', 'HPC (Slurm, Torque, PBS, OAR)', 'Cloud Computing', 'Linux / Windows']
+      items: [
+        'Docker / Singularity / Kubernetes',
+        'High Performance Computing (Slurm, Torque, PBS, OAR)',
+        'Cloud Computing AWS / GCP / Azure',
+        'Linux / Windows']
   },
   {
-    name: 'LLM & AI Engineering',
-    items: ['LLMDev: feature eng. - fine tuning', 'LLMOps: deployment, n8n workflows', 'Monitoring (Grafana / Prometheus)']
+    name: 'Data Engineering',
+    items: [
+      'ETL',
+      'Nextflow',
+      'Snakemake',
+      'Airflow',
+      'n8n',
+      'Elasticsearch',
+      'Data (Data Wrangling & Delivery)',
+      'ISO 27001', 'AI/ML Operations',
+      'Retrieval augmented generation'
+    ]
   },
-  { 
+  {
     name: 'Applied Data Science',
-    items: ['Descriptive & Inferential stats', 'Machine Learning', 'Graph Theory']
-  },
-  { 
-    name: 'Project Management',
-    items: ['Git', 'CI / CD', 'DevOps', 'Agile', 'Scrum', 'Kanban']
-  },
-  { 
-    name: 'Life Science',
-    items: ['Molecular Biology', 'Genomics', 'Phylogenetics']
-  },
-  { 
-    name: 'Web',
-    items: ['Shiny', 'Flask', 'Django', 'FastAPI']
+    items: [
+      'Statistics (Quantitative & Qualitative, Descriptive & Inferential, Hypothesis Testing, Experiment Design)',
+      'Algorithm Benchmarking',
+      'Data (Visualization, Interpretation & Storytelling)',
+      'Machine Learning', 'AI/ML Development'
+    ]
   },
   {
-    name: 'Data & Viz Libraries',
-    items: ['Pandas', 'NumPy', 'SciPy', 'Matplotlib', 'Plotly', 'ggplot2', 'Spark']
+    name: 'Project Management',
+    items: ['Good Software Engineering Practices ',
+          'Git', 'CI / CD', 'DevOps', 'Agile', 'Scrum']
   },
-  { 
-    name: 'Blockchain & Web3',
-    items: ['Infrastructure ops', 'Distributed systems', 'Smart contracts', 'On-chain analytics', 'DeFi ecosystem']
+  {
+    name: 'Life Science',
+    items: [
+      'Next-Generation Sequencing',
+      'Molecular Biology', 'Omics', 'Phylogenetics',
+      'Infectious Diseases', 'Oncology',  'Rare Diseases' , 'ISO 15189',
+      'Clinical trials and datasets formats',
+    ]
   }
 ];
 
