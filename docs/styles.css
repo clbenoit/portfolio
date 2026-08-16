@@ -251,54 +251,157 @@
   overflow-x: hidden;
 }
 
-/* --- Skills Grid --- */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding: 20px 24px 16px;
-  max-width: 1200px;
-  margin: 0 auto;
+/* --- Skills Carousel (one category at a time, endless rightward loop) --- */
+.skills-carousel {
+  position: relative;
+  width: 100%;
+  padding: 22px 0 8px;
   box-sizing: border-box;
 }
 
-.skill-card {
+/* Viewport holds the track + left/right arrows so arrows overlay the edges. */
+.skills-viewport {
+  position: relative;
+  width: 100%;
+}
+
+/* --- Carousel arrows (also used, restyled, by the timeline) --- */
+.skills-arrow,
+.ht-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--vocs-color_border);
+  background: var(--vocs-color_background2);
+  color: var(--vocs-color_heading);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.skills-arrow:hover,
+.ht-arrow:hover:not(:disabled) {
+  background: var(--vocs-color_background3);
+  border-color: var(--vocs-color_textAccent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+
+.skills-arrow:active,
+.ht-arrow:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.skills-arrow-left { left: 6px; }
+.skills-arrow-right { right: 6px; }
+
+/* Horizontal scroll track: each slide takes the full track width and
+   snaps to center. Native scrollbar hidden — navigation via dots + gestures. */
+.skills-track {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;            /* Firefox */
+  -ms-overflow-style: none;         /* IE/Edge */
+}
+
+.skills-track::-webkit-scrollbar {
+  display: none;                    /* Chrome/Safari */
+}
+
+/* Each slide is exactly one viewport-ish width so a single category shows. */
+.skills-slide-wrap {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  box-sizing: border-box;
+  padding: 0 24px;
+}
+
+.skills-slide {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+}
+
+.skills-card {
+  flex: 1;
   background: var(--vocs-color_background2);
   border: 1px solid var(--vocs-color_border);
-  border-radius: 8px;
-  padding: 14px 16px;
+  border-radius: 12px;
+  padding: 24px 28px;
+  min-height: 150px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.skill-card:hover {
+.skills-card:hover {
   border-color: var(--vocs-color_border2);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
-.skill-card-title {
+.skills-card-title {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--vocs-color_heading);
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
 }
 
-.skill-card-items {
+.skills-card-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 8px;
 }
 
 .skill-tag {
   display: inline-block;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--vocs-color_text2);
   background: var(--vocs-color_background3);
-  padding: 2px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* --- Carousel navigation dots --- */
+.skills-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 0 4px;
+  flex-wrap: wrap;
+}
+
+.skills-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: var(--vocs-color_border2);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.skills-dot:hover {
+  background: var(--vocs-color_textAccent);
+}
+
+.skills-dot-active {
+  background: var(--vocs-color_textAccent);
+  transform: scale(1.35);
 }
 
 /* --- Horizontal Timeline --- */
@@ -306,6 +409,22 @@
   position: relative;
   width: 100%;
   padding-bottom: 60px;
+}
+
+/* Timeline arrows: anchored to the wrapper, vertically near the card area. */
+.ht-arrow {
+  top: 45%;
+  width: 44px;
+  height: 44px;
+}
+
+.ht-arrow-left { left: 12px; }
+.ht-arrow-right { right: 12px; }
+
+.ht-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
 }
 
 /* --- Scroll container with visible scrollbar --- */
@@ -533,25 +652,51 @@
    RESPONSIVE — Mobile
    ===================================================== */
 @media only screen and (max-width: 768px) {
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    padding: 14px 12px 10px;
+  .skills-carousel {
+    padding: 14px 0 6px;
   }
 
-  .skill-card {
-    padding: 10px 12px;
+  .skills-slide-wrap {
+    padding: 0 14px;
   }
 
-  .skill-card-title {
-    font-size: 12px;
-    margin-bottom: 6px;
+  .skills-card {
+    padding: 16px 18px;
+    min-height: 130px;
+    border-radius: 10px;
+  }
+
+  .skills-card-title {
+    font-size: 14px;
+    margin-bottom: 12px;
   }
 
   .skill-tag {
-    font-size: 11px;
-    padding: 1px 6px;
+    font-size: 12px;
+    padding: 3px 9px;
   }
+
+  .skills-dots {
+    padding: 12px 0 4px;
+    gap: 7px;
+  }
+
+  .skills-arrow,
+  .ht-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .skills-arrow svg,
+  .ht-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .skills-arrow-left { left: 2px; }
+  .skills-arrow-right { right: 2px; }
+  .ht-arrow-left { left: 6px; }
+  .ht-arrow-right { right: 6px; }
 
   /* Timeline */
   .ht-track {
@@ -610,18 +755,23 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    padding: 10px 8px 8px;
+  .skills-slide-wrap {
+    padding: 0 10px;
   }
 
-  .skill-card-title {
-    font-size: 11px;
+  .skills-card {
+    padding: 14px 15px;
+    min-height: 120px;
+  }
+
+  .skills-card-title {
+    font-size: 13px;
+    margin-bottom: 10px;
   }
 
   .skill-tag {
-    font-size: 10px;
+    font-size: 11px;
+    padding: 2px 8px;
   }
 
   .ht-track {

@@ -1,5 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
+// ---- Chevron icons for the timeline navigation arrows ----
+const ChevronLeft = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+);
+const ChevronRight = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
 // ---- Inline SVG icons (24×24 viewBox, 2px stroke) ----
 
 const BriefcaseIcon = () => (
@@ -208,6 +220,10 @@ const HorizontalTimeline = () => {
   const scrollRef = useRef(null);
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  // Mirror of activeIndex for use inside the global keydown listener
+  // (avoids a stale closure without re-binding the listener on every change).
+  const activeIndexRef = useRef(0);
+  useEffect(() => { activeIndexRef.current = activeIndex; }, [activeIndex]);
 
   // Force the ruler line to span the full track width (measured from DOM)
   useEffect(() => {
@@ -228,34 +244,63 @@ const HorizontalTimeline = () => {
   const scrollToIndex = useCallback((index) => {
     const container = scrollRef.current;
     if (!container) return;
-    const station = container.querySelector(`[data-index="${index}"]`);
+    const clamped = Math.max(0, Math.min(index, experiences.length - 1));
+    const station = container.querySelector(`[data-index="${clamped}"]`);
     if (station) {
-      station.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      setActiveIndex(index);
+      // Scroll the container horizontally only (avoid scrollIntoView which can
+      // also move the page vertically).
+      const left = station.offsetLeft - (container.clientWidth - station.clientWidth) / 2;
+      container.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+      setActiveIndex(clamped);
     }
   }, []);
 
-  // Center viewport vertically between skills & timeline, then center timeline on Clinical
+  // Timeline arrows: step to the previous / next experience station.
+  const goPrevStation = useCallback(() => {
+    scrollToIndex(activeIndex - 1);
+  }, [scrollToIndex, activeIndex]);
+  const goNextStation = useCallback(() => {
+    scrollToIndex(activeIndex + 1);
+  }, [scrollToIndex, activeIndex]);
+
+  // Center the timeline horizontally on the "Clinical" card at mount.
+  // NOTE: we deliberately do NOT force any vertical page scroll here — the
+  // page stays at its natural top position so the user isn't teleported.
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
     setTimeout(() => {
-      // Horizontal: center on Clinical
+      // Horizontal only: center the timeline's scroll container on Clinical.
+      // scrollTo on the container avoids moving the whole page vertically
+      // (scrollIntoView could nudge the window).
       const target = container.querySelector('[data-index="1"]');
       if (target) {
-        target.scrollIntoView({ inline: 'center', block: 'nearest' });
+        const left = target.offsetLeft - (container.clientWidth - target.clientWidth) / 2;
+        container.scrollTo({ left: Math.max(0, left), behavior: 'instant' });
         setActiveIndex(1);
-      }
-      // Vertical: center viewport on the boundary between skills and timeline
-      const wrapper = container.closest('.ht-wrapper');
-      if (wrapper) {
-        const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
-        const vh = window.innerHeight;
-        const offset = wrapperTop - (vh / 2) + 60; // 60px = push slightly down so skills are visible
-        window.scrollTo({ top: Math.max(0, offset), behavior: 'instant' });
       }
     }, 200);
   }, []);
+
+  // Global keyboard arrows (← / →) always drive the TIMELINE only.
+  // We preventDefault so the skills carousel (or the page) never reacts to them.
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      // Ignore when typing in a field.
+      const tag = (e.target && e.target.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToIndex(activeIndexRef.current - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToIndex(activeIndexRef.current + 1);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [scrollToIndex]);
 
   // IntersectionObserver to track which card is in view
   useEffect(() => {
@@ -284,6 +329,24 @@ const HorizontalTimeline = () => {
 
   return (
     <div className="ht-wrapper">
+      <button
+        type="button"
+        className="ht-arrow ht-arrow-left"
+        onClick={goPrevStation}
+        disabled={activeIndex <= 0}
+        aria-label="Previous experience"
+      >
+        <ChevronLeft />
+      </button>
+      <button
+        type="button"
+        className="ht-arrow ht-arrow-right"
+        onClick={goNextStation}
+        disabled={activeIndex >= experiences.length - 1}
+        aria-label="Next experience"
+      >
+        <ChevronRight />
+      </button>
       <div className="ht-scroll" ref={scrollRef}>
         <div className="ht-track" ref={trackRef}>
           {/* Ruler line — inside track so dots can sit above it via z-index */}
