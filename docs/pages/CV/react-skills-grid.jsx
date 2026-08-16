@@ -74,8 +74,8 @@ const skillsData = [
   }
 ];
 
-const AUTOPLAY_INTERVAL = 3000;   // 3s per category
-const RESUME_DELAY = 9000;        // resume autoplay 9s after user interaction
+const AUTOPLAY_INTERVAL = 2500;   // 3s per category
+const RESUME_DELAY = 7000;        // resume autoplay 9s after user interaction
 
 // We render two consecutive copies of the categories so that the carousel
 // can keep sliding to the right forever. When we reach the start of the
