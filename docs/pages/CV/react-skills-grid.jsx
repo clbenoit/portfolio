@@ -23,14 +23,18 @@ const skillsData = [
   //       'Monitoring & uptime management'      ]
   // },
   {
-    name: 'Libraries &  Frameworks',
-    items: ['Shiny', 'Flask', 'Django', 'FastAPI','Pandas', 'NumPy', 'SciPy',
-           'Matplotlib', 'Plotly', 'Spark', 'Pytorch', 'OpenCV', 'scikit-learn' ,
-          'LangGraph', 'LangChain', 'LlamaIndex', 'Haystack','OpenAI API']
-  },
-  {
-    name: 'Languages',
-    items: ['Python', 'R', 'TypeScript', 'Bash/Shell', 'SQL']
+    name: 'AI & Machine Learning',
+    items: [
+      'Machine Learning', 'Deep Learning',
+      'AI/ML Development', 'MLOps / AI Ops',
+      'GenAI & LLMs',
+      'Retrieval Augmented Generation (RAG)',
+      'RAGAS',
+      'Agentic AI Systems',
+      'Algorithm Benchmarking',
+      'PyTorch', 'scikit-learn', 'OpenCV',
+      'LangChain', 'LangGraph', 'LlamaIndex', 'Haystack', 'OpenAI API'
+    ]
   },
   {
     name: 'Computing Systems',
@@ -38,6 +42,7 @@ const skillsData = [
         'Docker / Singularity / Kubernetes',
         'High Performance Computing (Slurm, Torque, PBS, OAR)',
         'Cloud Computing AWS / GCP / Azure',
+        'Terraform',
         'Linux / Windows']
   },
   {
@@ -45,23 +50,32 @@ const skillsData = [
     items: [
       'ETL', 'Nextflow', 'Snakemake', 'Airflow', 'n8n', 'Elasticsearch',
       'Data (Data Wrangling & Delivery)',
-      'ISO 27001', 'AI/ML Operations',
-      'Retrieval augmented generation'
+      'ISO 27001'
     ]
   },
   {
     name: 'Applied Data Science',
     items: [
       'Statistics (Quantitative & Qualitative, Descriptive & Inferential, Hypothesis Testing, Experiment Design)',
-      'Algorithm Benchmarking',
       'Data (Visualization, Interpretation & Storytelling)',
-      'Machine Learning', 'AI/ML Development'
+      'Exploratory Data Analysis',
+      'A/B Testing',
+      'Data Mining'
     ]
   },
   {
     name: 'Project Management',
     items: ['Good Software Engineering Practices ',
           'Git', 'CI / CD', 'DevOps', 'Agile', 'Scrum']
+  },
+    {
+    name: 'Libraries & Frameworks',
+    items: ['Shiny', 'Flask', 'Django', 'FastAPI', 'Pandas', 'NumPy', 'SciPy',
+           'Matplotlib', 'Plotly', 'Spark']
+  },
+  {
+    name: 'Languages',
+    items: ['Python', 'R', 'TypeScript', 'Bash/Shell', 'SQL']
   },
   {
     name: 'Life Science',
