@@ -1,4 +1,10 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import MobileTimeline from './timeline-mobile';
+import HorizontalTimeline from './timeline-gantt';
+
+/* ================================================================
+   SHARED DATA: icons, colours, experiences, date helpers, axes
+   ================================================================ */
 
 // ---- Inline SVG icons (24×24 viewBox, 2px stroke) ----
 
@@ -34,35 +40,30 @@ const GlobeIcon = () => (
   </svg>
 );
 
-const iconMap = {
+export const iconMap = {
   work:      <BriefcaseIcon />,
   education: <GradCapIcon />,
   internship: <FlaskIcon />,
   traveling: <GlobeIcon />,
 };
 
-// Colour ramp per `type`, used for the Gantt bars. A single hue per category
-// keeps the chart scannable; the gradient is reserved for the time axis.
-const typeColor = {
+// Colour ramp per `type`.
+export const typeColor = {
   work:      '#6366f1', // indigo
   education: '#0ea5e9', // sky
   internship:'#14b8a6', // teal
-  //traveling: '#f59e0b', // amber
-  //traveling: '#d97706',
-  //traveling: 'rgb(167, 104, 140)'
-  traveling: '#be5b84'
-  //traveling: '#b85474'
+  //traveling: '#cac7ed',
+  traveling: '#d491d2',
 };
 
-/**
- * Convert a "Month YYYY" or "YYYY" human label to a decimal year, e.g.
- * "Aug 2022" -> 2022.625, "2013" -> 2013.0. Used only to compute bar
- * positions/widths; the human label is always displayed verbatim alongside.
- */
+// ---- Date helpers ----
+
 const MONTHS = {
   jan:0, feb:1, mar:2, apr:3, may:4, jun:5,
   jul:6, aug:7, sep:8, oct:9, nov:10, dec:11,
 };
+
+/** "Month YYYY" or "YYYY" → decimal year (e.g. "Aug 2022" → 2022.625). */
 function yearToFloat(label) {
   if (!label) return null;
   const m = String(label).trim().match(/^([a-z]{3,9})\s+(\d{4})$/i);
@@ -75,11 +76,17 @@ function yearToFloat(label) {
   return y ? Number(y[1]) : null;
 }
 
-/**
- * Parse a "Start - End" range label into { start, end, present, point, startMonth, endMonth }.
- * `end` of `present` is pinned to `NOW` by the caller.
- * `startMonth`/`endMonth` are integer 0-11 for duration calculation.
- */
+function monthFromLabel(label) {
+  if (!label) return null;
+  const m = String(label).trim().match(/^([a-z]{3,9})\s+\d{4}$/i);
+  if (m) {
+    const ml = m[1].toLowerCase().slice(0, 3);
+    return MONTHS[ml] ?? null;
+  }
+  return null;
+}
+
+/** Parse "Start - End" into { start, end, present, point, startMonth, endMonth }. */
 function parseRange(label, nowYearFloat) {
   const s = String(label || '');
   const present = /present|now$/i.test(s);
@@ -95,30 +102,16 @@ function parseRange(label, nowYearFloat) {
     start: start ?? end ?? nowYearFloat,
     end: end ?? start ?? nowYearFloat,
     present,
-    point: !endLabel && !present, // e.g. "2013" only
+    point: !endLabel && !present,
     startLabel: startLabel || '',
     endLabel: endLabel || '',
-    startMonth: startMonth,   // null when only year is known
-    endMonth: endMonth,       // null when only year is known
+    startMonth,
+    endMonth,
   };
 }
 
-/** Extract integer month index (0=Jan) from a "Month YYYY" label, or null for YYYY-only. */
-function monthFromLabel(label) {
-  if (!label) return null;
-  const m = String(label).trim().match(/^([a-z]{3,9})\s+\d{4}$/i);
-  if (m) {
-    const ml = m[1].toLowerCase().slice(0, 3);
-    return MONTHS[ml] ?? null;
-  }
-  return null;
-}
+// ---- Experience data (source of truth) ----
 
-/**
- * The source of truth. Each entry is one *role/experience* = one lane.
- * Dates are kept as human labels, plus numeric bounds for chart layout.
- * `displayRange` is the exact string shown to the reader.
- */
 const experiences = [
   {
     id: 'coordinator',
@@ -287,25 +280,19 @@ const experiences = [
   },
 ];
 
-/**
- * "NOW" as a decimal year, pinned to a fixed rollout date so the chart is
- * deterministic server-side (SSG) and in tests. Bump when the CV is edited.
- */
+/** Deterministic "now" for SSG builds. Bump when the CV is edited. */
 const ROLLOUT_YEAR = 2027 + 1/12; // February 2027
 
 /** Format a duration in years/months (inclusive: the end month is counted). */
-function formatDuration(exp) {
+export function formatDuration(exp) {
   const { startMonth, endMonth, start, end, present, point } = exp;
   if (point) return '';
-  // Months unknown (year-only labels) → default to Jan(0)-Dec(11)
   const sm = startMonth ?? 0;
   const em = endMonth ?? (present ? Math.round((end - Math.floor(end)) * 12) : 11);
   const sy = Math.floor(start);
   const ey = Math.floor(end);
-  // Inclusive: May (4) → Jul (6) = 3 months
   let totalMonths = (ey - sy) * 12 + (em - sm) + 1;
   if (present) {
-    // Never exceed the real difference from ROLLOUT_YEAR
     const nowMonths = Math.round((end - start) * 12);
     totalMonths = Math.max(1, Math.min(totalMonths, nowMonths));
   }
@@ -317,264 +304,33 @@ function formatDuration(exp) {
   return `${y} an${y > 1 ? 's' : ''} ${m} mois`;
 }
 
-// Pre-compute numeric bounds + duration for every entry (once, module-level).
-const enriched = experiences.map((exp) => {
+// Pre-compute numeric bounds for every entry (module-level, once).
+export const enriched = experiences.map((exp) => {
   const { start, end, present, point, startLabel, endLabel, startMonth, endMonth } =
     parseRange(`${exp.startLabel} - ${exp.endLabel}`, ROLLOUT_YEAR);
   return { ...exp, start, end, present, point, startLabel, endLabel, startMonth, endMonth };
 });
 
-// Global axis bounds. We extend AXIS_MAX by ~10 months so "Present" bars
-// don't hit the right edge — the gap visually says "and continuing".
+// Global axis bounds.
 const allStarts = enriched.map((e) => e.start);
 const allEnds = enriched.map((e) => e.end);
-const AXIS_MIN = Math.min(...allStarts, ROLLOUT_YEAR);
+export const AXIS_MIN = Math.min(...allStarts, ROLLOUT_YEAR);
 const RAW_AXIS_MAX = Math.max(...allEnds, ROLLOUT_YEAR);
-const AXIS_MAX = RAW_AXIS_MAX + 0.8; // ~10 months of breathing room on the right
-const AXIS_PAD = (AXIS_MAX - AXIS_MIN) * 0.02 || 0.1;
+export const AXIS_MAX = RAW_AXIS_MAX + 0.8; // ~10 months breathing room
+export const AXIS_PAD = (AXIS_MAX - AXIS_MIN) * 0.02 || 0.1;
 
 /** Lane order: newest end date → oldest end date, then stable by id. */
-const sortedForLanes = [...enriched].sort(
+export const sortedForLanes = [...enriched].sort(
   (a, b) => b.end - a.end || b.start - a.start || a.id.localeCompare(b.id)
 );
 
-const HorizontalTimeline = () => {
-  const ganttRef = useRef(null);
-  const [activeId, setActiveId] = useState(
-    enriched.find((e) => e.isCurrent)?.id || enriched[0].id
-  );
-
-  // On mount, scroll so the junction between the SkillsGrid (above) and the
-  // Gantt chart (below) sits near the top third of the viewport — the user
-  // sees the bottom of the skills and the start of the timeline together.
-  useEffect(() => {
-    const el = ganttRef.current;
-    if (!el) return;
-    // getBoundingClientRect().top + window.scrollY gives the absolute page
-    // position; subtract a third of the viewport height to reveal the
-    // SkillsGrid just above the Gantt.
-    const ganttTop = el.getBoundingClientRect().top + window.scrollY;
-    const target = ganttTop - window.innerHeight / 3;
-    window.scrollTo({ top: Math.max(0, target), behavior: 'instant' });
-  }, []);
-
-  // Convert a fractional year to a left-% within the axis (with padding).
-  const toPct = useCallback((year) => {
-    const span = AXIS_MAX - AXIS_MIN || 1;
-    return ((year - AXIS_MIN) / span) * 100;
-  }, []);
-
-  const leftPct = useCallback((year) => {
-    const span = AXIS_MAX - AXIS_MIN || 1;
-    const raw = ((year - AXIS_MIN) / span) * 100;
-    const padPct = (AXIS_PAD / span) * 100;
-    return raw + padPct;
-  }, []);
-
-  const widthPct = useCallback((start, end) => {
-    const span = AXIS_MAX - AXIS_MIN || 1;
-    return ((end - start) / span) * 100;
-  }, []);
-
-  return (
-    <div className="ht-wrapper">
-      <div className="ht-scroll">
-        {/* Time axis ruler generated from the year bounds */}
-        <div className="ht-gantt" ref={ganttRef}>
-          {/* Year gridlines (light), one per year between AXIS_MIN and AXIS_MAX */}
-          <div className="ht-grid" aria-hidden="true">
-            {(() => {
-              const ticks = [];
-              const firstYear = Math.floor(AXIS_MIN) + 1;
-              const lastYear = Math.floor(AXIS_MAX);
-              for (let y = firstYear; y <= lastYear; y++) {
-                ticks.push(
-                  <span
-                    key={y}
-                    className="ht-grid-line"
-                    style={{ left: `${toPct(y)}%` }}
-                  >
-                    <em className="ht-grid-label">{y}</em>
-                  </span>
-                );
-              }
-              return ticks;
-            })()}
-          </div>
-
-          {/* One lane per experience (oldest → newest) */}
-          {sortedForLanes.map((exp) => {
-            const isActive = exp.id === activeId;
-            const left = leftPct(exp.start);
-            const width = widthPct(exp.start, exp.end);
-            const duration = formatDuration(exp);
-            return (
-              <div
-                key={exp.id}
-                className={`ht-lane ${isActive ? 'ht-lane-active' : ''}`}
-                data-id={exp.id}
-                onClick={() => setActiveId(exp.id)}
-              >
-                <div className="ht-lane-label">
-                  {isActive && <span className="ht-lane-focus-marker" />}
-                  <span className="ht-lane-icon" style={{ background: typeColor[exp.type] }}>
-                    {iconMap[exp.type]}
-                  </span>
-                  <span className="ht-lane-title">{exp.title}</span>
-                  <span className="ht-lane-date">{exp.displayRange}</span>
-                  {duration && <span className="ht-lane-duration">{duration}</span>}
-                </div>
-
-                {/* The Gantt bar — width proportional to real duration */}
-                <div className="ht-lane-row">
-                  <div
-                    className={`ht-bar ${exp.point ? 'ht-bar-point' : ''} ${exp.present ? 'ht-bar-present' : ''}`}
-                    style={{
-                      left: `${left}%`,
-                      width: exp.point ? '10px' : `${width}%`,
-                      background: typeColor[exp.type],
-                    }}
-                  />
-                </div>
-
-                {/* Details card, shown/highlighted when this lane is active */}
-                {(exp.content || exp.subtitle) && (
-                  <div className="ht-lane-detail">
-                    <h4 className="ht-card-subtitle">{exp.subtitle}</h4>
-                    {exp.content}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Re-add chevrons for mobile timeline arrows
-const ChevronLeft = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="15 18 9 12 15 6" />
-  </svg>
-);
-const ChevronRight = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
+/* ================================================================
+   TOP-LEVEL SWITCH: mobile vs desktop
+   ================================================================ */
 
 const BREAKPOINT = 768;
-const HM_STATION_WIDTH = 300; // px — must match .hm-station width in CSS
-const HM_LINE_TOP = 30;      // px — top offset of the gradient line (dot center)
 
-/**
- * Mobile timeline — simple horizontal slider with one card per experience,
- * snap scrolling, and left/right arrows. No Gantt lanes.
- * Chronological order: oldest (left) → newest (right).
- */
-const MobileTimeline = () => {
-  // Chronological: oldest → newest (left to right)
-  const chronological = useMemo(
-    () => [...enriched].sort((a, b) => a.start - b.start || a.id.localeCompare(b.id)),
-    []
-  );
-  const total = chronological.length;
-  const scrollRef = useRef(null);
-  const defaultIdx = chronological.findIndex((e) => e.isCurrent);
-  const [current, setCurrent] = useState(Math.max(0, defaultIdx));
-
-  const scrollTo = useCallback((index) => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const clamped = Math.max(0, Math.min(index, total - 1));
-    const station = container.querySelector(`[data-idx="${clamped}"]`);
-    if (station) {
-      const left = station.offsetLeft - (container.clientWidth - station.clientWidth) / 2;
-      container.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-      setCurrent(clamped);
-    }
-  }, [total]);
-
-  const goPrev = useCallback(() => scrollTo(current - 1), [scrollTo, current]);
-  const goNext = useCallback(() => scrollTo(current + 1), [scrollTo, current]);
-  const isFirst = current <= 0;
-  const isLast = current >= total - 1;
-
-  // Mount: center on the current role
-  useEffect(() => {
-    if (defaultIdx >= 0) {
-      setTimeout(() => scrollTo(defaultIdx), 200);
-    }
-  }, [scrollTo, defaultIdx]);
-
-  return (
-    <div className="hm-wrapper">
-      <button
-        type="button"
-        className="hm-arrow hm-arrow-left"
-        onClick={goPrev}
-        disabled={isFirst}
-        aria-label="Previous experience"
-      >
-        <ChevronLeft />
-      </button>
-      <button
-        type="button"
-        className="hm-arrow hm-arrow-right"
-        onClick={goNext}
-        disabled={isLast}
-        aria-label="Next experience"
-      >
-        <ChevronRight />
-      </button>
-      <div className="hm-scroll" ref={scrollRef}>
-        {/* Gradient line with explicit pixel width = total stations × station width.
-            background-attachment: local makes it scroll with the content. */}
-        <div
-          className="hm-line"
-          style={{ width: total * HM_STATION_WIDTH, top: HM_LINE_TOP }}
-        />
-        <div className="hm-track">
-          {chronological.map((exp, i) => {
-            const duration = formatDuration(exp);
-            return (
-              <div key={exp.id} className="hm-station" data-idx={i}>
-                <div className="hm-dot" style={{ background: typeColor[exp.type] }}>
-                  <span className="hm-dot-icon">{iconMap[exp.type]}</span>
-                </div>
-                <div className="hm-card">
-                  <div className="hm-card-date">{exp.displayRange}</div>
-                  {duration && <span className="hm-card-duration">{duration}</span>}
-                  <h3 className="hm-card-title">{exp.title}</h3>
-                  <h4 className="hm-card-subtitle">{exp.subtitle}</h4>
-                  {exp.content}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="hm-nav">
-        {chronological.map((_, i) => (
-          <button
-            key={i}
-            className={`hm-nav-dot ${i === current ? 'hm-nav-dot-active' : ''}`}
-            onClick={() => scrollTo(i)}
-            aria-label={`Go to experience ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-/**
- * Top-level component: renders the Gantt chart on desktop (≥ 768px) and
- * the simple horizontal slider on mobile.
- */
-const Timeline = () => {
+export default function Timeline() {
   const [isDesktop, setIsDesktop] = useState(null);
 
   useEffect(() => {
@@ -584,8 +340,6 @@ const Timeline = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  if (isDesktop === null) return null; // SSR / first paint — render nothing
+  if (isDesktop === null) return null;
   return isDesktop ? <HorizontalTimeline /> : <MobileTimeline />;
-};
-
-export default Timeline;
+}
