@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 
 // ---- Inline SVG icons (24×24 viewBox, 2px stroke) ----
 
@@ -47,7 +47,11 @@ const typeColor = {
   work:      '#6366f1', // indigo
   education: '#0ea5e9', // sky
   internship:'#14b8a6', // teal
-  traveling: '#f59e0b', // amber
+  //traveling: '#f59e0b', // amber
+  //traveling: '#d97706',
+  //traveling: 'rgb(167, 104, 140)'
+  traveling: '#be5b84'
+  //traveling: '#b85474'
 };
 
 /**
@@ -210,9 +214,9 @@ const experiences = [
   },
   {
     id: 'dual-master',
-    displayRange: '2017 - 2018',
-    startLabel: '2017',
-    endLabel: '2018',
+    displayRange: 'September 2017 - August 2018',
+    startLabel: 'September 2017',
+    endLabel: 'August 2018',
     title: "Dual Master's in Omics Data Analysis",
     subtitle: 'Aix-Marseille University',
     type: 'education',
@@ -242,9 +246,9 @@ const experiences = [
   },
   {
     id: 'polytech',
-    displayRange: '2015 - 2018',
-    startLabel: '2015',
-    endLabel: '2018',
+    displayRange: 'September 2015 - August 2018',
+    startLabel: 'September 2015',
+    endLabel: 'August 2018',
     title: "Master's in Biotechnology Engineering",
     subtitle: 'Polytech Marseille',
     type: 'education',
@@ -320,11 +324,13 @@ const enriched = experiences.map((exp) => {
   return { ...exp, start, end, present, point, startLabel, endLabel, startMonth, endMonth };
 });
 
-// Global axis bounds, padded so the first/last bars don't touch the edges.
+// Global axis bounds. We extend AXIS_MAX by ~10 months so "Present" bars
+// don't hit the right edge — the gap visually says "and continuing".
 const allStarts = enriched.map((e) => e.start);
 const allEnds = enriched.map((e) => e.end);
 const AXIS_MIN = Math.min(...allStarts, ROLLOUT_YEAR);
-const AXIS_MAX = Math.max(...allEnds, ROLLOUT_YEAR);
+const RAW_AXIS_MAX = Math.max(...allEnds, ROLLOUT_YEAR);
+const AXIS_MAX = RAW_AXIS_MAX + 0.8; // ~10 months of breathing room on the right
 const AXIS_PAD = (AXIS_MAX - AXIS_MIN) * 0.02 || 0.1;
 
 /** Lane order: newest end date → oldest end date, then stable by id. */
@@ -447,4 +453,132 @@ const HorizontalTimeline = () => {
   );
 };
 
-export default HorizontalTimeline;
+// Re-add chevrons for mobile timeline arrows
+const ChevronLeft = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+);
+const ChevronRight = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
+const BREAKPOINT = 768;
+
+/**
+ * Mobile timeline — simple horizontal slider with one card per experience,
+ * snap scrolling, and left/right arrows. No Gantt lanes.
+ * Chronological order: oldest (left) → newest (right).
+ */
+const MobileTimeline = () => {
+  // Chronological: oldest → newest (left to right)
+  const chronological = useMemo(
+    () => [...enriched].sort((a, b) => a.start - b.start || a.id.localeCompare(b.id)),
+    []
+  );
+  const total = chronological.length;
+  const scrollRef = useRef(null);
+  const defaultIdx = chronological.findIndex((e) => e.isCurrent);
+  const [current, setCurrent] = useState(Math.max(0, defaultIdx));
+
+  const scrollTo = useCallback((index) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const clamped = Math.max(0, Math.min(index, total - 1));
+    const station = container.querySelector(`[data-idx="${clamped}"]`);
+    if (station) {
+      const left = station.offsetLeft - (container.clientWidth - station.clientWidth) / 2;
+      container.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+      setCurrent(clamped);
+    }
+  }, [total]);
+
+  const goPrev = useCallback(() => scrollTo(current - 1), [scrollTo, current]);
+  const goNext = useCallback(() => scrollTo(current + 1), [scrollTo, current]);
+  const isFirst = current <= 0;
+  const isLast = current >= total - 1;
+
+  // Mount: center on the current role
+  useEffect(() => {
+    if (defaultIdx >= 0) {
+      setTimeout(() => scrollTo(defaultIdx), 200);
+    }
+  }, [scrollTo, defaultIdx]);
+
+  return (
+    <div className="hm-wrapper">
+      <button
+        type="button"
+        className="hm-arrow hm-arrow-left"
+        onClick={goPrev}
+        disabled={isFirst}
+        aria-label="Previous experience"
+      >
+        <ChevronLeft />
+      </button>
+      <button
+        type="button"
+        className="hm-arrow hm-arrow-right"
+        onClick={goNext}
+        disabled={isLast}
+        aria-label="Next experience"
+      >
+        <ChevronRight />
+      </button>
+      <div className="hm-scroll" ref={scrollRef}>
+        <div className="hm-line" />
+        <div className="hm-track">
+          {chronological.map((exp, i) => {
+            const duration = formatDuration(exp);
+            return (
+              <div key={exp.id} className="hm-station" data-idx={i}>
+                <div className="hm-dot" style={{ background: typeColor[exp.type] }}>
+                  <span className="hm-dot-icon">{iconMap[exp.type]}</span>
+                </div>
+                <div className="hm-card">
+                  <div className="hm-card-date">{exp.displayRange}</div>
+                  {duration && <span className="hm-card-duration">{duration}</span>}
+                  <h3 className="hm-card-title">{exp.title}</h3>
+                  <h4 className="hm-card-subtitle">{exp.subtitle}</h4>
+                  {exp.content}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="hm-nav">
+        {chronological.map((_, i) => (
+          <button
+            key={i}
+            className={`hm-nav-dot ${i === current ? 'hm-nav-dot-active' : ''}`}
+            onClick={() => scrollTo(i)}
+            aria-label={`Go to experience ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Top-level component: renders the Gantt chart on desktop (≥ 768px) and
+ * the simple horizontal slider on mobile.
+ */
+const Timeline = () => {
+  const [isDesktop, setIsDesktop] = useState(null);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= BREAKPOINT);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  if (isDesktop === null) return null; // SSR / first paint — render nothing
+  return isDesktop ? <HorizontalTimeline /> : <MobileTimeline />;
+};
+
+export default Timeline;
