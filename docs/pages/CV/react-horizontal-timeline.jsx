@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 // ---- Inline SVG icons (24×24 viewBox, 2px stroke) ----
 
@@ -324,9 +324,24 @@ const sortedForLanes = [...enriched].sort(
 );
 
 const HorizontalTimeline = () => {
+  const ganttRef = useRef(null);
   const [activeId, setActiveId] = useState(
     enriched.find((e) => e.isCurrent)?.id || enriched[0].id
   );
+
+  // On mount, scroll so the junction between the SkillsGrid (above) and the
+  // Gantt chart (below) sits near the top third of the viewport — the user
+  // sees the bottom of the skills and the start of the timeline together.
+  useEffect(() => {
+    const el = ganttRef.current;
+    if (!el) return;
+    // getBoundingClientRect().top + window.scrollY gives the absolute page
+    // position; subtract a third of the viewport height to reveal the
+    // SkillsGrid just above the Gantt.
+    const ganttTop = el.getBoundingClientRect().top + window.scrollY;
+    const target = ganttTop - window.innerHeight / 3;
+    window.scrollTo({ top: Math.max(0, target), behavior: 'instant' });
+  }, []);
 
   // Convert a fractional year to a left-% within the axis (with padding).
   const toPct = useCallback((year) => {
@@ -350,7 +365,7 @@ const HorizontalTimeline = () => {
     <div className="ht-wrapper">
       <div className="ht-scroll">
         {/* Time axis ruler generated from the year bounds */}
-        <div className="ht-gantt">
+        <div className="ht-gantt" ref={ganttRef}>
           {/* Year gridlines (light), one per year between AXIS_MIN and AXIS_MAX */}
           <div className="ht-grid" aria-hidden="true">
             {(() => {

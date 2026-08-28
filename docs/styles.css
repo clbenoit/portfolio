@@ -225,16 +225,23 @@
 .ht-wrapper {
   position: relative;
   width: 100%;
+  padding-bottom: 60px;
 }
 
-/* --- Scroll container with visible scrollbar --- */
+/* --- Scroll container (horizontal only — vertical is page-level) --- */
 .ht-scroll {
   overflow-x: auto;
-  overflow-y: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   padding: 0;
   position: relative;
-  max-height: 85vh;
+  /* Shadow hint when content overflows on the right */
+  background:
+    linear-gradient(to right, transparent 0%, transparent calc(100% - 6px), rgba(0,0,0,0.08) calc(100% - 6px), rgba(0,0,0,0.14) 100%) no-repeat,
+    linear-gradient(to right, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.08) 6px, transparent 6px, transparent 100%) no-repeat;
+  background-position: right center, left center;
+  background-size: 40px 100%, 40px 100%;
+  background-attachment: scroll, scroll;
   /* Visible scrollbar */
   scrollbar-width: auto;
   scrollbar-color: #888898 #e8e8ee;
