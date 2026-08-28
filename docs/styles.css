@@ -1,102 +1,3 @@
-.flag-sizeL {
-  padding: 0em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.flag-sizeM {
-  padding: 0.2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.flag-sizeS {
-  padding: 0.3em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.vertical-timeline-element {
-  width: 100%;
-}
-
-.vertical-timeline-element-title {
-  font-size: 18px;
-  color: inherit;
-}
-.vertical-timeline-element-subtitle {
-  font-size: 16px;
-  color: inherit;
-}
-.vertical-timeline-element-content {
-  font-size: 15px;
-  color: inherit;
-}
-
-.vertical-timeline-element-content p,
-.vertical-timeline-element-content h3,
-.vertical-timeline-element-content h4 {
-  color: inherit !important;
-}
-
-.vertical-timeline-element-content > * {
-  color: inherit !important;
-}
-
-/* Force text color in timeline - light mode */
-/* :root:not(.dark) .vertical-timeline-element-content,
-:root:not(.dark) .vertical-timeline-element-content *,
-:root:not(.dark) .vertical-timeline-element-content p,
-:root:not(.dark) .vertical-timeline-element-content h3,
-:root:not(.dark) .vertical-timeline-element-content h4 {
-  color: #000 !important;
-}
-
-/* Force text color in timeline - dark mode */
-/* :root.dark .vertical-timeline-element-content,
-:root.dark .vertical-timeline-element-content *,
-:root.dark .vertical-timeline-element-content p,
-:root.dark .vertical-timeline-element-content h3,
-:root.dark .vertical-timeline-element-content h4 {
-  color: #fff !important;
-} */ */
-
-.hrefverticalelement {
-  /* color: black; */
-  color: inherit;
-}
-.hrefverticalelement::after {
-  content: "\2197"; /* Unicode arrow character code for top right arrow */
-  position: relative;
-  top: -5px;
-  right: 0px;
-  font-size: 16px;
-}
-
-/* Scoped link styling for Clinical Bioinformatics Engineer card */
-.clinical-card-link {
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 2px;
-  transition: color 0.18s ease, text-decoration-color 0.18s ease;
-}
-
-.clinical-card-link:hover,
-.clinical-card-link:focus-visible {
-  color: #0f4f8a;
-}
-
-:root.dark .clinical-card-link:hover,
-:root.dark .clinical-card-link:focus-visible,
-[data-theme="dark"] .clinical-card-link:hover,
-[data-theme="dark"] .clinical-card-link:focus-visible {
-  color: #d9ecff;
-}
-
 .popacity {
  background: #33475B;
  padding: 10px;
@@ -106,87 +7,6 @@
   background: #b81d1d;
   padding: 10px;
  }
-
-.two-column-layout {
-  display: flex; /* Use flexbox for a simple two-column layout */
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.main-content {
-  flex:1; /* Take up remaining space in the container */
-  /*margin-right: 50px;*/
-  margin-right: 50px;
-  min-width: 350px;
-}
-
-@media only screen and (max-width: 600px) {
-  .main-content {
-    flex:1; /* Take up remaining space in the container */
-    margin-right: 0px;
-  }
- /* .category-box {
-    max-width: 60%; /* Adjust this value as needed */ 
-  /*}
- */
-}
-
-.sidebarcv {
-  margin-right: 0px;
-  width: '100%'; /* Adjust the width of the sidebar as needed */ 
-  flex-basis: 300px; /* Set the width of the sidebar */
-  /* Add any other styling for the sidebar */
-}
-
-.category-box {
-  width: 100%;
-  color: white;
-  background: rgb(44, 62, 80);
-  padding: 10px;
-  margin: 5px;
-  margin-bottom: 25px;
-  cursor: pointer;
-  display: inline-block;
-  borderRadius: 5px;
-  box-sizing: border-box;
-}
-
-/* Timeline line - light mode */
-.vertical-timeline::before {
-  /* background: #d4d4d8 !important; */
-  /* background: #cbd5e1 !important; slate-300 */
-  background: #a5b0bc !important; /* slate-300 */
-}
-
-/* Timeline line - dark mode */
-:root.dark .vertical-timeline::before,
-[data-theme="dark"] .vertical-timeline::before {
-  background: #6f6d78 !important;
-}
-
-/* Timeline connector - light mode */
-.vertical-timeline-element::before {
-  /* background: #ffffff !important; */
-  background: #f8fafc !important; /* quasi blanc */
-}
-
-/* Timeline connector - dark mode */
-:root.dark .vertical-timeline-element::before,
-[data-theme="dark"] .vertical-timeline-element::before {
-  background: #2b292d !important;
-}
-
-/* Timeline element icon - light mode (border only) */
-.vertical-timeline-element-icon {
-  /* box-shadow: 0 0 0 4px #838284 !important; */
-  box-shadow: 0 0 0 4px #475569 !important; /* slate-600 */
-}
-
-/* Timeline element icon - dark mode (border only) */
-:root.dark .vertical-timeline-element-icon,
-[data-theme="dark"] .vertical-timeline-element-icon {
-  box-shadow: 0 0 0 4px #f6f6f7 !important;
-}
 
 /* Styles pour les boutons de la HomePage (mobile uniquement) */
 @media only screen and (max-width: 600px) {
@@ -265,9 +85,8 @@
   width: 100%;
 }
 
-/* --- Carousel arrows (also used, restyled, by the timeline) --- */
-.skills-arrow,
-.ht-arrow {
+/* --- Carousel arrows --- */
+.skills-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -286,15 +105,13 @@
   transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
-.skills-arrow:hover,
-.ht-arrow:hover:not(:disabled) {
+.skills-arrow:hover {
   background: var(--vocs-color_background3);
   border-color: var(--vocs-color_textAccent);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 }
 
-.skills-arrow:active,
-.ht-arrow:active:not(:disabled) {
+.skills-arrow:active {
   transform: translateY(-50%) scale(0.94);
 }
 
@@ -408,33 +225,16 @@
 .ht-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 60px;
-}
-
-/* Timeline arrows: anchored to the wrapper, vertically near the card area. */
-.ht-arrow {
-  top: 45%;
-  width: 44px;
-  height: 44px;
-}
-
-.ht-arrow-left { left: 12px; }
-.ht-arrow-right { right: 12px; }
-
-.ht-arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-  box-shadow: none;
 }
 
 /* --- Scroll container with visible scrollbar --- */
 .ht-scroll {
   overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: 0;
   position: relative;
+  max-height: 85vh;
   /* Visible scrollbar */
   scrollbar-width: auto;
   scrollbar-color: #888898 #e8e8ee;
@@ -460,119 +260,202 @@
   background: #6e6e7e;
 }
 
-/* --- Track (flex container) --- */
-.ht-track {
-  display: flex;
-  flex-direction: row;
+/* --- Gantt chart container --- */
+.ht-gantt {
+  position: relative;
+  padding: 40px 20px 20px 20px;
+  min-width: 100%;
+}
+
+/* --- Year grid (light vertical lines + labels) --- */
+.ht-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ht-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px dashed var(--vocs-color_border2);
+  opacity: 0.45;
+}
+
+.ht-grid-label {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vocs-color_text2);
+  white-space: nowrap;
+}
+
+/* --- Lane = one role row --- */
+.ht-lane {
   position: relative;
   z-index: 1;
-  padding: 6px calc(50vw - 190px) 20px;
-}
-
-/* --- Timeline ruler line (width set by JS, below dots) --- */
-.ht-line {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(to right, 
-    #94a3b8 0%, 
-    #64748b 20%, 
-    #0ea5e9 40%, 
-    #3b82f6 60%, 
-    #6366f1 80%, 
-    #7c3aed 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* --- Station (snap point) --- */
-.ht-station {
-  flex: 0 0 auto;
-  width: 380px;
-  scroll-snap-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--vocs-color_border);
+  cursor: pointer;
+  transition: background 0.2s ease, padding 0.2s ease;
 }
 
-/* --- Dot (sits on the line, above it) --- */
-.ht-dot {
-  width: 44px;
-  height: 44px;
+.ht-lane:hover {
+  background: color-mix(in srgb, var(--vocs-color_background2) 95%, var(--vocs-color_textAccent) 5%);
+}
+
+.ht-lane:first-child { border-top: none; }
+
+.ht-lane-active {
+  background: color-mix(in srgb, var(--vocs-color_background2) 90%, var(--vocs-color_textAccent) 10%);
+  border-radius: 8px;
+  margin: 2px -8px 2px -8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* --- Lane header: icon, title, date range, duration --- */
+.ht-lane-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+
+.ht-lane-focus-marker {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 3;
-  box-shadow: 0 0 0 5px var(--vocs-color_background);
-  border: 2px solid;
+  background: #5b5bd6;
   flex-shrink: 0;
-  margin-top: 4px;
+  animation: ht-focus-pulse 1.8s ease-in-out infinite;
 }
 
-.ht-dot-icon {
-  width: 26px;
-  height: 26px;
+@keyframes ht-focus-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+.ht-lane-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
   color: #1a1a1a;
 }
 
-.ht-dot-icon svg {
-  width: 100%;
-  height: 100%;
+.ht-lane-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
-/* --- Connector (dot → card) --- */
-.ht-connector {
-  width: 2px;
-  height: 22px;
-  background: #b8b8c8;
-  flex-shrink: 0;
+.ht-lane-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vocs-color_heading);
+  line-height: 1.3;
+  flex: 1;
+  min-width: 180px;
 }
 
-/* --- Cards --- */
-.ht-card {
-  width: 340px;
-  background: var(--vocs-color_background2);
-  border: 1px solid var(--vocs-color_border);
-  border-radius: 10px;
-  padding: 18px 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  z-index: 2;
-  cursor: default;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  flex-shrink: 0;
-}
-
-.ht-card:hover {
-  border-color: var(--vocs-color_border2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.ht-card-date {
-  display: inline-block;
+.ht-lane-date {
   font-size: 12px;
   font-weight: 600;
   background: #5b5bd6;
   color: #fff;
   padding: 3px 10px;
   border-radius: 12px;
-  margin-bottom: 8px;
+  white-space: nowrap;
 }
 
-.ht-card-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--vocs-color_heading);
-  margin: 0 0 4px 0;
-  line-height: 1.3;
+.ht-lane-duration {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--vocs-color_text2);
+  background: var(--vocs-color_background);
+  border: 1px solid var(--vocs-color_border);
+  border-radius: 8px;
+  padding: 2px 7px;
+  white-space: nowrap;
 }
 
+/* --- Lane row with the Gantt bar --- */
+.ht-lane-row {
+  position: relative;
+  height: 24px;
+  margin: 0 4px;
+  z-index: 0;
+}
+
+.ht-bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 4px;
+  opacity: 0.82;
+  transition: opacity 0.2s ease, height 0.2s ease;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ht-bar:hover { opacity: 1; }
+
+.ht-lane-active .ht-bar {
+  opacity: 1;
+  height: calc(100% + 2px);
+  top: -1px;
+}
+
+.ht-bar-point {
+  border-radius: 50%;
+  min-width: 10px;
+}
+
+.ht-bar-present {
+  animation: ht-present-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ht-present-pulse {
+  0%, 100% { opacity: 0.82; }
+  50% { opacity: 1; }
+}
+
+/* --- Lane detail card (always visible, subtly styled) --- */
+.ht-lane-detail {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: var(--vocs-color_background2);
+  border: 1px solid var(--vocs-color_border);
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  opacity: 0.88;
+  transition: opacity 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Reinforcement of focus effect on .ht-lane-active (we still show the detail) */
+.ht-lane-active .ht-lane-detail {
+  opacity: 1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--vocs-color_border2);
+}
+
+/* Shared card elements (reused inside .ht-lane-detail) */
 .ht-card-subtitle {
   font-size: 14px;
   font-weight: 500;
@@ -581,7 +464,7 @@
   line-height: 1.3;
 }
 
-/* --- Bullet list inside cards --- */
+/* --- Bullet list inside lanes --- */
 .ht-bullets {
   list-style-type: disc;
   list-style-position: outside;
@@ -610,42 +493,6 @@
 
 .ht-link:hover {
   color: var(--vocs-color_textAccentHover);
-}
-
-/* --- Navigation dots --- */
-.ht-nav {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 18px 0 8px;
-}
-
-.ht-nav-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid var(--vocs-color_border2);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.25s ease, transform 0.2s ease;
-  outline: none;
-}
-
-.ht-nav-dot:hover {
-  background: var(--vocs-color_border);
-  transform: scale(1.3);
-}
-
-.ht-nav-dot-active {
-  background: #5b5bd6;
-  border-color: #5b5bd6;
-  transform: scale(1.2);
-}
-
-.ht-nav-dot-active:hover {
-  background: #4a4ac4;
-  border-color: #4a4ac4;
 }
 
 /* =====================================================
@@ -681,39 +528,50 @@
     gap: 7px;
   }
 
-  .skills-arrow,
-  .ht-arrow {
+  .skills-arrow {
     width: 36px;
     height: 36px;
   }
 
-  .skills-arrow svg,
-  .ht-arrow svg {
+  .skills-arrow svg {
     width: 18px;
     height: 18px;
   }
 
   .skills-arrow-left { left: 2px; }
   .skills-arrow-right { right: 2px; }
-  .ht-arrow-left { left: 6px; }
-  .ht-arrow-right { right: 6px; }
 
-  /* Timeline */
-  .ht-track {
-    padding: 6px calc(50vw - 150px) 16px;
+  /* Timeline — Gantt */
+  .ht-gantt {
+    padding: 32px 12px 16px 12px;
   }
 
-  .ht-station {
-    width: 300px;
+  .ht-lane-label {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
-  .ht-card {
-    width: 270px;
-    padding: 14px 16px;
+  .ht-lane-title {
+    font-size: 13px;
+    min-width: unset;
   }
 
-  .ht-card-title {
-    font-size: 15px;
+  .ht-lane-date {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  .ht-lane-duration {
+    font-size: 10px;
+  }
+
+  .ht-lane-row {
+    height: 20px;
+  }
+
+  .ht-lane-detail {
+    padding: 12px 14px;
   }
 
   .ht-card-subtitle {
@@ -723,30 +581,6 @@
   .ht-bullets li {
     font-size: 12.5px;
     line-height: 1.45;
-  }
-
-  .ht-dot {
-    width: 38px;
-    height: 38px;
-  }
-
-  .ht-dot-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .ht-connector {
-    height: 18px;
-  }
-
-  .ht-nav {
-    gap: 6px;
-    padding: 12px 0 4px;
-  }
-
-  .ht-nav-dot {
-    width: 8px;
-    height: 8px;
   }
 
   .ht-scroll::-webkit-scrollbar {
@@ -774,21 +608,25 @@
     padding: 2px 8px;
   }
 
-  .ht-track {
-    padding: 6px calc(50vw - 140px) 14px;
+  .ht-gantt {
+    padding: 28px 8px 12px 8px;
   }
 
-  .ht-station {
-    width: 280px;
+  .ht-lane-date {
+    font-size: 10px;
   }
 
-  .ht-card {
-    width: 252px;
-    padding: 12px 14px;
+  .ht-lane-duration {
+    font-size: 10px;
+    padding: 1px 5px;
   }
 
-  .ht-card-title {
-    font-size: 14px;
+  .ht-lane-detail {
+    padding: 10px 12px;
+  }
+
+  .ht-card-subtitle {
+    font-size: 12px;
   }
 
   .ht-bullets li {

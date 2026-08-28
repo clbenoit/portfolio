@@ -1,16 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-
-// ---- Chevron icons for the timeline navigation arrows ----
-const ChevronLeft = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="15 18 9 12 15 6" />
-  </svg>
-);
-const ChevronRight = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
+import { useState, useCallback } from 'react';
 
 // ---- Inline SVG icons (24×24 viewBox, 2px stroke) ----
 
@@ -46,53 +34,93 @@ const GlobeIcon = () => (
   </svg>
 );
 
-const PencilIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-  </svg>
-);
-
 const iconMap = {
   work:      <BriefcaseIcon />,
   education: <GradCapIcon />,
   internship: <FlaskIcon />,
   traveling: <GlobeIcon />,
-  blog:      <PencilIcon />,
 };
 
-// Gradient stops matching the .ht-line CSS gradient. Chronological axis reads
-// left (oldest, muted gray) → right (newest, accent violet/blue).
-const gradientStops = [
-  { pos: 0,   rgb: [148, 163, 184] },  // #94a3b8 (oldest)
-  { pos: 20,  rgb: [100, 116, 139] },  // #64748b
-  { pos: 40,  rgb: [14, 165, 233]  },  // #0ea5e9
-  { pos: 60,  rgb: [59, 130, 246]  },  // #3b82f6
-  { pos: 80,  rgb: [99, 102, 241]  },  // #6366f1
-  { pos: 100, rgb: [124, 58, 237]  },  // #7c3aed (newest)
-];
+// Colour ramp per `type`, used for the Gantt bars. A single hue per category
+// keeps the chart scannable; the gradient is reserved for the time axis.
+const typeColor = {
+  work:      '#6366f1', // indigo
+  education: '#0ea5e9', // sky
+  internship:'#14b8a6', // teal
+  traveling: '#f59e0b', // amber
+};
 
-/** Interpolate the gradient colour at a given percentage (0-100) */
-function getGradientColor(pct) {
-  let lo = gradientStops[0], hi = gradientStops[gradientStops.length - 1];
-  for (let i = 0; i < gradientStops.length - 1; i++) {
-    if (pct >= gradientStops[i].pos && pct <= gradientStops[i + 1].pos) {
-      lo = gradientStops[i];
-      hi = gradientStops[i + 1];
-      break;
-    }
+/**
+ * Convert a "Month YYYY" or "YYYY" human label to a decimal year, e.g.
+ * "Aug 2022" -> 2022.625, "2013" -> 2013.0. Used only to compute bar
+ * positions/widths; the human label is always displayed verbatim alongside.
+ */
+const MONTHS = {
+  jan:0, feb:1, mar:2, apr:3, may:4, jun:5,
+  jul:6, aug:7, sep:8, oct:9, nov:10, dec:11,
+};
+function yearToFloat(label) {
+  if (!label) return null;
+  const m = String(label).trim().match(/^([a-z]{3,9})\s+(\d{4})$/i);
+  if (m) {
+    const ml = m[1].toLowerCase().slice(0, 3);
+    const yr = Number(m[2]);
+    return ml in MONTHS && !isNaN(yr) ? yr + MONTHS[ml] / 12 : yr;
   }
-  const range = hi.pos - lo.pos;
-  const t = range === 0 ? 0 : (pct - lo.pos) / range;
-  const r = Math.round(lo.rgb[0] + t * (hi.rgb[0] - lo.rgb[0]));
-  const g = Math.round(lo.rgb[1] + t * (hi.rgb[1] - lo.rgb[1]));
-  const b = Math.round(lo.rgb[2] + t * (hi.rgb[2] - lo.rgb[2]));
-  return `rgb(${r},${g},${b})`;
+  const y = String(label).trim().match(/^(\d{4})$/);
+  return y ? Number(y[1]) : null;
 }
 
+/**
+ * Parse a "Start - End" range label into { start, end, present, point, startMonth, endMonth }.
+ * `end` of `present` is pinned to `NOW` by the caller.
+ * `startMonth`/`endMonth` are integer 0-11 for duration calculation.
+ */
+function parseRange(label, nowYearFloat) {
+  const s = String(label || '');
+  const present = /present|now$/i.test(s);
+  const parts = s.split(/[-–—]+/).map((p) => p.trim()).filter(Boolean);
+  const startLabel = parts[0];
+  const endLabel = parts[1];
+  const start = yearToFloat(startLabel);
+  const startMonth = monthFromLabel(startLabel);
+  let end = endLabel ? yearToFloat(endLabel) : start;
+  let endMonth = endLabel ? monthFromLabel(endLabel) : startMonth;
+  if (present) { end = nowYearFloat; endMonth = Math.round((nowYearFloat - Math.floor(nowYearFloat)) * 12); }
+  return {
+    start: start ?? end ?? nowYearFloat,
+    end: end ?? start ?? nowYearFloat,
+    present,
+    point: !endLabel && !present, // e.g. "2013" only
+    startLabel: startLabel || '',
+    endLabel: endLabel || '',
+    startMonth: startMonth,   // null when only year is known
+    endMonth: endMonth,       // null when only year is known
+  };
+}
 
+/** Extract integer month index (0=Jan) from a "Month YYYY" label, or null for YYYY-only. */
+function monthFromLabel(label) {
+  if (!label) return null;
+  const m = String(label).trim().match(/^([a-z]{3,9})\s+\d{4}$/i);
+  if (m) {
+    const ml = m[1].toLowerCase().slice(0, 3);
+    return MONTHS[ml] ?? null;
+  }
+  return null;
+}
+
+/**
+ * The source of truth. Each entry is one *role/experience* = one lane.
+ * Dates are kept as human labels, plus numeric bounds for chart layout.
+ * `displayRange` is the exact string shown to the reader.
+ */
 const experiences = [
   {
-    date: 'January 2026 - Present',
+    id: 'coordinator',
+    displayRange: 'January 2026 - Present',
+    startLabel: 'January 2026',
+    endLabel: 'Present',
     title: 'Coordinator',
     subtitle: 'CNC Collective',
     type: 'work',
@@ -105,34 +133,44 @@ const experiences = [
     ),
   },
   {
-    date: 'Aug 2022 - Present',
+    id: 'chuga',
+    displayRange: 'August 2022 - Present',
+    startLabel: 'August 2022',
+    endLabel: 'Present',
     title: 'Clinical Bioinformatics Engineer',
     subtitle: <>University Hospital (<a href="https://www.chu-grenoble.fr/" target="_blank" rel="noopener noreferrer" className="ht-link">CHUGA</a>) Molecular Biology Platform - Bioinformatics & Data Platform</>,
     type: 'work',
+    isCurrent: true,
     content: (
       <ul className="ht-bullets">
         <li><b>Designed and operationalized clinical-grade bioinformatics workflows</b> — from sequencing QC to variant interpretation and reporting — within regulated hospital environments.</li>
         <li>Engineered a <a href="https://clbenoit.github.io/portfolio/blog/nanodiag" target="_blank" rel="noopener noreferrer" className="ht-link">deep-learning based molecular diagnostics pipeline</a> for rapid brain tumor classification using Oxford Nanopore sequencing, integrating, automated bioinformatics workflows, and sovereign on-premises infrastructure compliant with NF ISO 15189.</li>
-        <li><b>Supported multidisciplinary diagnostics</b> across virology, hematology, solid tumors, rare diseases, reproductive medicine, prenatal diagnostics, and neuro-oncology.</li>        
+        <li><b>Supported multidisciplinary diagnostics</b> across virology, hematology, solid tumors, rare diseases, reproductive medicine, prenatal diagnostics, and neuro-oncology.</li>
         <li>Delivered data analysis for <a href="https://doi.org/10.1016/j.omtn.2024.102259" target="_blank" rel="noopener noreferrer" className="ht-link">peer-reviewed publications</a>, <a href="https://github.com/clbenoit/CutOneStrand" target="_blank" rel="noopener noreferrer" className="ht-link">open-source software</a>, and a <a href="https://clbenoit.github.io/portfolio/blog/circRNAs" target="_blank" rel="noopener noreferrer" className="ht-link">doctoral dissertation</a>.</li>
       </ul>
     ),
   },
-    {
-        date: 'April 2022 - July 2022',
-        title: 'Career Break — Travel & Continuous Learning',
-        subtitle: 'Europe',
-        type: 'traveling',
-        content: (
-          <ul className="ht-bullets">
-            <li><b>Cross-cultural immersion</b> across 8+ European countries — adaptability, resourcefulness, and communication in diverse environments.</li>
-            <li><b>Self-directed intensive study</b> in Machine Learning & Deep Learning through online coursework and personal projects during travel.</li>
-            <li><b>Solo project management</b> — budget, logistics, and itinerary planning with real-time decision-making under uncertainty.</li>
-          </ul>
-        ),
-      },
   {
-    date: 'March 2019 - March 2022',
+    id: 'break',
+    displayRange: 'April 2022 - July 2022',
+    startLabel: 'April 2022',
+    endLabel: 'July 2022',
+    title: 'Career Break — Travel & Continuous Learning',
+    subtitle: 'Europe',
+    type: 'traveling',
+    content: (
+      <ul className="ht-bullets">
+        <li><b>Cross-cultural immersion</b> across 8+ European countries — adaptability, resourcefulness, and communication in diverse environments.</li>
+        <li><b>Self-directed intensive study</b> in Machine Learning & Deep Learning through online coursework and personal projects during travel.</li>
+        <li><b>Solo project management</b> — budget, logistics, and itinerary planning with real-time decision-making under uncertainty.</li>
+      </ul>
+    ),
+  },
+  {
+    id: 'curie',
+    displayRange: 'March 2019 - March 2022',
+    startLabel: 'March 2019',
+    endLabel: 'March 2022',
     title: 'Research Engineer',
     subtitle: 'Institut Curie, Bioinformatics Core Facility',
     type: 'work',
@@ -146,7 +184,10 @@ const experiences = [
     ),
   },
   {
-    date: 'Feb 2018 - March 2019',
+    id: 'firalis',
+    displayRange: 'Feb 2018 - March 2019',
+    startLabel: 'Feb 2018',
+    endLabel: 'March 2019',
     title: 'R&D Intern',
     subtitle: 'FIRALIS S.A.',
     type: 'internship',
@@ -159,8 +200,11 @@ const experiences = [
     ),
   },
   {
-    date: '2017 - 2018',
-    title: 'Dual Master\'s in Omics Data Analysis',
+    id: 'dual-master',
+    displayRange: '2017 - 2018',
+    startLabel: '2017',
+    endLabel: '2018',
+    title: "Dual Master's in Omics Data Analysis",
     subtitle: 'Aix-Marseille University',
     type: 'education',
     content: (
@@ -172,8 +216,11 @@ const experiences = [
       </ul>
     ),
   },
-    {
-    date: 'May 2017 - Jul 2017',
+  {
+    id: 'tgc',
+    displayRange: 'May 2017 - Jul 2017',
+    startLabel: 'May 2017',
+    endLabel: 'Jul 2017',
     title: 'Fundamental Research Intern',
     subtitle: 'TAGC / TGML U1090',
     type: 'internship',
@@ -185,8 +232,11 @@ const experiences = [
     ),
   },
   {
-    date: '2015 - 2018',
-    title: 'Master\'s in Biotechnology Engineering',
+    id: 'polytech',
+    displayRange: '2015 - 2018',
+    startLabel: '2015',
+    endLabel: '2018',
+    title: "Master's in Biotechnology Engineering",
     subtitle: 'Polytech Marseille',
     type: 'education',
     content: (
@@ -199,7 +249,10 @@ const experiences = [
     ),
   },
   {
-    date: '2013 - 2015',
+    id: 'prepa',
+    displayRange: '2013 - 2015',
+    startLabel: '2013',
+    endLabel: '2015',
     title: 'Preparatory Class — Engineering Schools',
     subtitle: 'Carnot High School, Dijon',
     type: 'education',
@@ -210,7 +263,10 @@ const experiences = [
     ),
   },
   {
-    date: '2013',
+    id: 'bac',
+    displayRange: '2013',
+    startLabel: '2013',
+    endLabel: '',
     title: 'Baccalaureate',
     subtitle: 'Mâcon',
     type: 'education',
@@ -219,196 +275,149 @@ const experiences = [
 ];
 
 /**
- * Chronological view of the experiences (oldest → newest) so the timeline
- * reads naturally from left (past) to right (present). The source array stays
- * authored newest-first for readability; we reverse it in place for display.
+ * "NOW" as a decimal year, pinned to a fixed rollout date so the chart is
+ * deterministic server-side (SSG) and in tests. Bump when the CV is edited.
  */
-const chronologicalExperiences = [...experiences].reverse();
+const ROLLOUT_YEAR = 2027 + 1/12; // February 2027
 
-/** Index of the currently held position (`isCurrent`), used as initial focus. */
-const currentIndex = Math.max(
-  0,
-  chronologicalExperiences.findIndex((exp) => exp.isCurrent === true)
+/** Format a duration in years/months (inclusive: the end month is counted). */
+function formatDuration(exp) {
+  const { startMonth, endMonth, start, end, present, point } = exp;
+  if (point) return '';
+  // Months unknown (year-only labels) → default to Jan(0)-Dec(11)
+  const sm = startMonth ?? 0;
+  const em = endMonth ?? (present ? Math.round((end - Math.floor(end)) * 12) : 11);
+  const sy = Math.floor(start);
+  const ey = Math.floor(end);
+  // Inclusive: May (4) → Jul (6) = 3 months
+  let totalMonths = (ey - sy) * 12 + (em - sm) + 1;
+  if (present) {
+    // Never exceed the real difference from ROLLOUT_YEAR
+    const nowMonths = Math.round((end - start) * 12);
+    totalMonths = Math.max(1, Math.min(totalMonths, nowMonths));
+  }
+  if (totalMonths < 1) return '';
+  const y = Math.floor(totalMonths / 12);
+  const m = totalMonths % 12;
+  if (y === 0) return `${m} mois`;
+  if (m === 0) return `${y} an${y > 1 ? 's' : ''}`;
+  return `${y} an${y > 1 ? 's' : ''} ${m} mois`;
+}
+
+// Pre-compute numeric bounds + duration for every entry (once, module-level).
+const enriched = experiences.map((exp) => {
+  const { start, end, present, point, startLabel, endLabel, startMonth, endMonth } =
+    parseRange(`${exp.startLabel} - ${exp.endLabel}`, ROLLOUT_YEAR);
+  return { ...exp, start, end, present, point, startLabel, endLabel, startMonth, endMonth };
+});
+
+// Global axis bounds, padded so the first/last bars don't touch the edges.
+const allStarts = enriched.map((e) => e.start);
+const allEnds = enriched.map((e) => e.end);
+const AXIS_MIN = Math.min(...allStarts, ROLLOUT_YEAR);
+const AXIS_MAX = Math.max(...allEnds, ROLLOUT_YEAR);
+const AXIS_PAD = (AXIS_MAX - AXIS_MIN) * 0.02 || 0.1;
+
+/** Lane order: newest end date → oldest end date, then stable by id. */
+const sortedForLanes = [...enriched].sort(
+  (a, b) => b.end - a.end || b.start - a.start || a.id.localeCompare(b.id)
 );
 
 const HorizontalTimeline = () => {
-  const scrollRef = useRef(null);
-  const trackRef = useRef(null);
-  const total = chronologicalExperiences.length;
-  const [activeIndex, setActiveIndex] = useState(currentIndex);
-  // Mirror of activeIndex for use inside the global keydown listener
-  // (avoids a stale closure without re-binding the listener on every change).
-  const activeIndexRef = useRef(currentIndex);
-  useEffect(() => { activeIndexRef.current = activeIndex; }, [activeIndex]);
+  const [activeId, setActiveId] = useState(
+    enriched.find((e) => e.isCurrent)?.id || enriched[0].id
+  );
 
-  // Force the ruler line to span the full track width (measured from DOM)
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const updateLine = () => {
-      const line = track.querySelector('.ht-line');
-      if (line) {
-        line.style.width = `${track.scrollWidth}px`;
-      }
-    };
-    updateLine();
-    // Re-sync on resize
-    window.addEventListener('resize', updateLine);
-    return () => window.removeEventListener('resize', updateLine);
+  // Convert a fractional year to a left-% within the axis (with padding).
+  const toPct = useCallback((year) => {
+    const span = AXIS_MAX - AXIS_MIN || 1;
+    return ((year - AXIS_MIN) / span) * 100;
   }, []);
 
-  const scrollToIndex = useCallback((index) => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const clamped = Math.max(0, Math.min(index, total - 1));
-    const station = container.querySelector(`[data-index="${clamped}"]`);
-    if (station) {
-      // Scroll the container horizontally only (avoid scrollIntoView which can
-      // also move the page vertically).
-      const left = station.offsetLeft - (container.clientWidth - station.clientWidth) / 2;
-      container.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-      setActiveIndex(clamped);
-    }
-  }, [total]);
-
-  // Timeline arrows: step to the previous / next experience station.
-  const goPrevStation = useCallback(() => {
-    scrollToIndex(activeIndex - 1);
-  }, [scrollToIndex, activeIndex]);
-  const goNextStation = useCallback(() => {
-    scrollToIndex(activeIndex + 1);
-  }, [scrollToIndex, activeIndex]);
-
-  // Disable the "prev/next" arrows at the ends of the chronological axis:
-  // index 0 is the oldest, total - 1 is the newest/current.
-  const isFirst = activeIndex <= 0;
-  const isLast = activeIndex >= total - 1;
-
-  // Center the timeline horizontally on the current position (`isCurrent`) at
-  // mount. NOTE: we deliberately do NOT force any vertical page scroll here —
-  // the page stays at its natural top position so the user isn't teleported.
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-    setTimeout(() => {
-      // Horizontal only: center the timeline's scroll container on the target.
-      // scrollTo on the container avoids moving the whole page vertically
-      // (scrollIntoView could nudge the window).
-      const target = container.querySelector(`[data-index="${currentIndex}"]`);
-      if (target) {
-        const left = target.offsetLeft - (container.clientWidth - target.clientWidth) / 2;
-        container.scrollTo({ left: Math.max(0, left), behavior: 'instant' });
-        setActiveIndex(currentIndex);
-      }
-    }, 200);
+  const leftPct = useCallback((year) => {
+    const span = AXIS_MAX - AXIS_MIN || 1;
+    const raw = ((year - AXIS_MIN) / span) * 100;
+    const padPct = (AXIS_PAD / span) * 100;
+    return raw + padPct;
   }, []);
 
-  // Global keyboard arrows (← / →) always drive the TIMELINE only.
-  // We preventDefault so the skills carousel (or the page) never reacts to them.
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      // Ignore when typing in a field.
-      const tag = (e.target && e.target.tagName) || '';
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
-
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        scrollToIndex(activeIndexRef.current - 1);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        scrollToIndex(activeIndexRef.current + 1);
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [scrollToIndex]);
-
-  // IntersectionObserver to track which card is in view
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            const index = Number(entry.target.getAttribute('data-index'));
-            if (!isNaN(index)) {
-              setActiveIndex(index);
-            }
-          }
-        });
-      },
-      { root: container, threshold: 0.5 }
-    );
-
-    const stations = container.querySelectorAll('.ht-station');
-    stations.forEach((s) => observer.observe(s));
-
-    return () => observer.disconnect();
+  const widthPct = useCallback((start, end) => {
+    const span = AXIS_MAX - AXIS_MIN || 1;
+    return ((end - start) / span) * 100;
   }, []);
 
   return (
     <div className="ht-wrapper">
-      <button
-        type="button"
-        className="ht-arrow ht-arrow-left"
-        onClick={goPrevStation}
-        disabled={isFirst}
-        aria-label="Previous experience"
-      >
-        <ChevronLeft />
-      </button>
-      <button
-        type="button"
-        className="ht-arrow ht-arrow-right"
-        onClick={goNextStation}
-        disabled={isLast}
-        aria-label="Next experience"
-      >
-        <ChevronRight />
-      </button>
-      <div className="ht-scroll" ref={scrollRef}>
-        <div className="ht-track" ref={trackRef}>
-          {/* Ruler line — inside track so dots can sit above it via z-index */}
-          <div className="ht-line" />
-          {chronologicalExperiences.map((exp, i) => {
-            const pct = (i / (total - 1)) * 100;
-            const dotColor = getGradientColor(pct);
+      <div className="ht-scroll">
+        {/* Time axis ruler generated from the year bounds */}
+        <div className="ht-gantt">
+          {/* Year gridlines (light), one per year between AXIS_MIN and AXIS_MAX */}
+          <div className="ht-grid" aria-hidden="true">
+            {(() => {
+              const ticks = [];
+              const firstYear = Math.floor(AXIS_MIN) + 1;
+              const lastYear = Math.floor(AXIS_MAX);
+              for (let y = firstYear; y <= lastYear; y++) {
+                ticks.push(
+                  <span
+                    key={y}
+                    className="ht-grid-line"
+                    style={{ left: `${toPct(y)}%` }}
+                  >
+                    <em className="ht-grid-label">{y}</em>
+                  </span>
+                );
+              }
+              return ticks;
+            })()}
+          </div>
+
+          {/* One lane per experience (oldest → newest) */}
+          {sortedForLanes.map((exp) => {
+            const isActive = exp.id === activeId;
+            const left = leftPct(exp.start);
+            const width = widthPct(exp.start, exp.end);
+            const duration = formatDuration(exp);
             return (
-              <div key={i} className="ht-station" data-index={i}>
-                {/* Dot on the line */}
-                <div
-                  className="ht-dot"
-                  style={{ background: dotColor, borderColor: dotColor }}
-                >
-                  <span className="ht-dot-icon">{iconMap[exp.type]}</span>
+              <div
+                key={exp.id}
+                className={`ht-lane ${isActive ? 'ht-lane-active' : ''}`}
+                data-id={exp.id}
+                onClick={() => setActiveId(exp.id)}
+              >
+                <div className="ht-lane-label">
+                  {isActive && <span className="ht-lane-focus-marker" />}
+                  <span className="ht-lane-icon" style={{ background: typeColor[exp.type] }}>
+                    {iconMap[exp.type]}
+                  </span>
+                  <span className="ht-lane-title">{exp.title}</span>
+                  <span className="ht-lane-date">{exp.displayRange}</span>
+                  {duration && <span className="ht-lane-duration">{duration}</span>}
                 </div>
-                {/* Connector from dot to card */}
-                <div className="ht-connector" />
-                {/* Experience card */}
-                <div className="ht-card">
-                  <div className="ht-card-date">{exp.date}</div>
-                  <h3 className="ht-card-title">{exp.title}</h3>
-                  <h4 className="ht-card-subtitle">{exp.subtitle}</h4>
-                  {exp.content}
+
+                {/* The Gantt bar — width proportional to real duration */}
+                <div className="ht-lane-row">
+                  <div
+                    className={`ht-bar ${exp.point ? 'ht-bar-point' : ''} ${exp.present ? 'ht-bar-present' : ''}`}
+                    style={{
+                      left: `${left}%`,
+                      width: exp.point ? '10px' : `${width}%`,
+                      background: typeColor[exp.type],
+                    }}
+                  />
                 </div>
+
+                {/* Details card, shown/highlighted when this lane is active */}
+                {(exp.content || exp.subtitle) && (
+                  <div className="ht-lane-detail">
+                    <h4 className="ht-card-subtitle">{exp.subtitle}</h4>
+                    {exp.content}
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
-      </div>
-
-      {/* Navigation dots */}
-      <div className="ht-nav">
-        {chronologicalExperiences.map((_, i) => (
-          <button
-            key={i}
-            className={`ht-nav-dot ${i === activeIndex ? 'ht-nav-dot-active' : ''}`}
-            onClick={() => scrollToIndex(i)}
-            aria-label={`Go to experience ${i + 1}`}
-          />
-        ))}
       </div>
     </div>
   );
