@@ -466,6 +466,8 @@ const ChevronRight = () => (
 );
 
 const BREAKPOINT = 768;
+const HM_STATION_WIDTH = 300; // px — must match .hm-station width in CSS
+const HM_LINE_TOP = 30;      // px — top offset of the gradient line (dot center)
 
 /**
  * Mobile timeline — simple horizontal slider with one card per experience,
@@ -528,7 +530,12 @@ const MobileTimeline = () => {
         <ChevronRight />
       </button>
       <div className="hm-scroll" ref={scrollRef}>
-        <div className="hm-line" />
+        {/* Gradient line with explicit pixel width = total stations × station width.
+            background-attachment: local makes it scroll with the content. */}
+        <div
+          className="hm-line"
+          style={{ width: total * HM_STATION_WIDTH, top: HM_LINE_TOP }}
+        />
         <div className="hm-track">
           {chronological.map((exp, i) => {
             const duration = formatDuration(exp);

@@ -701,17 +701,12 @@
 
   .hm-scroll::-webkit-scrollbar { display: none; }
 
-  .hm-track {
-    display: flex;
-    flex-direction: row;
-    padding: 6px calc(50vw - 150px) 16px;
-  }
-
+  /* Gradient timeline line — width is set inline via JS (total stations × 300px).
+     position: absolute inside .hm-scroll with overflow-x: auto means the line
+     scrolls with the content; the explicit pixel width ensures it covers all stations. */
   .hm-line {
     position: absolute;
-    top: 24px;
     left: 0;
-    right: 0;
     height: 4px;
     background: linear-gradient(to right,
       #94a3b8 0%,
@@ -722,6 +717,12 @@
       #7c3aed 100%);
     z-index: 0;
     pointer-events: none;
+  }
+
+  .hm-track {
+    display: flex;
+    flex-direction: row;
+    padding: 6px calc(50vw - 150px) 16px;
   }
 
   .hm-station {
