@@ -253,13 +253,13 @@
   scrollbar-width: none;
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
-/* CECI EST LA BARRE DE ANNES DU GANTT GRAPH */
+/* CECI EST LA BARRE DE ANNES DU GANTT */
 .ht-axis-bar--fixed {
   position: fixed;
-  top: 42px;
+  top: 52px;
   z-index: 10;
-  /* La zone de blur + fond semi-transparent déborde de 12px de chaque côté */
-  padding: 12px 0;
+  /* Padding en bas seulement : le blur déborde uniquement sous la barre */
+  padding: 0 0 12px 0;
   background: transparent;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -273,8 +273,7 @@
 /* Show the spacer when axis is fixed so the body doesn't jump up */
 .ht-wrapper--fixed .ht-axis-spacer {
   display: block;
-  /* Le spacer doit correspondre à la hauteur totale (36px contenu + 24px padding) */
-  height: 60px;
+  height: 48px;
 }
 .ht-axis-bar::-webkit-scrollbar {
   display: none;
@@ -282,7 +281,7 @@
 
 .ht-axis-bar-content {
   position: relative;
-  height: 36px;
+  height: 42px;
   padding: 0 20px;
   min-width: 100%;
 }
@@ -360,7 +359,7 @@
   top: 10px;
   left: 6px;
   font-style: normal;
-  font-size: 11px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--vocs-color_text2);
   white-space: nowrap;
