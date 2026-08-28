@@ -599,6 +599,67 @@
   }
 }
 
+/* =====================================================
+   RESPONSIVE — Desktop Large & Extra-Large
+   ===================================================== */
+@media only screen and (min-width: 1200px) {
+  /* Show TWO slides side by side */
+  .skills-slide-wrap {
+    flex: 0 0 50%;
+    padding: 0 16px;
+  }
+
+  .skills-slide {
+    max-width: 640px;
+  }
+
+  .skills-card {
+    padding: 28px 34px;
+    min-height: 170px;
+  }
+
+  .skills-card-title {
+    font-size: 17px;
+  }
+
+  .skill-tag {
+    font-size: 14px;
+    padding: 5px 14px;
+  }
+
+  .skills-arrow-left { left: 10px; }
+  .skills-arrow-right { right: 10px; }
+}
+
+@media only screen and (min-width: 1600px) {
+  /* Show THREE slides side by side on very large screens */
+  .skills-slide-wrap {
+    flex: 0 0 33.333%;
+    padding: 0 14px;
+  }
+
+  .skills-slide {
+    max-width: 560px;
+  }
+
+  .skills-card {
+    padding: 30px 36px;
+    min-height: 180px;
+  }
+
+  .skills-card-title {
+    font-size: 18px;
+  }
+
+  .skill-tag {
+    font-size: 15px;
+    padding: 6px 16px;
+  }
+
+  .skills-arrow-left { left: 14px; }
+  .skills-arrow-right { right: 14px; }
+}
+
 @media only screen and (max-width: 480px) {
   .skills-slide-wrap {
     padding: 0 10px;
