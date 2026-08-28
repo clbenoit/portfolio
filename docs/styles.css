@@ -476,12 +476,12 @@
   left: 0;
   height: 4px;
   background: linear-gradient(to right, 
-    #7c3aed 0%, 
-    #6366f1 20%, 
-    #3b82f6 40%, 
-    #0ea5e9 60%, 
-    #64748b 80%, 
-    #94a3b8 100%);
+    #94a3b8 0%, 
+    #64748b 20%, 
+    #0ea5e9 40%, 
+    #3b82f6 60%, 
+    #6366f1 80%, 
+    #7c3aed 100%);
   z-index: 1;
   pointer-events: none;
 }

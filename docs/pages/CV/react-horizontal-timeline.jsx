@@ -60,14 +60,15 @@ const iconMap = {
   blog:      <PencilIcon />,
 };
 
-// Gradient stops matching the .ht-line CSS gradient
+// Gradient stops matching the .ht-line CSS gradient. Chronological axis reads
+// left (oldest, muted gray) → right (newest, accent violet/blue).
 const gradientStops = [
-  { pos: 0,   rgb: [124, 58, 237]  },  // #7c3aed
-  { pos: 20,  rgb: [99, 102, 241]  },  // #6366f1
-  { pos: 40,  rgb: [59, 130, 246]  },  // #3b82f6
-  { pos: 60,  rgb: [14, 165, 233]  },  // #0ea5e9
-  { pos: 80,  rgb: [100, 116, 139] },  // #64748b
-  { pos: 100, rgb: [148, 163, 184] },  // #94a3b8
+  { pos: 0,   rgb: [148, 163, 184] },  // #94a3b8 (oldest)
+  { pos: 20,  rgb: [100, 116, 139] },  // #64748b
+  { pos: 40,  rgb: [14, 165, 233]  },  // #0ea5e9
+  { pos: 60,  rgb: [59, 130, 246]  },  // #3b82f6
+  { pos: 80,  rgb: [99, 102, 241]  },  // #6366f1
+  { pos: 100, rgb: [124, 58, 237]  },  // #7c3aed (newest)
 ];
 
 /** Interpolate the gradient colour at a given percentage (0-100) */
@@ -91,10 +92,11 @@ function getGradientColor(pct) {
 
 const experiences = [
   {
-    date: 'January 2026',
+    date: 'January 2026 - Present',
     title: 'Coordinator',
     subtitle: 'CNC Collective',
     type: 'work',
+    isCurrent: true,
     content: (
       <ul className="ht-bullets">
         <li>Collaborative developer collective focused on distributed technologies, software engineering, and scalable application architecture.</li>
@@ -216,13 +218,27 @@ const experiences = [
   },
 ];
 
+/**
+ * Chronological view of the experiences (oldest → newest) so the timeline
+ * reads naturally from left (past) to right (present). The source array stays
+ * authored newest-first for readability; we reverse it in place for display.
+ */
+const chronologicalExperiences = [...experiences].reverse();
+
+/** Index of the currently held position (`isCurrent`), used as initial focus. */
+const currentIndex = Math.max(
+  0,
+  chronologicalExperiences.findIndex((exp) => exp.isCurrent === true)
+);
+
 const HorizontalTimeline = () => {
   const scrollRef = useRef(null);
   const trackRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const total = chronologicalExperiences.length;
+  const [activeIndex, setActiveIndex] = useState(currentIndex);
   // Mirror of activeIndex for use inside the global keydown listener
   // (avoids a stale closure without re-binding the listener on every change).
-  const activeIndexRef = useRef(0);
+  const activeIndexRef = useRef(currentIndex);
   useEffect(() => { activeIndexRef.current = activeIndex; }, [activeIndex]);
 
   // Force the ruler line to span the full track width (measured from DOM)
@@ -244,7 +260,7 @@ const HorizontalTimeline = () => {
   const scrollToIndex = useCallback((index) => {
     const container = scrollRef.current;
     if (!container) return;
-    const clamped = Math.max(0, Math.min(index, experiences.length - 1));
+    const clamped = Math.max(0, Math.min(index, total - 1));
     const station = container.querySelector(`[data-index="${clamped}"]`);
     if (station) {
       // Scroll the container horizontally only (avoid scrollIntoView which can
@@ -253,7 +269,7 @@ const HorizontalTimeline = () => {
       container.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
       setActiveIndex(clamped);
     }
-  }, []);
+  }, [total]);
 
   // Timeline arrows: step to the previous / next experience station.
   const goPrevStation = useCallback(() => {
@@ -263,21 +279,26 @@ const HorizontalTimeline = () => {
     scrollToIndex(activeIndex + 1);
   }, [scrollToIndex, activeIndex]);
 
-  // Center the timeline horizontally on the "Clinical" card at mount.
-  // NOTE: we deliberately do NOT force any vertical page scroll here — the
-  // page stays at its natural top position so the user isn't teleported.
+  // Disable the "prev/next" arrows at the ends of the chronological axis:
+  // index 0 is the oldest, total - 1 is the newest/current.
+  const isFirst = activeIndex <= 0;
+  const isLast = activeIndex >= total - 1;
+
+  // Center the timeline horizontally on the current position (`isCurrent`) at
+  // mount. NOTE: we deliberately do NOT force any vertical page scroll here —
+  // the page stays at its natural top position so the user isn't teleported.
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
     setTimeout(() => {
-      // Horizontal only: center the timeline's scroll container on Clinical.
+      // Horizontal only: center the timeline's scroll container on the target.
       // scrollTo on the container avoids moving the whole page vertically
       // (scrollIntoView could nudge the window).
-      const target = container.querySelector('[data-index="1"]');
+      const target = container.querySelector(`[data-index="${currentIndex}"]`);
       if (target) {
         const left = target.offsetLeft - (container.clientWidth - target.clientWidth) / 2;
         container.scrollTo({ left: Math.max(0, left), behavior: 'instant' });
-        setActiveIndex(1);
+        setActiveIndex(currentIndex);
       }
     }, 200);
   }, []);
@@ -333,7 +354,7 @@ const HorizontalTimeline = () => {
         type="button"
         className="ht-arrow ht-arrow-left"
         onClick={goPrevStation}
-        disabled={activeIndex <= 0}
+        disabled={isFirst}
         aria-label="Previous experience"
       >
         <ChevronLeft />
@@ -342,7 +363,7 @@ const HorizontalTimeline = () => {
         type="button"
         className="ht-arrow ht-arrow-right"
         onClick={goNextStation}
-        disabled={activeIndex >= experiences.length - 1}
+        disabled={isLast}
         aria-label="Next experience"
       >
         <ChevronRight />
@@ -351,8 +372,8 @@ const HorizontalTimeline = () => {
         <div className="ht-track" ref={trackRef}>
           {/* Ruler line — inside track so dots can sit above it via z-index */}
           <div className="ht-line" />
-          {experiences.map((exp, i) => {
-            const pct = (i / (experiences.length - 1)) * 100;
+          {chronologicalExperiences.map((exp, i) => {
+            const pct = (i / (total - 1)) * 100;
             const dotColor = getGradientColor(pct);
             return (
               <div key={i} className="ht-station" data-index={i}>
@@ -380,7 +401,7 @@ const HorizontalTimeline = () => {
 
       {/* Navigation dots */}
       <div className="ht-nav">
-        {experiences.map((_, i) => (
+        {chronologicalExperiences.map((_, i) => (
           <button
             key={i}
             className={`ht-nav-dot ${i === activeIndex ? 'ht-nav-dot-active' : ''}`}
