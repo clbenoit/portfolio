@@ -120,6 +120,8 @@ const experiences = [
     endLabel: 'Present',
     title: 'Coordinator',
     subtitle: 'CNC Collective',
+    location: 'Grenoble',
+    displayOrder: 0,
     type: 'work',
     isCurrent: true,
     content: (
@@ -137,6 +139,8 @@ const experiences = [
     endLabel: 'Present',
     title: 'Clinical Bioinformatics Engineer',
     subtitle: <>University Hospital (<a href="https://www.chu-grenoble.fr/" target="_blank" rel="noopener noreferrer" className="ht-link">CHUGA</a>) Molecular Biology Platform - Bioinformatics & Data Platform</>,
+    location: 'Grenoble',
+    displayOrder: 1,
     type: 'work',
     isCurrent: true,
     content: (
@@ -159,7 +163,9 @@ const experiences = [
     startLabel: 'April 2022',
     endLabel: 'July 2022',
     title: 'Career Break — Travel & Continuous Learning',
-    subtitle: 'Europe',
+    subtitle: null,
+    location: 'Europe',
+    displayOrder: 2,
     type: 'traveling',
     content: (
       <ul className="ht-bullets">
@@ -176,6 +182,8 @@ const experiences = [
     endLabel: 'March 2022',
     title: 'Research Engineer',
     subtitle: 'Institut Curie, Bioinformatics Core Facility',
+    location: 'Paris',
+    displayOrder: 3,
     type: 'work',
     content: (
       <ul className="ht-bullets">
@@ -194,6 +202,8 @@ const experiences = [
     endLabel: 'March 2019',
     title: 'R&D Intern',
     subtitle: 'FIRALIS S.A.',
+    location: 'Huningue, Biovalley',
+    displayOrder: 4,
     type: 'internship',
     content: (
       <ul className="ht-bullets">
@@ -212,6 +222,8 @@ const experiences = [
     endLabel: 'August 2018',
     title: "Dual Master's in Omics Data Analysis",
     subtitle: 'Aix-Marseille University',
+    location: 'Marseille',
+    displayOrder: 5,
     type: 'education',
     content: (
       <ul className="ht-bullets">
@@ -229,6 +241,8 @@ const experiences = [
     endLabel: 'Jul 2017',
     title: 'Fundamental Research Intern',
     subtitle: 'TAGC / TGML U1090',
+    location: 'Marseille',
+    displayOrder: 6,
     type: 'internship',
     content: (
       <ul className="ht-bullets">
@@ -244,6 +258,8 @@ const experiences = [
     endLabel: 'August 2018',
     title: "Master's in Biotechnology Engineering",
     subtitle: 'Polytech Marseille',
+    location: 'Marseille',
+    displayOrder: 7,
     type: 'education',
     content: (
       <ul className="ht-bullets">
@@ -261,6 +277,8 @@ const experiences = [
     endLabel: '2015',
     title: 'Preparatory Class — Engineering Schools',
     subtitle: 'Carnot High School, Dijon',
+    location: 'Dijon',
+    displayOrder: 8,
     type: 'education',
     content: (
       <ul className="ht-bullets">
@@ -274,7 +292,9 @@ const experiences = [
     startLabel: '2013',
     endLabel: '',
     title: 'Baccalaureate',
-    subtitle: 'Mâcon',
+    subtitle: null,
+    location: 'Mâcon',
+    displayOrder: 9,
     type: 'education',
     content: null,
   },
@@ -319,9 +339,9 @@ const RAW_AXIS_MAX = Math.max(...allEnds, ROLLOUT_YEAR);
 export const AXIS_MAX = RAW_AXIS_MAX + 0.8; // ~10 months breathing room
 export const AXIS_PAD = (AXIS_MAX - AXIS_MIN) * 0.02 || 0.1;
 
-/** Lane order: newest end date → oldest end date, then stable by id. */
+/** Lane order: newest → oldest using displayOrder. */
 export const sortedForLanes = [...enriched].sort(
-  (a, b) => b.end - a.end || b.start - a.start || a.id.localeCompare(b.id)
+  (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)
 );
 
 /* ================================================================

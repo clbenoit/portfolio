@@ -446,7 +446,7 @@
 
 .ht-lane-date {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   background: #5b5bd6;
   color: #fff;
   padding: 3px 10px;
@@ -454,14 +454,23 @@
   white-space: nowrap;
 }
 
+.ht-lane-location {
+  font-size: 12px;
+  font-weight: 700;
+  background: #e3de3d;
+  color: #3b4206;
+  padding: 3px 10px;
+  border-radius: 25px;
+  white-space: nowrap;
+}
+
 .ht-lane-duration {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--vocs-color_text2);
-  background: var(--vocs-color_background);
-  border: 1px solid var(--vocs-color_border);
-  border-radius: 8px;
-  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #6b7280;
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 12px;
   white-space: nowrap;
 }
 
@@ -912,12 +921,27 @@
     margin-bottom: 6px;
   }
 
+  .hm-card-location {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    background: #e3de3d;
+    color: #3b4206;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 4px;
+    margin-bottom: 6px;
+  }
+
   .hm-card-duration {
     display: inline-block;
     font-size: 11px;
-    font-weight: 500;
-    color: var(--vocs-color_text2);
-    margin-left: 6px;
+    font-weight: 600;
+    background: #6b7280;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 4px;
     margin-bottom: 6px;
   }
 

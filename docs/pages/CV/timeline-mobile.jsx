@@ -91,16 +91,18 @@ export default function MobileTimeline() {
         <div className="hm-track">
           {chronological.map((exp, i) => {
             const duration = formatDuration(exp);
+            const laneColor = typeColor[exp.type];
             return (
               <div key={exp.id} className="hm-station" data-idx={i}>
-                <div className="hm-dot" style={{ background: typeColor[exp.type] }}>
+                <div className="hm-dot" style={{ background: laneColor }}>
                   <span className="hm-dot-icon">{iconMap[exp.type]}</span>
                 </div>
                 <div className="hm-card">
                   <div className="hm-card-date">{exp.displayRange}</div>
+                  {exp.location && <span className="hm-card-location">{exp.location}</span>}
                   {duration && <span className="hm-card-duration">{duration}</span>}
                   <h3 className="hm-card-title">{exp.title}</h3>
-                  <h4 className="hm-card-subtitle">{exp.subtitle}</h4>
+                  {exp.subtitle && <h4 className="hm-card-subtitle">{exp.subtitle}</h4>}
                   {exp.content}
                 </div>
               </div>

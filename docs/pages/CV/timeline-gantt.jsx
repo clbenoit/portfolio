@@ -168,6 +168,7 @@ export default function HorizontalTimeline() {
             const left = leftPct(exp.start);
             const width = widthPct(exp.start, exp.end);
             const duration = formatDuration(exp);
+            const laneColor = typeColor[exp.type];
             return (
               <div
                 key={exp.id}
@@ -177,10 +178,11 @@ export default function HorizontalTimeline() {
               >
                 <div className="ht-lane-label">
                   {isActive && <span className="ht-lane-focus-marker" />}
-                  <span className="ht-lane-icon" style={{ background: typeColor[exp.type] }}>
+                  <span className="ht-lane-icon" style={{ background: laneColor }}>
                     {iconMap[exp.type]}
                   </span>
                   <span className="ht-lane-title">{exp.title}</span>
+                  {exp.location && <span className="ht-lane-location">{exp.location}</span>}
                   <span className="ht-lane-date">{exp.displayRange}</span>
                   {duration && <span className="ht-lane-duration">{duration}</span>}
                 </div>
