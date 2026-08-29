@@ -169,9 +169,8 @@ const experiences = [
     type: 'traveling',
     content: (
       <ul className="ht-bullets">
-        <li><b>Cross-cultural immersion</b> across 8+ European countries — adaptability, resourcefulness, and communication in diverse environments.</li>
-        <li><b>Self-directed intensive study</b> in Machine Learning & Deep Learning through online coursework and personal projects during travel.</li>
-        <li><b>Solo project management</b> — budget, logistics, and itinerary planning with real-time decision-making under uncertainty.</li>
+        <li><b>Self-directed intensive study</b> in Machine Learning & Deep Learning through online coursework and personal projects during 8+ months of travel across Europe.</li>
+        <li><b>Adaptability & autonomy</b> — solo logistics, budget, and real-time decision-making across diverse cultural environments.</li>
       </ul>
     ),
   },
@@ -227,10 +226,7 @@ const experiences = [
     type: 'education',
     content: (
       <ul className="ht-bullets">
-        <li><b>Specialized in Genomics & Bioinformatics</b> track — high-throughput sequencing technologies (NGS), transcriptomics, epigenomics, and proteomics data analysis.</li>
-        <li><b>Hands-on bioinformatics</b> — statistical and functional analysis of genomic datasets using biological databases (NCBI, Ensembl, UniProt) and command-line tools.</li>
-        <li><b>Dual-competence curriculum</b> combining experimental molecular biology with computational data science, preparing for both academic research and industry roles.</li>
-        <li>6-month <b>industrial research and development internship</b> applying omics workflows to biological data modeling.</li>
+        <li>Applied data science and analytical methods to biology, with applications in omics and bioinformatics.</li>
       </ul>
     ),
   },
@@ -263,11 +259,9 @@ const experiences = [
     type: 'education',
     content: (
       <ul className="ht-bullets">
-        <li><b>French Grande École engineering program</b> specializing in Health & Environmental Biotechnology — molecular biology, genetic engineering, cell culture, and biochemical engineering.</li>
-        <li><b>Bioprocess engineering</b> — design, production, extraction, and purification of biological compounds using microorganisms and cell systems, with analytical quality control under GxP standards.</li>
-        <li><b>Dual-degree curriculum</b> completed concurrently with a research Master's in Structural Biology & Genomics — <b>bridging industrial engineering rigor with academic omics expertise.</b></li>
-        <li>6-month <b>industrial R&D internship</b> in a professional environment, plus international mobility training.</li>
-      </ul>
+        <li>Specializing in Biotechnology — molecular biology, genetic engineering, cell culture, and biochemical engineering.</li>
+        <li><b>Bioprocess engineering</b> — process design, scale-up, and optimization for the production, extraction, and purification of biological compounds, with expertise in analytical quality control and regulatory compliance.</li>
+    </ul>
     ),
   },
   {
@@ -276,13 +270,13 @@ const experiences = [
     startLabel: '2013',
     endLabel: '2015',
     title: 'Preparatory Class — Engineering Schools',
-    subtitle: 'Carnot High School, Dijon',
+    subtitle: 'Carnot High School',
     location: 'Dijon',
     displayOrder: 8,
     type: 'education',
     content: (
       <ul className="ht-bullets">
-        <li>Mathematics, Programming, Physics, Chemistry, Biology, Life & Earth Sciences.</li>
+        <li>Multidisciplinary program covering mathematics, programming, physics, chemistry, and biology, preparing for competitive entrance exams.</li>
       </ul>
     ),
   },
