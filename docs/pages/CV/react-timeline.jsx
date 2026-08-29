@@ -124,9 +124,9 @@ const experiences = [
     isCurrent: true,
     content: (
       <ul className="ht-bullets">
-        <li>Coordinator of a 6+ member collaborative developer collective focused on distributed technologies and scalable application architecture.</li>
+        <li>Coordinator of a <b>6+ member collaborative developer collective</b> focused on distributed technologies and scalable application architecture.</li>
         <li>Provided to members: Proof-of-Stake full-node hosting and liquid staking services powered by the <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a> protocol.</li>
-        <li>Cross-functional team coordination and technical leadership across the collective's services: <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> and <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a>.</li>
+        <li><b>Cross-functional team coordination and technical leadership</b> across the collective's services: <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> and <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -141,14 +141,14 @@ const experiences = [
     isCurrent: true,
     content: (
       <ul className="ht-bullets">
-        <li>Developed and deployed an automated sample-identity verification (identitovigilance) pipeline for early detection of sample swaps, with real-time alerts to analytical teams and lead medical biologists — monitoring 2,000+ patient samples/year.</li>
-        <li>Deployed AI assistants for QC triage and report drafting, used daily by 10+ biologists and engineers, reducing report turnaround time by 30%.</li>
-        <li>Integrated 2 analysis pipelines with the laboratory information system (LIS), eliminating manual data entry for 2,000+ samples/year and cutting result delivery time by 60%, with automated off-hours operation.</li>
+        <li>Developed and deployed an automated sample-identity verification (identitovigilance) pipeline for early detection of sample swaps, with real-time alerts to analytical teams and lead medical biologists — <b>monitoring 2,000+ patient samples/year</b>.</li>
+        <li>Deployed AI assistants for QC triage and report drafting, used daily by 10+ biologists and engineers, <b>reducing report turnaround time by 30%</b>.</li>
+        <li>Integrated 2 analysis pipelines with the laboratory information system (LIS), eliminating manual data entry for 2,000+ samples/year and <b>cutting result delivery time by 60%, with automated off-hours operation</b>.</li>
         <li>Engineered a <a href="https://clbenoit.github.io/portfolio/blog/nanodiag" target="_blank" rel="noopener noreferrer" className="ht-link">deep-learning molecular diagnostics pipeline</a> for rapid brain tumor classification on Oxford Nanopore sequencing: re-engineered the sequencing target panel as classifier input, restoring reliable confidence scores across 3 DL algorithms benchmarked against the clinical state-of-the-art random forest (published 2023, still reference in 2025).</li>
-        <li>Owned the real-time monitoring layer of this pipeline — live classification, early alerts, automated run interruption at confidence threshold — generating substantial wet-lab reagent cost savings.</li>
+        <li>Owned the real-time monitoring layer of this pipeline — live classification, early alerts, automated run interruption at confidence threshold — generating <b>substantial wet-lab reagent cost savings</b>.</li>
         <li>Delivered data analysis for <a href="https://doi.org/10.1016/j.omtn.2024.102259" target="_blank" rel="noopener noreferrer" className="ht-link">peer-reviewed publications</a>, <a href="https://github.com/clbenoit/CutOneStrand" target="_blank" rel="noopener noreferrer" className="ht-link">open-source software</a>, and a <a href="https://clbenoit.github.io/portfolio/blog/circRNAs" target="_blank" rel="noopener noreferrer" className="ht-link">doctoral dissertation</a> (Léa Cerato, IAB, defended April 2025).</li>
-        <li>Authored quality documentation and SOPs for NF EN ISO 15189 accreditation — COFRAC audit passed with zero non-conformities.</li>
-        <li>Designed and owned 7 internal web applications (4 data analysis, 3 lab operations, incl. variant interpretation interfaces), adopted across the platform's ~40-user base.</li>
+        <li>Authored quality documentation and SOPs for NF EN ISO 15189 accreditation — <b>COFRAC audit passed with zero non-conformities</b>.</li>
+        <li>Designed and owned 7 internal web applications (4 data analysis, 3 lab operations, incl. variant interpretation interfaces), <b>adopted across the platform's ~40-user base</b>.</li>
         <li>Deployed all pipelines on sovereign on-premises infrastructure; administered a fleet of 10+ wet- and dry-lab instruments (AVITI, NextSeq 550 ×2, Ion S5, GridION).</li>
       </ul>
     ),
@@ -179,11 +179,11 @@ const experiences = [
     type: 'work',
     content: (
       <ul className="ht-bullets">
-        <li>Performed 70+ statistical analyses across 3 research projects over 3 years, contributing to multiple peer-reviewed publications (npj Precision Oncology, Nature, Current Oncology) in precision oncology, single-cell epigenomics and melanoma research.</li>
+        <li>Performed <b>70+ statistical analyses across 3 research projects</b> over 3 years, contributing to multiple peer-reviewed publications (<b>npj Precision Oncology, Nature, Current Oncology</b>) in precision oncology, single-cell epigenomics and melanoma research.</li>
         <li>Developed and operationalised 3 <a href="https://clbenoit.github.io/portfolio/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">R Shiny applications</a> for omics data analysis and visualisation, enabling non-technical researchers to explore large-scale biological results interactively.</li>
         <li>Built <a href="https://github.com/orgs/bioinfo-pf-curie/repositories" target="_blank" rel="noopener noreferrer" className="ht-link">automated omics analysis pipelines</a> for bulk & single-cell RNA-Seq, ChIP-Seq, ATAC-Seq, and targeted gene panels.</li>
         <li>Benchmarked existing pipelines to guide platform tooling choices; developed 2 reproducible bioinformatics pipelines.</li>
-        <li>Trained 120+ biologists and clinicians in data analysis with Python/R and common bioinformatics tools.</li>
+        <li>Trained <b>120+ biologists and clinicians</b> in data analysis with Python/R and common bioinformatics tools.</li>
       </ul>
     ),
   },
@@ -197,7 +197,7 @@ const experiences = [
     type: 'internship',
     content: (
       <ul className="ht-bullets">
-        <li>Contributed to the R&D of a <a href="https://www.firalis.com/home" target="_blank" rel="noopener noreferrer" className="ht-link">diagnostic test</a> based on transcriptomic biomarkers (lncRNAs) predicting heart failure risk after myocardial infarction.</li>
+        <li>Contributed to the R&D of a <a href="https://www.firalis.com/home" target="_blank" rel="noopener noreferrer" className="ht-link">diagnostic test</a> based on transcriptomic biomarkers (lncRNAs) <b>predicting heart failure risk after myocardial infarction</b>.</li>
         <li>Curated, processed and analyzed high-throughput transcriptomic datasets from patient cohorts, delivering analysis-ready data for predictive modeling.</li>
         <li>Tracked model performance across R&D iterations, documenting sensitivity gains of the biomarker signature during development.</li>
         <li>Built quality-control and reproducibility standards into the analysis workflow, securing robust downstream analyses.</li>
@@ -218,7 +218,7 @@ const experiences = [
         <li><b>Specialized in Genomics & Bioinformatics</b> track — high-throughput sequencing technologies (NGS), transcriptomics, epigenomics, and proteomics data analysis.</li>
         <li><b>Hands-on bioinformatics</b> — statistical and functional analysis of genomic datasets using biological databases (NCBI, Ensembl, UniProt) and command-line tools.</li>
         <li><b>Dual-competence curriculum</b> combining experimental molecular biology with computational data science, preparing for both academic research and industry roles.</li>
-        <li>6-month <b>industrial research and development internship</b> applying omics workflows to real biological questions.</li>
+        <li>6-month <b>industrial research and development internship</b> applying omics workflows to biological data modeling.</li>
       </ul>
     ),
   },
