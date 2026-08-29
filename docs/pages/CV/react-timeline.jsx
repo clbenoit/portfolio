@@ -187,10 +187,10 @@ const experiences = [
     content: (
       <ul className="ht-bullets">
         <li>Performed <b>70+ statistical analyses across 3 research projects</b> over 3 years, contributing to multiple peer-reviewed publications (<b>npj Precision Oncology, Nature, Current Oncology</b>) in precision oncology, single-cell epigenomics and melanoma research.</li>
-        <li>Developed and operationalised 3 <a href="https://clbenoit.github.io/portfolio/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">R Shiny applications</a> for omics data analysis and visualisation, enabling non-technical researchers to explore large-scale biological results interactively.</li>
+        <li>Developed and operationalised 3 <a href="https://clbenoit.github.io/portfolio/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">R Shiny applications</a> for omics data analysis and visualisation, <b>enabling non-technical researchers to explore large-scale biological results interactively.</b></li>
         <li>Built <a href="https://github.com/orgs/bioinfo-pf-curie/repositories" target="_blank" rel="noopener noreferrer" className="ht-link">automated omics analysis pipelines</a> for bulk & single-cell RNA-Seq, ChIP-Seq, ATAC-Seq, and targeted gene panels.</li>
         <li>Benchmarked existing pipelines to guide platform tooling choices; developed 2 reproducible bioinformatics pipelines.</li>
-        <li>Trained <b>120+ biologists and clinicians</b> in data analysis with Python/R and common bioinformatics tools.</li>
+        <li><b>Trained 120+ biologists and clinicians</b> in data analysis with Python/R and common bioinformatics tools.</li>
       </ul>
     ),
   },
@@ -206,11 +206,11 @@ const experiences = [
     type: 'internship',
     content: (
       <ul className="ht-bullets">
-        <li>Contributed to the R&D of a <a href="https://www.firalis.com/home" target="_blank" rel="noopener noreferrer" className="ht-link">diagnostic test</a> based on transcriptomic biomarkers (lncRNAs) <b>predicting heart failure risk after myocardial infarction</b>.</li>
-        <li>Curated, processed and analyzed high-throughput transcriptomic datasets from patient cohorts, delivering analysis-ready data for predictive modeling.</li>
-        <li>Tracked model performance across R&D iterations, documenting sensitivity gains of the biomarker signature during development.</li>
-        <li>Built quality-control and reproducibility standards into the analysis workflow, securing robust downstream analyses.</li>
-        <li>Documented methods and results for scientific reporting, traceability and knowledge transfer within the R&D team.</li>
+        <li>Contributed to the R&D of a <a href="https://www.firalis.com/home" target="_blank" rel="noopener noreferrer" className="ht-link">diagnostic test</a> based on transcriptomic biomarkers (lncRNAs) <b>predicting heart failure risk after myocardial infarction.</b></li>
+        <li>Curated, processed and analyzed high-throughput transcriptomic datasets from patient cohorts, <b>delivering analysis-ready data for predictive modeling</b>.</li>
+        <li>Tracked model performance across R&D iterations, <b>documenting sensitivity gains of the biomarker signature during development.</b></li>
+        <li>Built quality-control and reproducibility standards into the analysis workflow, <b>securing robust downstream analyses</b>.</li>
+        <li>Documented methods and results for scientific reporting, <b>traceability and knowledge transfer within the R&D team.</b></li>
       </ul>
     ),
   },
@@ -260,7 +260,7 @@ const experiences = [
     content: (
       <ul className="ht-bullets">
         <li>Specializing in Biotechnology — molecular biology, genetic engineering, cell culture, and biochemical engineering.</li>
-        <li><b>Bioprocess engineering</b> — process design, scale-up, and optimization for the production, extraction, and purification of biological compounds, with expertise in analytical quality control and regulatory compliance.</li>
+        <li>Bioprocess engineering — process design, scale-up, and optimization for the production, extraction, and purification of biological compounds, with expertise in analytical quality control and regulatory compliance.</li>
     </ul>
     ),
   },
