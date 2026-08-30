@@ -1,14 +1,38 @@
-<!doctype html>
-<html lang="en" class="light" data-vocs>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/portfolio/initializeTheme.iife.js"></script>
-    <script type="module" crossorigin src="/portfolio/assets/index-mVBmYZSd.js"></script>
-    <link rel="stylesheet" crossorigin href="/portfolio/assets/style-PcBJQliG.css">
-  </head>
-  <body>
-    <span style="display: none;">Are you an LLM? Read <a href="/llms.txt">llms.txt</a> for a summary of the docs, or <a href="/llms-full.txt">llms-full.txt</a> for the full context.</span>
-    <div id="app"></div>
-  </body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Experimental design in the context of next generation sequencing - Clément BENOIT</title><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><style>.blog-layout[data-astro-cid-jo55ryrt]{max-width:760px;margin:0 auto;padding:80px 40px}@media (width<=767px){.blog-layout[data-astro-cid-jo55ryrt]{padding:40px 16px}}.blog-post[data-astro-cid-jo55ryrt]{max-width:720px}.blog-post-content[data-astro-cid-jo55ryrt]{margin-top:24px;font-size:16px;line-height:1.8}.blog-post-content[data-astro-cid-jo55ryrt] h1{color:var(--color-heading);margin-top:0;margin-bottom:.5em}.blog-post-content[data-astro-cid-jo55ryrt] h2,.blog-post-content[data-astro-cid-jo55ryrt] h3{color:var(--color-heading);margin-top:2em;margin-bottom:.5em}.blog-post-content[data-astro-cid-jo55ryrt] p{margin:1em 0}.blog-post-content[data-astro-cid-jo55ryrt] a{color:var(--color-textAccent);text-decoration:none}.blog-post-content[data-astro-cid-jo55ryrt] a:hover{color:var(--color-textAccentHover);text-decoration:underline}.blog-post-content[data-astro-cid-jo55ryrt] img,.blog-post-content[data-astro-cid-jo55ryrt] video{border-radius:8px;max-width:100%;height:auto;margin:1.5em 0}.blog-post-content[data-astro-cid-jo55ryrt] figure{text-align:center;margin:1.5em 0}.blog-post-content[data-astro-cid-jo55ryrt] figcaption{color:var(--color-text3);margin-top:8px;font-size:14px}.blog-post-content[data-astro-cid-jo55ryrt] blockquote{border-left:3px solid var(--color-backgroundAccent);color:var(--color-text2);margin:1.5em 0;padding-left:16px}.blog-post-content[data-astro-cid-jo55ryrt] code{background:var(--color-background3);border-radius:4px;padding:2px 6px;font-size:.9em}.blog-post-content[data-astro-cid-jo55ryrt] pre{background:var(--color-background3);border-radius:8px;padding:16px;font-size:14px;line-height:1.5;overflow-x:auto}.blog-post-content[data-astro-cid-jo55ryrt] pre code{background:0 0;padding:0}.blog-post-tags[data-astro-cid-jo55ryrt]{flex-wrap:wrap;gap:6px;margin-top:12px;display:flex}.blog-tag[data-astro-cid-jo55ryrt]{background:var(--color-backgroundIrisTint);color:var(--color-textAccent);border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500;display:inline-block}
+</style><link rel="stylesheet" href="/portfolio/_astro/global.DEJEVbqB.css"><style>*,:before,:after{box-sizing:border-box}body{color:var(--color-text);background:var(--color-background);-webkit-font-smoothing:antialiased;margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;line-height:1.6}.minimal-main{width:100%}
+</style></head><body><nav class="top-nav" data-astro-cid-wpvy4v7s><div class="top-nav-inner" data-astro-cid-wpvy4v7s><a href="/portfolio/" class="top-nav-title" data-astro-cid-wpvy4v7s>Home</a><div class="top-nav-links" data-astro-cid-wpvy4v7s><a href="/portfolio/cv/" class="top-nav-link" data-astro-cid-wpvy4v7s>CV</a><a href="/portfolio/blog/" class="top-nav-link active" data-astro-cid-wpvy4v7s>Blog</a><a href="/portfolio/projects/" class="top-nav-link" data-astro-cid-wpvy4v7s>Projects</a></div></div></nav><main class="minimal-main"><div class="blog-layout" data-astro-cid-jo55ryrt><article class="blog-post" data-astro-cid-jo55ryrt><time class="blog-post-date" datetime="2024-02-15T00:00:00.000Z" data-astro-cid-jo55ryrt>February 15, 2024</time><div class="blog-post-content" data-astro-cid-jo55ryrt><h1 id="experimental-design-in-the-context-of-next-generation-sequencing">Experimental design in the context of next generation sequencing</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Coming from a biotechnology background, I was sensitized to the problems of experimental design. I then spent a few years as a bioinformatician, leaving this task to my platform colleagues.</p>
+<p>As a bioinformatician, you focus on producing quality pipelines and algorithms for processing sequencer output.
+But we sometimes forget that, without good experimental design, we run the risk of being unable to draw conclusions,
+or even of unwittingly producing false positives. <br/></p>
+<p>Here’s a brief overview of the main considerations for experience designers.</p>
+<h2 id="next-generation-sequencing-specificities">Next generation sequencing specificities</h2>
+<p>We need to bear in mind that everything starts with biological material, from which we want to extract <strong>informative</strong> biological sequences, to answer a precise question.
+The difficulty lies in extracting useful information without confusing it with other factors: background noise, bias…</p>
+<p>The sample is first taken from its environment, by which it will have been impacted.
+The interaction of the biological material with its environment,
+as well as the sampling carried out, already constitute a first source of variance.</p>
+<h1 id="methodology">Methodology</h1>
+<ol>
+<li><strong>Clearly define the question posed and the technology chosen to answer it.</strong> <br/>
+Many confounding factors will depend on the technology chosen. They will have a greater or lesser impact depending on the question asked.</li>
+<li><strong>Control the experimental variables</strong> <br/>
+Variables to control can include sample preparation techniques, sequencing parameters and environmental conditions. Ensure that the impact of this factors
+on your data is minimized and controled to isolate the impact of the specific variables of interest, enhancing ythe reliability of the results.</li>
+<li><strong>Randomization techniques</strong> <br/>
+Applying randomization techniques will prevent your experiment to capture <a href="https://en.wikipedia.org/wiki/Systemic_bias">systemic bias</a> in your data.</li>
+<li><strong>Replication Strategies</strong><br/>
+Replicating the experiment with different samples or under different conditions enhances the robustness of the results.
+It allows for the identification of consistent patterns and aids in generalizing findings to a broader context.</li>
+<li><strong>Factorial design</strong><br/>
+Factorial design is a statistical experimental method that explores the effects of multiple independent variables simultaneously.
+It allows researchers to assess the individual effects of each factor and any potential interactions between them, providing a more comprehensive understanding
+of experimental outcomes.</li>
+</ol>
+<h1 id="conclusion">Conclusion</h1>
+<p>Experimental design is not so complicated in terms of methodology, and is essential to get the most out of sequencing your biological samples.
+However, a thorough knowledge of the different technologies available and of experimental design techniques and strategies is required to apply it effectively…</p>
+
+
+</div></article></div></main></body></html>
