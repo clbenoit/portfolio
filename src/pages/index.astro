@@ -17,7 +17,7 @@ import LandingLayout from '../layouts/LandingLayout.astro';
         <a href="https://github.com/clbenoit" class="landing-button">GitHub</a>
         <a href="https://linkedin.com/in/clement-benoit" class="landing-button">LinkedIn</a>
       </div>
-      <a href="mailto:benoitclement.data@gmail.com" class="landing-email">benoitclement.data@gmail.com</a>
+      <a href="/portfolio/contact/" class="landing-cta">Let's talk about your project</a>
     </div>
   </div>
 </LandingLayout>
@@ -92,16 +92,24 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     border-color: var(--color-backgroundAccentHover);
   }
 
-  .landing-email {
-    font-size: 16px;
-    color: var(--color-textAccent);
+  .landing-cta {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 16px 36px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 10px;
     text-decoration: none;
-    margin-top: 8px;
+    color: var(--color-backgroundAccentText);
+    background: var(--color-backgroundAccent);
+    border: 2px solid var(--color-backgroundAccent);
+    transition: all 0.15s ease;
   }
 
-  .landing-email:hover {
-    color: var(--color-textAccentHover);
-    text-decoration: underline;
+  .landing-cta:hover {
+    background: var(--color-backgroundAccentHover);
+    border-color: var(--color-backgroundAccentHover);
+    transform: translateY(-1px);
   }
 
   @media (max-width: 600px) {
