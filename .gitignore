@@ -26,3 +26,5 @@ packages.microsoft.gpg
 vocs.config.ts.timestamp*
 
 bun.lockb
+
+.astro/*
