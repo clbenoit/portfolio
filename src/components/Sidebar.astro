@@ -1,0 +1,117 @@
+---
+import { sidebar } from '../config';
+
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="sidebar">
+  {sidebar.map(section => (
+    <div class="sidebar-section">
+      {section.link ? (
+        <a
+          href={section.href}
+          class={currentPath === section.href ? 'sidebar-heading-link active' : 'sidebar-heading-link'}
+        >
+          {section.text}
+        </a>
+      ) : (
+        <span class="sidebar-heading">{section.text}</span>
+      )}
+      {section.items && (
+        <ul class="sidebar-items">
+          {section.items.map(item => (
+            <li>
+              <a
+                href={item.href}
+                class={currentPath === item.href ? 'sidebar-link active' : 'sidebar-link'}
+              >
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  ))}
+</aside>
+
+<style>
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    padding: 32px 16px 32px 0;
+    border-right: 1px solid var(--color-border);
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+
+  .sidebar-section {
+    margin-bottom: 24px;
+  }
+
+  .sidebar-heading {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text3);
+    padding: 4px 8px 8px;
+    margin-top: 8px;
+  }
+
+  .sidebar-heading-link {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text2);
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .sidebar-heading-link:hover {
+    background: var(--color-background3);
+    color: var(--color-text);
+  }
+
+  .sidebar-heading-link.active {
+    color: var(--color-backgroundAccent);
+    background: var(--color-backgroundIrisTint);
+  }
+
+  .sidebar-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-link {
+    display: block;
+    font-size: 13px;
+    color: var(--color-text3);
+    text-decoration: none;
+    padding: 5px 8px 5px 16px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .sidebar-link:hover {
+    background: var(--color-background3);
+    color: var(--color-text);
+  }
+
+  .sidebar-link.active {
+    color: var(--color-backgroundAccent);
+    background: var(--color-backgroundIrisTint);
+  }
+
+  @media (max-width: 767px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>

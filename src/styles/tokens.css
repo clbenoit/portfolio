@@ -1,0 +1,70 @@
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Backgrounds */
+  --color-background: #f6f6f7;
+  --color-background2: #ffffff;
+  --color-background3: #f0f0f2;
+  --color-background4: #e9e9ec;
+  --color-background5: #e2e2e6;
+  --color-backgroundDark: #ffffff;
+
+  /* Accent */
+  --color-backgroundAccent: #5b5bd6;
+  --color-backgroundAccentHover: #4a4ac4;
+  --color-backgroundAccentText: #ffffff;
+
+  /* Tints */
+  --color-backgroundBlueTint: rgba(0, 143, 245, 0.08);
+  --color-backgroundGreenTint: rgba(0, 164, 51, 0.08);
+  --color-backgroundGreenTint2: rgba(0, 168, 56, 0.12);
+  --color-backgroundIrisTint: rgba(91, 91, 214, 0.08);
+  --color-backgroundRedTint: rgba(243, 0, 13, 0.08);
+  --color-backgroundRedTint2: rgba(255, 0, 8, 0.12);
+  --color-backgroundYellowTint: rgba(244, 221, 0, 0.12);
+
+  /* Borders */
+  --color-border: #d4d4d8;
+  --color-border2: #bdbdc4;
+  --color-borderAccent: #6e6ade;
+  --color-borderBlue: rgba(0, 158, 255, 0.25);
+  --color-borderGreen: rgba(1, 156, 57, 0.25);
+  --color-borderIris: #6e6ade;
+  --color-borderRed: rgba(255, 0, 8, 0.25);
+  --color-borderYellow: rgba(244, 221, 0, 0.35);
+
+  /* Text */
+  --color-heading: #1c1c1f;
+  --color-text: #2b2b2f;
+  --color-text2: #4a4a4f;
+  --color-text3: #6b6b70;
+  --color-text4: #8a8a90;
+
+  /* Accent text */
+  --color-textAccent: #5b5bd6;
+  --color-textAccentHover: #4a4ac4;
+
+  --color-textBlue: #0066cc;
+  --color-textBlueHover: #004fa3;
+
+  --color-textGreen: #0f7a45;
+  --color-textGreenHover: #0b5e35;
+
+  --color-textIris: #5b5bd6;
+  --color-textIrisHover: #4a4ac4;
+
+  --color-textRed: #c93737;
+  --color-textRedHover: #a52a2a;
+
+  --color-textYellow: #9c7a00;
+  --color-textYellowHover: #7a5f00;
+
+  --color-title: #1c1c1f;
+
+  /* Shadows */
+  --color-shadow: rgba(0, 0, 0, 0.05);
+  --color-shadow2: rgba(0, 0, 0, 0.08);
+
+  --color-inverted: #000000;
+}
