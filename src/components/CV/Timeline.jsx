@@ -242,8 +242,28 @@ const experiences = [
     type: 'internship',
     content: (
       <ul className="ht-bullets">
-        <li>Benchmarked a pipeline combining quantitative and qualitative transcriptome analysis to reveal isoform expression switches between experimental conditions.</li>
-        <li>Main tools: <a href="https://pachterlab.github.io/kallisto/" target="_blank" rel="noopener noreferrer" className="ht-link">Kallisto</a>, <a href="https://pachterlab.github.io/sleuth_walkthroughs/trapnell/analysis.html" target="_blank" rel="noopener noreferrer" className="ht-link">Sleuth</a></li>
+        <li>
+          Evaluation and comparison of RNA-seq analysis tools (
+          <a
+            href="https://pachterlab.github.io/kallisto/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ht-link"
+          >
+            Kallisto
+          </a>
+          ,{' '}
+          <a
+            href="https://pachterlab.github.io/sleuth_walkthroughs/trapnell/analysis.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ht-link"
+          >
+            Sleuth
+          </a>
+          ) to guide the development of a pipeline for studying differential
+          isoform expression across experimental conditions.
+        </li>
       </ul>
     ),
   },
