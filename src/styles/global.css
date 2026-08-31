@@ -233,14 +233,14 @@
   display: none; /* hidden on desktop, shown in mobile media query */
 }
 
-/* --- Ghost spacer: keeps layout stable when the axis bar becomes fixed --- */
+/* --- Ghost spacer: keeps layout stable when the axis bar becomes top-fixed --- */
 .ht-axis-spacer {
-  display: none;        /* hidden by default */
-  height: 36px;         /* matches .ht-axis-bar-content */
+  display: none;
+  height: 36px;
   width: 100%;
 }
 
-/* --- Axis bar — toggled between static (in-flow) and fixed by JS --- */
+/* --- Axis bar — normal (in-flow) state --- */
 .ht-axis-bar {
   position: relative;
   top: 0;
@@ -250,32 +250,34 @@
   -webkit-overflow-scrolling: touch;
   background: var(--color-background);
   border-bottom: 1px solid var(--color-border);
-  /* Hide the axis scrollbar visually — it's synchronised with .ht-scroll below */
   scrollbar-width: none;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
-/* CECI EST LA BARRE DE ANNES DU GANTT */
+
+/* --- Top-fixed: pinned below the nav bar while the Gantt fills the viewport --- */
 .ht-axis-bar--fixed {
   position: fixed;
   top: 52px;
+  left: 0;
+  right: 0;
   z-index: 10;
-  /* Padding en bas seulement : le blur déborde uniquement sous la barre */
   padding: 0 0 12px 0;
   background: transparent;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: none;
 }
-/* La bande de couleur est réservée aux 36px centraux (les labels) */
+
 .ht-axis-bar--fixed .ht-axis-bar-content {
-  background: color-mix(in srgb, #66e4a9 75%, transparent);
+  background: color-mix(in srgb, var(--color-background) 92%, var(--color-textAccent) 8%);
   border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
-/* Show the spacer when axis is fixed so the body doesn't jump up */
+
 .ht-wrapper--fixed .ht-axis-spacer {
   display: block;
   height: 48px;
 }
+
 .ht-axis-bar::-webkit-scrollbar {
   display: none;
 }
