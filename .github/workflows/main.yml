@@ -39,7 +39,7 @@ jobs:
         env:
           # On force le moteur de build à injecter le bon préfixe
           BASE_URL: /portfolio/
-          PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          PUBLIC_WEB3FORMS_KEY: ${{ vars.WEB3FORMS_KEY }}
       - name: 🚀 Deploy
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: peaceiris/actions-gh-pages@v4
