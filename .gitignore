@@ -28,3 +28,6 @@ vocs.config.ts.timestamp*
 bun.lockb
 
 .astro/*
+# env
+.env
+.env.local

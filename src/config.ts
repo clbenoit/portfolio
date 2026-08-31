@@ -8,6 +8,7 @@ export const topNav = [
   { text: 'CV', link: '/cv/', href: '/portfolio/cv/' },
   { text: 'Blog', link: '/blog/', href: '/portfolio/blog/' },
   { text: 'Projects', link: '/projects/', href: '/portfolio/projects/' },
+  { text: 'Contact', link: '/contact/', href: '/portfolio/contact/' },
 ];
 
 export const sidebar = [
