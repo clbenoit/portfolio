@@ -1,12 +1,12 @@
 ---
 authors:
   - "[cbenoit](www.linkedin.com/in/clement-benoit)"
-title: "Un aperçu rapide de l'analyse d'enrichissement de jeux de gènes"
+title: "Un aperçu rapide de l'analyse d'enrichissement de ensembles de gènes"
 date: 2024-02-15
 lang: "fr"
 ---
 
-# Un aperçu rapide de l'analyse d'enrichissement de jeux de gènes
+# Un aperçu rapide de l'analyse d'enrichissement de ensembles de gènes
 
 ## Pourquoi l'analyse GSEA ?
 
@@ -19,7 +19,7 @@ C'est pourquoi la reproductibilité est l'un des principaux défis auxquels sont
 
 Enfin, interpréter des listes de milliers de gènes différentiellement exprimés est un exercice fastidieux pour le biologiste.
 
-La GSEA, en dézoomant de l'échelle du gène à celle de la voie, améliore la reproductibilité des études,
+La GSEA, en changeant d'échelle du gène à celle de la voie, améliore la reproductibilité des études,
 tout en facilitant leur interprétation.
 
 ## Principes
@@ -54,7 +54,7 @@ Les scores d'enrichissement pour chaque ensemble sont normalisés et un taux de 
     <strong>Il est utile de garder à l'esprit que</strong>
   </div><br />
 - Le logiciel officiel GSEA ne se plaindra pas si vous lui fournissez des données d'expression génique brutes. Cependant, vos résultats seront totalement incorrects.
-- Vous pouvez effectuer une GSEA pré-classée, ce qui peut être très utile pour réaliser une analyse d'enrichissement de jeux de gènes sur des données qui ne correspondent pas au scénario typique de GSEA. Par exemple, elle peut être utilisée lorsque les choix de métriques de classement fournis par GSEA ne sont pas appropriés pour les données, ou lorsqu'une liste classée de caractéristiques génomiques s'écarte des données d'expression génique traditionnelles (par exemple, résultats GWAS, ChIP-seq, etc.). De plus, si vous manquez de puissance de calcul et avez accès à une liste pré-classée, cette solution peut être votre meilleure option.
+- Vous pouvez effectuer une GSEA pré-classée, ce qui peut être très utile pour réaliser une analyse d'enrichissement de ensembles de gènes sur des données qui ne correspondent pas au scénario typique de GSEA. Par exemple, elle peut être utilisée lorsque les choix de métriques de classement fournis par GSEA ne sont pas appropriés pour les données, ou lorsqu'une liste classée de caractéristiques génomiques s'écarte des données d'expression génique traditionnelles (par exemple, résultats GWAS, ChIP-seq, etc.). De plus, si vous manquez de puissance de calcul et avez accès à une liste pré-classée, cette solution peut être votre meilleure option.
 - Définissez clairement la question que vous essayez de traiter et choisissez les métriques de classement appropriées.
 - La curation des ensembles de gènes pourrait être utile comme étape de prétraitement. En effet, vous n'avez pas besoin d'effectuer des tests sur des ensembles de gènes qui ne vous intéressent pas. Cela augmenterait vos besoins en ressources de calcul et créerait un bruit supplémentaire pour la procédure d'ajustement pour tests d'hypothèses multiples.
 </p>

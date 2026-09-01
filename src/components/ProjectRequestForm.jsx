@@ -145,33 +145,6 @@ export default function ProjectRequestForm({ lang = 'en' }) {
 
   return (
     <form className="project-form" onSubmit={handleSubmit} noValidate>
-      <div className="form-field">
-        <label htmlFor="budget">{t.budget}</label>
-        <select
-          id="budget"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
-          className={errors.budget ? 'field-error' : ''}
-        >
-          <option value="">{t.budgetPlaceholder}</option>
-          {BUDGET_OPTIONS.slice(1).map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
-        {errors.budget && <span className="form-error">{errors.budget}</span>}
-      </div>
-
-      <div className="form-field">
-        <label htmlFor="deadline">{t.deadline}</label>
-        <input
-          type="date"
-          id="deadline"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          className={errors.deadline ? 'field-error' : ''}
-        />
-        {errors.deadline && <span className="form-error">{errors.deadline}</span>}
-      </div>
 
       <fieldset className="form-field form-field-services">
         <legend>{t.services}</legend>
@@ -201,6 +174,34 @@ export default function ProjectRequestForm({ lang = 'en' }) {
           className={errors.description ? 'field-error' : ''}
         />
         {errors.description && <span className="form-error">{errors.description}</span>}
+      </div>
+
+            <div className="form-field">
+        <label htmlFor="budget">{t.budget}</label>
+        <select
+          id="budget"
+          value={budget}
+          onChange={(e) => setBudget(e.target.value)}
+          className={errors.budget ? 'field-error' : ''}
+        >
+          <option value="">{t.budgetPlaceholder}</option>
+          {BUDGET_OPTIONS.slice(1).map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+        {errors.budget && <span className="form-error">{errors.budget}</span>}
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="deadline">{t.deadline}</label>
+        <input
+          type="date"
+          id="deadline"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+          className={errors.deadline ? 'field-error' : ''}
+        />
+        {errors.deadline && <span className="form-error">{errors.deadline}</span>}
       </div>
 
       <button
