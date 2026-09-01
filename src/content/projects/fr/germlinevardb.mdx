@@ -1,0 +1,38 @@
+---
+title: "GermlineVarDB"
+category: "omics"
+lang: "fr"
+---
+
+# GermlineVarDB 
+<div> <h3><i>Une interface graphique pour explorer votre base de données de variations génomiques germinales.</i></h3></div><br/>
+![](/portfolio/somavardb.gif)
+## Pourquoi cette application
+
+Peu d'hôpitaux ne sous-traitent pas leur analyse bioinformatique à des partenaires privés (du moins en France). Il y a plusieurs raisons à cela :
+
+- Manque de ressources et de capacité d'investissement pour anticiper les changements technologiques rapides.
+- Les métiers de la données, encore à leurs balbutiements, n'ont pas encore pleinement pénétré ces structures.
+- Contraintes juridiques et administratives lourdes concernant l'accréditation des solutions informatiques à usage clinique.
+
+Se tourner vers un prestataire externe est donc une solution à court terme. À long terme, cependant, l'externalisation pose deux problèmes majeurs :
+
+- Le coût du service externalisé est au final bien plus élevé qu'en interne.
+- Les utilisateurs (biologistes cliniques) travaillent gratuitement à trier les bases de données construites par ces prestataires externes à partir des données brutes qui leur sont envoyées par les hôpitaux auxquels ces cliniciens appartiennent.
+L'hôpital paiera donc une nouvelle fois pour accéder aux IA qui ont été entraînées grâce à son travail.
+
+C'est dans cette optique que je me suis intéressé à la question de la réinternalisation de cette activité au CHUGA.
+La partie analytique fera l'objet d'un autre article, mais brièvement,
+la [communauté nf-core](https://nf-co.re/) est, à mon avis, le meilleur candidat sur lequel baser cet objectif.
+
+Cependant, il y a un autre point bloquant. Les prestataires bioinformatiques fournissent, en plus d'un pipeline,
+des interfaces graphiques permettant aux biologistes de traiter efficacement les données de variations génomiques pour le rendu diagnostique. Dans ces conditions, même si vous internalisez un pipeline de qualité clinique accrédité, il sera difficile de les convaincre de revenir à un tableur Excel beaucoup moins attrayant. Cela sera perçu comme un retour en arrière.
+
+SomaVarDB vise donc à s'interfacer avec la sortie d'un pipeline nf-core, cliniquement accrédité si possible.
+C'est un package qui contient à la fois les outils pour construire la base de données locale à partir des sorties de nf-core,
+et l'interface pour interagir avec cette base de données.
+
+## Open-source
+
+- [Démo en ligne](https://omicsverse.fr/app/GermlineVarDB)
+- [Code source](https://github.com/clbenoit/GermlineVarDB)

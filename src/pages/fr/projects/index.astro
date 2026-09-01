@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import DefaultLayout from '../../../layouts/DefaultLayout.astro';
+
+const projects = await getCollection('projects_fr');
+const omicsApps = projects.filter(p => p.data.category === 'omics');
+const cncProjects = projects.filter(p => p.data.category === 'cnc');
+---
+
+<DefaultLayout title="Projets" lang="fr">
+  <h1>Voici mes projets</h1>
+
+  <h2>OmicsVerse</h2>
+
+  <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback style="max-width: 100%; height: auto">
+    <source src="/portfolio/Omicsverse.webm" type="video/webm" />
+  </video>
+
+  <p>L'objectif initial du portail <a href="https://omicsverse.fr">OmicsVerse</a> est d'héberger des versions de démonstration des différentes applications de données que je crée.</p>
+  <p>Le code source des applications et la documentation pour les administrateurs sont disponibles sur mon <a href="https://github.com/clbenoit">github</a>.</p>
+  <p>Les sections et pages suivantes hébergeront la documentation détaillée pour les utilisateurs.</p>
+  <p>Si vous avez une application de données à orientation génomique à héberger, n'hésitez pas à me contacter, sous réserve de ressources disponibles.</p>
+
+  <ul>
+    {omicsApps.map(p => (
+      <li><a href={`/portfolio/fr/projects/${p.id}/`}>{p.data.title}</a></li>
+    ))}
+  </ul>
+
+  <h3>Puis-je l'utiliser à des fins cliniques ?</h3>
+
+  <p>La réponse honnête est : <b>pas encore</b>.</p>
+  <p>Ce sont des <b>outils de recherche et d'exploration</b>.<br />
+  Les utiliser en diagnostic de routine nécessiterait une conformité<br />
+  aux réglementations sur les dispositifs médicaux logiciels et des processus de validation formels
+  <a href="/portfolio/fr/projects/#ref-1">[1]</a> <a href="/portfolio/fr/projects/#ref-2">[2]</a> <a href="/portfolio/fr/projects/#ref-3">[3]</a>.</p>
+  <p>C'est bien au-delà de ce qu'un seul développeur peut réaliser de manière réaliste seul.<br /><br />
+  Donc si vous souhaitez contribuer au projet, n'hésitez pas à me contacter :
+  <a href="mailto:benoitclement.data@gmail.com">benoitclement.data@gmail.com</a>.</p>
+  <p>Cela dit, ces outils sont conçus pour <b>abaisser la barrière</b> pour les institutions qui souhaitent :</p>
+  <ul>
+    <li>Reprendre le contrôle de leurs données de méthylation.</li>
+    <li>Préparer des efforts de validation interne.</li>
+    <li>Développer une expertise collective plutôt que de l'externaliser.</li>
+  </ul>
+
+  <h2>Chartreuse Node Crew</h2>
+
+  <p>Co-fondateur et responsable d'une équipe de développement Web3 collaborative. Cette initiative rassemble des développeurs passionnés pour explorer et construire des applications décentralisées.</p>
+
+  <p><b>Domaines d'expertise :</b> Développement de smart contracts, protocoles DeFi, architecture blockchain</p>
+
+  <h3>Modèles IA CNC</h3>
+
+  <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback style="max-width: 100%; height: auto">
+    <source src="/portfolio/ai.webm" type="video/webm" />
+  </video>
+
+  <p>Modèles d'IA accessibles hébergés sur une <a href="https://ai.omicsverse.fr">plateforme dédiée</a> pour les <em>membres du CNC crew</em></p>
+
+  <p><b>Fonctionnalités :</b></p>
+  <ul>
+    <li>Interface web pour des tests interactifs de modèles</li>
+    <li>API REST pour un accès programmatique</li>
+    <li>Modèles de langage et ML à la pointe</li>
+    <li>Authentification utilisateur et gestion sécurisée</li>
+    <li>Fine-tuning et adaptation de modèles personnalisés</li>
+    <li>LLMOps évolutif avec Kubernetes et Docker</li>
+    <li>Prêt pour HPC et Cloud (Singularity, calcul haute performance)</li>
+    <li>Data science avancée (statistiques inférentielles et théorie des graphes)</li>
+    <li>IA activée par blockchain (analyse on-chain et interaction smart contracts)</li>
+    <li>Surveillance haute disponibilité et fiabilité des systèmes distribués</li>
+    <li>Intégration avec nos services Cloud sur <a href="https://cloud.omicsverse.fr">cloud.omicsverse.fr</a></li>
+  </ul>
+
+  <h3>Services Cloud CNC</h3>
+
+  <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback style="max-width: 100%; height: auto">
+    <source src="/portfolio/cloud.webm" type="video/webm" />
+  </video>
+
+  <p>Instance <a href="https://cloud.omicsverse.fr">Nextcloud</a> de qualité professionnelle pour une collaboration sécurisée.</p>
+
+  <p><b>Fonctionnalités :</b></p>
+  <ul>
+    <li>Stockage sécurisé de fichiers et synchronisation</li>
+    <li>Outils de collaboration d'équipe</li>
+    <li>Architecture respectueuse de la vie privée</li>
+    <li>Gestion centralisée des équipes</li>
+    <li>Stockage décentralisé expérimental via intégration IPFS</li>
+    <li>Intégration avec nos services IA sur <a href="https://ai.omicsverse.fr">ai.omicsverse.fr</a></li>
+  </ul>
+
+  <h2>Références</h2>
+
+  <p id="ref-1">
+    <b>[1]</b> Tuomas Granlund; Tommi Mikkonen; Vlad Stirbu (2020).<br />
+    <i>On Medical Device Software CE Compliance and Conformity Assessment</i>.<br />
+    <b>IEEE</b>.<br />
+    <a href="https://doi.org/10.1109/ICSA-C50368.2020.00040" target="_blank" rel="noopener noreferrer">DOI</a>
+  </p>
+  <p id="ref-2">
+    <b>[2]</b> Cyrille Michaud (2020).<br />
+    <i>How to qualify, classify and CE mark software</i>.<br />
+    <b>MD101</b>.<br />
+    <a href="https://blog.cm-dm.com/pages/How-to-qualify%2C-classify-and-CE-mark-software" target="_blank" rel="noopener noreferrer">URL</a>
+  </p>
+  <p id="ref-3">
+    <b>[3]</b> Małgorzata Kruszynska (2021).<br />
+    <i>CE marking for Medical Device Software: a step-by-step guide</i>.<br />
+    <b>Spyrosoft</b>.<br />
+    <a href="https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software" target="_blank" rel="noopener noreferrer">URL</a>
+  </p>
+</DefaultLayout>

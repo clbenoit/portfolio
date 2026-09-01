@@ -364,7 +364,7 @@ export const sortedForLanes = [...enriched].sort(
 
 const BREAKPOINT = 768;
 
-export default function Timeline() {
+export default function Timeline({ lang }) {
   const [isDesktop, setIsDesktop] = useState(null);
 
   useEffect(() => {

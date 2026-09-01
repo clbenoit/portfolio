@@ -1,0 +1,60 @@
+---
+title: "LRM_Elembio"
+category: "omics"
+lang: "fr"
+---
+
+# LRM_Elembio
+
+<div> <h3><i>Une interface graphique pour créer des Manifests standardisés pour les runs de séquençage AVITI.</i></h3></div><br/>
+
+<video
+  autoPlay
+  loop
+  muted
+  playsInline
+  disablePictureInPicture
+  disableRemotePlayback
+  style={{ maxWidth: "100%", height: "auto" }}
+>
+  <source src="/portfolio/lrm_elembio.webm" type="video/webm" />
+</video>
+
+## Pourquoi cette application
+
+LRM_Elembio est un outil open-source conçu pour simplifier la création des fichiers **Manifest** nécessaires à la planification des runs de séquençage sur les plateformes AVITI d'**Elements Bioscience**. Les fichiers Manifest doivent suivre un format strict, ce qui peut être difficile à générer manuellement, en particulier lorsqu'il s'agit de faire correspondre les positions des puits d'échantillons avec les index de barcodes.
+
+En pratique, la création manuelle de Manifest entraîne souvent :
+
+- Des erreurs dues à des positions ou index d'échantillons mal assortis  
+- Une forte dépendance aux bioinformaticiens pour la configuration de routine des runs  
+- Une intégration plus lente dans les pipelines cliniques ou de recherche  
+
+L'application **LRM_Elembio** résout ces problèmes en offrant une interface intuitive qui simplifie la génération de Manifests.
+
+## Objectifs
+
+Les principaux objectifs de LRM_Elembio sont :
+
+- Permettre aux non-programmeurs, y compris les techniciens de laboratoire et les cliniciens, de générer des Manifests  
+- Automatiser la correspondance entre les positions des puits de la flowcell et les index des échantillons  
+- Réduire les erreurs et améliorer la reproductibilité dans la configuration des runs  
+- Faciliter l'intégration du séquençage AVITI dans les workflows courants  
+
+En abaissant la barrière technique, les utilisateurs peuvent se concentrer sur la conception expérimentale et le suivi des échantillons plutôt que sur le formatage de fichiers.
+
+## Ce qu'elle fait
+
+LRM_Elembio propose :
+
+- Le chargement interactif des métadonnées des échantillons  
+- La correspondance automatique des échantillons avec les positions de la flowcell AVITI  
+- La validation du format des fichiers Manifest selon les spécifications d'Elements Bioscience  
+- L'export de fichiers Manifest prêts à l'emploi pour un téléchargement direct sur l'instrument AVITI  
+
+L'application garantit que tous les fichiers générés sont conformes aux exigences AVITI tout en maintenant une interface accessible et conviviale.
+
+## Open-source
+
+- [Code source](https://github.com/clbenoit/LRM_elembio)  
+- Les contributions et les signalements de problèmes sont les bienvenus sur GitHub

@@ -1,0 +1,51 @@
+---
+title: "Application Shiny FilLT3r"
+category: "omics"
+lang: "fr"
+---
+
+# Application Shiny FilLT3r
+
+<div> <h3><i>Une interface graphique pour la détection, la caractérisation et la quantification sans alignement des duplications internes en tandem de FLT3.</i></h3></div><br/>
+![](/portfolio/filt3r_shiny.gif)
+
+## Pourquoi cette application
+
+FiLT3r est un algorithme léger sans alignement conçu pour détecter, caractériser et quantifier les duplications internes en tandem de FLT3 (FLT3-ITD) à partir de données de séquençage à haut débit, permettant une stratification précise du risque et un suivi dans la [leucémie myéloïde aiguë](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) (AML).
+
+[Accéder à la publication scientifique](https://doi.org/10.1186/s12859-022-04983-6)
+
+Bien que puissants, les outils en ligne de commande restent un obstacle pour de nombreux utilisateurs, en particulier les biologistes et cliniciens qui ne sont pas familiers avec les scripts R. En pratique, cela conduit souvent à :
+
+- Une forte dépendance envers les bioinformaticiens pour les analyses courantes
+- Une exploration limitée de l'espace des paramètres en raison de contraintes d'utilisabilité
+- Une reproductibilité réduite lorsque les analyses sont adaptées manuellement
+
+L'**application Shiny FilLT3r** a été développée pour répondre à ces problèmes en offrant une interface graphique intuitive qui encapsule l'outil FilLT3r original.
+
+## Objectifs
+
+Les principaux objectifs de cette application sont :
+
+- Rendre FilLT3r accessible aux non-programmeurs
+- Permettre un réglage interactif des paramètres et un retour immédiat
+- Améliorer la transparence et la reproductibilité des stratégies de filtrage
+- Faciliter l'exploration des données avant les analyses aval
+
+En abaissant la barrière technique, cette application permet aux utilisateurs de se concentrer sur l'interprétation biologique plutôt que sur les détails d'implémentation.
+
+## Ce qu'elle fait
+
+L'application Shiny FilLT3r permet :
+
+- Le chargement interactif des jeux de données d'entrée
+- La configuration graphique des paramètres de filtrage de FilLT3r
+- La visualisation en temps réel des effets du filtrage
+- L'export des jeux de données filtrés pour les analyses aval
+
+L'application repose strictement sur la méthodologie FilLT3r sous-jacente, garantissant la cohérence avec l'approche originale publiée.
+
+## Open-source
+
+- [Code source](https://github.com/clbenoit/filt3r.shiny)
+- [Publication FilLT3r](https://doi.org/10.1186/s12859-022-04983-6)

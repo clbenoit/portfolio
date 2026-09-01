@@ -108,7 +108,7 @@ const SlideCard = ({ category }) => (
   </div>
 );
 
-const SkillsGrid = () => {
+const SkillsGrid = ({ lang }) => {
   const trackRef = useRef(null);
   const slideRefs = useRef([]);
   const autoplayRef = useRef(null);
