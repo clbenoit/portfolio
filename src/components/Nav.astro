@@ -4,18 +4,27 @@ import { topNav, siteConfig } from '../config';
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="top-nav">
+<nav class="top-nav" data-open="false">
   <div class="top-nav-inner">
     <a href="/portfolio/" class="top-nav-title">{siteConfig.title}</a>
-    <div class="top-nav-links">
-      {topNav.map(item => (
-        <a
-          href={item.href}
-          class={currentPath.startsWith(item.href) ? 'top-nav-link active' : 'top-nav-link'}
-        >
-          {item.text}
-        </a>
-      ))}
+    <button class="hamburger" aria-label="Toggle navigation menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+    <div class="top-nav-dropdown">
+      <div class="top-nav-links">
+        {topNav.map(item => (
+          <a
+            href={item.href}
+            class={currentPath.startsWith(item.href) ? 'top-nav-link active' : 'top-nav-link'}
+          >
+            {item.text}
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </nav>
@@ -46,6 +55,25 @@ const currentPath = Astro.url.pathname;
     text-decoration: none;
   }
 
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text2);
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .hamburger:hover {
+    color: var(--color-text);
+    background: var(--color-background3);
+  }
+
+  .top-nav-dropdown {
+    display: flex;
+  }
+
   .top-nav-links {
     display: flex;
     gap: 24px;
@@ -74,5 +102,52 @@ const currentPath = Astro.url.pathname;
     .top-nav {
       padding: 0 16px;
     }
+
+    .hamburger {
+      display: block;
+    }
+
+    .top-nav-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-backgroundDark);
+      border-bottom: 1px solid var(--color-border);
+      flex-direction: column;
+      padding: 8px 0;
+    }
+
+    .top-nav[data-open="true"] .top-nav-dropdown {
+      display: flex;
+    }
+
+    .top-nav-links {
+      flex-direction: column;
+      gap: 4px;
+      padding: 0 16px;
+    }
+
+    .top-nav-link {
+      padding: 10px 12px;
+      font-size: 16px;
+    }
   }
 </style>
+
+<script>
+  const nav = document.querySelector('.top-nav');
+  const hamburger = nav?.querySelector('.hamburger');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = nav.getAttribute('data-open') === 'true';
+    nav.setAttribute('data-open', isOpen ? 'false' : 'true');
+  });
+
+  nav?.querySelectorAll('.top-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.setAttribute('data-open', 'false');
+    });
+  });
+</script>
