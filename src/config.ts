@@ -4,34 +4,47 @@ export const siteConfig = {
   basePath: '/portfolio',
 };
 
+export const locales = ['fr', 'en'] as const;
+export type Locale = (typeof locales)[number];
+export const defaultLocale: Locale = 'en';
+
+export const localeLabels: Record<Locale, string> = {
+  fr: 'FR',
+  en: 'EN',
+};
+
+export function localizedHref(href: string, lang: Locale): string {
+  const base = siteConfig.basePath;
+  return href.replace(base, `${base}/${lang}`);
+}
+
 export const topNav = [
-  { text: 'CV', link: '/cv/', href: '/portfolio/cv/' },
-  { text: 'Blog', link: '/blog/', href: '/portfolio/blog/' },
-  { text: 'Projects', link: '/projects/', href: '/portfolio/projects/' },
-  { text: 'Contact', link: '/contact/', href: '/portfolio/contact/' },
+  { text: 'CV', href: '/portfolio/cv/' },
+  { text: 'Blog', href: '/portfolio/blog/' },
+  { text: 'Projects', href: '/portfolio/projects/' },
+  { text: 'Contact', href: '/portfolio/contact/' },
 ];
 
 export const sidebar = [
   {
     text: 'Projects Overview',
-    link: '/projects/',
     href: '/portfolio/projects/',
   },
   {
     text: 'Genomics Data Analysis Apps',
     items: [
-      { text: 'SomaVarDB', link: '/projects/somavardb/', href: '/portfolio/projects/somavardb/' },
-      { text: 'GermlineVarDB', link: '/projects/germlinevardb/', href: '/portfolio/projects/germlinevardb/' },
-      { text: 'MethylDB', link: '/projects/methyldb/', href: '/portfolio/projects/methyldb/' },
-      { text: 'FilLT3r Shiny App', link: '/projects/filtr3r-shiny/', href: '/portfolio/projects/filtr3r-shiny/' },
-      { text: 'LRM_Elembio', link: '/projects/lrm-elembio/', href: '/portfolio/projects/lrm-elembio/' },
+      { text: 'SomaVarDB', href: '/portfolio/projects/somavardb/' },
+      { text: 'GermlineVarDB', href: '/portfolio/projects/germlinevardb/' },
+      { text: 'MethylDB', href: '/portfolio/projects/methyldb/' },
+      { text: 'FilLT3r Shiny App', href: '/portfolio/projects/filtr3r-shiny/' },
+      { text: 'LRM_Elembio', href: '/portfolio/projects/lrm-elembio/' },
     ],
   },
   {
     text: 'Web3 Engineering Group (CNC)',
     items: [
-      { text: 'CNC AI Models', link: '/projects/cnc-ai/', href: '/portfolio/projects/cnc-ai/' },
-      { text: 'CNC Cloud Services', link: '/projects/cnc-cloud/', href: '/portfolio/projects/cnc-cloud/' },
+      { text: 'CNC AI Models', href: '/portfolio/projects/cnc-ai/' },
+      { text: 'CNC Cloud Services', href: '/portfolio/projects/cnc-cloud/' },
     ],
   },
 ];

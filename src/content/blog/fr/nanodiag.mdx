@@ -1,0 +1,113 @@
+---
+title: "Classification en temps réel des tumeurs cérébrales par deep learning sur données de méthylation Nanopore enrichies par Adaptive Sampling"
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+date: 2026-06-11
+tags:
+  - deep learning
+  - cancer
+  - méthylation
+  - nanopore
+lang: "fr"
+---
+
+# Classification en temps réel des tumeurs cérébrales par algorithme de deep learning sur données de méthylation Nanopore enrichies par Adaptive Sampling
+
+## Le contexte
+
+Depuis dix ans, la classification moléculaire des tumeurs du système nerveux central repose sur les profils de méthylation (puces Illumina 450K/EPIC), interprétés via le classifieur de référence développé par le DKFZ (Heidelberg) [\[1\]](/blog/nanodiag#ref-1). Cette dépendance à des plateformes propriétaires et à un outil centralisé — dont le passage récent à un modèle payant a inquiété de nombreux laboratoires — pousse à chercher des alternatives ouvertes et souveraines.
+
+Le séquençage Nanopore ouvre une piste sérieuse : des outils comme [Sturgeon](https://github.com/UMCUGenetics/sturgeon) classifient directement à partir des signaux de méthylation natifs de l'ADN, avec des performances proches des approches historiques [\[3\]](/blog/nanodiag#ref-3) — mais ils sont entraînés sur du séquençage génome entier (WGS). Or en clinique, séquencer tout le génome coûte cher et prend du temps : l'**Adaptive Sampling**, qui ne conserve en temps réel que les molécules correspondant à un panel ciblé plutôt que de lire le génome uniformément, permet d'aller plus vite et moins cher. Les auteurs de Sturgeon montrent justement que l'Adaptive Sampling améliore les performances de leur classifieur — mais ils ne publient pas le panel utilisé pour cet enrichissement.
+
+**D'où notre question :** peut-on concevoir nous-mêmes ce panel d'enrichissement ciblé, de façon à préserver la performance diagnostique tout en s'intégrant aux contraintes de notre plateforme mutualisée ?
+
+Ce travail s'inscrit aussi dans un enjeu national : selon le Livre Blanc de la FFGH, 46 % de la population française pourrait un jour nécessiter un examen génétique, et la France doit se doter d'infrastructures souveraines et interopérables [\[4\]](/blog/nanodiag#ref-4).
+
+## Trouver le bon panel
+
+Notre panel de départ, limité aux CpGs de gènes connus pour les tumeurs cérébrales, ne couvrait qu'environ 1,5 % du génome — proche de la recommandation Nanopore habituelle pour maximiser le nombre d'échantillons par flow cell. Insuffisant : Sturgeon, entraîné sur du séquençage génome entier, hallucinait sur ces données trop parcellaires. Bien que ses auteurs montrent que l'Adaptive Sampling fonctionne
+
+**Premier enseignement** : la performance du classifieur dépend davantage de la largeur du génome ciblé que de la pertinence biologique stricte des régions choisies.
+
+Nous avons donc reconstruit le panel à partir des ~450 000 CpGs des puces Illumina 450K, en élargissant les fenêtres génomiques autour de ces régions pour capturer plus de lectures informatives en long-read. Après plusieurs itérations sur la taille de ces fenêtres, nous avons atteint un panel couvrant **près de 30 % du génome** — vingt fois plus que le panel initial.
+
+## Rétablir une classification robuste
+
+Sur nos échantillons de validation, quatre approches convergeaient vers les mêmes conclusions : Sturgeon, NanoDX, PanNanoDX (sa variante pan-cancer), et les modèles Random Forest, état de l'art du diagnostic en 2023 [\[5\]](/blog/nanodiag#ref-5). Le Random Forest atteignait même 100 % de confiance.
+
+<figure>
+  <img src="/portfolio/robin.png" alt="Description" />
+  <figcaption>*Figure 1 — Résultats des 4 classifiers sur Robin*</figcaption>
+</figure>
+
+L'information biologique couverte suffisait à répondre à la question clinique : le Random Forest, outil état de l'art en clinique, rendait le bon diagnostic avec un score de confiance maximal. Les trois **classifieurs de deep learning**, eux, retrouvaient également la bonne classe, mais **leur score de confiance restait systématiquement dégradé par le caractère partiel des données d'Adaptive Sampling**.
+
+## Ouverture : fine-tuner le modèle
+
+Une piste naturelle pour regagner la robustesse encore manquante aux classifieurs de deep learning serait de **fine-tuner le modèle sur nos propres données d'Adaptive Sampling**, plutôt que sur du séquençage génome entier. Cela suppose d'accéder aux poids du modèle — ce qui n'est pas possible ici : Sturgeon est distribué sous une licence de type « logiciel d'évaluation/recherche accessible publiquement + poids téléchargeables publiquement », mais pas open-weight au sens permissif du terme. La licence désigne d'ailleurs explicitement Cyclomics comme contact pour tout usage commercial, clinique ou diagnostique. C'est une limite structurelle du projet, pas seulement technique.
+
+## Deux exigences supplémentaires
+
+**Les profils CNV.** La classification seule ne suffit pas : les variations de nombre de copies (CNV) sont une couche d'information diagnostique essentielle. Les premières versions du panel créaient des zones sur- ou sous-représentées ; après optimisation, les profils CNV sont devenus comparables à ceux obtenus en génome entier.
+
+**Le statut MGMT.** La méthylation du promoteur MGMT est un facteur prédictif établi de la réponse au traitement des glioblastomes [\[2\]](/blog/nanodiag#ref-2). Or les régions exploitées par les outils de référence (Rapid-CNS2, DKFZ) ne correspondaient pas totalement à celles de notre premier design, d'où des résultats discordants. Conclusion : **un panel optimisé pour la classification n'est pas automatiquement optimisé pour MGMT.** Une phase d'optimisation dédiée a permis d'obtenir un panel unique satisfaisant simultanément classification, CNV et MGMT.
+
+## Ouverture : un assistant LLM + RAG dans ROBIN
+
+Une amélioration de cet outil consisterait à ajouter un assistant conversationnel pour aider les biologistes à interpréter les résultats de manière plus intuitive et interactive : expliquer une classification, un profil CNV, un statut MGMT, et suggérer les étapes suivantes du diagnostic. Pour être fiable dans ce contexte clinique, un tel assistant devrait être **augmenté de connaissances biologiques et littéraires via RAG**. Ce serait une fonctionnalité intéressante pour l'interface Robin, en tant que couche d'interprétation au-dessus des résultats bruts.
+
+## L'apport le plus surprenant : le monitoring temps réel
+
+L'une des innovation qui m'a le plus surpris dans Robin n'a finalement pas été biologique mais organisationnelle. Le workflow classique (séquençage → transfert → pipeline → interprétation) est séquentiel. Avec [Robin](https://github.com/UMCUGenetics/sturgeon), les lectures sont analysées dès leur production : classification, profils CNV et indicateurs qualité se mettent à jour en continu pendant le run.
+
+Cela permet de suivre la stabilité du diagnostic en direct, de générer des alertes précoces, et de repérer le moment où l'information accumulée est suffisante — parfois bien avant la fin théorique du run. Le séquençage peut alors être interrompu, ce qui réduit l'usure des flow cells et augmente le nombre de réutilisations et d'analyses possibles.
+
+Dans un contexte de plateforme ce n'est pas un simple confort technique : c'est un levier structurel pour réduire ces délais, et pour mieux exploiter des équipements partagés entre plusieurs services.
+
+## Une friction réglementaire
+
+Sur le plan infrastructure, les outils ont été déployés avec une séparation stricte dev/prod, conformément aux bonnes pratiques DevOps. Mais la norme ISO 15189, pensée pour des volumes standards, s'adapte mal au séquençage massif — l'absence de contrôles positifs pour les maladies ultra-rares, combinée au rythme d'innovation des outils, crée une tension réelle entre exigence réglementaire et agilité diagnostique, documentée par le Livre Blanc de la FFGH.
+
+## Conclusion
+
+Parti d'un objectif simple — **reproduire les performances de Sturgeon en Adaptive Sampling** — ce projet a abouti à une chaîne complète associant classification moléculaire, analyse CNV, statut MGMT, interprétation temps réel et optimisation de l'usage des séquenceurs. Il montre qu'une alternative locale, ouverte et maîtrisée aux solutions centralisées est possible, tout en améliorant l'efficacité opérationnelle d'une plateforme de biologie moléculaire.
+
+Il illustre aussi un enjeu identifié par le Livre Blanc de la FFGH : la France manque de bio-informaticiens médicaux capables de concevoir ces panels, intégrer les classifieurs et industrialiser les pipelines. Sans ces profils hybrides, à l'interface de la biologie, de l'informatique et de la clinique, la souveraineté technologique reste un vœu pieux.
+
+---
+
+Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) et en collaboration avec [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) pour la partie wet lab. J'ai été en charge du volet dry lab : conception des panels, intégration et validation d'outils et de modèles existants, développement des pipelines d'analyse et mise en production de la solution dans ce contexte clinique.
+
+# Références
+
+<p id="ref-1">
+**[1]** [Illumina Methylation Assay](https://en.wikipedia.org/wiki/Illumina_Methylation_Assay)
+<i>Wikipedia</i>.
+</p>
+
+<p id="ref-2">
+**[2]** Véronique Quillien et al (2011).
+<i>Intérêt de la MGMT dans les gliomes</i>.
+<b>Bulletin du Cancer</b>.
+<a href="https://doi.org/10.1684/bdc.2011.1332" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-3">
+**[3]** Vermeulen C. et al (2023).
+<i>Ultra-fast deep-learned CNS tumour classification during surgery</i>.
+<b>Nature</b>.
+<a href="https://doi.org/10.1038/s41586-023-06615-2" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-4">
+**[4]** Fédération Française de Génétique Humaine (2026).
+<i>Livre Blanc de la Génétique Médicale</i>.
+<a href="https://www.ffgh.fr/" target="_blank" rel="noopener noreferrer">FFGH</a>
+</p>
+
+<p id="ref-5">
+**[5]** Capper et al (2018).
+<i>DNA methylation-based classification of central nervous system tumours </i>.
+<b>Nature</b>.
+<a href="https://www.nature.com/articles/nature26000" target="_blank" rel="noopener noreferrer">FFGH</a>
+</p>

@@ -1,15 +1,15 @@
 ---
-import MinimalLayout from '../../layouts/MinimalLayout.astro';
-import ProjectRequestForm from '../../components/ProjectRequestForm.jsx';
+import MinimalLayout from '../../../layouts/MinimalLayout.astro';
+import ProjectRequestForm from '../../../components/ProjectRequestForm.jsx';
 ---
 
-<MinimalLayout title="Contact">
+<MinimalLayout title="Contact" lang="en">
   <div class="contact-page">
     <h1 class="contact-heading">Let's work together</h1>
     <p class="contact-subtitle">
       Tell me about your project and I'll get back to you within 48 hours.
     </p>
-    <ProjectRequestForm client:load />
+    <ProjectRequestForm client:load lang="en" />
 
     <div class="contact-email-section">
       <hr class="contact-divider" />

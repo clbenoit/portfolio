@@ -1,0 +1,77 @@
+---
+import MinimalLayout from '../../../layouts/MinimalLayout.astro';
+import ProjectRequestForm from '../../../components/ProjectRequestForm.jsx';
+---
+
+<MinimalLayout title="Contact" lang="fr">
+  <div class="contact-page">
+    <h1 class="contact-heading">Travaillons ensemble</h1>
+    <p class="contact-subtitle">
+      Parlez-moi de votre projet et je vous répondrai sous 48 heures.
+    </p>
+    <ProjectRequestForm client:load lang="fr" />
+
+    <div class="contact-email-section">
+      <hr class="contact-divider" />
+      <p class="contact-email-note">
+        Vous préférez utiliser un email ? N'hésitez pas à m'écrire directement — surtout pour des questions rapides, des suivis ou des sujets qui ne sont pas une demande de projet.
+      </p>
+      <a href="mailto:benoitclement.data@gmail.com" class="contact-email-link">
+        benoitclement.data@gmail.com
+      </a>
+    </div>
+  </div>
+</MinimalLayout>
+
+<style>
+  .contact-page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  .contact-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin: 0 0 8px;
+    text-align: center;
+  }
+
+  .contact-subtitle {
+    font-size: 16px;
+    color: var(--color-text3);
+    text-align: center;
+    margin: 0 0 40px;
+    line-height: 1.6;
+  }
+
+  .contact-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 48px 0 24px;
+  }
+
+  .contact-email-section {
+    text-align: center;
+  }
+
+  .contact-email-note {
+    font-size: 14px;
+    color: var(--color-text3);
+    margin: 0 0 12px;
+    line-height: 1.6;
+  }
+
+  .contact-email-link {
+    font-size: 16px;
+    color: var(--color-textAccent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .contact-email-link:hover {
+    color: var(--color-textAccentHover);
+    text-decoration: underline;
+  }
+</style>

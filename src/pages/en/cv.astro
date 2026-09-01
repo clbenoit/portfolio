@@ -1,0 +1,12 @@
+---
+import MinimalLayout from '../../layouts/MinimalLayout.astro';
+import SkillsGrid from '../../components/CV/SkillsGrid';
+import Timeline from '../../components/CV/Timeline';
+---
+
+<MinimalLayout title="CV" lang="en">
+  <div class="cv-page">
+    <SkillsGrid client:load lang="en" />
+    <Timeline client:load lang="en" />
+  </div>
+</MinimalLayout>

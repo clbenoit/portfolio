@@ -1,8 +1,13 @@
 ---
-import DefaultLayout from '../../layouts/DefaultLayout.astro';
+import { getCollection } from 'astro:content';
+import DefaultLayout from '../../../layouts/DefaultLayout.astro';
+
+const projects = await getCollection('projects_en');
+const omicsApps = projects.filter(p => p.data.category === 'omics');
+const cncProjects = projects.filter(p => p.data.category === 'cnc');
 ---
 
-<DefaultLayout title="Projects">
+<DefaultLayout title="Projects" lang="en">
   <h1>Here are my projects</h1>
 
   <h2>OmicsVerse</h2>
@@ -12,34 +17,26 @@ import DefaultLayout from '../../layouts/DefaultLayout.astro';
   </video>
 
   <p>The initial aim of the <a href="https://omicsverse.fr">OmicsVerse portal</a> is to host demo versions of the various data applications I create.</p>
-
   <p>Application source code and documentation for administrators can be found on my <a href="https://github.com/clbenoit">github</a>.</p>
-
   <p>The following sections &amp; pages will host detailed documentation of users.</p>
-
-  <p>If you have a genomics-oriented data application to host, don't hesitate to contact me. provided there are resources available.</p>
+  <p>If you have a genomics-oriented data application to host, don't hesitate to contact me, provided there are resources available.</p>
 
   <ul>
-    <li><a href="/portfolio/projects/somavardb/">SomaVarDB</a></li>
-    <li><a href="/portfolio/projects/germlinevardb/">GermlineVarDB</a></li>
-    <li><a href="/portfolio/projects/filtr3r-shiny/">FilLT3r Shiny App</a></li>
-    <li><a href="/portfolio/projects/methyldb/">Methyldb</a></li>
-    <li><a href="/portfolio/projects/lrm-elembio/">LRM_Elembio</a></li>
+    {omicsApps.map(p => (
+      <li><a href={`/portfolio/en/projects/${p.id}/`}>{p.data.title}</a></li>
+    ))}
   </ul>
 
   <h3>Can I use it for clinical purposes?</h3>
 
   <p>The honest answer is: <b>not yet</b>.</p>
-
   <p>These are <b>research and exploratory tools</b>.<br />
   Using it in routine diagnostics would require compliance with<br />
   medical device software regulations and formal validation processes
-  <a href="/portfolio/projects/#ref-1">[1]</a> <a href="/portfolio/projects/#ref-2">[2]</a> <a href="/portfolio/projects/#ref-3">[3]</a>.</p>
-
-  <p>This is far beyond what a single developer can realistically achieve alone this is an unattainable goal for just one person in their spare time.<br /><br />
-  So if you feel like contributing to the project. Don't hesitate to contact me:
+  <a href="/portfolio/en/projects/#ref-1">[1]</a> <a href="/portfolio/en/projects/#ref-2">[2]</a> <a href="/portfolio/en/projects/#ref-3">[3]</a>.</p>
+  <p>This is far beyond what a single developer can realistically achieve alone.<br /><br />
+  So if you feel like contributing to the project, don't hesitate to contact me:
   <a href="mailto:benoitclement.data@gmail.com">benoitclement.data@gmail.com</a>.</p>
-
   <p>That said, these tools are designed to <b>lower the barrier</b> for institutions that want to:</p>
   <ul>
     <li>Reclaim control over their methylation data.</li>
@@ -102,14 +99,12 @@ import DefaultLayout from '../../layouts/DefaultLayout.astro';
     <b>IEEE</b>.<br />
     <a href="https://doi.org/10.1109/ICSA-C50368.2020.00040" target="_blank" rel="noopener noreferrer">DOI</a>
   </p>
-
   <p id="ref-2">
     <b>[2]</b> Cyrille Michaud (2020).<br />
     <i>How to qualify, classify and CE mark software</i>.<br />
     <b>MD101</b>.<br />
     <a href="https://blog.cm-dm.com/pages/How-to-qualify%2C-classify-and-CE-mark-software" target="_blank" rel="noopener noreferrer">URL</a>
   </p>
-
   <p id="ref-3">
     <b>[3]</b> Małgorzata Kruszynska (2021).<br />
     <i>CE marking for Medical Device Software: a step-by-step guide</i>.<br />

@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import DefaultLayout from '../../../layouts/DefaultLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects_en');
+  return Promise.all(projects.map(async (project) => {
+    const { Content } = await render(project);
+    return {
+      params: { slug: project.id },
+      props: { project, Content },
+    };
+  }));
+}
+
+const { project, Content } = Astro.props;
+---
+
+<DefaultLayout title={project.data.title} lang="en">
+  <div class="project-content">
+    <Content />
+  </div>
+</DefaultLayout>

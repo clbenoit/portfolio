@@ -1,12 +1,21 @@
 ---
-import { topNav, siteConfig } from '../config';
+import { topNav, siteConfig, locales, localizedHref, localeLabels } from '../config';
+import type { Locale } from '../config';
 
+export interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'en' } = Astro.props;
 const currentPath = Astro.url.pathname;
+const otherLang = lang === 'fr' ? 'en' : 'fr';
+const otherLabel = localeLabels[otherLang];
+const currentLabel = localeLabels[lang];
 ---
 
 <nav class="top-nav" data-open="false">
   <div class="top-nav-inner">
-    <a href="/portfolio/" class="top-nav-title">{siteConfig.title}</a>
+    <a href={`/portfolio/${lang}/`} class="top-nav-title">{siteConfig.title}</a>
     <button class="hamburger" aria-label="Toggle navigation menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6" />
@@ -16,16 +25,33 @@ const currentPath = Astro.url.pathname;
     </button>
     <div class="top-nav-dropdown">
       <div class="top-nav-links">
-        {topNav.map(item => (
-          <a
-            href={item.href}
-            class={currentPath.startsWith(item.href) ? 'top-nav-link active' : 'top-nav-link'}
-          >
-            {item.text}
-          </a>
-        ))}
+        {topNav.map(item => {
+          const localizedHrefVal = localizedHref(item.href, lang);
+          return (
+            <a
+              href={localizedHrefVal}
+              class={currentPath.startsWith(localizedHrefVal) ? 'top-nav-link active' : 'top-nav-link'}
+            >
+              {item.text}
+            </a>
+          );
+        })}
+        <a
+          href={currentPath.replace(`/${lang}/`, `/${otherLang}/`)}
+          class="top-nav-link lang-switch"
+          data-current={currentLabel}
+        >
+          {otherLabel}
+        </a>
       </div>
     </div>
+    <a
+      href={currentPath.replace(`/${lang}/`, `/${otherLang}/`)}
+      class="lang-switch-desktop"
+      aria-label={`Switch to ${otherLabel}`}
+    >
+      {otherLabel}
+    </a>
   </div>
 </nav>
 
@@ -77,6 +103,7 @@ const currentPath = Astro.url.pathname;
   .top-nav-links {
     display: flex;
     gap: 24px;
+    align-items: center;
   }
 
   .top-nav-link {
@@ -98,6 +125,43 @@ const currentPath = Astro.url.pathname;
     color: var(--color-backgroundAccent);
   }
 
+  .lang-switch {
+    border-left: 1px solid var(--color-border);
+    margin-left: 8px;
+    padding-left: 16px;
+    font-weight: 700;
+  }
+
+  .lang-switch-desktop {
+    display: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text2);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    margin-left: 8px;
+  }
+
+  .lang-switch-desktop:hover {
+    color: var(--color-text);
+    background: var(--color-background3);
+    border-color: var(--color-border2);
+  }
+
+  @media (min-width: 768px) {
+    .lang-switch-desktop {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .lang-switch {
+      display: none;
+    }
+  }
+
   @media (max-width: 767px) {
     .top-nav {
       padding: 0 16px;
@@ -105,6 +169,11 @@ const currentPath = Astro.url.pathname;
 
     .hamburger {
       display: block;
+      order: 2;
+    }
+
+    .lang-switch-desktop {
+      display: none;
     }
 
     .top-nav-dropdown {
@@ -133,6 +202,15 @@ const currentPath = Astro.url.pathname;
       padding: 10px 12px;
       font-size: 16px;
     }
+
+    .lang-switch {
+      border-left: none;
+      border-top: 1px solid var(--color-border);
+      margin-left: 0;
+      padding-left: 12px;
+      padding-top: 12px;
+      margin-top: 8px;
+    }
   }
 </style>
 
@@ -148,6 +226,17 @@ const currentPath = Astro.url.pathname;
   nav?.querySelectorAll('.top-nav-link').forEach(link => {
     link.addEventListener('click', () => {
       nav.setAttribute('data-open', 'false');
+    });
+  });
+</script>
+
+<script>
+  document.querySelectorAll('.lang-switch, .lang-switch-desktop').forEach(btn => {
+    btn.addEventListener('click', () => {
+      var m = window.location.pathname.match(/^\/(?:portfolio\/)?(fr|en)\//);
+      var current = m ? m[1] : 'en';
+      var next = current === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('lang', next);
     });
   });
 </script>

@@ -1,28 +1,84 @@
 import { useState } from 'react';
 
-const SERVICES = [
-  'Bioinformatics',
-  'Data analysis',
-  'AI automation and workflow developments',
-  'Data engineering',
-  'Other',
-];
+const EN = {
+  formTitle: 'Project request form',
+  budget: 'Budget range',
+  budgetPlaceholder: 'Select a budget range',
+  deadline: 'Deadline',
+  services: 'Services needed',
+  description: 'Project description',
+  descriptionPlaceholder: 'Describe your project, goals, and any specific requirements...',
+  submit: 'Submit your project request',
+  sending: 'Sending...',
+  successTitle: 'Thank you!',
+  successMsg: "Your project request has been sent successfully. I'll get back to you within 48 hours.",
+  errorBudget: 'Please select a budget range.',
+  errorDeadline: 'Please select a deadline.',
+  errorDeadlineFuture: 'Deadline must be a future date.',
+  errorServices: 'Please select at least one service.',
+  errorDescription: 'Please describe your project.',
+  errorSubmit: 'Submission failed. Please try again.',
+  errorNetwork: 'Network error. Please check your connection and try again.',
+  subject: 'New project request from portfolio',
+};
+
+const FR = {
+  formTitle: 'Formulaire de demande de projet',
+  budget: "Budget estimé",
+  budgetPlaceholder: "Sélectionnez une fourchette",
+  deadline: 'Date limite',
+  services: 'Services souhaités',
+  description: 'Description du projet',
+  descriptionPlaceholder: 'Décrivez votre projet, ses objectifs et vos besoins spécifiques...',
+  submit: 'Envoyer la demande',
+  sending: 'Envoi en cours...',
+  successTitle: 'Merci !',
+  successMsg: 'Votre demande a bien été envoyée. Je vous répondrai sous 48 heures.',
+  errorBudget: 'Veuillez sélectionner un budget.',
+  errorDeadline: 'Veuillez sélectionner une date.',
+  errorDeadlineFuture: 'La date doit être dans le futur.',
+  errorServices: 'Veuillez sélectionner au moins un service.',
+  errorDescription: 'Veuillez décrire votre projet.',
+  errorSubmit: "L'envoi a échoué. Veuillez réessayer.",
+  errorNetwork: 'Erreur réseau. Vérifiez votre connexion et réessayez.',
+  subject: 'Nouvelle demande de projet depuis le portfolio',
+};
+
+const SERVICES = {
+  en: [
+    'Bioinformatics',
+    'Data analysis',
+    'AI automation and workflow developments',
+    'Data engineering',
+    'Other',
+  ],
+  fr: [
+    'Bioinformatique',
+    'Analyse de données',
+    "Automatisation IA et développement de workflows",
+    'Ingénierie des données',
+    'Autre',
+  ],
+};
 
 const BUDGET_OPTIONS = ['', '<2k', '2-5k', '5-10k', '10-20k', '20k+'];
 
 const WEB3FORMS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 
-export default function ProjectRequestForm() {
+export default function ProjectRequestForm({ lang = 'en' }) {
+  const t = lang === 'fr' ? FR : EN;
+  const services = SERVICES[lang] || SERVICES.en;
+
   const [budget, setBudget] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [services, setServices] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('idle');
   const [errors, setErrors] = useState({});
   const [serverMessage, setServerMessage] = useState('');
 
   function toggleService(service) {
-    setServices((prev) =>
+    setSelectedServices((prev) =>
       prev.includes(service)
         ? prev.filter((s) => s !== service)
         : [...prev, service]
@@ -31,14 +87,14 @@ export default function ProjectRequestForm() {
 
   function validate() {
     const next = {};
-    if (!budget) next.budget = 'Please select a budget range.';
-    if (!deadline) next.deadline = 'Please select a deadline.';
+    if (!budget) next.budget = t.errorBudget;
+    if (!deadline) next.deadline = t.errorDeadline;
     else if (new Date(deadline) <= new Date())
-      next.deadline = 'Deadline must be a future date.';
-    if (services.length === 0)
-      next.services = 'Please select at least one service.';
+      next.deadline = t.errorDeadlineFuture;
+    if (selectedServices.length === 0)
+      next.services = t.errorServices;
     if (!description.trim())
-      next.description = 'Please describe your project.';
+      next.description = t.errorDescription;
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -56,10 +112,10 @@ export default function ProjectRequestForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: 'New project request from portfolio',
+          subject: t.subject,
           budget,
           deadline,
-          services: services.join(', '),
+          services: selectedServices.join(', '),
           description: description.trim(),
         }),
       });
@@ -70,19 +126,19 @@ export default function ProjectRequestForm() {
         setStatus('success');
       } else {
         setStatus('error');
-        setServerMessage(data.message || 'Submission failed. Please try again.');
+        setServerMessage(data.message || t.errorSubmit);
       }
     } catch {
       setStatus('error');
-      setServerMessage('Network error. Please check your connection and try again.');
+      setServerMessage(t.errorNetwork);
     }
   }
 
   if (status === 'success') {
     return (
       <div className="form-success">
-        <h2>Thank you!</h2>
-        <p>Your project request has been sent successfully. I'll get back to you within 48 hours.</p>
+        <h2>{t.successTitle}</h2>
+        <p>{t.successMsg}</p>
       </div>
     );
   }
@@ -90,14 +146,14 @@ export default function ProjectRequestForm() {
   return (
     <form className="project-form" onSubmit={handleSubmit} noValidate>
       <div className="form-field">
-        <label htmlFor="budget">Budget range</label>
+        <label htmlFor="budget">{t.budget}</label>
         <select
           id="budget"
           value={budget}
           onChange={(e) => setBudget(e.target.value)}
           className={errors.budget ? 'field-error' : ''}
         >
-          <option value="">Select a budget range</option>
+          <option value="">{t.budgetPlaceholder}</option>
           {BUDGET_OPTIONS.slice(1).map((opt) => (
             <option key={opt} value={opt}>{opt}</option>
           ))}
@@ -106,7 +162,7 @@ export default function ProjectRequestForm() {
       </div>
 
       <div className="form-field">
-        <label htmlFor="deadline">Deadline</label>
+        <label htmlFor="deadline">{t.deadline}</label>
         <input
           type="date"
           id="deadline"
@@ -118,14 +174,14 @@ export default function ProjectRequestForm() {
       </div>
 
       <fieldset className="form-field form-field-services">
-        <legend>Services needed</legend>
+        <legend>{t.services}</legend>
         {errors.services && <span className="form-error">{errors.services}</span>}
         <div className="checkbox-group">
-          {SERVICES.map((service) => (
+          {services.map((service) => (
             <label key={service} className="checkbox-label">
               <input
                 type="checkbox"
-                checked={services.includes(service)}
+                checked={selectedServices.includes(service)}
                 onChange={() => toggleService(service)}
               />
               {service}
@@ -135,13 +191,13 @@ export default function ProjectRequestForm() {
       </fieldset>
 
       <div className="form-field">
-        <label htmlFor="description">Project description</label>
+        <label htmlFor="description">{t.description}</label>
         <textarea
           id="description"
           rows={5}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Describe your project, goals, and any specific requirements..."
+          placeholder={t.descriptionPlaceholder}
           className={errors.description ? 'field-error' : ''}
         />
         {errors.description && <span className="form-error">{errors.description}</span>}
@@ -152,7 +208,7 @@ export default function ProjectRequestForm() {
         className="form-submit"
         disabled={status === 'submitting'}
       >
-        {status === 'submitting' ? 'Sending...' : 'Submit your project request'}
+        {status === 'submitting' ? t.sending : t.submit}
       </button>
 
       {status === 'error' && (

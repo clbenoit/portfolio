@@ -1,0 +1,146 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+---
+
+<LandingLayout lang="fr">
+  <div class="landing-root">
+    <div class="landing-hero">
+      <h1 class="landing-heading">
+        Salut !<br />
+        Je suis Clément BENOIT
+      </h1>
+      <p class="landing-bio">
+        Un ingénieur en bioinformatique spécialisé dans les <b>données omiques, la génomique clinique et les pipelines biomédicaux basés sur l'IA</b>.
+        <br /><br />
+        Je <b>construis</b> des outils computationnels et des systèmes d'IA qui transforment des données de santé complexes en <b>solutions fiables et prêtes pour la production clinique</b>.
+        <br /><br />
+        Formé en ingénierie biotechnologique et bioinformatique, <b>j'aime faire le pont entre la biologie, le génie logiciel et l'IA.</b>
+      </p>
+
+      <div class="landing-buttons">
+        <a href="/portfolio/fr/projects/" class="landing-button landing-button-accent">
+          Voir mes projets
+        </a>
+        <a href="https://github.com/clbenoit" class="landing-button">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/clement-benoit" class="landing-button">
+          LinkedIn
+        </a>
+      </div>
+
+      <p class="landing-bio">
+        Je suis toujours ouvert à d'autres types de projets — les environnements réglementés ne sont pas un problème !
+      </p>
+
+      <a href="/portfolio/fr/contact/" class="landing-cta">
+        Parlons de votre projet
+      </a>
+      <p class="landing-bio"><br />
+        <b>En dehors du travail :</b> skateboard, prendre soin de mes plantes, explorer les Alpes autour de Grenoble et diriger un collectif de développeurs en parallèle.
+      </p>
+    </div>
+  </div>
+</LandingLayout>
+
+<style>
+  .landing-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 64px);
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .landing-heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+
+  .landing-bio {
+    font-size: 18px;
+    color: var(--color-text2);
+    max-width: 720px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .landing-bio b {
+    color: var(--color-text);
+  }
+
+  .landing-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .landing-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    background: var(--color-background2);
+    transition: all 0.15s ease;
+  }
+
+  .landing-button:hover {
+    background: var(--color-background3);
+    border-color: var(--color-border2);
+  }
+
+  .landing-button-accent {
+    background: var(--color-backgroundAccent);
+    color: var(--color-backgroundAccentText);
+    border-color: var(--color-backgroundAccent);
+  }
+
+  .landing-button-accent:hover {
+    background: var(--color-backgroundAccentHover);
+    border-color: var(--color-backgroundAccentHover);
+  }
+
+  .landing-cta {
+    display: inline-block;
+    padding: 16px 36px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--color-backgroundAccentText);
+    background: var(--color-backgroundAccent);
+    border: 2px solid var(--color-backgroundAccent);
+    transition: all 0.15s ease;
+  }
+
+  .landing-cta:hover {
+    background: var(--color-backgroundAccentHover);
+    border-color: var(--color-backgroundAccentHover);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 600px) {
+    .landing-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .landing-button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

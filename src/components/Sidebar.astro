@@ -1,6 +1,12 @@
 ---
-import { sidebar } from '../config';
+import { sidebar, localizedHref } from '../config';
+import type { Locale } from '../config';
 
+export interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'en' } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
@@ -9,7 +15,7 @@ const currentPath = Astro.url.pathname;
     <div class="sidebar-section">
       {section.link ? (
         <a
-          href={section.href}
+          href={localizedHref(section.href, lang)}
           class={currentPath === section.href ? 'sidebar-heading-link active' : 'sidebar-heading-link'}
         >
           {section.text}
@@ -22,7 +28,7 @@ const currentPath = Astro.url.pathname;
           {section.items.map(item => (
             <li>
               <a
-                href={item.href}
+                href={localizedHref(item.href, lang)}
                 class={currentPath === item.href ? 'sidebar-link active' : 'sidebar-link'}
               >
                 {item.text}
