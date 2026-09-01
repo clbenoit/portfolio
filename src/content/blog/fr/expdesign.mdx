@@ -1,0 +1,56 @@
+---
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+title: "Plan d'expérience dans le cadre du séquençage nouvelle génération"
+date: 2024-02-15
+lang: "fr"
+---
+
+# Plan d'expérience dans le cadre du séquençage nouvelle génération
+
+## Introduction
+
+Venant d'un cursus en biotechnologie, j'ai été sensibilisé aux problèmes de plan d'expérience. J'ai ensuite passé quelques années en tant que bioinformaticien, laissant cette tâche à mes collègues de plateforme.
+
+En tant que bioinformaticien, on se concentre sur la production de pipelines et d'algorithmes de qualité pour traiter les données du séquenceur.
+Mais on oublie parfois que, sans un bon plan d'expérience, on risque de ne pas pouvoir tirer de conclusions,
+voire de produire involontairement des faux positifs. <br />
+
+Voici un bref aperçu des principales considérations pour les concepteurs d'expériences.
+
+## Spécificités du séquençage nouvelle génération
+
+Il faut garder à l'esprit que tout commence par du matériel biologique, à partir duquel on souhaite extraire des séquences biologiques **informatives**, pour répondre à une question précise.
+La difficulté réside dans l'extraction d'informations utiles sans les confondre avec d'autres facteurs : bruit de fond, biais...
+
+L'échantillon est d'abord prélevé de son environnement, par lequel il aura été impacté.
+L'interaction du matériel biologique avec son environnement,
+ainsi que le prélèvement effectué, constituent déjà une première source de variance.
+
+# Méthodologie
+
+1. **Définir clairement la question posée et la technologie choisie pour y répondre.** <br/>
+De nombreux facteurs de confusion dépendront de la technologie choisie. Ils auront un impact plus ou moins grand selon la question posée.
+2. **Contrôler les variables expérimentales** <br/>
+Les variables à contrôler peuvent inclure les techniques de préparation des échantillons, les paramètres de séquençage et les conditions environnementales. Assurez-vous que l'impact de ces facteurs
+sur vos données soit minimisé et contrôlé pour isoler l'impact des variables spécifiques d'intérêt, renforçant ainsi la fiabilité des résultats.
+3. **Techniques de randomisation** <br/>
+L'application de techniques de randomisation empêchera votre expérience de capturer un [biais systémique](https://en.wikipedia.org/wiki/Systemic_bias) dans vos données.
+4. **Stratégies de réplication**<br/>
+La réplication de l'expérience avec différents échantillons ou dans différentes conditions renforce la robustesse des résultats.
+Elle permet d'identifier des motifs cohérents et aide à généraliser les conclusions à un contexte plus large.
+5. **Plan factoriel**<br/>
+Le plan factoriel est une méthode statistique expérimentale qui explore les effets de plusieurs variables indépendantes simultanément.
+Il permet aux chercheurs d'évaluer les effets individuels de chaque facteur et toute interaction potentielle entre eux, offrant une compréhension plus complète
+des résultats expérimentaux.
+
+# Conclusion
+
+Le plan d'expérience n'est pas si compliqué en termes de méthodologie, et il est essentiel pour tirer le meilleur parti du séquençage de vos échantillons biologiques.
+Cependant, une connaissance approfondie des différentes technologies disponibles et des techniques et stratégies de plan d'expérience est nécessaire pour l'appliquer efficacement...
+
+{/* # To go further */}
+
+{/* [^1], [^2], [^3] */}
+
+{/* [^1]: Doe, J., & Smith, A. (Year). *Title of the Publication*. **Journal Name**, Volume(Issue), Page Range. [DOI](https://doi.org/xxxx) */}

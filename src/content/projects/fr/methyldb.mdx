@@ -1,0 +1,140 @@
+---
+title: "MethylDB"
+category: "omics"
+lang: "fr"
+---
+
+# MethylDB
+
+<div>
+  <h3>
+    <i>Une plateforme open-source pour explorer et interpréter les données de méthylation de l'ADN localement.</i>
+  </h3>
+</div>
+
+<br />
+
+![](/portfolio/methyldb.gif)
+
+## Pourquoi cette application
+
+Le profilage de la méthylation de l'ADN est devenu une pierre angulaire de la pathologie moléculaire moderne,
+en particulier pour la classification des tumeurs, où les classifieurs de référence (notamment ceux développés au DKFZ) ont profondément changé les pratiques diagnostiques.
+
+Pendant de nombreuses années, l'accès à ces analyses a été facilité par la disponibilité d'**outils en ligne, gratuits et centralisés**
+[\[1\]](/projects/methyldb#ref-1).
+Ce modèle a permis une diffusion rapide, une harmonisation des pratiques et une adoption massive par la communauté.
+
+Cependant, les récentes évolutions vers un **accès restreint, des modèles de licence ou des spin-offs commerciaux**
+[\[2\]](/projects/methyldb#ref-2) [\[3\]](/projects/methyldb#ref-3)
+ont révélé une faiblesse structurelle de cette approche :
+de nombreux laboratoires sont devenus **dépendants d'infrastructures externes** pour une activité diagnostique centrale.
+
+Comme pour l'analyse des variants, l'externalisation de l'analyse du méthylome est souvent motivée par :
+
+- Des ressources limitées en bioinformatique locale.
+- La complexité de maintenir des pipelines d'analyse à jour.
+- Des contraintes réglementaires et administratives en milieu clinique.
+
+Bien que compréhensible, cette stratégie soulève des problèmes à long terme :
+
+- Perte d'autonomie sur les données et les méthodes.
+- Augmentation des coûts pour des outils historiquement portés par la communauté.
+- Stagnation de l'expertise locale, malgré une complexité méthodologique croissante.
+
+MethylDB est né de ce constat.
+
+## Philosophie du projet
+
+MethylDB vise à fournir une **solution locale, transparente et extensible** pour l'exploration des résultats de méthylation de l'ADN,
+sans dépendre de services externes de type boîte noire.
+
+L'objectif n'est **pas** de remplacer les classifieurs ou pipelines existants,
+mais de **ré-internaliser la couche d'interprétation**, là où se situe l'essentiel de la valeur ajoutée pour les biologistes.
+
+En résumé :
+
+- Les pipelines peuvent rester standardisés (nf-core, internes ou commerciaux).
+- Les résultats de méthylation bruts ou traités restent au sein de l'institution.
+- L'interprétation, la comparaison, l'annotation et la curation sont effectuées localement.
+
+Cette logique est la même que celle qui a motivé le développement de GermlineVarDB.
+
+## Ce que MethylDB fait
+
+MethylDB est conçu pour :
+
+- Importer des résultats de méthylation de l'ADN (ex. matrices issues d'IDAT, sorties de classifieurs, métriques QC).
+- Construire une **base de données locale de méthylation** à travers les échantillons, projets et le temps.
+- Fournir une **interface graphique** pour :
+  - Explorer la similarité et le clustering des échantillons.
+  - Inspecter les scores des classifieurs et les métriques de confiance.
+  - Comparer les nouveaux cas aux cohortes locales historiques.
+  - Signaler les classifications ambiguës ou limites.
+
+L'accent est délibérément mis sur **l'utilisabilité pour les biologistes moléculaires et les pathologistes**,
+et non sur le remplacement des notebooks ou des workflows en ligne de commande.
+
+## Open-source et porté par la communauté
+
+MethylDB est publié en tant que **projet open-source**, avec la même conviction que mes travaux précédents :
+les outils utilisés quotidiennement en diagnostic doivent être compréhensibles, audibles et améliorables par leurs utilisateurs.
+
+- [Code source](https://github.com/clbenoit/MethylDB)
+- Démo en direct (à venir)
+
+Le projet est intentionnellement modulaire, permettant aux utilisateurs de l'adapter à :
+
+- Différentes technologies de puces.
+- Différents classifieurs ou jeux de données de référence.
+- Des contextes de recherche ou de diagnostic de routine.
+
+
+## Appel aux contributions
+
+Si vous êtes :
+
+- Un laboratoire affecté par les récents changements d'accès aux classifieurs du méthylome,
+- Un bioinformaticien fatigué de réimplémenter les mêmes outils internes,
+- Ou simplement intéressé par un diagnostic moléculaire ouvert et durable,
+
+alors les contributions, retours et discussions sont plus que bienvenus.
+
+📩 Contact : [benoitclement.data@gmail.com](mailto:benoitclement.data@gmail.com)
+
+## Remerciements
+
+Je tiens à remercier chaleureusement [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5) pour son aide précieuse et ses contributions tout au long des phases de conception et de développement de MethylDB.
+Ses retours, ses discussions techniques et son implication concrète ont été déterminants pour mener ce projet à bien.
+
+Ce projet a également bénéficié de l'utilisation de **jeux de données publics** lors du développement et des tests, en particulier :
+
+Ce projet a également bénéficié de l'utilisation de **jeux de données publics** lors des phases de développement et de test, en particulier :
+- le jeu de données **GSE109381** ([NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381))
+- le jeu de données **GSE225810** ([NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE225810))
+
+---
+title: "MethylDB"
+
+## Références
+
+<p id="ref-1">
+**[1]** Capper D. et al. (2018).
+<i>DNA methylation-based classification of central nervous system tumours</i>.
+<b>Nature</b>, 555, 469–474.
+<a href="https://doi.org/10.1038/nature26000" target="_blank"   rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+**[2]** German Cancer Research Center (DKFZ).
+<i>AI-supported molecular cancer diagnosis for brain tumors</i>.
+Communiqué de presse du DKFZ décrivant la transition du classifieur de méthylation vers une exploitation industrielle via une spin-off.
+<a href="https://www.dkfz.de/en/news/press-releases/detail/ai-supported-molecular-cancer-diagnosis-for-brain-tumors" target="_blank"   rel="noopener noreferrer">URL</a>
+</p>
+
+<p id="ref-3">
+**[3]** Heidelberg Epignostix GmbH.
+<i>Our Technology – CNS Tumor Classifier</i>.
+Portail commercial officiel décrivant l'accès au classifieur de méthylation selon des conditions d'utilisation définies.
+<a href="https://epignostix.com/our-technology/our-technology-cns-tumor-classifier/" target="_blank"   rel="noopener noreferrer">URL</a>
+</p>

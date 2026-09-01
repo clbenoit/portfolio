@@ -1,0 +1,94 @@
+---
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+title: "Un pipeline reproductible pour le criblage de sites génomiques ciblables par CRISPR dans les troubles autosomiques dominants, fournissant des preuves pour évaluer les candidats thérapeutiques potentiels et éclairer la prise de décision médicale ultérieure."
+date: 2024-08-01
+lang: "fr"
+---
+# Un pipeline reproductible pour le criblage de sites génomiques ciblables par CRISPR dans les troubles autosomiques dominants, fournissant des preuves pour évaluer les candidats thérapeutiques potentiels et éclairer la prise de décision médicale ultérieure.
+https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531(24)00146-X
+
+## Introduction
+
+La thérapie génique a connu une avancée majeure avec le développement de la technologie **CRISPR-Cas9**. 
+Cet outil révolutionnaire permet aux scientifiques de modifier les gènes avec précision, offrant un nouvel espoir pour 
+traiter les troubles génétiques et les maladies. **Avec le potentiel de corriger les mutations génétiques à 
+la source, CRISPR-Cas9 ouvre un monde de possibilités pour la médecine personnalisée et les thérapies ciblées.**
+L'avenir de la thérapie génique semble plus prometteur que jamais,
+avec la promesse de traitements améliorés et même de potentielles guérisons pour un large éventail de conditions.
+
+Les [troubles autosomiques dominants](https://www.genome.gov/genetics-glossary/Autosomal-Dominant-Disorder) font partie des maladies qui pourraient bénéficier de traitements géniques à l'avenir. 
+Comme son nom l'indique, la présence d'un seul allèle muté pathogène est suffisante pour
+que la maladie apparaisse, certains chercheurs comptent donc sur la technologie CRISPR-Cas9 pour briser l'allèle muté. 
+Seul l'allèle sauvage subsiste, et la maladie est ainsi guérie. 
+Bien que l'efficacité de cette approche semble prometteuse [\[1\]](/blog/cutonestrand#ref-1) [\[2\]](/blog/cutonestrand#ref-2) [\[3\]](/blog/cutonestrand#ref-3), plusieurs problèmes doivent encore être résolus, dont deux que nous allons tenter d'aborder dans cet article :
+
+**Comment la conception de ces traitements de médecine personnalisée peut-elle être efficace et rapide pour chaque patient ?** <br/><br/>
+**Comment cibler spécifiquement l'allèle muté sans endommager l'allèle fonctionnel ni une autre partie du génome ?**
+
+## L'analyse de données peut être utilisée pour créer une liste de régions génomiques intéressantes pour la thérapie génique
+
+Le clivage ciblé du génome est réalisé en ciblant le clivage spécifique à la séquence de l'endonucléase 
+Cas9 de S. pyogenes (spCas9) avec un gRNA. Pour que le gRNA dirige avec succès le clivage par Cas9,
+la séquence d'ADN cible correspondante dans le génome doit se trouver à côté d'un site PAM,
+également appelé motif adjacent au protospacer. Le PAM canonique associé à la nucléase spCas9 est **5'-NGG-3'**.
+Nous allons donc tenter d'établir une liste exhaustive de toutes les régions génomiques qui pourraient être utilisées pour cette
+thérapie génique.
+1) Nous commençons par sélectionner tous les SNP fréquents dans la population (> 5 %), pour lesquels nous pouvons
+utiliser la base de données gnomAD [\[4\]](/blog/cutonestrand#ref-4). Nous souhaitons que la liste créée soit utilisable pour traiter le plus grand nombre possible de
+patients, nous évitons donc les SNP trop rares.
+2) Seuls les SNP qui induisent la disparition ou l'apparition du motif **5'-NGG-3'**
+nous permettront de cibler uniquement l'allèle muté tout en préservant le WT. Pour ce faire, nous avons écrit un script interne en Python.
+3) Nous avons utilisé la [suite d'outils jvarkit](https://github.com/lindenb/jvarkit) pour reconstituer le contexte génomique de ces SNP, c'est-à-dire
+ajouter les séquences flanquantes à gauche et à droite de nos SNP d'intérêt, selon le génome de référence humain.
+4) Enfin, nous avons utilisé l'outil [FlashFry](https://github.com/mckennalab/FlashFry) pour calculer et prédire les scores d'efficacité et de spécificité
+pour chacune des positions que nous avons sélectionnées. Nous voulions couper le gène malade efficacement,
+sans altérer d'autres régions du génome.
+
+Grâce à cette méthode, nous avons pu établir une liste de positions génomiques d'intérêt pour le traitement des myopathies liées au récepteur de la ryanodine de type 1 (RYR1-RM) de type « Autosomal-Dominant-Disorder ». [\[5\]](/blog/cutonestrand#ref-5)
+Grâce au séquençage de nouvelle génération, il est possible d'obtenir les deux séquences génomiques d'un patient
+à un coût raisonnable. Toutes les positions de notre liste pour lesquelles le patient est hétérozygote sont donc
+candidates à la thérapie génique !
+
+[Accédez au code d'analyse ici !](https://github.com/clbenoit/CutOneStrand)
+
+## Généralisation
+
+Bien sûr, la mise en œuvre de la thérapie génique doit faire face à d'autres obstacles et questions,
+mais cette approche peut être généralisée à d'autres troubles autosomiques dominants et permettre aux soignants de
+cribler le génome de manière exhaustive afin de créer une liste restreinte de régions
+d'intérêt pour ce type de thérapie génique !
+
+### Références
+
+<p id="ref-1">
+**[1]** Anzalone A.V, Koblan L.W and Liu D.R.  
+<i>Genome editing with CRISPR–Cas nucleases, base editors, transposases and prime editors</i>.  
+<a href="https://www.nature.com/articles/s41587-020-0561-9" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+**[2]** F Chemello, A.C Chai, H Li, C Rodriguez-Caycedo, E Sanchez-Ortiz, A Atmanli, A.A Mireault, N Liu,  
+R Bassel-Duby, E.N Olson.  
+<i>Precise correction of Duchenne muscular dystrophy exon deletion mutations by base and prime editing</i>.  
+<a href="https://pubmed.ncbi.nlm.nih.gov/33931459/" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-3">
+**[3]** Kelly Godbout, Joël Rousseau, Jacques P Tremblay.  
+<i>Successful Correction by Prime Editing of a Mutation in the RYR1 Gene Responsible for a Myopathy</i>.  
+<a href="https://www.mdpi.com/2073-4409/13/1/31" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-4">
+**[4]** The Genome Aggregation Database (gnomAD).  
+<i>Database and resource for population genomic variation</i>.  
+<a href="https://gnomad.broadinstitute.org/about" target="_blank" rel="noopener noreferrer">URL</a>
+</p>
+
+<p id="ref-5">
+**[5]** Mathilde Beaufils, Margaux Melka, Julie Brocard, Clement Benoit, Nagi Debbah, Kamel Mamchaoui,  
+Norma B. Romero, Anne Frédérique Dalmas-Laurent, Susana Quijano-Roy, Julien Fauré, John Rendu, Isabelle Marty.  
+<i>Functional benefit of CRISPR-Cas9-induced allele deletion for RYR1 dominant mutation</i>.  
+<a href="https://doi.org/10.1016/j.omtn.2024.102259" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>

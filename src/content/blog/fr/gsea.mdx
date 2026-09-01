@@ -1,0 +1,96 @@
+---
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+title: "Un aperçu rapide de l'analyse d'enrichissement de jeux de gènes"
+date: 2024-02-15
+lang: "fr"
+---
+
+# Un aperçu rapide de l'analyse d'enrichissement de jeux de gènes
+
+## Pourquoi l'analyse GSEA ?
+
+L'analyse de l'expression génique à l'échelle du génome est devenue un pilier de la recherche en génomique. Cependant, il existe encore une large gamme d'outils pour interpréter ces profils d'expression génique.
+Ils ont tous des avantages, des inconvénients, et sont encore en évolution. Ceci, couplé au fait que ces études reposent sur le test d'un grand nombre d'hypothèses et sur des tailles d'échantillons relativement petites, conduit les études d'expression à l'échelle du génome entier à être souvent non reproductibles.
+C'est pourquoi la reproductibilité est l'un des principaux défis auxquels sont confrontées les études impliquant des données d'expression génique à l'échelle du génome entier
+[\[1\]](/blog/gsea#ref-1),
+[\[2\]](/blog/gsea#ref-2),
+[\[3\]](/blog/gsea#ref-3).
+
+Enfin, interpréter des listes de milliers de gènes différentiellement exprimés est un exercice fastidieux pour le biologiste.
+
+La GSEA, en dézoomant de l'échelle du gène à celle de la voie, améliore la reproductibilité des études,
+tout en facilitant leur interprétation.
+
+## Principes
+
+### Quelle est la question ?
+
+Disons que vous avez classé une liste de gènes <b><i>L</i></b> selon votre métrique préférée. La GSEA tente de répondre à la question suivante : <br/>
+<p className="popacity">
+Étant donné un ensemble de gènes <b><i>S</i></b> : Est-ce que les gènes appartenant à <b><i>S</i></b> ont tendance à se trouver vers le haut (ou le bas) de la liste <b><i>L</i></b>,
+auquel cas l'ensemble de gènes est corrélé à la distinction de classe phénotypique.
+</p>
+
+Bien sûr, nous effectuerons autant de tests indépendants que nous avons d'ensembles de gènes à tester.
+Une [correction pour tests multiples](https://www.firalis.com/products/fimics-cardiac-ruo-kit-panel) devrait alors être envisagée.
+
+### La méthode
+
+**Étape 1 : Calculer un score d'enrichissement (ES)**<br/>
+Ce score reflète le degré auquel l'ensemble S est surreprésenté aux extrêmes supérieurs (ES > 0) ou inférieurs (ES < 0) de la liste classée R. Il est calculé en parcourant la liste L,
+en augmentant la somme cumulée lorsque nous rencontrons un gène dans S et en la diminuant lorsque nous rencontrons des gènes n'appartenant pas à S. Finalement, la déviation maximale de zéro rencontrée durant la marche aléatoire est retenue comme ES. <br/><br/>
+
+**Étape 2 : Estimation du niveau de signification de ES**<br/>
+La P-valeur nominale estime la signification statistique du ES en utilisant un test de permutation empirique basé sur le phénotype qui
+préserve la structure de corrélation des données d'expression génique. Les étiquettes phénotypiques sont permutées et le ES est recalculé pour générer une distribution nulle pour le ES. La P-valeur nominale empirique du ES observé est ensuite calculée par rapport à
+cette distribution nulle. La permutation des étiquettes de classe préserve les corrélations gène-gène et fournit ainsi une évaluation de la signification plus biologiquement raisonnable que celle obtenue en permutant les gènes.<br/><br/>
+
+**Étape 3 : Ajustement pour tests d'hypothèses multiples.**<br/>
+Les scores d'enrichissement pour chaque ensemble sont normalisés et un taux de fausses découvertes est calculé.
+
+<p className="popacitydanger" >
+  <div style={{ textAlign: 'center' }}>
+    <strong>Il est utile de garder à l'esprit que</strong>
+  </div><br />
+- Le logiciel officiel GSEA ne se plaindra pas si vous lui fournissez des données d'expression génique brutes. Cependant, vos résultats seront totalement incorrects.
+- Vous pouvez effectuer une GSEA pré-classée, ce qui peut être très utile pour réaliser une analyse d'enrichissement de jeux de gènes sur des données qui ne correspondent pas au scénario typique de GSEA. Par exemple, elle peut être utilisée lorsque les choix de métriques de classement fournis par GSEA ne sont pas appropriés pour les données, ou lorsqu'une liste classée de caractéristiques génomiques s'écarte des données d'expression génique traditionnelles (par exemple, résultats GWAS, ChIP-seq, etc.). De plus, si vous manquez de puissance de calcul et avez accès à une liste pré-classée, cette solution peut être votre meilleure option.
+- Définissez clairement la question que vous essayez de traiter et choisissez les métriques de classement appropriées.
+- La curation des ensembles de gènes pourrait être utile comme étape de prétraitement. En effet, vous n'avez pas besoin d'effectuer des tests sur des ensembles de gènes qui ne vous intéressent pas. Cela augmenterait vos besoins en ressources de calcul et créerait un bruit supplémentaire pour la procédure d'ajustement pour tests d'hypothèses multiples.
+</p>
+
+### Pour aller plus loin avec la théorie
+
+Il existe une variante de GSEA appelée FGSEA pour <u>F</u>ast <u>G</u>ene <u>S</u>et <u>E</u>nrichment <u>A</u>nalysis.<br/>
+
+Une autre approche courante pour effectuer une analyse de voies est l'[analyse d'enrichissement ontologique des gènes](https://geneontology.org/docs/go-enrichment-analysis/).
+
+## Programmes disponibles pour la pratique
+- [Outils officiels du Broad Institute](https://www.gsea-msigdb.org/gsea/downloads.jsp)
+- **WEB-based GEne SeT AnaLysis Toolkit**
+  [GUI](https://www.webgestalt.org/)
+  [Paquet R](https://cran.r-project.org/web/packages/WebGestaltR/index.html)
+- [Fast Gene Set Enrichment Analysis](https://bioconductor.org/packages/release/bioc/html/fgsea.html) (Pré-classé uniquement)
+
+## Références
+
+<p id="ref-1">
+**[1]** Timothy E. Sweeney, Winston A. Haynes, Francesco Vallania, John P. Ioannidis, Purvesh Khatri (2017).
+<i>Methods to increase reproducibility in differential gene expression via meta-analysis</i>.
+<b>Nucleic Acids Research</b>.
+<a href="https://doi.org/10.1093/nar/gkw797" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-2">
+**[2]** Steven N Goodman, Daniele Fanelli, John P A Ioannidis (2016).
+<i>What does research reproducibility mean?</i>.
+<b>Sci Transl Med</b>.
+<a href="https://doi.org/10.1126/scitranslmed.aaf5027" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
+
+<p id="ref-3">
+**[3]** Lianbo Yu (2020).
+<i>RNA-Seq Reproducibility Assessment of the Sequencing Quality Control Project</i>.
+<b>Cancer Informatics</b>.
+<a href="https://doi.org/10.1177/1176935120922498" target="_blank" rel="noopener noreferrer">DOI</a>
+</p>
