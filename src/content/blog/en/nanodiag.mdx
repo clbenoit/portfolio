@@ -1,81 +1,84 @@
 ---
-title: "[FR] Classification en temps réel des tumeurs cérébrales par algorithme de deep learning sur données de méthylation Nanopore enrichies par Adaptive Sampling"
+title: "Real-time brain tumour classification via deep learning on Nanopore methylation data enriched by Adaptive Sampling"
 authors:
   - "[cbenoit](www.linkedin.com/in/clement-benoit)"
 date: 2026-06-11
 tags:
-  - fr
+  - deep learning
+  - cancer
+  - methylation
+  - nanopore
 lang: "en"
 ---
 
-# Classification en temps réel des tumeurs cérébrales par algorithme de deep learning sur données de méthylation Nanopore enrichies par Adaptive Sampling
+# Real-time brain tumour classification via deep learning on Nanopore methylation data enriched by Adaptive Sampling
 
-## Le contexte
+## Context
 
-Depuis dix ans, la classification moléculaire des tumeurs du système nerveux central repose sur les profils de méthylation (puces Illumina 450K/EPIC), interprétés via le classifieur de référence développé par le DKFZ (Heidelberg) [\[1\]](/blog/nanodiag#ref-1). Cette dépendance à des plateformes propriétaires et à un outil centralisé — dont le passage récent à un modèle payant a inquiété de nombreux laboratoires — pousse à chercher des alternatives ouvertes et souveraines.
+For the past decade, the molecular classification of central nervous system tumours has relied on methylation profiles (Illumina 450K/EPIC arrays), interpreted via the reference classifier developed by the DKFZ (Heidelberg) [\[1\]](/blog/nanodiag#ref-1). This dependence on proprietary platforms and a centralised tool — whose recent shift to a pay-per-use model has worried many laboratories — is driving the search for open and sovereign alternatives.
 
-Le séquençage Nanopore ouvre une piste sérieuse : des outils comme [Sturgeon](https://github.com/UMCUGenetics/sturgeon) classifient directement à partir des signaux de méthylation natifs de l'ADN, avec des performances proches des approches historiques [\[3\]](/blog/nanodiag#ref-3) — mais ils sont entraînés sur du séquençage génome entier (WGS). Or en clinique, séquencer tout le génome coûte cher et prend du temps : l'**Adaptive Sampling**, qui ne conserve en temps réel que les molécules correspondant à un panel ciblé plutôt que de lire le génome uniformément, permet d'aller plus vite et moins cher. Les auteurs de Sturgeon montrent justement que l'Adaptive Sampling améliore les performances de leur classifieur — mais ils ne publient pas le panel utilisé pour cet enrichissement.
+Nanopore sequencing offers a promising path: tools like [Sturgeon](https://github.com/UMCUGenetics/sturgeon) classify directly from native DNA methylation signals, with performance approaching that of historical approaches [\[3\]](/blog/nanodiag#ref-3) — but they are trained on whole-genome sequencing (WGS). In clinical settings, however, sequencing the entire genome is costly and time-consuming: **Adaptive Sampling**, which retains in real time only molecules matching a targeted panel rather than reading the genome uniformly, makes the process faster and cheaper. The authors of Sturgeon show that Adaptive Sampling improves their classifier's performance — yet they do not publish the panel used for this enrichment.
 
-**D'où notre question :** peut-on concevoir nous-mêmes ce panel d'enrichissement ciblé, de façon à préserver la performance diagnostique tout en s'intégrant aux contraintes de notre plateforme mutualisée ?
+**Hence our question:** can we design this targeted enrichment panel ourselves, in a way that preserves diagnostic performance while integrating with the constraints of our shared platform?
 
-Ce travail s'inscrit aussi dans un enjeu national : selon le Livre Blanc de la FFGH, 46 % de la population française pourrait un jour nécessiter un examen génétique, et la France doit se doter d'infrastructures souveraines et interopérables [\[4\]](/blog/nanodiag#ref-4).
+This work also fits into a national context: according to the White Paper of the FFGH, 46 % of the French population may one day require a genetic test, and France must equip itself with sovereign, interoperable infrastructures [\[4\]](/blog/nanodiag#ref-4).
 
-## Trouver le bon panel
+## Finding the right panel
 
-Notre panel de départ, limité aux CpGs de gènes connus pour les tumeurs cérébrales, ne couvrait qu'environ 1,5 % du génome — proche de la recommandation Nanopore habituelle pour maximiser le nombre d'échantillons par flow cell. Insuffisant : Sturgeon, entraîné sur du séquençage génome entier, hallucinait sur ces données trop parcellaires. Bien que ses auteurs montrent que l'Adaptive Sampling fonctionne
+Our initial panel, restricted to CpGs of genes known to be involved in brain tumours, covered only about 1.5 % of the genome — close to the usual Nanopore recommendation for maximising the number of samples per flow cell. That was insufficient: Sturgeon, trained on whole-genome sequencing, hallucinated on these too-sparse data. Although its authors show that Adaptive Sampling works,
 
-**Premier enseignement** : la performance du classifieur dépend davantage de la largeur du génome ciblé que de la pertinence biologique stricte des régions choisies.
+**First lesson:** the classifier's performance depends more on the breadth of the targeted genome than on the strict biological relevance of the chosen regions.
 
-Nous avons donc reconstruit le panel à partir des ~450 000 CpGs des puces Illumina 450K, en élargissant les fenêtres génomiques autour de ces régions pour capturer plus de lectures informatives en long-read. Après plusieurs itérations sur la taille de ces fenêtres, nous avons atteint un panel couvrant **près de 30 % du génome** — vingt fois plus que le panel initial.
+We therefore rebuilt the panel from the ~450,000 CpGs of the Illumina 450K arrays, widening the genomic windows around these regions to capture more informative long reads. After several iterations on window size, we obtained a panel covering **nearly 30 % of the genome** — twenty times more than the initial panel.
 
-## Rétablir une classification robuste
+## Restoring robust classification
 
-Sur nos échantillons de validation, quatre approches convergeaient vers les mêmes conclusions : Sturgeon, NanoDX, PanNanoDX (sa variante pan-cancer), et les modèles Random Forest, état de l'art du diagnostic en 2023 [\[5\]](/blog/nanodiag#ref-5). Le Random Forest atteignait même 100 % de confiance.
+On our validation samples, four approaches converged on the same conclusions: Sturgeon, NanoDX, PanNanoDX (its pan-cancer variant), and the Random Forest models, the state of the art for diagnosis in 2023 [\[5\]](/blog/nanodiag#ref-5). The Random Forest even reached 100 % confidence.
 
 <figure>
   <img src="/portfolio/robin.png" alt="Description" />
-  <figcaption>*Figure 1 — Résultats des 4 classifiers sur Robin*</figcaption>
-</figure>
+  <figcaption>*Figure 1 — Results of the 4 classifiers on Robin*</figcaption>
+</figure >
 
-L'information biologique couverte suffisait à répondre à la question clinique : le Random Forest, outil état de l'art en clinique, rendait le bon diagnostic avec un score de confiance maximal. Les trois **classifieurs de deep learning**, eux, retrouvaient également la bonne classe, mais **leur score de confiance restait systématiquement dégradé par le caractère partiel des données d'Adaptive Sampling**.
+The biological information covered was sufficient to answer the clinical question: the Random Forest, the state-of-the-art tool in clinical practice, delivered the correct diagnosis with a maximal confidence score. The three **deep learning classifiers** also recovered the correct class, but **their confidence scores were systematically degraded by the partial nature of the Adaptive Sampling data**.
 
-## Ouverture : fine-tuner le modèle
+## Outlook: fine-tuning the model
 
-Une piste naturelle pour regagner la robustesse encore manquante aux classifieurs de deep learning serait de **fine-tuner le modèle sur nos propres données d'Adaptive Sampling**, plutôt que sur du séquençage génome entier. Cela suppose d'accéder aux poids du modèle — ce qui n'est pas possible ici : Sturgeon est distribué sous une licence de type « logiciel d'évaluation/recherche accessible publiquement + poids téléchargeables publiquement », mais pas open-weight au sens permissif du terme. La licence désigne d'ailleurs explicitement Cyclomics comme contact pour tout usage commercial, clinique ou diagnostique. C'est une limite structurelle du projet, pas seulement technique.
+A natural path to regain the robustness still lacking in the deep learning classifiers would be to **fine-tune the model on our own Adaptive Sampling data**, rather than on whole-genome sequencing. This requires access to the model weights — which is not possible here: Sturgeon is distributed under a licence of the type "publicly accessible evaluation/research software + publicly downloadable weights", but not open-weight in the permissive sense. The licence also explicitly designates Cyclomics as the contact for any commercial, clinical or diagnostic use. This is a structural limitation of the project, not merely a technical one.
 
-## Deux exigences supplémentaires
+## Two additional requirements
 
-**Les profils CNV.** La classification seule ne suffit pas : les variations de nombre de copies (CNV) sont une couche d'information diagnostique essentielle. Les premières versions du panel créaient des zones sur- ou sous-représentées ; après optimisation, les profils CNV sont devenus comparables à ceux obtenus en génome entier.
+**CNV profiles.** Classification alone is not enough: copy number variations (CNVs) are an essential layer of diagnostic information. Early versions of the panel created over- or under-represented regions; after optimisation, CNV profiles became comparable to those obtained with whole-genome data.
 
-**Le statut MGMT.** La méthylation du promoteur MGMT est un facteur prédictif établi de la réponse au traitement des glioblastomes [\[2\]](/blog/nanodiag#ref-2). Or les régions exploitées par les outils de référence (Rapid-CNS2, DKFZ) ne correspondaient pas totalement à celles de notre premier design, d'où des résultats discordants. Conclusion : **un panel optimisé pour la classification n'est pas automatiquement optimisé pour MGMT.** Une phase d'optimisation dédiée a permis d'obtenir un panel unique satisfaisant simultanément classification, CNV et MGMT.
+**MGMT status.** MGMT promoter methylation is an established predictive factor for treatment response in glioblastomas [\[2\]](/blog/nanodiag#ref-2). However, the regions exploited by reference tools (Rapid-CNS2, DKFZ) did not fully match those in our initial design, leading to discordant results. Conclusion: **a panel optimised for classification is not automatically optimised for MGMT.** A dedicated optimisation phase yielded a single panel that simultaneously satisfies classification, CNV and MGMT requirements.
 
-## Ouverture : un assistant LLM + RAG dans ROBIN
+## Outlook: an LLM + RAG assistant in ROBIN
 
-Une amélioration de cet outil consisterait à ajouter un assistant conversationnel pour aider les biologistes à interpréter les résultats de manière plus intuitive et interactive : expliquer une classification, un profil CNV, un statut MGMT, et suggérer les étapes suivantes du diagnostic. Pour être fiable dans ce contexte clinique, un tel assistant devrait être **augmenté de connaissances biologiques et littéraires via RAG**. Ce serait une fonctionnalité intéressante pour l'interface Robin, en tant que couche d'interprétation au-dessus des résultats bruts.
+An improvement to this tool would be to add a conversational assistant to help biologists interpret results in a more intuitive and interactive way: explaining a classification, a CNV profile, an MGMT status, and suggesting the next diagnostic steps. To be reliable in this clinical context, such an assistant would need to be **augmented with biological and literature knowledge via RAG**. This would be a valuable feature for the Robin interface, serving as an interpretation layer on top of the raw results.
 
-## L'apport le plus surprenant : le monitoring temps réel
+## The most surprising benefit: real-time monitoring
 
-L'une des innovation qui m'a le plus surpris dans Robin n'a finalement pas été biologique mais organisationnelle. Le workflow classique (séquençage → transfert → pipeline → interprétation) est séquentiel. Avec [Robin](https://github.com/UMCUGenetics/sturgeon), les lectures sont analysées dès leur production : classification, profils CNV et indicateurs qualité se mettent à jour en continu pendant le run.
+One of the innovations that surprised me most about Robin was ultimately not biological but organisational. The classic workflow (sequencing → transfer → pipeline → interpretation) is sequential. With [Robin](https://github.com/UMCUGenetics/sturgeon), reads are analysed as soon as they are produced: classification, CNV profiles and quality indicators update continuously during the run.
 
-Cela permet de suivre la stabilité du diagnostic en direct, de générer des alertes précoces, et de repérer le moment où l'information accumulée est suffisante — parfois bien avant la fin théorique du run. Le séquençage peut alors être interrompu, ce qui réduit l'usure des flow cells et augmente le nombre de réutilisations et d'analyses possibles.
+This makes it possible to track diagnostic stability in real time, generate early alerts, and identify the point at which the accumulated information is sufficient — sometimes well before the theoretical end of the run. Sequencing can then be stopped, reducing flow cell wear and increasing the number of reuses and analyses possible.
 
-Dans un contexte de plateforme ce n'est pas un simple confort technique : c'est un levier structurel pour réduire ces délais, et pour mieux exploiter des équipements partagés entre plusieurs services.
+In a shared-platform context, this is not merely a technical convenience: it is a structural lever for reducing turnaround times and making better use of equipment shared across multiple departments.
 
-## Une friction réglementaire
+## A regulatory friction
 
-Sur le plan infrastructure, les outils ont été déployés avec une séparation stricte dev/prod, conformément aux bonnes pratiques DevOps. Mais la norme ISO 15189, pensée pour des volumes standards, s'adapte mal au séquençage massif — l'absence de contrôles positifs pour les maladies ultra-rares, combinée au rythme d'innovation des outils, crée une tension réelle entre exigence réglementaire et agilité diagnostique, documentée par le Livre Blanc de la FFGH.
+On the infrastructure side, the tools were deployed with a strict dev/prod separation, following DevOps best practices. But the ISO 15189 standard, designed for standard volumes, does not adapt well to massive sequencing — the absence of positive controls for ultra-rare diseases, combined with the pace of tool innovation, creates a real tension between regulatory requirements and diagnostic agility, as documented by the FFGH White Paper.
 
 ## Conclusion
 
-Parti d'un objectif simple — **reproduire les performances de Sturgeon en Adaptive Sampling** — ce projet a abouti à une chaîne complète associant classification moléculaire, analyse CNV, statut MGMT, interprétation temps réel et optimisation de l'usage des séquenceurs. Il montre qu'une alternative locale, ouverte et maîtrisée aux solutions centralisées est possible, tout en améliorant l'efficacité opérationnelle d'une plateforme de biologie moléculaire.
+What began as a simple goal — **reproducing Sturgeon's performance with Adaptive Sampling** — resulted in a complete pipeline combining molecular classification, CNV analysis, MGMT status, real-time interpretation and optimised sequencer usage. It shows that a local, open, and controlled alternative to centralised solutions is possible, while improving the operational efficiency of a molecular biology platform.
 
-Il illustre aussi un enjeu identifié par le Livre Blanc de la FFGH : la France manque de bio-informaticiens médicaux capables de concevoir ces panels, intégrer les classifieurs et industrialiser les pipelines. Sans ces profils hybrides, à l'interface de la biologie, de l'informatique et de la clinique, la souveraineté technologique reste un vœu pieux.
+It also illustrates a challenge identified by the FFGH White Paper: France lacks medical bioinformaticians capable of designing these panels, integrating classifiers and industrialising pipelines. Without these hybrid profiles, at the interface of biology, computing and clinical practice, technological sovereignty remains a pious hope.
 
 ---
 
-Ces travaux ont été réalisés sous la supervision médicale du [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) et en collaboration avec [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) pour la partie wet lab. J'ai été en charge du volet dry lab : conception des panels, intégration et validation d'outils et de modèles existants, développement des pipelines d'analyse et mise en production de la solution dans ce contexte clinique.
+This work was carried out under the medical supervision of [Dr Jean Boutonnat](https://www.chu-grenoble.fr/patients-et-accompagnants/offre-de-soin/dr-jean-boutonnat) and in collaboration with [Valentin Ripoche](https://www.linkedin.com/in/valentin-ripoche-02bb721b5/) for the wet-lab component. I was in charge of the dry-lab side: panel design, integration and validation of existing tools and models, development of analysis pipelines, and production deployment of the solution in this clinical context.
 
-# Références
+# References
 
 <p id="ref-1">
 **[1]** [Illumina Methylation Assay](https://en.wikipedia.org/wiki/Illumina_Methylation_Assay)
