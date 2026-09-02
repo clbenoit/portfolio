@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mémoire partagée, boucle fermée : ce que 7 sprints agentiques m&#39;ont appris sur l&#39;orchestration avec OpenCode - Clément BENOIT</title><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><style>.back-arrow[data-astro-cid-3kmfnthz]{color:var(--color-text2);align-items:center;gap:6px;margin-bottom:1.5rem;font-size:.92rem;font-weight:500;text-decoration:none;transition:color .15s;display:inline-flex}.back-arrow[data-astro-cid-3kmfnthz]:hover{color:var(--color-textAccent)}
+</style><link rel="stylesheet" href="/portfolio/_astro/global.Dj5Ce6-k.css"><style>.blog-layout[data-astro-cid-r2afylss]{max-width:760px;margin:0 auto;padding:80px 40px}@media (width<=767px){.blog-layout[data-astro-cid-r2afylss]{padding:40px 16px}}.blog-post[data-astro-cid-r2afylss]{max-width:720px}.blog-post-content[data-astro-cid-r2afylss]{margin-top:24px;font-size:16px;line-height:1.8}.blog-post-content[data-astro-cid-r2afylss] h1{color:var(--color-heading);margin-top:0;margin-bottom:.5em}.blog-post-content[data-astro-cid-r2afylss] h2,.blog-post-content[data-astro-cid-r2afylss] h3{color:var(--color-heading);margin-top:2em;margin-bottom:.5em}.blog-post-content[data-astro-cid-r2afylss] p{margin:1em 0}.blog-post-content[data-astro-cid-r2afylss] a{color:var(--color-textAccent);text-decoration:none}.blog-post-content[data-astro-cid-r2afylss] a:hover{color:var(--color-textAccentHover);text-decoration:underline}.blog-post-content[data-astro-cid-r2afylss] img,.blog-post-content[data-astro-cid-r2afylss] video{border-radius:8px;max-width:100%;height:auto;margin:1.5em 0}.blog-post-content[data-astro-cid-r2afylss] figure{text-align:center;margin:1.5em 0}.blog-post-content[data-astro-cid-r2afylss] figcaption{color:var(--color-text3);margin-top:8px;font-size:14px}.blog-post-content[data-astro-cid-r2afylss] blockquote{border-left:3px solid var(--color-backgroundAccent);color:var(--color-text2);margin:1.5em 0;padding-left:16px}.blog-post-content[data-astro-cid-r2afylss] code{background:var(--color-background3);border-radius:4px;padding:2px 6px;font-size:.9em}.blog-post-content[data-astro-cid-r2afylss] pre{background:var(--color-background3);border-radius:8px;padding:16px;font-size:14px;line-height:1.5;overflow-x:auto}.blog-post-content[data-astro-cid-r2afylss] pre code{background:0 0;padding:0}.blog-post-tags[data-astro-cid-r2afylss]{flex-wrap:wrap;gap:6px;margin-top:12px;display:flex}.blog-tag[data-astro-cid-r2afylss]{background:var(--color-backgroundIrisTint);color:var(--color-textAccent);border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500;display:inline-block}
+*,:before,:after{box-sizing:border-box}body{color:var(--color-text);background:var(--color-background);-webkit-font-smoothing:antialiased;margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;line-height:1.6}.minimal-main{width:100%}
+</style></head><body><nav class="top-nav" data-open="false" data-astro-cid-wpvy4v7s><div class="top-nav-inner" data-astro-cid-wpvy4v7s><a href="/portfolio/fr/" class="top-nav-title" data-astro-cid-wpvy4v7s>Home</a><button class="hamburger" aria-label="Toggle navigation menu" data-astro-cid-wpvy4v7s><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-wpvy4v7s><line x1="3" y1="6" x2="21" y2="6" data-astro-cid-wpvy4v7s></line><line x1="3" y1="12" x2="21" y2="12" data-astro-cid-wpvy4v7s></line><line x1="3" y1="18" x2="21" y2="18" data-astro-cid-wpvy4v7s></line></svg></button><div class="top-nav-dropdown" data-astro-cid-wpvy4v7s><div class="top-nav-links" data-astro-cid-wpvy4v7s><a href="/portfolio/fr/cv/" class="top-nav-link" data-astro-cid-wpvy4v7s>CV</a><a href="/portfolio/fr/blog/" class="top-nav-link active" data-astro-cid-wpvy4v7s>Blog</a><a href="/portfolio/fr/projects/" class="top-nav-link" data-astro-cid-wpvy4v7s>Projects</a><a href="/portfolio/fr/contact/" class="top-nav-link" data-astro-cid-wpvy4v7s>Contact</a><a href="/portfolio/en/blog/orchestration-agentique/" class="top-nav-link lang-switch" data-current="FR" data-astro-cid-wpvy4v7s>EN</a></div></div><a href="/portfolio/en/blog/orchestration-agentique/" class="lang-switch-desktop" aria-label="Switch to EN" data-astro-cid-wpvy4v7s>EN</a></div></nav><script type="module">var e=document.querySelector(`.top-nav`);(e?.querySelector(`.hamburger`))?.addEventListener(`click`,()=>{let t=e.getAttribute(`data-open`)===`true`;e.setAttribute(`data-open`,t?`false`:`true`)}),e?.querySelectorAll(`.top-nav-link`).forEach(t=>{t.addEventListener(`click`,()=>{e.setAttribute(`data-open`,`false`)})});</script><script type="module">document.querySelectorAll(`.lang-switch, .lang-switch-desktop`).forEach(e=>{e.addEventListener(`click`,()=>{var e=window.location.pathname.match(/^\/(?:portfolio\/)?(fr|en)\//),t=(e?e[1]:`en`)===`fr`?`en`:`fr`;localStorage.setItem(`lang`,t)})});</script><main class="minimal-main"><div class="blog-layout" data-astro-cid-r2afylss><a href="/portfolio/fr/blog/" class="back-arrow" aria-label="Back" data-astro-cid-3kmfnthz><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" data-astro-cid-3kmfnthz><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-3kmfnthz></path></svg><span data-astro-cid-3kmfnthz>Back</span></a><article class="blog-post" data-astro-cid-r2afylss><time class="blog-post-date" datetime="2026-08-30T00:00:00.000Z" data-astro-cid-r2afylss>30 août 2026</time><div class="blog-post-tags" data-astro-cid-r2afylss><span class="blog-tag" data-astro-cid-r2afylss>opencode</span><span class="blog-tag" data-astro-cid-r2afylss>orchestration</span><span class="blog-tag" data-astro-cid-r2afylss>agents</span><span class="blog-tag" data-astro-cid-r2afylss>i18n</span><span class="blog-tag" data-astro-cid-r2afylss>mémoire</span></div><div class="blog-post-content" data-astro-cid-r2afylss><h2 id="introduction">Introduction</h2>
+<p>Depuis six mois, j’utilise OpenCode comme terminal de pilotage pour le développement de mon portfolio. Pas comme un simple autocompléteur — comme un véritable orchestrateur agentique, avec agents primaires (Plan/Build), subagents spécialisés (traducteur, explorateur) et un système de spécifications structuré via openspec.</p>
+<p>Le bilan après 7 changements archivés et 149 commits : des succès francs, des échecs silencieux, et un constat qui m’a surpris. <strong>Le problème n’est ni la qualité du code produit, ni la pertinence des spécifications. Le problème, c’est la synchronisation entre la spec écrite et la réalité du code.</strong></p>
+<p>Cette analyse s’appuie sur les archives réelles de mes sprints, pas sur des hypothèses.</p>
+<hr/>
+<h2 id="le-pattern-qui-réussit--scope-réduit-build-reproductible-monitoring-temps-réel">Le pattern qui réussit : scope réduit, build reproductible, monitoring temps réel</h2>
+<p>Trois changements ont été livrés sans encombre :</p>
+<table>
+<thead>
+<tr>
+<th>Changement</th>
+<th>Tâches</th>
+<th>Statut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mobile dropdown</strong> (nav responsive)</td>
+<td>14</td>
+<td>✅ Complété + vérifié</td>
+</tr>
+<tr>
+<td><strong>Project Request Form</strong> (formulaire Web3Forms)</td>
+<td>33</td>
+<td>✅ Complété + vérifié</td>
+</tr>
+<tr>
+<td><strong>Sticky CV timeline + back arrow</strong></td>
+<td>38</td>
+<td>✅ Complété + vérifié desktop/mobile/tablet</td>
+</tr>
+</tbody>
+</table>
+<p>Leur point commun : chaque changement touche une couche unique (UI/CSS, formulaire, navigation), le scope est contenu à 2-3 fichiers, et la boucle de rétroaction est immédiate.</p>
+<p>Contrairement à ce qu’on pourrait croire, <code>bun run build</code> n’est pas une « vérification théorique » — c’est une exécution réelle : Astro génère les pages statiques, résout les routes, valide les types. Si le build passe, l’intégrité structurelle est garantie. L’agent Build ne « suppose » pas que ça marche, il le constate par l’output du compilateur.</p>
+<p>Et pour le rendu visuel, le monitoring est continu : le site est servi en localhost via <code>astro dev</code>, conteneurisé dans un Dockerfile standard qui assure portabilité et reproductibilité. Le moindre bug visuel ou technique est immédiatement visible — pas besoin de cocher une checkbox dans un fichier markdown pour « valider » ce que le navigateur montre en direct.</p>
+<p>Le pattern gagnant, c’est <strong>Plan → 1 spec → Build → feedback immédiat via build log + dev server live</strong>.</p>
+<hr/>
+<h2 id="le-paradoxe-du-contenu--quand-linfrastructure-dépasse-la-substance">Le paradoxe du contenu : quand l’infrastructure dépasse la substance</h2>
+<p>Le chantier i18n est le plus révélateur. L’infrastructure est impeccable :</p>
+<ul>
+<li>Routing <code>[lang]</code> dynamique (FR/EN)</li>
+<li>Détection de langue (<code>navigator.language</code> + <code>localStorage</code>)</li>
+<li>Subagent <code>traducteur</code> spécifié avec glossaire, vérification sémantique, règle « no auto-commit »</li>
+<li>Restructuration des collections de contenu (<code>fr/</code> et <code>en/</code>)</li>
+<li>Flux RSS par langue</li>
+</ul>
+<p>Résultat : 26 pages générées, build 0 erreurs. Le site fonctionne en production.</p>
+<p>Le subagent <code>traducteur</code> existe sur le papier. Sa spec est précise (→ <a href="https://github.com/clbenoit/portfolio/blob/devel/openspec/specs/i18n/translation-agent/spec.md">spécification complète dans openspec</a>). Mais il n’a jamais été invoqué pour l’intégralité du contenu.</p>
+<p>C’est le paradoxe de l’orchestration agentique : <strong>l’infrastructure se construit en heures, le contenu prend des jours.</strong> Les agents excellent sur le structurel, butent sur le substantiel — là où le jugement humain est irréductible.</p>
+<hr/>
+<h2 id="la-mémoire-qui-manque--openspec-vs-opencode-deux-cerveaux-qui-ne-se-parlent-pas">La mémoire qui manque : openspec vs OpenCode, deux cerveaux qui ne se parlent pas</h2>
+<p>Voici l’observation la plus importante de cette rétrospective.</p>
+<p>Mon projet utilise <strong>deux systèmes de mémoire parallèles :</strong></p>
+<ol>
+<li><strong>openspec</strong> (<code>/workspace/openspec/</code>) — specs formelles, proposals, design docs, tasks checklist. C’est la « mémoire longue » du projet, versionnée, structurée.</li>
+<li><strong>OpenCode</strong> (AGENTS.md, config, contexte de session) — c’est la « mémoire de travail », chargée au début de chaque session, volatile.</li>
+</ol>
+<p>Ces deux systèmes <strong>ne partagent pas leur état.</strong></p>
+<p>Conséquence concrète : la migration Vocs→Astro. Le code a été intégralement migré — le <code>config.yaml</code> décrit le projet en Astro 7.x, les commits le confirment. Mais les <strong>81 checkboxes openspec sont restées décochées.</strong></p>
+<p>À première vue, on pourrait incriminer l’agent Build : « il a migré le code sans mettre à jour la spec. » Mais la vraie cause est humaine — et c’est précisément ce qui rend l’analyse intéressante.</p>
+<p>J’étais débutant avec un nouveau <em>harness</em> OpenCode, doublé d’une surcouche mobile de contrôle. En plein milieu du dev, j’ai fait une fausse manipulation et <strong>perdu la session, l’historique, le contexte.</strong> Juste à la fin de la migration. Résultat : le code était là, mais le fil de la session — celui qui aurait permis à l’agent Build de revenir cocher les tâches — était rompu.</p>
+<p>Ce n’est pas un bug d’OpenCode. C’est une <strong>fragilité structurelle du workflow humain-agent</strong>. Quand l’humain est le seul point de passage entre « code livré » et « spec mise à jour », une simple erreur de manipulation suffit à désynchroniser définitivement les deux.</p>
+<p>Un agent Review n’aurait pas ce problème : session ou pas, il scannerait le file tree, comparerait le livrable à la spec, et alignerait les checkboxes. Il serait le <strong>garde-fou qui survit aux interruptions humaines.</strong></p>
+<p>Autre conséquence : le <code>config.yaml</code> d’openspec (102 lignes) fait office de <strong>« mémoire partagée artisanale »</strong> qui décrit le stack, les conventions CSS, les chemins. Sans ce fichier, chaque nouvelle session OpenCode redécouvrirait le projet from scratch. Avec ce fichier, le Plan agent est immédiatement opérationnel — mais il faut le maintenir synchronisé manuellement.</p>
+<p><strong>Ce que ça révèle :</strong> dans un système multi-agents, la qualité de l’orchestration dépend directement de la qualité de la mémoire partagée entre les agents — et entre les sessions. Une spec désynchronisée est pire qu’aucune spec.</p>
+<hr/>
+<h2 id="ce-que-jen-retire--5-principes-pour-lorchestration-agentique">Ce que j’en retire : 5 principes pour l’orchestration agentique</h2>
+<h3 id="1-scope-atomique-feedback-immédiat">1. Scope atomique, feedback immédiat</h3>
+<p>Une tâche agentique doit avoir un retour automatisable (build log) <em>et</em> un retour visuel accessible (dev server localhost). La combinaison des deux suffit — pas besoin de formaliser la vérif visuelle dans un fichier de spec, le navigateur est le meilleur validateur.</p>
+<h3 id="2-la-mémoire-partagée-doit-être-vivante--ou-automatisée">2. La mémoire partagée doit être vivante — ou automatisée</h3>
+<p>Un fichier de contexte (AGENTS.md, config.yaml) est un investissement à très haut rendement. Mais il doit soit être maintenu par les agents eux-mêmes à chaque changement, soit être régénéré automatiquement. Actuellement, openspec et OpenCode sont deux mémoires parallèles qui dérivent l’une de l’autre.</p>
+<h3 id="3-distinguer-infrastructure-et-contenu">3. Distinguer infrastructure et contenu</h3>
+<p>Les agents construisent l’infrastructure. Les humains produisent et valident le contenu. Vouloir automatiser les deux avec le même pipeline crée des goulots d’étranglement et des illusions de complétion. Le subagent <code>traducteur</code> est un assistant, pas un remplacement du jugement éditorial.</p>
+<h3 id="4-le-monitoring-temps-réel-est-le-vrai-test-de-régression">4. Le monitoring temps réel est le vrai test de régression</h3>
+<p><code>astro dev</code> en localhost conteneurisé (Docker) donne un feedback visuel immédiat. C’est l’équivalent du monitoring temps réel que j’ai mis en place sur Nanodiag : on voit le diagnostic se stabiliser en direct pendant le run. Ici, on voit le rendu se stabiliser en direct pendant le dev. Cette boucle informelle est plus fiable qu’une checklist formelle parce qu’elle est instantanée.</p>
+<h3 id="5-un-agent-plan-sans-agent-review-est-un-avion-sans-train-datterrissage">5. Un agent Plan sans agent Review est un avion sans train d’atterrissage</h3>
+<p>OpenCode fournit Plan (lecture seule) et Build (écriture). Mais le troisième maillon — <strong>Review</strong> — n’a pas d’agent dédié. Résultat : le Build agent exécute, le dev server valide visuellement, mais personne ne revient cocher les checkboxes openspec. Un subagent <code>review</code> avec permissions de lecture, capable de comparer le livrable à la spec et de mettre à jour les checkboxes, fermerait cette boucle formelle.</p>
+<p><strong>J’ai détaillé l’incident exact qui a révélé ce besoin ici → <a href="/portfolio/fr/blog/humain-agent-review/">Quand l’humain lâche la session : pourquoi un agent Review n’est pas un luxe</a>.</strong> Le prochain article sera son implémentation technique, via le workflow openspec.</p>
+<hr/>
+<h2 id="ouverture--et-si-on-monitorait-les-agents-comme-on-monitor-un-séquençage-">Ouverture : et si on monitorait les agents comme on monitor un séquençage ?</h2>
+<p>Sur Nanodiag, le monitoring temps réel a été la découverte la plus marquante : voir la classification se stabiliser en direct change le rapport au résultat — on sait <em>quand</em> l’information est suffisante, on peut interrompre le run plus tôt.</p>
+<p>Je me demande si l’orchestration agentique n’a pas besoin du même paradigme : un dashboard qui montre l’état de synchronisation entre specs et code, les divergences actives, les checkboxes orphelines. Pas un énième fichier YAML à maintenir à la main — un véritable <strong>monitoring de la boucle agentique</strong>, aussi réactif qu’un <code>astro dev</code> en localhost, aussi reproductible qu’un Dockerfile.</p>
+<p>C’est peut-être le sujet du prochain outil open-source.</p>
+<hr/>
+<h2 id="références">Références</h2>
+<ul>
+<li><a href="https://opencode-tutorial.com/en/docs/agents">OpenCode Docs — Agents</a></li>
+<li><a href="https://opencode-tutorial.com/en/docs/skills">OpenCode Docs — Skills</a></li>
+<li><a href="https://opencode-tutorial.com/en/docs/rules">OpenCode Docs — Rules</a></li>
+<li><a href="https://opencode-tutorial.com/en/docs/permissions">OpenCode Docs — Permissions</a></li>
+<li><a href="https://opencode-tutorial.com/en/docs/custom-tools">OpenCode Docs — Custom Tools</a></li>
+<li><a href="https://github.com/clbenoit/portfolio/tree/devel/openspec">Archive complète des spécifications du portfolio</a></li>
+</ul></div></article></div></main></body></html>
