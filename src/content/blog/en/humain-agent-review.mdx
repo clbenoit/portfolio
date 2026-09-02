@@ -1,0 +1,55 @@
+---
+title: "When the Human Drops the Session: Why a Review Agent Is Not a Luxury"
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+date: 2026-09-02
+tags:
+  - opencode
+  - agents
+  - review
+  - workflow
+lang: "en"
+---
+
+Following directly from [my analysis of 7 agentic sprints on this portfolio](/portfolio/en/blog/orchestration-agentique/), this piece zooms in on the specific incident that revealed the need for a Review agent — and why it's not an architect's whim, but protection against the most mundane human errors.
+
+## The Incident
+
+Vocs → Astro migration. 81 subtasks. Code migrated successfully. **Zero checkboxes checked in openspec.**
+
+Why? Not an OpenCode bug. Not Build agent negligence.
+
+**I lost the session.**
+
+New OpenCode harness + mobile control overlay — I was in the learning phase. One wrong move, and poof: session, history, context — all gone. Right at the end of the migration, at the precise moment when the Build agent should have come back to sync the checkboxes.
+
+Result: perfectly functional code, and a spec that says "nothing is done."
+
+## Why a Human Can't Be the Sole Guardian of Spec/Code Sync
+
+What happened isn't an exotic scenario. It's the normal mode of human-machine interaction:
+
+- Accidentally closing a terminal
+- Losing an SSH connection
+- Overwriting a session file
+- Rebooting your machine
+
+When the human is the only bridge between "code delivered" and "spec updated," **every interruption becomes a permanent divergence.** The Build agent delivers. The Plan agent specifies. But no one connects the two after the session is lost.
+
+## What a Review Agent Would Change
+
+A Review agent doesn't rely on a continuous session. It's a subagent triggered **after** the build, with a simple mission:
+
+1. Scan the file tree → which files were created or modified?
+2. Cross-reference with the openspec spec → which checkboxes should be checked?
+3. Update the tasks → align the spec with the code reality.
+
+Read-only on source code (no code writing), permissions limited to `read` + `glob` + `edit` (on spec files only), it would be the **safety net that survives human interruptions.**
+
+## This Is Not Bureaucracy
+
+Checking boxes can feel cosmetic. But in an agentic workflow where every new session reloads the spec to understand the project state, **a desynchronized spec is worse than no spec at all** — it actively lies about the code's state.
+
+The Review agent isn't there to look pretty. It's there to ensure the project's long-term memory (the spec) tells the truth about the code — even when the human lost track of the previous session.
+
+The next article will detail the technical implementation, using the openspec workflow to specify and build it.

@@ -1,0 +1,128 @@
+---
+title: "Mémoire partagée, boucle fermée : ce que 7 sprints agentiques m'ont appris sur l'orchestration avec OpenCode"
+authors:
+  - "[cbenoit](www.linkedin.com/in/clement-benoit)"
+date: 2026-08-30
+tags:
+  - opencode
+  - orchestration
+  - agents
+  - i18n
+  - mémoire
+lang: "fr"
+---
+
+## Introduction
+
+Depuis six mois, j'utilise OpenCode comme terminal de pilotage pour le développement de mon portfolio. Pas comme un simple autocompléteur — comme un véritable orchestrateur agentique, avec agents primaires (Plan/Build), subagents spécialisés (traducteur, explorateur) et un système de spécifications structuré via openspec.
+
+Le bilan après 7 changements archivés et 149 commits : des succès francs, des échecs silencieux, et un constat qui m'a surpris. **Le problème n'est ni la qualité du code produit, ni la pertinence des spécifications. Le problème, c'est la synchronisation entre la spec écrite et la réalité du code.**
+
+Cette analyse s'appuie sur les archives réelles de mes sprints, pas sur des hypothèses.
+
+---
+
+## Le pattern qui réussit : scope réduit, build reproductible, monitoring temps réel
+
+Trois changements ont été livrés sans encombre :
+
+| Changement | Tâches | Statut |
+|---|---|---|
+| **Mobile dropdown** (nav responsive) | 14 | ✅ Complété + vérifié |
+| **Project Request Form** (formulaire Web3Forms) | 33 | ✅ Complété + vérifié |
+| **Sticky CV timeline + back arrow** | 38 | ✅ Complété + vérifié desktop/mobile/tablet |
+
+Leur point commun : chaque changement touche une couche unique (UI/CSS, formulaire, navigation), le scope est contenu à 2-3 fichiers, et la boucle de rétroaction est immédiate.
+
+Contrairement à ce qu'on pourrait croire, `bun run build` n'est pas une « vérification théorique » — c'est une exécution réelle : Astro génère les pages statiques, résout les routes, valide les types. Si le build passe, l'intégrité structurelle est garantie. L'agent Build ne « suppose » pas que ça marche, il le constate par l'output du compilateur.
+
+Et pour le rendu visuel, le monitoring est continu : le site est servi en localhost via `astro dev`, conteneurisé dans un Dockerfile standard qui assure portabilité et reproductibilité. Le moindre bug visuel ou technique est immédiatement visible — pas besoin de cocher une checkbox dans un fichier markdown pour « valider » ce que le navigateur montre en direct.
+
+Le pattern gagnant, c'est **Plan → 1 spec → Build → feedback immédiat via build log + dev server live**.
+
+---
+
+## Le paradoxe du contenu : quand l'infrastructure dépasse la substance
+
+Le chantier i18n est le plus révélateur. L'infrastructure est impeccable :
+
+- Routing `[lang]` dynamique (FR/EN)
+- Détection de langue (`navigator.language` + `localStorage`)
+- Subagent `traducteur` spécifié avec glossaire, vérification sémantique, règle « no auto-commit »
+- Restructuration des collections de contenu (`fr/` et `en/`)
+- Flux RSS par langue
+
+Résultat : 26 pages générées, build 0 erreurs. Le site fonctionne en production.
+
+Le subagent `traducteur` existe sur le papier. Sa spec est précise (→ [spécification complète dans openspec](https://github.com/clbenoit/portfolio/blob/devel/openspec/specs/i18n/translation-agent/spec.md)). Mais il n'a jamais été invoqué pour l'intégralité du contenu.
+
+C'est le paradoxe de l'orchestration agentique : **l'infrastructure se construit en heures, le contenu prend des jours.** Les agents excellent sur le structurel, butent sur le substantiel — là où le jugement humain est irréductible.
+
+---
+
+## La mémoire qui manque : openspec vs OpenCode, deux cerveaux qui ne se parlent pas
+
+Voici l'observation la plus importante de cette rétrospective.
+
+Mon projet utilise **deux systèmes de mémoire parallèles :**
+
+1. **openspec** (`/workspace/openspec/`) — specs formelles, proposals, design docs, tasks checklist. C'est la « mémoire longue » du projet, versionnée, structurée.
+2. **OpenCode** (AGENTS.md, config, contexte de session) — c'est la « mémoire de travail », chargée au début de chaque session, volatile.
+
+Ces deux systèmes **ne partagent pas leur état.**
+
+Conséquence concrète : la migration Vocs→Astro. Le code a été intégralement migré — le `config.yaml` décrit le projet en Astro 7.x, les commits le confirment. Mais les **81 checkboxes openspec sont restées décochées.**
+
+À première vue, on pourrait incriminer l'agent Build : « il a migré le code sans mettre à jour la spec. » Mais la vraie cause est humaine — et c'est précisément ce qui rend l'analyse intéressante.
+
+J'étais débutant avec un nouveau *harness* OpenCode, doublé d'une surcouche mobile de contrôle. En plein milieu du dev, j'ai fait une fausse manipulation et **perdu la session, l'historique, le contexte.** Juste à la fin de la migration. Résultat : le code était là, mais le fil de la session — celui qui aurait permis à l'agent Build de revenir cocher les tâches — était rompu.
+
+Ce n'est pas un bug d'OpenCode. C'est une **fragilité structurelle du workflow humain-agent**. Quand l'humain est le seul point de passage entre « code livré » et « spec mise à jour », une simple erreur de manipulation suffit à désynchroniser définitivement les deux.
+
+Un agent Review n'aurait pas ce problème : session ou pas, il scannerait le file tree, comparerait le livrable à la spec, et alignerait les checkboxes. Il serait le **garde-fou qui survit aux interruptions humaines.**
+
+Autre conséquence : le `config.yaml` d'openspec (102 lignes) fait office de **« mémoire partagée artisanale »** qui décrit le stack, les conventions CSS, les chemins. Sans ce fichier, chaque nouvelle session OpenCode redécouvrirait le projet from scratch. Avec ce fichier, le Plan agent est immédiatement opérationnel — mais il faut le maintenir synchronisé manuellement.
+
+**Ce que ça révèle :** dans un système multi-agents, la qualité de l'orchestration dépend directement de la qualité de la mémoire partagée entre les agents — et entre les sessions. Une spec désynchronisée est pire qu'aucune spec.
+
+---
+
+## Ce que j'en retire : 5 principes pour l'orchestration agentique
+
+### 1. Scope atomique, feedback immédiat
+Une tâche agentique doit avoir un retour automatisable (build log) *et* un retour visuel accessible (dev server localhost). La combinaison des deux suffit — pas besoin de formaliser la vérif visuelle dans un fichier de spec, le navigateur est le meilleur validateur.
+
+### 2. La mémoire partagée doit être vivante — ou automatisée
+Un fichier de contexte (AGENTS.md, config.yaml) est un investissement à très haut rendement. Mais il doit soit être maintenu par les agents eux-mêmes à chaque changement, soit être régénéré automatiquement. Actuellement, openspec et OpenCode sont deux mémoires parallèles qui dérivent l'une de l'autre.
+
+### 3. Distinguer infrastructure et contenu
+Les agents construisent l'infrastructure. Les humains produisent et valident le contenu. Vouloir automatiser les deux avec le même pipeline crée des goulots d'étranglement et des illusions de complétion. Le subagent `traducteur` est un assistant, pas un remplacement du jugement éditorial.
+
+### 4. Le monitoring temps réel est le vrai test de régression
+`astro dev` en localhost conteneurisé (Docker) donne un feedback visuel immédiat. C'est l'équivalent du monitoring temps réel que j'ai mis en place sur Nanodiag : on voit le diagnostic se stabiliser en direct pendant le run. Ici, on voit le rendu se stabiliser en direct pendant le dev. Cette boucle informelle est plus fiable qu'une checklist formelle parce qu'elle est instantanée.
+
+### 5. Un agent Plan sans agent Review est un avion sans train d'atterrissage
+OpenCode fournit Plan (lecture seule) et Build (écriture). Mais le troisième maillon — **Review** — n'a pas d'agent dédié. Résultat : le Build agent exécute, le dev server valide visuellement, mais personne ne revient cocher les checkboxes openspec. Un subagent `review` avec permissions de lecture, capable de comparer le livrable à la spec et de mettre à jour les checkboxes, fermerait cette boucle formelle.
+
+  **J'ai détaillé l'incident exact qui a révélé ce besoin ici → [Quand l'humain lâche la session : pourquoi un agent Review n'est pas un luxe](/portfolio/fr/blog/humain-agent-review/).** Le prochain article sera son implémentation technique, via le workflow openspec.
+
+---
+
+## Ouverture : et si on monitorait les agents comme on monitor un séquençage ?
+
+Sur Nanodiag, le monitoring temps réel a été la découverte la plus marquante : voir la classification se stabiliser en direct change le rapport au résultat — on sait *quand* l'information est suffisante, on peut interrompre le run plus tôt.
+
+Je me demande si l'orchestration agentique n'a pas besoin du même paradigme : un dashboard qui montre l'état de synchronisation entre specs et code, les divergences actives, les checkboxes orphelines. Pas un énième fichier YAML à maintenir à la main — un véritable **monitoring de la boucle agentique**, aussi réactif qu'un `astro dev` en localhost, aussi reproductible qu'un Dockerfile.
+
+C'est peut-être le sujet du prochain outil open-source.
+
+---
+
+## Références
+
+- [OpenCode Docs — Agents](https://opencode-tutorial.com/en/docs/agents)
+- [OpenCode Docs — Skills](https://opencode-tutorial.com/en/docs/skills)
+- [OpenCode Docs — Rules](https://opencode-tutorial.com/en/docs/rules)
+- [OpenCode Docs — Permissions](https://opencode-tutorial.com/en/docs/permissions)
+- [OpenCode Docs — Custom Tools](https://opencode-tutorial.com/en/docs/custom-tools)
+- [Archive complète des spécifications du portfolio](https://github.com/clbenoit/portfolio/tree/devel/openspec)
