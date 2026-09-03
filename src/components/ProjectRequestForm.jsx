@@ -56,7 +56,7 @@ const SERVICES = {
   ],
   fr: [
     'Bioinformatique',
-    'Analyse de données',
+    'Analyse et modélisation de données',
     "Automatisation IA et développement de workflows",
     'Agents IA sur mesure',
     'Ingénierie des données',
