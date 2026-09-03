@@ -47,16 +47,20 @@ const FR = {
 const SERVICES = {
   en: [
     'Bioinformatics',
-    'Data analysis',
+    'Data analysis and modeling',
     'AI automation and workflow developments',
+    'Custom AI agents',
     'Data engineering',
+    'Web apps & data visualisation',
     'Other',
   ],
   fr: [
     'Bioinformatique',
     'Analyse de données',
     "Automatisation IA et développement de workflows",
+    'Agents IA sur mesure',
     'Ingénierie des données',
+    'Applications web & visualisation de données',
     'Autre',
   ],
 };
