@@ -52,7 +52,7 @@ const SERVICES = {
     'Custom AI agents',
     'Data engineering',
     'Web apps & data visualisation',
-    'Strategic Audit'
+    'Strategic Audit',
     'Other',
   ],
   fr: [
@@ -62,7 +62,7 @@ const SERVICES = {
     'Agents IA sur mesure',
     'Ingénierie des données',
     'Applications web & visualisation de données',
-    'Audit stratégique'
+    'Audit stratégique',
     'Autre',
   ],
 };
