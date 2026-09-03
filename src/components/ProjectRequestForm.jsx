@@ -2,6 +2,14 @@ import { useState } from 'react';
 
 const EN = {
   formTitle: 'Project request form',
+  firstName: 'First name',
+  firstNamePlaceholder: 'Your first name',
+  lastName: 'Last name',
+  lastNamePlaceholder: 'Your last name',
+  company: 'Company',
+  companyPlaceholder: 'Your company (optional)',
+  email: 'Email',
+  emailPlaceholder: 'your@email.com',
   budget: 'Budget range',
   budgetPlaceholder: 'Select a budget range',
   deadline: 'Deadline',
@@ -12,6 +20,9 @@ const EN = {
   sending: 'Sending...',
   successTitle: 'Thank you!',
   successMsg: "Your project request has been sent successfully. I'll get back to you within 48 hours.",
+  errorFirstName: 'Please enter your first name.',
+  errorLastName: 'Please enter your last name.',
+  errorEmail: 'Please enter a valid email address.',
   errorBudget: 'Please select a budget range.',
   errorDeadline: 'Please select a deadline.',
   errorDeadlineFuture: 'Deadline must be a future date.',
@@ -24,8 +35,16 @@ const EN = {
 
 const FR = {
   formTitle: 'Formulaire de demande de projet',
-  budget: "Budget estimé",
-  budgetPlaceholder: "Sélectionnez une fourchette",
+  firstName: 'Prénom',
+  firstNamePlaceholder: 'Votre prénom',
+  lastName: 'Nom',
+  lastNamePlaceholder: 'Votre nom',
+  company: 'Société',
+  companyPlaceholder: 'Votre société (optionnel)',
+  email: 'Email',
+  emailPlaceholder: 'vous@email.com',
+  budget: 'Budget estimé',
+  budgetPlaceholder: 'Sélectionnez une fourchette',
   deadline: 'Date limite',
   services: 'Services souhaités',
   description: 'Description du projet',
@@ -34,6 +53,9 @@ const FR = {
   sending: 'Envoi en cours...',
   successTitle: 'Merci !',
   successMsg: 'Votre demande a bien été envoyée. Je vous répondrai sous 48 heures.',
+  errorFirstName: 'Veuillez saisir votre prénom.',
+  errorLastName: 'Veuillez saisir votre nom.',
+  errorEmail: 'Veuillez saisir une adresse email valide.',
   errorBudget: 'Veuillez sélectionner un budget.',
   errorDeadline: 'Veuillez sélectionner une date.',
   errorDeadlineFuture: 'La date doit être dans le futur.',
@@ -47,28 +69,48 @@ const FR = {
 const SERVICES = {
   en: [
     'Bioinformatics',
-    'Data analysis',
+    'Data analysis and modeling',
     'AI automation and workflow developments',
+    'Custom AI agents',
     'Data engineering',
+    'Web apps & data visualisation',
+    'Strategic Audit',
     'Other',
   ],
   fr: [
     'Bioinformatique',
-    'Analyse de données',
+    'Analyse et modélisation de données',
     "Automatisation IA et développement de workflows",
+    'Agents IA sur mesure',
     'Ingénierie des données',
+    'Applications web & visualisation de données',
+    'Audit stratégique',
     'Autre',
   ],
 };
 
 const BUDGET_OPTIONS = ['', '<2k', '2-5k', '5-10k', '10-20k', '20k+'];
 
-const WEB3FORMS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+const UNIFIED_APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzdWElow0Ntn-RskmIopWBopEQ6A9UPMOIW89XGTet9w9LEhIvAW_WIa1C8iIdG5yvG/exec';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function getLeadId(email) {
+  const params = new URLSearchParams(window.location.search);
+  const override = params.get('leadId');
+  if (override) return override;
+  return btoa(email.trim().toLowerCase());
+}
 
 export default function ProjectRequestForm({ lang = 'en' }) {
   const t = lang === 'fr' ? FR : EN;
   const services = SERVICES[lang] || SERVICES.en;
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [company, setCompany] = useState('');
+  const [email, setEmail] = useState('');
   const [budget, setBudget] = useState('');
   const [deadline, setDeadline] = useState('');
   const [selectedServices, setSelectedServices] = useState([]);
@@ -87,6 +129,9 @@ export default function ProjectRequestForm({ lang = 'en' }) {
 
   function validate() {
     const next = {};
+    if (!firstName.trim()) next.firstName = t.errorFirstName;
+    if (!lastName.trim()) next.lastName = t.errorLastName;
+    if (!email.trim() || !EMAIL_RE.test(email.trim())) next.email = t.errorEmail;
     if (!budget) next.budget = t.errorBudget;
     if (!deadline) next.deadline = t.errorDeadline;
     else if (new Date(deadline) <= new Date())
@@ -106,31 +151,38 @@ export default function ProjectRequestForm({ lang = 'en' }) {
     setStatus('submitting');
     setServerMessage('');
 
+    const leadId = getLeadId(email);
+
+    const payload = {
+      action: 'request',
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      company: company.trim(),
+      email: email.trim(),
+      budget,
+      deadline,
+      services: selectedServices.join(', '),
+      description: description.trim(),
+      source: 'portfolio-website',
+      lang,
+      leadId,
+    };
+
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(UNIFIED_APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: t.subject,
-          budget,
-          deadline,
-          services: selectedServices.join(', '),
-          description: description.trim(),
-        }),
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (json.error) throw new Error(json.error);
 
-      if (data.success) {
-        setStatus('success');
-      } else {
-        setStatus('error');
-        setServerMessage(data.message || t.errorSubmit);
-      }
-    } catch {
+      setStatus('success');
+    } catch (err) {
       setStatus('error');
-      setServerMessage(t.errorNetwork);
+      setServerMessage(err.message || t.errorNetwork);
     }
   }
 
@@ -145,6 +197,58 @@ export default function ProjectRequestForm({ lang = 'en' }) {
 
   return (
     <form className="project-form" onSubmit={handleSubmit} noValidate>
+
+      <div className="form-row">
+        <div className="form-field">
+          <label htmlFor="firstName">{t.firstName}</label>
+          <input
+            type="text"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder={t.firstNamePlaceholder}
+            className={errors.firstName ? 'field-error' : ''}
+          />
+          {errors.firstName && <span className="form-error">{errors.firstName}</span>}
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="lastName">{t.lastName}</label>
+          <input
+            type="text"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder={t.lastNamePlaceholder}
+            className={errors.lastName ? 'field-error' : ''}
+          />
+          {errors.lastName && <span className="form-error">{errors.lastName}</span>}
+        </div>
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="company">{t.company}</label>
+        <input
+          type="text"
+          id="company"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          placeholder={t.companyPlaceholder}
+        />
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="email">{t.email}</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t.emailPlaceholder}
+          className={errors.email ? 'field-error' : ''}
+        />
+        {errors.email && <span className="form-error">{errors.email}</span>}
+      </div>
 
       <fieldset className="form-field form-field-services">
         <legend>{t.services}</legend>
@@ -176,7 +280,7 @@ export default function ProjectRequestForm({ lang = 'en' }) {
         {errors.description && <span className="form-error">{errors.description}</span>}
       </div>
 
-            <div className="form-field">
+      <div className="form-field">
         <label htmlFor="budget">{t.budget}</label>
         <select
           id="budget"
