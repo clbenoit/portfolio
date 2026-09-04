@@ -40,6 +40,7 @@ jobs:
           # On force le moteur de build à injecter le bon préfixe
           BASE_URL: /portfolio/
           PUBLIC_WEB3FORMS_KEY: ${{ vars.WEB3FORMS_KEY }}
+          PUBLIC_APPS_SCRIPT_URL: ${{ vars.APPS_SCRIPT_URL }}
       - name: 🚀 Deploy
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: peaceiris/actions-gh-pages@v4
