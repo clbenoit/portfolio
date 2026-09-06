@@ -91,10 +91,17 @@ const SERVICES = {
 
 const BUDGET_OPTIONS = ['', '<2k', '2-5k', '5-10k', '10-20k', '20k+'];
 
-const WEB3FORMS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY;
-const APPS_SCRIPT_URL = import.meta.env.PUBLIC_APPS_SCRIPT_URL;
+const UNIFIED_APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzdWElow0Ntn-RskmIopWBopEQ6A9UPMOIW89XGTet9w9LEhIvAW_WIa1C8iIdG5yvG/exec';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function getLeadId(email) {
+  const params = new URLSearchParams(window.location.search);
+  const override = params.get('leadId');
+  if (override) return override;
+  return btoa(email.trim().toLowerCase());
+}
 
 export default function ProjectRequestForm({ lang = 'en' }) {
   const t = lang === 'fr' ? FR : EN;
@@ -144,20 +151,10 @@ export default function ProjectRequestForm({ lang = 'en' }) {
     setStatus('submitting');
     setServerMessage('');
 
-    const payload = {
-      access_key: WEB3FORMS_KEY,
-      subject: t.subject,
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      company: company.trim(),
-      email: email.trim(),
-      budget,
-      deadline,
-      services: selectedServices.join(', '),
-      description: description.trim(),
-    };
+    const leadId = getLeadId(email);
 
-    const sheetsPayload = {
+    const payload = {
+      action: 'request',
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       company: company.trim(),
@@ -167,32 +164,17 @@ export default function ProjectRequestForm({ lang = 'en' }) {
       services: selectedServices.join(', '),
       description: description.trim(),
       source: 'portfolio-website',
+      leadId,
     };
 
-    // Fire-and-forget to Google Sheets (no-cors to avoid CORS errors)
-    if (APPS_SCRIPT_URL) {
-      fetch(APPS_SCRIPT_URL, {
+    try {
+      await fetch(UNIFIED_APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: JSON.stringify(sheetsPayload),
-      }).catch(() => {});
-    }
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
-
-      if (data.success) {
-        setStatus('success');
-      } else {
-        setStatus('error');
-        setServerMessage(data.message || t.errorSubmit);
-      }
+      setStatus('success');
     } catch {
       setStatus('error');
       setServerMessage(t.errorNetwork);
