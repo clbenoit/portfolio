@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 
-import { iconMap, typeColor, enriched, formatDuration } from './Timeline';
+import { iconMap, typeColor, formatDuration } from './Timeline';
 
 /* ---- Inline SVG chevrons ---- */
 
@@ -27,10 +27,10 @@ const LINE_TOP = 30;      // px — dot centre offset
  * and left/right arrows. No Gantt lanes.
  * Chronological order: oldest (left) → newest (right).
  */
-export default function MobileTimeline() {
+export default function MobileTimeline({ lang, enriched }) {
   const chronological = useMemo(
     () => [...enriched].sort((a, b) => a.start - b.start || a.id.localeCompare(b.id)),
-    []
+    [enriched]
   );
   const total = chronological.length;
   const scrollRef = useRef(null);
@@ -90,7 +90,7 @@ export default function MobileTimeline() {
         />
         <div className="hm-track">
           {chronological.map((exp, i) => {
-            const duration = formatDuration(exp);
+            const duration = formatDuration(exp, lang);
             const laneColor = typeColor[exp.type];
             return (
               <div key={exp.id} className="hm-station" data-idx={i}>
