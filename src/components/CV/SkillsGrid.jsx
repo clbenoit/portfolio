@@ -12,16 +12,8 @@ const ChevronRight = () => (
   </svg>
 );
 
-const skillsData = [
-  // {
-  //   name: 'Blockchain & Web3',
-  //     items: [
-  //       'Infrastructures for distributed systems & consensus operations',
-  //       'Smart contract interaction',
-  //       'RPC & API-based services',
-  //       'Security & key management',
-  //       'Monitoring & uptime management'      ]
-  // },
+// Keep both locale arrays in sync when updating skills.
+const SKILLS_EN = [
   {
     name: 'AI & Machine Learning',
     items: [
@@ -88,13 +80,76 @@ const skillsData = [
   }
 ];
 
+const SKILLS_FR = [
+  {
+    name: 'IA & Machine Learning',
+    items: [
+      'Machine Learning', 'Deep Learning',
+      'Développement IA/ML', 'MLOps / AI Ops',
+      'GenAI & LLMs',
+      'Retrieval Augmented Generation (RAG)',
+      'RAGAS',
+      'Systèmes IA Agentiques',
+      'Benchmark d\'Algorithmes',
+      'PyTorch', 'scikit-learn', 'OpenCV',
+      'LangChain', 'LangGraph', 'LlamaIndex', 'Haystack', 'OpenAI API'
+    ]
+  },
+  {
+    name: 'Systèmes Informatiques',
+      items: [
+        'Docker / Singularity / Kubernetes',
+        'Calcul Haute Performance (Slurm, Torque, PBS, OAR)',
+        'Cloud Computing AWS / GCP / Azure',
+        'Terraform',
+        'Linux / Windows']
+  },
+  {
+    name: 'Ingénierie des Données',
+    items: [
+      'ETL', 'Nextflow', 'Snakemake', 'Airflow', 'n8n', 'Elasticsearch',
+      'Données (Wrangling & Delivery)',
+      'ISO 27001'
+    ]
+  },
+  {
+    name: 'Science des Données Appliquée',
+    items: [
+      'Statistiques (Quantitatives & Qualitatives, Descriptives & Inférentielles, Tests d\'Hypothèses, Plans d\'Expérience)',
+      'Données (Visualisation, Interprétation & Storytelling)',
+      'Analyse Exploratoire des Données',
+      'A/B Testing',
+      'Data Mining'
+    ]
+  },
+  {
+    name: 'Gestion de Projet',
+    items: ['Bonnes Pratiques de Génie Logiciel ',
+          'Git', 'CI / CD', 'DevOps', 'Agile', 'Scrum']
+  },
+    {
+    name: 'Librairies & Frameworks',
+    items: ['Shiny', 'Flask', 'Django', 'FastAPI', 'Pandas', 'NumPy', 'SciPy',
+           'Matplotlib', 'Plotly', 'Spark']
+  },
+  {
+    name: 'Langages',
+    items: ['Python', 'R', 'TypeScript', 'Bash/Shell', 'SQL']
+  },
+  {
+    name: 'Sciences du Vivant',
+    items: [
+      'Séquençage Nouvelle Génération (NGS)',
+      'Biologie Moléculaire', 'Omiques', 'Phylogénétique',
+      'Maladies Infectieuses', 'Oncologie', 'Maladies Rares', 'ISO 15189',
+      'Essais cliniques et formats de données',
+    ]
+  }
+];
+
 const AUTOPLAY_INTERVAL = 2500;   // 3s per category
 const RESUME_DELAY = 7000;        // resume autoplay 9s after user interaction
 
-// We render two consecutive copies of the categories so that the carousel
-// can keep sliding to the right forever. When we reach the start of the
-// second copy we silently jump back to the equivalent slide in the first
-// copy (no animation), which looks like an endless rightward loop.
 const SlideCard = ({ category }) => (
   <div className="skills-slide">
     <div className="skills-card">
@@ -109,6 +164,8 @@ const SlideCard = ({ category }) => (
 );
 
 const SkillsGrid = ({ lang }) => {
+  const skillsData = lang === 'fr' ? SKILLS_FR : SKILLS_EN;
+
   const trackRef = useRef(null);
   const slideRefs = useRef([]);
   const autoplayRef = useRef(null);
@@ -116,12 +173,9 @@ const SkillsGrid = ({ lang }) => {
   const isJumpingRef = useRef(false);
 
   const total = skillsData.length;
-  // logicalIndex is 0..total-1 (the "real" category being shown)
   const [logicalIndex, setLogicalIndex] = useState(0);
-  // The physical slide index inside the doubled list (0..2*total-1)
   const physicalRef = useRef(0);
 
-  // Scroll the track so that the given physical slide is centered.
   const scrollToPhysical = useCallback((physical, smooth = true) => {
     const track = trackRef.current;
     const slide = slideRefs.current[physical];
@@ -130,15 +184,12 @@ const SkillsGrid = ({ lang }) => {
     track.scrollTo({ left, behavior: smooth ? 'smooth' : 'auto' });
   }, []);
 
-  // Advance one slide to the right (auto or manual).
   const goNext = useCallback(() => {
     let next = physicalRef.current + 1;
     physicalRef.current = next;
     scrollToPhysical(next, true);
     setLogicalIndex(next % total);
 
-    // If we've entered the second copy, silently rewind to the first copy
-    // once the smooth scroll has finished, keeping the same visual position.
     if (next >= total) {
       window.setTimeout(() => {
         isJumpingRef.current = true;
@@ -146,17 +197,13 @@ const SkillsGrid = ({ lang }) => {
         physicalRef.current = rewound;
         scrollToPhysical(rewound, false);
         window.setTimeout(() => { isJumpingRef.current = false; }, 60);
-      }, 450); // wait for smooth scroll to settle
+      }, 450);
     }
   }, [scrollToPhysical, total]);
 
-  // Go one slide to the left. To keep an endless feel without a hard stop at
-  // the very first slide, if we'd go below 0 we first jump (no animation) to
-  // the equivalent slide in the second copy, then smooth-scroll left from there.
   const goPrev = useCallback(() => {
     const cur = physicalRef.current;
     if (cur <= 0) {
-      // Jump instantly to the mirror position in the second copy, then step left.
       isJumpingRef.current = true;
       const jumped = cur + total;
       physicalRef.current = jumped;
@@ -176,7 +223,6 @@ const SkillsGrid = ({ lang }) => {
     setLogicalIndex(prev % total);
   }, [scrollToPhysical, total]);
 
-  // --- Autoplay control -------------------------------------------------
   const startAutoplay = useCallback(() => {
     if (autoplayRef.current) return;
     autoplayRef.current = window.setInterval(goNext, AUTOPLAY_INTERVAL);
@@ -189,7 +235,6 @@ const SkillsGrid = ({ lang }) => {
     }
   }, []);
 
-  // User took control: pause autoplay, then resume after RESUME_DELAY.
   const pauseForUser = useCallback(() => {
     stopAutoplay();
     if (resumeRef.current) window.clearTimeout(resumeRef.current);
@@ -198,7 +243,6 @@ const SkillsGrid = ({ lang }) => {
     }, RESUME_DELAY);
   }, [stopAutoplay, startAutoplay]);
 
-  // Init: position on first slide, start autoplay.
   useEffect(() => {
     physicalRef.current = 0;
     scrollToPhysical(0, false);
@@ -209,8 +253,6 @@ const SkillsGrid = ({ lang }) => {
     };
   }, [scrollToPhysical, startAutoplay, stopAutoplay]);
 
-  // Keep the centered slide in sync while the user scrolls manually,
-  // and detect user-initiated scrolling to pause autoplay.
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -218,7 +260,6 @@ const SkillsGrid = ({ lang }) => {
     let scrollTimer = null;
 
     const onScroll = () => {
-      // Find the physical slide whose center is closest to the track center.
       const center = track.scrollLeft + track.clientWidth / 2;
       let closest = 0;
       let closestDist = Infinity;
@@ -235,7 +276,6 @@ const SkillsGrid = ({ lang }) => {
       setLogicalIndex(closest % total);
     };
 
-    // Any user pointer/wheel/touch on the track hands control to the user.
     const onUserInteract = () => {
       if (isJumpingRef.current) return;
       pauseForUser();
@@ -258,11 +298,8 @@ const SkillsGrid = ({ lang }) => {
     };
   }, [pauseForUser, total]);
 
-  // Manual navigation via dots — go to the nearest instance of that category
-  // travelling rightwards, then hand control to the user.
   const goToCategory = useCallback((target) => {
     const cur = physicalRef.current;
-    // pick the physical slide (in the doubled list) at/after cur that maps to target
     let next = cur;
     for (let step = 0; step < 2 * total; step++) {
       const candidate = cur + step;
@@ -284,11 +321,9 @@ const SkillsGrid = ({ lang }) => {
     pauseForUser();
   }, [scrollToPhysical, total, pauseForUser]);
 
-  // Arrow handlers — user takes control, so pause autoplay (resumes after delay).
   const onArrowPrev = useCallback(() => { pauseForUser(); goPrev(); }, [pauseForUser, goPrev]);
   const onArrowNext = useCallback(() => { pauseForUser(); goNext(); }, [pauseForUser, goNext]);
 
-  // Two consecutive copies for the infinite rightward loop.
   const doubled = [...skillsData, ...skillsData];
 
   return (

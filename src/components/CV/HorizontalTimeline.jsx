@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import {
-  iconMap, typeColor, enriched, sortedForLanes,
+  iconMap, typeColor,
   AXIS_MIN, AXIS_MAX, AXIS_PAD, formatDuration,
 } from './Timeline';
 
 /* ---- Desktop Gantt Timeline ---- */
 
-export default function HorizontalTimeline() {
+export default function HorizontalTimeline({ lang, enriched, sortedForLanes }) {
   const axisBarRef = useRef(null);
   const scrollBodyRef = useRef(null);
   const ganttRef = useRef(null);
@@ -136,7 +136,7 @@ export default function HorizontalTimeline() {
             const isActive = exp.id === activeId;
             const left = leftPct(exp.start);
             const width = widthPct(exp.start, exp.end);
-            const duration = formatDuration(exp);
+            const duration = formatDuration(exp, lang);
             const laneColor = typeColor[exp.type];
             return (
               <div
