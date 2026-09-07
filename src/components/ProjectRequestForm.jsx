@@ -164,20 +164,25 @@ export default function ProjectRequestForm({ lang = 'en' }) {
       services: selectedServices.join(', '),
       description: description.trim(),
       source: 'portfolio-website',
+      lang,
       leadId,
     };
 
     try {
-      await fetch(UNIFIED_APPS_SCRIPT_URL, {
+      const res = await fetch(UNIFIED_APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload),
       });
 
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (json.error) throw new Error(json.error);
+
       setStatus('success');
-    } catch {
+    } catch (err) {
       setStatus('error');
-      setServerMessage(t.errorNetwork);
+      setServerMessage(err.message || t.errorNetwork);
     }
   }
 
