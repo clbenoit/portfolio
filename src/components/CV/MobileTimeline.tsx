@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 
 import { iconMap, typeColor, formatDuration } from './Timeline';
+import type { EnrichedExperience } from './Timeline';
 
 /* ---- Inline SVG chevrons ---- */
 
@@ -27,21 +28,24 @@ const LINE_TOP = 30;      // px — dot centre offset
  * and left/right arrows. No Gantt lanes.
  * Chronological order: oldest (left) → newest (right).
  */
-export default function MobileTimeline({ lang, enriched }) {
+export default function MobileTimeline({ lang, enriched }: {
+  lang: string;
+  enriched: EnrichedExperience[];
+}) {
   const chronological = useMemo(
     () => [...enriched].sort((a, b) => a.start - b.start || a.id.localeCompare(b.id)),
     [enriched]
   );
   const total = chronological.length;
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const defaultIdx = chronological.findIndex((e) => e.isCurrent);
   const [current, setCurrent] = useState(Math.max(0, defaultIdx));
 
-  const scrollTo = useCallback((index) => {
+  const scrollTo = useCallback((index: number) => {
     const container = scrollRef.current;
     if (!container) return;
     const clamped = Math.max(0, Math.min(index, total - 1));
-    const station = container.querySelector(`[data-idx="${clamped}"]`);
+    const station = container.querySelector(`[data-idx="${clamped}"]`) as HTMLElement | null;
     if (station) {
       const left = station.offsetLeft - (container.clientWidth - station.clientWidth) / 2;
       container.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });

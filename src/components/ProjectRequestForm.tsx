@@ -1,4 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  budget?: string;
+  deadline?: string;
+  services?: string;
+  description?: string;
+}
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const EN = {
   formTitle: 'Project request form',
@@ -96,16 +108,16 @@ const UNIFIED_APPS_SCRIPT_URL =
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function getLeadId(email) {
+function getLeadId(email: string): string {
   const params = new URLSearchParams(window.location.search);
   const override = params.get('leadId');
   if (override) return override;
   return btoa(email.trim().toLowerCase());
 }
 
-export default function ProjectRequestForm({ lang = 'en' }) {
+export default function ProjectRequestForm({ lang = 'en' }: { lang?: string }) {
   const t = lang === 'fr' ? FR : EN;
-  const services = SERVICES[lang] || SERVICES.en;
+  const services: string[] = SERVICES[lang as 'en' | 'fr'] || SERVICES.en;
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -113,13 +125,13 @@ export default function ProjectRequestForm({ lang = 'en' }) {
   const [email, setEmail] = useState('');
   const [budget, setBudget] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('idle');
-  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [errors, setErrors] = useState<FormErrors>({});
   const [serverMessage, setServerMessage] = useState('');
 
-  function toggleService(service) {
+  function toggleService(service: string) {
     setSelectedServices((prev) =>
       prev.includes(service)
         ? prev.filter((s) => s !== service)
@@ -127,8 +139,8 @@ export default function ProjectRequestForm({ lang = 'en' }) {
     );
   }
 
-  function validate() {
-    const next = {};
+  function validate(): boolean {
+    const next: FormErrors = {};
     if (!firstName.trim()) next.firstName = t.errorFirstName;
     if (!lastName.trim()) next.lastName = t.errorLastName;
     if (!email.trim() || !EMAIL_RE.test(email.trim())) next.email = t.errorEmail;
@@ -144,7 +156,7 @@ export default function ProjectRequestForm({ lang = 'en' }) {
     return Object.keys(next).length === 0;
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!validate()) return;
 

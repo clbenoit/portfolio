@@ -4,14 +4,19 @@ import {
   iconMap, typeColor,
   AXIS_MIN, AXIS_MAX, AXIS_PAD, formatDuration,
 } from './Timeline';
+import type { EnrichedExperience } from './Timeline';
 
 /* ---- Desktop Gantt Timeline ---- */
 
-export default function HorizontalTimeline({ lang, enriched, sortedForLanes }) {
-  const axisBarRef = useRef(null);
-  const scrollBodyRef = useRef(null);
-  const ganttRef = useRef(null);
-  const wrapperRef = useRef(null);
+export default function HorizontalTimeline({ lang, enriched, sortedForLanes }: {
+  lang: string;
+  enriched: EnrichedExperience[];
+  sortedForLanes: EnrichedExperience[];
+}) {
+  const axisBarRef = useRef<HTMLDivElement | null>(null);
+  const scrollBodyRef = useRef<HTMLDivElement | null>(null);
+  const ganttRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [axisFixed, setAxisFixed] = useState(false);
   const axisFixedRef = useRef(false);
   const [activeId, setActiveId] = useState(
@@ -78,19 +83,19 @@ export default function HorizontalTimeline({ lang, enriched, sortedForLanes }) {
     };
   }, []);
 
-  const toPct = useCallback((year) => {
+  const toPct = useCallback((year: number) => {
     const span = AXIS_MAX - AXIS_MIN || 1;
     return ((year - AXIS_MIN) / span) * 100;
   }, []);
 
-  const leftPct = useCallback((year) => {
+  const leftPct = useCallback((year: number) => {
     const span = AXIS_MAX - AXIS_MIN || 1;
     const raw = ((year - AXIS_MIN) / span) * 100;
     const padPct = (AXIS_PAD / span) * 100;
     return raw + padPct;
   }, []);
 
-  const widthPct = useCallback((start, end) => {
+  const widthPct = useCallback((start: number, end: number) => {
     const span = AXIS_MAX - AXIS_MIN || 1;
     return ((end - start) / span) * 100;
   }, []);

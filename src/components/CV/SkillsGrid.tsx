@@ -150,7 +150,12 @@ const SKILLS_FR = [
 const AUTOPLAY_INTERVAL = 2500;   // 3s per category
 const RESUME_DELAY = 7000;        // resume autoplay 9s after user interaction
 
-const SlideCard = ({ category }) => (
+interface SkillCategory {
+  name: string;
+  items: string[];
+}
+
+const SlideCard = ({ category }: { category: SkillCategory }) => (
   <div className="skills-slide">
     <div className="skills-card">
       <div className="skills-card-title">{category.name}</div>
@@ -163,20 +168,20 @@ const SlideCard = ({ category }) => (
   </div>
 );
 
-const SkillsGrid = ({ lang }) => {
+const SkillsGrid = ({ lang }: { lang: string }) => {
   const skillsData = lang === 'fr' ? SKILLS_FR : SKILLS_EN;
 
-  const trackRef = useRef(null);
-  const slideRefs = useRef([]);
-  const autoplayRef = useRef(null);
-  const resumeRef = useRef(null);
-  const isJumpingRef = useRef(false);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const autoplayRef = useRef<number | null>(null);
+  const resumeRef = useRef<number | null>(null);
+  const isJumpingRef = useRef<boolean>(false);
 
   const total = skillsData.length;
   const [logicalIndex, setLogicalIndex] = useState(0);
   const physicalRef = useRef(0);
 
-  const scrollToPhysical = useCallback((physical, smooth = true) => {
+  const scrollToPhysical = useCallback((physical: number, smooth: boolean = true) => {
     const track = trackRef.current;
     const slide = slideRefs.current[physical];
     if (!track || !slide) return;
@@ -257,7 +262,7 @@ const SkillsGrid = ({ lang }) => {
     const track = trackRef.current;
     if (!track) return;
 
-    let scrollTimer = null;
+    let scrollTimer: number | null = null;
 
     const onScroll = () => {
       const center = track.scrollLeft + track.clientWidth / 2;
@@ -298,7 +303,7 @@ const SkillsGrid = ({ lang }) => {
     };
   }, [pauseForUser, total]);
 
-  const goToCategory = useCallback((target) => {
+  const goToCategory = useCallback((target: number) => {
     const cur = physicalRef.current;
     let next = cur;
     for (let step = 0; step < 2 * total; step++) {
