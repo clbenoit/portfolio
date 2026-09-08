@@ -32,6 +32,8 @@ const EN = {
   sending: 'Sending...',
   successTitle: 'Thank you!',
   successMsg: "Your project request has been sent successfully. I'll get back to you within 48 hours.",
+  newsletterInvite: 'While you wait, join my newsletter for insights on AI and bioinformatics →',
+  newsletterLink: 'subscribe',
   errorFirstName: 'Please enter your first name.',
   errorLastName: 'Please enter your last name.',
   errorEmail: 'Please enter a valid email address.',
@@ -65,6 +67,8 @@ const FR = {
   sending: 'Envoi en cours...',
   successTitle: 'Merci !',
   successMsg: 'Votre demande a bien été envoyée. Je vous répondrai sous 48 heures.',
+  newsletterInvite: "En attendant ma réponse, rejoignez ma newsletter pour des insights sur l'IA et la bioinfo →",
+  newsletterLink: "s'inscrire",
   errorFirstName: 'Veuillez saisir votre prénom.',
   errorLastName: 'Veuillez saisir votre nom.',
   errorEmail: 'Veuillez saisir une adresse email valide.',
@@ -103,8 +107,8 @@ const SERVICES = {
 
 const BUDGET_OPTIONS = ['', '<2k', '2-5k', '5-10k', '10-20k', '20k+'];
 
-const UNIFIED_APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbzdWElow0Ntn-RskmIopWBopEQ6A9UPMOIW89XGTet9w9LEhIvAW_WIa1C8iIdG5yvG/exec';
+const FUNNEL_BASE_URL = import.meta.env.PUBLIC_FUNNEL_URL || 'http://localhost:5104';
+const PROJECT_REQUEST_ENDPOINT = FUNNEL_BASE_URL + '/api/project-request';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -181,7 +185,7 @@ export default function ProjectRequestForm({ lang = 'en' }: { lang?: string }) {
     };
 
     try {
-      const res = await fetch(UNIFIED_APPS_SCRIPT_URL, {
+      const res = await fetch(PROJECT_REQUEST_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload),
@@ -203,6 +207,10 @@ export default function ProjectRequestForm({ lang = 'en' }: { lang?: string }) {
       <div className="form-success">
         <h2>{t.successTitle}</h2>
         <p>{t.successMsg}</p>
+        <p className="form-success-newsletter">
+          {t.newsletterInvite}{' '}
+          <a href={`/portfolio/${lang}/newsletter/`}>{t.newsletterLink}</a>
+        </p>
       </div>
     );
   }
