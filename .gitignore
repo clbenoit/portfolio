@@ -32,3 +32,4 @@ bun.lockb
 .env
 .env.local
 portfolio_env
+funnel_env

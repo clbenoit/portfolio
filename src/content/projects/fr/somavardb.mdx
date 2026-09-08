@@ -10,3 +10,29 @@ category: "omics"
 ## Pourquoi cette application
 
 Peu d'hôpitaux ne sous-traitent pas leur analyse bioinformatique à des partenaires privés (du moins en France). Il y a plusieurs raisons à cela :
+
+- Manque de ressources et de capacité d'investissement pour anticiper l' évolution technologique rapide.
+- Les métiers de la data, encore en plein essor, n'ont pas encore totalement pénétré ces structures.
+- Contraintes juridiques et administratives lourdes pour l'accréditation des solutions logicielles à usage clinique.
+
+Recourir à un prestataire externe est donc une solution à court terme. À long terme, toutefois, la sous-traitance pose deux problèmes majeurs :
+
+- Le coût de la prestation sous-traitée est au final beaucoup plus élevé qu'en interne.
+- Les utilisateurs (biologistes cliniciens) travaillent gratuitement à trier les bases de données construites par ces prestataires externes à partir des données brutes qui leur sont envoyées par les hôpitaux auxquels ces cliniciens appartiennent.
+L'hôpital paiera donc à nouveau l'accès aux modèles d'IA qui ont été entraînés grâce à son travail.
+
+C'est dans cette optique que j'ai porté mon attention sur la question de la ré-internalisation de cette activité au CHUGA.
+La partie analytique fera l'objet d'un autre article, mais en bref,
+la [communauté nf-core](https://nf-co.re/) est, à mon avis, le meilleur candidat sur lequel fonder cet objectif.
+
+Il y a toutefois un autre point bloquant. Les prestataires bioinformatiques fournissent, avec un pipeline,
+des interfaces graphiques permettant aux biologistes de traiter efficacement les données de variations génomiques pour le rendu diagnostique. Dans ces conditions, même si vous internalisez un pipeline de qualité clinique accrédité, il sera difficile de les convaincre de revenir à un tableur Excel bien moins attractif. Cela sera perçu comme un recul.
+
+SomaVarDB vise donc à s'incruster dans la sortie d'un pipeline nf-core, cliniquement accrédité si possible.
+C'est un package qui contient à la fois les outils pour construire la base de données locale à partir de la sortie nf-core,
+et l'interface pour interagir avec cette base.
+
+## Open-source
+
+- [Démo en ligne](https://omicsverse.fr/app/SomaVarDB)
+- [Code source](https://github.com/clbenoit/SomaVarDB)

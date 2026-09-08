@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import MinimalLayout from '../../../layouts/MinimalLayout.astro';
 import BackArrow from '../../../components/BackArrow.astro';
+import NewsletterCta from '../../../components/NewsletterCta.astro';
 
 const posts = await getCollection('blog_fr');
 posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -33,6 +34,7 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
       </article>
     ))}
   </div>
+  <NewsletterCta lang="fr" compact />
   </div>
 </MinimalLayout>
 

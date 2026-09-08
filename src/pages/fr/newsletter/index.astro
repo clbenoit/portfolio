@@ -1,0 +1,49 @@
+---
+import MinimalLayout from '../../../layouts/MinimalLayout.astro';
+import NewsletterCta from '../../../components/NewsletterCta.astro';
+
+---
+
+<MinimalLayout title="Newsletter" lang="fr">
+  <div class="newsletter-page">
+    <h1 class="newsletter-heading">Rejoignez ma newsletter</h1>
+    <p class="newsletter-subtitle">
+      Retours d'expérience concrets, sans marketing, sans spam —
+      quelques fois par an, jamais plus.
+    </p>
+    <NewsletterCta lang="fr" />
+  </div>
+</MinimalLayout>
+
+<style>
+  .newsletter-page {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .newsletter-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin: 0 0 12px;
+  }
+
+  .newsletter-subtitle {
+    font-size: 16px;
+    color: var(--color-text3);
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-page {
+      padding: 48px 16px;
+    }
+
+    .newsletter-heading {
+      font-size: 22px;
+    }
+  }
+</style>
