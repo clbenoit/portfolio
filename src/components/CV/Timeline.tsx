@@ -1,6 +1,33 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import MobileTimeline from './MobileTimeline';
 import HorizontalTimeline from './HorizontalTimeline';
+
+export type ExperienceType = 'work' | 'education' | 'internship' | 'traveling';
+
+export interface RangeResult {
+  start: number;
+  end: number;
+  present: boolean;
+  point: boolean;
+  startLabel: string;
+  endLabel: string;
+  startMonth: number | null;
+  endMonth: number | null;
+}
+
+export interface EnrichedExperience extends RangeResult {
+  id: string;
+  displayRange: string;
+  title: string;
+  subtitle: React.ReactNode;
+  location: string;
+  displayOrder: number;
+  type: ExperienceType;
+  isCurrent?: boolean;
+  content: React.ReactNode;
+}
+
+type RawExperience = Omit<EnrichedExperience, 'start' | 'end' | 'present' | 'point' | 'startMonth' | 'endMonth'>;
 
 /* ================================================================
    SHARED DATA: icons, colours, experiences, date helpers, axes
@@ -40,7 +67,7 @@ const GlobeIcon = () => (
   </svg>
 );
 
-export const iconMap = {
+export const iconMap: Record<ExperienceType, React.ReactNode> = {
   work:      <BriefcaseIcon />,
   education: <GradCapIcon />,
   internship: <FlaskIcon />,
@@ -48,7 +75,7 @@ export const iconMap = {
 };
 
 // Colour ramp per `type`.
-export const typeColor = {
+export const typeColor: Record<ExperienceType, string> = {
   work:      '#6366f1', // indigo
   education: '#0ea5e9', // sky
   internship:'#14b8a6', // teal
@@ -69,14 +96,14 @@ const MONTHS_FR = {
 };
 
 /** Try to match a month abbreviation in both English and French maps. */
-function resolveMonth(m3) {
+function resolveMonth(m3: string): number | null {
   if (m3 in MONTHS) return MONTHS[m3];
   if (m3 in MONTHS_FR) return MONTHS_FR[m3];
   return null;
 }
 
 /** "Month YYYY" or "YYYY" → decimal year (e.g. "Aug 2022" → 2022.625). */
-function yearToFloat(label) {
+function yearToFloat(label: string | null): number | null {
   if (!label) return null;
   const m = String(label).trim().match(/^([a-zÀ-ÿ]{3,9})\s+(\d{4})$/i);
   if (m) {
@@ -89,7 +116,7 @@ function yearToFloat(label) {
   return y ? Number(y[1]) : null;
 }
 
-function monthFromLabel(label) {
+function monthFromLabel(label: string | null): number | null {
   if (!label) return null;
   const m = String(label).trim().match(/^([a-zÀ-ÿ]{3,9})\s+\d{4}$/i);
   if (m) {
@@ -100,7 +127,7 @@ function monthFromLabel(label) {
 }
 
 /** Parse "Start - End" into { start, end, present, point, startMonth, endMonth }. */
-function parseRange(label, nowYearFloat) {
+function parseRange(label: string, nowYearFloat: number): RangeResult {
   const s = String(label || '');
   const present = /present|now|présent$/i.test(s);
   const parts = s.split(/[-–—]+/).map((p) => p.trim()).filter(Boolean);
@@ -126,7 +153,7 @@ function parseRange(label, nowYearFloat) {
 // ---- Experience data (source of truth) ----
 // Keep both locale arrays in sync when updating the CV.
 
-const EXPERIENCES_EN = [
+const EXPERIENCES_EN: RawExperience[] = [
   {
     id: 'coordinator',
     displayRange: 'January 2026 - Present',
@@ -328,7 +355,7 @@ const EXPERIENCES_EN = [
   },
 ];
 
-const EXPERIENCES_FR = [
+const EXPERIENCES_FR: RawExperience[] = [
   {
     id: 'coordinator',
     displayRange: 'Janvier 2026 - Présent',
@@ -541,7 +568,7 @@ const DURATION = {
 };
 
 /** Format a duration in years/months (inclusive: the end month is counted). */
-export function formatDuration(exp, lang = 'en') {
+export function formatDuration(exp: EnrichedExperience, lang: string = 'en'): string {
   const { startMonth, endMonth, start, end, present, point } = exp;
   if (point) return '';
   const sm = startMonth ?? 0;
@@ -563,7 +590,7 @@ export function formatDuration(exp, lang = 'en') {
 }
 
 // Pre-compute numeric bounds for every entry (module-level, once per locale).
-function enrichExperiences(experiences) {
+function enrichExperiences(experiences: RawExperience[]): EnrichedExperience[] {
   return experiences.map((exp) => {
     const { start, end, present, point, startLabel, endLabel, startMonth, endMonth } =
       parseRange(`${exp.startLabel} - ${exp.endLabel}`, ROLLOUT_YEAR);
@@ -583,7 +610,7 @@ export const AXIS_MAX = RAW_AXIS_MAX + 0.8;
 export const AXIS_PAD = (AXIS_MAX - AXIS_MIN) * 0.02 || 0.1;
 
 /** Lane order: newest → oldest using displayOrder. */
-function sortForLanes(enriched) {
+function sortForLanes(enriched: EnrichedExperience[]): EnrichedExperience[] {
   return [...enriched].sort(
     (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)
   );
@@ -598,12 +625,12 @@ export const sortedForLanes_FR = sortForLanes(enriched_FR);
 
 const BREAKPOINT = 768;
 
-export default function Timeline({ lang }) {
+export default function Timeline({ lang }: { lang: string }) {
   const locale = lang === 'fr' ? 'fr' : 'en';
   const enriched = locale === 'fr' ? enriched_FR : enriched_EN;
   const sortedForLanes = locale === 'fr' ? sortedForLanes_FR : sortedForLanes_EN;
 
-  const [isDesktop, setIsDesktop] = useState(null);
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= BREAKPOINT);
