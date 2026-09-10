@@ -216,7 +216,7 @@ export default function ProjectRequestForm({ lang = 'en' }: { lang?: string }) {
   }
 
   return (
-    <form className="project-form" onSubmit={handleSubmit} noValidate>
+    <form className="project-form" onSubmit={handleSubmit} noValidate aria-busy={status === 'submitting' || undefined}>
 
       <div className="form-row">
         <div className="form-field">
@@ -333,7 +333,7 @@ export default function ProjectRequestForm({ lang = 'en' }: { lang?: string }) {
         className="form-submit"
         disabled={status === 'submitting'}
       >
-        {status === 'submitting' ? t.sending : t.submit}
+        {status === 'submitting' ? <><span className="spinner" />{t.sending}</> : t.submit}
       </button>
 
       {status === 'error' && (
