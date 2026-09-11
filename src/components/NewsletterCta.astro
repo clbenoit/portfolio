@@ -25,6 +25,9 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
     </button>
   </div>
   <p class="nl-cta-status" role="status" aria-live="polite"></p>
+  <p class="nl-cta-note">
+    {isFr ? 'Désabonnement en 1 clic à tout moment.' : 'Unsubscribe with one click at any time.'}
+  </p>
 </form>
 
 <style>
@@ -120,6 +123,13 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
     color: var(--color-text2);
     text-align: center;
     line-height: 1.5;
+  }
+
+  .nl-cta-note {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-text3);
+    text-align: center;
   }
 </style>
 
