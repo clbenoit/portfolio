@@ -23,7 +23,7 @@ const currentPath = Astro.url.pathname;
       {section.link ? (
         <a
           href={localizedHref(section.href, lang)}
-          class={currentPath === section.href ? 'sidebar-heading-link active' : 'sidebar-heading-link'}
+          class={currentPath === localizedHref(section.href, lang) ? 'sidebar-heading-link active' : 'sidebar-heading-link'}
         >
           {section.text}
         </a>
@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
             <li>
               <a
                 href={localizedHref(item.href, lang)}
-                class={currentPath === item.href ? 'sidebar-link active' : 'sidebar-link'}
+                class={currentPath === localizedHref(item.href, lang) ? 'sidebar-link active' : 'sidebar-link'}
               >
                 {item.text}
               </a>
@@ -62,6 +62,10 @@ const currentPath = Astro.url.pathname;
 
   .sidebar-section {
     margin-bottom: 24px;
+  }
+
+  .sidebar-section:first-of-type {
+    margin-bottom: 7px;
   }
 
   .sidebar-newsletter {

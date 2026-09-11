@@ -1164,7 +1164,7 @@
   cursor: not-allowed;
 }
 
-.form-submit .spinner {
+.spinner {
   display: inline-block;
   width: 16px;
   height: 16px;
