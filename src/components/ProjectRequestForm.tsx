@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DeadlineDateField from './DeadlineDateField';
 
 interface FormErrors {
   firstName?: string;
@@ -318,12 +319,12 @@ export default function ProjectRequestForm({ lang = 'en' }: { lang?: string }) {
 
       <div className="form-field">
         <label htmlFor="deadline">{t.deadline}</label>
-        <input
-          type="date"
-          id="deadline"
+        <DeadlineDateField
           value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          className={errors.deadline ? 'field-error' : ''}
+          onChange={setDeadline}
+          lang={lang === 'fr' ? 'fr' : 'en'}
+          id="deadline"
+          invalid={Boolean(errors.deadline)}
         />
         {errors.deadline && <span className="form-error">{errors.deadline}</span>}
       </div>
