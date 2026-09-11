@@ -1,0 +1,189 @@
+---
+import { sidebar, localizedHref } from '../config';
+import type { Locale } from '../config';
+
+export interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'en' } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+type Chip = { text: string; href: string };
+type Section = { text: string; items: Chip[] };
+
+const newsletterHref = localizedHref('/portfolio/newsletter/', lang);
+const newsletterChip: Chip = { text: 'Newsletter', href: newsletterHref };
+
+const allSections = sidebar.filter((s): s is Section => 'items' in s);
+
+const isOverview = currentPath === localizedHref((sidebar[0] as { href: string }).href, lang);
+
+let chips: Chip[];
+if (isOverview) {
+  chips = [
+    newsletterChip,
+    ...allSections.flatMap(s =>
+      s.items.map(item => ({ text: item.text, href: localizedHref(item.href, lang) }))
+    ),
+  ];
+} else {
+  const currentSection = allSections.find(s =>
+    s.items.some(item => currentPath === localizedHref(item.href, lang))
+  );
+  if (currentSection) {
+    const items = currentSection.items.map(item => ({
+      text: item.text,
+      href: localizedHref(item.href, lang),
+    }));
+    const active = items.find(item => currentPath === item.href)!;
+    const siblings = items.filter(item => currentPath !== item.href);
+    chips = [active, newsletterChip, ...siblings];
+  } else {
+    chips = [newsletterChip];
+  }
+}
+---
+
+<nav class="mobile-project-nav" aria-label="Projects navigation">
+  <div class="mpn-scroll">
+    {chips.map(chip => (
+      <a
+        href={chip.href}
+        class={chip.href === newsletterHref ? 'mpn-chip mpn-chip--newsletter' :
+               chip.href === currentPath ? 'mpn-chip active' : 'mpn-chip'}
+      >
+        {chip.href === newsletterHref && (
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="m22 7-10 6L2 7"></path>
+          </svg>
+        )}
+        {chip.text}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .mobile-project-nav {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-project-nav {
+      display: block;
+      position: sticky;
+      top: 64px;
+      z-index: 40;
+      background: var(--color-background);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .mpn-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 16px;
+      scrollbar-width: none;
+    }
+
+    .mpn-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mpn-chip {
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text2);
+      text-decoration: none;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .mpn-chip:hover {
+      background: var(--color-background3);
+      color: var(--color-text);
+    }
+
+    .mpn-chip.active {
+      color: var(--color-backgroundAccent);
+      background: var(--color-backgroundIrisTint);
+      border-color: var(--color-borderAccent);
+      font-weight: 600;
+    }
+
+    .mpn-chip--newsletter {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-backgroundAccent);
+      border-color: var(--color-borderAccent);
+      font-weight: 600;
+    }
+
+    .mpn-chip--newsletter:hover {
+      background: var(--color-backgroundIrisTint);
+    }
+
+    .mpn-chip--newsletter svg {
+      flex-shrink: 0;
+    }
+
+    .mobile-project-nav::before,
+    .mobile-project-nav::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 24px;
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+
+    .mobile-project-nav::before {
+      left: 0;
+      background: linear-gradient(to left, transparent, var(--color-background));
+      opacity: 0;
+    }
+
+    .mobile-project-nav::after {
+      right: 0;
+      background: linear-gradient(to right, transparent, var(--color-background));
+    }
+
+    .mpn-scrolled-left::before {
+      opacity: 1;
+    }
+
+    .mpn-at-end::after {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const mpnNav = document.querySelector<HTMLElement>('.mobile-project-nav');
+  const mpnScroller = mpnNav?.querySelector<HTMLElement>('.mpn-scroll');
+  if (mpnNav && mpnScroller) {
+    const activeChip = mpnScroller.querySelector<HTMLElement>('.mpn-chip.active');
+    if (activeChip) {
+      const target = activeChip.offsetLeft - (mpnScroller.clientWidth - activeChip.offsetWidth) / 2;
+      mpnScroller.scrollLeft = Math.max(0, target);
+    }
+
+    const updateFades = () => {
+      const maxScroll = mpnScroller.scrollWidth - mpnScroller.clientWidth;
+      mpnNav.classList.toggle('mpn-scrolled-left', mpnScroller.scrollLeft > 4);
+      mpnNav.classList.toggle('mpn-at-end', mpnScroller.scrollLeft >= maxScroll - 4);
+    };
+    mpnScroller.addEventListener('scroll', updateFades, { passive: true });
+    updateFades();
+  }
+</script>

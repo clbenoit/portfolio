@@ -19,10 +19,10 @@ export function localizedHref(href: string, lang: Locale): string {
 }
 
 export const topNav = [
-  { text: 'CV', href: '/portfolio/cv/' },
   { text: 'Blog', href: '/portfolio/blog/' },
   { text: 'Projects', href: '/portfolio/projects/' },
   { text: 'Contact', href: '/portfolio/contact/' },
+  { text: 'CV', href: '/portfolio/cv/' },
 ];
 
 export const sidebar = [

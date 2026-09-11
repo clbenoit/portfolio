@@ -2,14 +2,16 @@
 export interface Props {
   lang?: 'fr' | 'en';
   compact?: boolean;
+  tease?: string;
 }
 
-const { lang = 'en', compact = false } = Astro.props;
+const { lang = 'en', compact = false, tease } = Astro.props;
 const isFr = lang === 'fr';
 const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
 ---
 
 <form class={ctaClass} data-newsletter-cta data-lang={lang} novalidate>
+  {tease && <p class="nl-cta-tease">{tease}</p>}
   <div class="nl-cta-field">
     <input
       type="email"
@@ -111,6 +113,14 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
       flex-direction: column;
     }
   }
+
+  .nl-cta-tease {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: var(--color-text2);
+    text-align: center;
+    line-height: 1.5;
+  }
 </style>
 
 <script>
@@ -123,12 +133,20 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
       loading: 'Inscription…',
       ok: 'Vous êtes inscrit !',
       invalid: 'Veuillez saisir une adresse email valide.',
+      subscribedBtn: 'Se désinscrire',
+      unsubscribing: 'Désinscription…',
+      unsubscribed: 'Vous êtes désinscrit.',
+      unsubscribeError: 'Échec de la désinscription. Veuillez réessayer.',
     },
     en: {
       idle: 'Subscribe',
       loading: 'Subscribing…',
       ok: "You're subscribed!",
       invalid: 'Please enter a valid email address.',
+      subscribedBtn: 'Unsubscribe',
+      unsubscribing: 'Unsubscribing…',
+      unsubscribed: "You've been unsubscribed.",
+      unsubscribeError: 'Unsubscribe failed. Please try again.',
     },
   };
 
@@ -142,10 +160,42 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const email = input.value.trim();
       status.className = 'nl-cta-status';
       status.textContent = '';
+
+      const subscribedEmail = form.dataset.subscribed;
+
+      if (subscribedEmail) {
+        btn.disabled = true;
+        btn.textContent = t.unsubscribing;
+
+        try {
+          const res = await fetch(NL_API_BASE + '/api/newsletter/unsubscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: subscribedEmail }),
+          });
+          const json = await res.json();
+          if (!res.ok || json.error) throw new Error(json.error || 'Unexpected response');
+
+          delete form.dataset.subscribed;
+          input.value = '';
+          input.disabled = false;
+          btn.textContent = t.idle;
+          status.textContent = t.unsubscribed;
+          status.classList.add('success');
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : t.unsubscribeError;
+          status.textContent = msg;
+          status.classList.add('error');
+          btn.textContent = t.subscribedBtn;
+        } finally {
+          btn.disabled = false;
+        }
+        return;
+      }
+
+      const email = input.value.trim();
 
       if (!NL_EMAIL_RE.test(email)) {
         status.textContent = t.invalid;
@@ -154,7 +204,8 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
       }
 
       btn.disabled = true;
-      btn.textContent = t.loading;
+      btn.setAttribute('aria-busy', 'true');
+      btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>' + t.loading;
 
       try {
         const res = await fetch(NL_API_BASE + '/api/newsletter/subscribe', {
@@ -166,16 +217,19 @@ const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
         if (!res.ok || json.error) {
           throw new Error(json.error || 'Unexpected response');
         }
+        form.dataset.subscribed = email;
+        input.disabled = true;
         status.textContent = t.ok;
         status.classList.add('success');
-        input.value = '';
+        btn.textContent = t.subscribedBtn;
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
         status.textContent = msg;
         status.classList.add('error');
+        btn.textContent = t.idle;
       } finally {
         btn.disabled = false;
-        btn.textContent = t.idle;
+        btn.removeAttribute('aria-busy');
       }
     });
   });
