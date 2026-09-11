@@ -1,11 +1,11 @@
 ---
-const { href } = Astro.props;
+const { href, label = 'Back' } = Astro.props;
 ---
-<a href={href} class="back-arrow" aria-label="Back">
+<a href={href} class="back-arrow" aria-label={label}>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-  <span>Back</span>
+  <span>{label}</span>
 </a>
 <style>
   .back-arrow {
