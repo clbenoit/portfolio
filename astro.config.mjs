@@ -12,4 +12,9 @@ export default defineConfig({
     react(),
     mdx(),
   ],
+  vite: {
+    optimizeDeps: {
+      exclude: ['react/jsx-dev-runtime'],
+    },
+  },
 });

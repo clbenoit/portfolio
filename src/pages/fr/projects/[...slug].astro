@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import DefaultLayout from '../../../layouts/DefaultLayout.astro';
+import BackArrow from '../../../components/BackArrow.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects_fr');
@@ -17,7 +18,26 @@ const { project, Content } = Astro.props;
 ---
 
 <DefaultLayout title={project.data.title} lang="fr">
+  <div class="project-back">
+    <BackArrow href="/portfolio/fr/projects/" label="Projects Overview" />
+  </div>
   <div class="project-content">
     <Content />
   </div>
 </DefaultLayout>
+
+<style>
+  @media (max-width: 767px) {
+    .project-back {
+      margin-top: 16px;
+    }
+
+    .project-back :global(.back-arrow) {
+      margin-bottom: 4px;
+    }
+
+    .project-content :global(h1) {
+      margin-top: 0;
+    }
+  }
+</style>

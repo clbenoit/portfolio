@@ -29,6 +29,7 @@ export const sidebar = [
   {
     text: 'Projects Overview',
     href: '/portfolio/projects/',
+    link: true,
   },
   {
     text: 'Genomics Data Analysis Apps',
