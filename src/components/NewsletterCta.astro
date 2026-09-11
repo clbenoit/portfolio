@@ -1,0 +1,182 @@
+---
+export interface Props {
+  lang?: 'fr' | 'en';
+  compact?: boolean;
+}
+
+const { lang = 'en', compact = false } = Astro.props;
+const isFr = lang === 'fr';
+const ctaClass = compact ? 'nl-cta nl-cta--compact' : 'nl-cta';
+---
+
+<form class={ctaClass} data-newsletter-cta data-lang={lang} novalidate>
+  <div class="nl-cta-field">
+    <input
+      type="email"
+      name="email"
+      placeholder={isFr ? 'vous@email.com' : 'you@email.com'}
+      aria-label={isFr ? 'Adresse email' : 'Email address'}
+      class="nl-cta-input"
+    />
+    <button type="submit" class="nl-cta-btn">
+      {isFr ? "S'inscrire" : 'Subscribe'}
+    </button>
+  </div>
+  <p class="nl-cta-status" role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .nl-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .nl-cta--compact {
+    margin-top: 72px;
+    width: 100%;
+    max-width: 480px;
+    padding: 24px 24px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-background);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .nl-cta-field {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .nl-cta-input {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-background);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .nl-cta-input:focus {
+    border-color: var(--color-backgroundAccent);
+  }
+
+  .nl-cta-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    background: var(--color-backgroundAccent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+
+  .nl-cta-btn:hover {
+    background: #4a4ab8;
+  }
+
+  .nl-cta-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .nl-cta-status {
+    font-size: 14px;
+    min-height: 20px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .nl-cta-status.success {
+    color: #28a745;
+  }
+
+  .nl-cta-status.error {
+    color: #dc3545;
+  }
+
+  @media (max-width: 480px) {
+    .nl-cta-field {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  const NL_API_BASE = import.meta.env.PUBLIC_FUNNEL_URL || 'https://ebook.omicsverse.fr';
+  const NL_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const NL_TEXTS = {
+    fr: {
+      idle: "S'inscrire",
+      loading: 'Inscription…',
+      ok: 'Vous êtes inscrit !',
+      invalid: 'Veuillez saisir une adresse email valide.',
+    },
+    en: {
+      idle: 'Subscribe',
+      loading: 'Subscribing…',
+      ok: "You're subscribed!",
+      invalid: 'Please enter a valid email address.',
+    },
+  };
+
+  document.querySelectorAll<HTMLFormElement>('[data-newsletter-cta]').forEach(function (form) {
+    const lang = (form.dataset.lang as 'fr' | 'en') || 'en';
+    const t = NL_TEXTS[lang];
+    const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const status = form.querySelector<HTMLParagraphElement>('.nl-cta-status');
+    if (!input || !btn || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = input.value.trim();
+      status.className = 'nl-cta-status';
+      status.textContent = '';
+
+      if (!NL_EMAIL_RE.test(email)) {
+        status.textContent = t.invalid;
+        status.classList.add('error');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = t.loading;
+
+      try {
+        const res = await fetch(NL_API_BASE + '/api/newsletter/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, lang }),
+        });
+        const json = await res.json();
+        if (!res.ok || json.error) {
+          throw new Error(json.error || 'Unexpected response');
+        }
+        status.textContent = t.ok;
+        status.classList.add('success');
+        input.value = '';
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+        status.textContent = msg;
+        status.classList.add('error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = t.idle;
+      }
+    });
+  });
+</script>

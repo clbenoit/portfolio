@@ -11,6 +11,13 @@ const currentPath = Astro.url.pathname;
 ---
 
 <aside class="sidebar">
+  <a class="sidebar-newsletter" href={localizedHref('/portfolio/newsletter/', lang)}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+      <path d="m22 7-10 6L2 7"></path>
+    </svg>
+    Newsletter
+  </a>
   {sidebar.map(section => (
     <div class="sidebar-section">
       {section.link ? (
@@ -55,6 +62,30 @@ const currentPath = Astro.url.pathname;
 
   .sidebar-section {
     margin-bottom: 24px;
+  }
+
+  .sidebar-newsletter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-backgroundAccent);
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 24px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .sidebar-newsletter:hover {
+    background: var(--color-backgroundIrisTint);
+    color: var(--color-backgroundAccent);
+  }
+
+  .sidebar-newsletter svg {
+    flex-shrink: 0;
   }
 
   .sidebar-heading {

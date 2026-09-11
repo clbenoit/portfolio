@@ -1,5 +1,6 @@
 ---
 import MinimalLayout from '../../../layouts/MinimalLayout.astro';
+import NewsletterCta from '../../../components/NewsletterCta.astro';
 
 ---
 
@@ -7,25 +8,10 @@ import MinimalLayout from '../../../layouts/MinimalLayout.astro';
   <div class="newsletter-page">
     <h1 class="newsletter-heading">Rejoignez ma newsletter</h1>
     <p class="newsletter-subtitle">
-      Recevez des retours d'expérience et des conseils pratiques sur
-      l'orchestration IA, la bioinformatique et les pipelines de données —
-      directement dans votre boîte mail.
+      Retours d'expérience concrets, sans marketing, sans spam —
+      quelques fois par an, jamais plus.
     </p>
-
-    <form class="newsletter-form" id="newsletter-form">
-      <div class="newsletter-field">
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="vous@email.com"
-          required
-          class="newsletter-input"
-        />
-        <button type="submit" class="newsletter-btn" id="submit-btn">S'inscrire</button>
-      </div>
-      <p class="newsletter-status" id="status"></p>
-    </form>
+    <NewsletterCta lang="fr" />
   </div>
 </MinimalLayout>
 
@@ -51,72 +37,6 @@ import MinimalLayout from '../../../layouts/MinimalLayout.astro';
     line-height: 1.6;
   }
 
-  .newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .newsletter-field {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-    max-width: 400px;
-  }
-
-  .newsletter-input {
-    flex: 1;
-    padding: 10px 14px;
-    font-size: 15px;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: var(--color-background);
-    color: var(--color-text);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
-  .newsletter-input:focus {
-    border-color: var(--color-backgroundAccent);
-  }
-
-  .newsletter-btn {
-    padding: 10px 20px;
-    font-size: 15px;
-    font-weight: 600;
-    background: var(--color-backgroundAccent);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-
-  .newsletter-btn:hover {
-    background: #4a4ab8;
-  }
-
-  .newsletter-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  .newsletter-status {
-    font-size: 14px;
-    min-height: 20px;
-    margin: 0;
-  }
-
-  .newsletter-status.success {
-    color: #28a745;
-  }
-
-  .newsletter-status.error {
-    color: #dc3545;
-  }
-
   @media (max-width: 480px) {
     .newsletter-page {
       padding: 48px 16px;
@@ -125,60 +45,5 @@ import MinimalLayout from '../../../layouts/MinimalLayout.astro';
     .newsletter-heading {
       font-size: 22px;
     }
-
-    .newsletter-field {
-      flex-direction: column;
-    }
   }
 </style>
-
-<script>
-  const FUNNEL_API = 'https://ebook.omicsverse.fr/api/newsletter/subscribe';
-
-  const form = document.getElementById('newsletter-form') as HTMLFormElement;
-  const statusEl = document.getElementById('status') as HTMLParagraphElement;
-  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      statusEl.textContent = 'Veuillez saisir une adresse email valide.';
-      statusEl.className = 'newsletter-status error';
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Inscription...';
-    statusEl.textContent = '';
-    statusEl.className = 'newsletter-status';
-
-    try {
-      const res = await fetch(FUNNEL_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          lang: 'fr',
-        }),
-      });
-
-      const json = await res.json();
-      if (!res.ok || json.error) {
-        throw new Error(json.error || 'Unexpected response');
-      }
-
-      statusEl.textContent = 'Vous êtes inscrit !';
-      statusEl.className = 'newsletter-status success';
-      (document.getElementById('email') as HTMLInputElement).value = '';
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
-      statusEl.textContent = msg;
-      statusEl.className = 'newsletter-status error';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'S\'inscrire';
-    }
-  });
-</script>

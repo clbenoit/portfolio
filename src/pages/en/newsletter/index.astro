@@ -1,29 +1,17 @@
 ---
 import MinimalLayout from '../../../layouts/MinimalLayout.astro';
+import NewsletterCta from '../../../components/NewsletterCta.astro';
+
 ---
 
 <MinimalLayout title="Newsletter" lang="en">
   <div class="newsletter-page">
     <h1 class="newsletter-heading">Join my newsletter</h1>
     <p class="newsletter-subtitle">
-      Get practical insights on AI orchestration, bioinformatics, and real-world
-      data pipelines — straight to your inbox.
+      Practical field reports on AI orchestration, bioinformatics, and
+      real-world data pipelines — straight to your inbox, no marketing, no spam.
     </p>
-
-    <form class="newsletter-form" id="newsletter-form">
-      <div class="newsletter-field">
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="your@email.com"
-          required
-          class="newsletter-input"
-        />
-        <button type="submit" class="newsletter-btn" id="submit-btn">Subscribe</button>
-      </div>
-      <p class="newsletter-status" id="status"></p>
-    </form>
+    <NewsletterCta lang="en" />
   </div>
 </MinimalLayout>
 
@@ -49,72 +37,6 @@ import MinimalLayout from '../../../layouts/MinimalLayout.astro';
     line-height: 1.6;
   }
 
-  .newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .newsletter-field {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-    max-width: 400px;
-  }
-
-  .newsletter-input {
-    flex: 1;
-    padding: 10px 14px;
-    font-size: 15px;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: var(--color-background);
-    color: var(--color-text);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
-  .newsletter-input:focus {
-    border-color: var(--color-backgroundAccent);
-  }
-
-  .newsletter-btn {
-    padding: 10px 20px;
-    font-size: 15px;
-    font-weight: 600;
-    background: var(--color-backgroundAccent);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-
-  .newsletter-btn:hover {
-    background: #4a4ab8;
-  }
-
-  .newsletter-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  .newsletter-status {
-    font-size: 14px;
-    min-height: 20px;
-    margin: 0;
-  }
-
-  .newsletter-status.success {
-    color: #28a745;
-  }
-
-  .newsletter-status.error {
-    color: #dc3545;
-  }
-
   @media (max-width: 480px) {
     .newsletter-page {
       padding: 48px 16px;
@@ -123,67 +45,5 @@ import MinimalLayout from '../../../layouts/MinimalLayout.astro';
     .newsletter-heading {
       font-size: 22px;
     }
-
-    .newsletter-field {
-      flex-direction: column;
-    }
   }
 </style>
-
-<script>
-  const APPS_SCRIPT = 'https://script.google.com/macros/s/AKfycbyAzob3-jLgIWwpJjvg2SGTXToVQ2hyLOwaTRWfjyJpmA8nBpXx6KvCxJOgl619Fahh/exec';
-  function btoaLocal(str: string): string {
-    return btoa(str);
-  }
-
-  const form = document.getElementById('newsletter-form') as HTMLFormElement;
-  const statusEl = document.getElementById('status') as HTMLParagraphElement;
-  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      statusEl.textContent = 'Please enter a valid email address.';
-      statusEl.className = 'newsletter-status error';
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Subscribing...';
-    statusEl.textContent = '';
-    statusEl.className = 'newsletter-status';
-
-    try {
-      const res = await fetch(APPS_SCRIPT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({
-          action: 'subscribeNewsletter',
-          email,
-          firstName: '',
-          lang: 'en',
-          leadId: btoaLocal(email.toLowerCase()),
-        }),
-      });
-
-      const text = await res.text();
-      let json;
-      try { json = JSON.parse(text); } catch { throw new Error('Invalid response: ' + text.slice(0, 200)); }
-      if (json.error) throw new Error(json.error);
-      if (!json.success) throw new Error('Unexpected response');
-
-      statusEl.textContent = "You're subscribed!";
-      statusEl.className = 'newsletter-status success';
-      (document.getElementById('email') as HTMLInputElement).value = '';
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
-      statusEl.textContent = msg;
-      statusEl.className = 'newsletter-status error';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Subscribe';
-    }
-  });
-</script>

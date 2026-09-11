@@ -23,7 +23,6 @@ export const topNav = [
   { text: 'Blog', href: '/portfolio/blog/' },
   { text: 'Projects', href: '/portfolio/projects/' },
   { text: 'Contact', href: '/portfolio/contact/' },
-  { text: 'Newsletter', href: '/portfolio/newsletter/' },
 ];
 
 export const sidebar = [

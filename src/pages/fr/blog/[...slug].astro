@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import MinimalLayout from '../../../layouts/MinimalLayout.astro';
 import BackArrow from '../../../components/BackArrow.astro';
+import NewsletterCta from '../../../components/NewsletterCta.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog_fr');
@@ -35,6 +36,7 @@ const { post, Content } = Astro.props;
       <Content />
     </div>
   </article>
+  <NewsletterCta lang="fr" compact />
 </div>
 </MinimalLayout>
 
