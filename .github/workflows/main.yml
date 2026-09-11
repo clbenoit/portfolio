@@ -41,6 +41,8 @@ jobs:
           BASE_URL: /portfolio/
           PUBLIC_WEB3FORMS_KEY: ${{ vars.WEB3FORMS_KEY }}
           PUBLIC_APPS_SCRIPT_URL: ${{ vars.APPS_SCRIPT_URL }}
+          # Endpoint funnel (project-request + newsletter) pour le build prod
+          PUBLIC_FUNNEL_URL: ${{ vars.PUBLIC_FUNNEL_URL }}
       - name: 🚀 Deploy
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: peaceiris/actions-gh-pages@v4
