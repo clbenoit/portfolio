@@ -107,7 +107,7 @@ const SERVICES = {
 
 const BUDGET_OPTIONS = ['', '<2k', '2-5k', '5-10k', '10-20k', '20k+'];
 
-const FUNNEL_BASE_URL = import.meta.env.PUBLIC_FUNNEL_URL || 'http://localhost:5104';
+const FUNNEL_BASE_URL = import.meta.env.PUBLIC_FUNNEL_URL || 'https://ebook.omicsverse.fr';
 const PROJECT_REQUEST_ENDPOINT = FUNNEL_BASE_URL + '/api/project-request';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
