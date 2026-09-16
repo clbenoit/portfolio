@@ -1,0 +1,78 @@
+---
+import { topNav, siteConfig } from '../config';
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="/portfolio/" class="top-nav-title">{siteConfig.title}</a>
+    <div class="top-nav-links">
+      {topNav.map(item => (
+        <a
+          href={item.href}
+          class={currentPath.startsWith(item.href) ? 'top-nav-link active' : 'top-nav-link'}
+        >
+          {item.text}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<style>
+  .top-nav {
+    background: var(--color-backgroundDark);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 0 40px;
+  }
+
+  .top-nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .top-nav-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-title);
+    text-decoration: none;
+  }
+
+  .top-nav-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .top-nav-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text2);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .top-nav-link:hover {
+    color: var(--color-text);
+    background: var(--color-background3);
+  }
+
+  .top-nav-link.active {
+    color: var(--color-backgroundAccent);
+  }
+
+  @media (max-width: 767px) {
+    .top-nav {
+      padding: 0 16px;
+    }
+  }
+</style>
