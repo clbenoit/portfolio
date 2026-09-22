@@ -1,3 +1,9 @@
+/* Global image reset: keep rendered MDX images (projects, blog...) within their container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .popacity {
  background: #33475B;
  padding: 10px;
