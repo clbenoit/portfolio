@@ -1,0 +1,236 @@
+---
+title: "Cyberguerre : ce que les modèles ouverts changent dans le red team"
+authors:
+  - "[cbenoit](https://www.linkedin.com/in/clement-benoit)"
+date: 2026-09-30
+tags:
+  - cyberguerre
+  - défense
+  - souveraineté
+  - modèles-ouverts
+  - red-team
+lang: "fr"
+---
+
+# Cyberguerre : ce que les modèles ouverts changent dans le red team
+
+On parle beaucoup de souveraineté de l'IA en termes de centres de données, de GPU et d'hébergement local. C'est évidemment important. Mais ce n'est peut-être pas là que se trouve le changement le plus intéressant.
+
+Pour un système critique, la question n'est pas seulement de savoir ce qu'un modèle sait faire. Il faut aussi savoir **jusqu'où on peut le faire aller**.
+
+C'est particulièrement important pour le red team.
+
+## Un système qu'on n'a pas attaqué, on ne le connaît pas
+
+Prenons un exemple simple : un centre de situation utilise un modèle pour résumer chaque matin les événements de la veille.
+
+Le système reçoit des dépêches, des rapports, des notes internes et différentes sources ouvertes. Il les analyse, les rapproche et produit une synthèse destinée à des opérateurs humains.
+
+Pour tester sa robustesse, on peut lui soumettre des milliers de documents conçus pour provoquer des erreurs : informations contradictoires, fausses sources, instructions cachées dans le contenu, tentatives de manipulation du contexte ou informations volontairement ambiguës.
+
+Mais une question se pose rapidement : **qui produit ces attaques ?**
+
+On peut bien sûr les écrire à la main. Le problème est alors celui de l'échelle. Pour explorer suffisamment de variantes, il devient intéressant d'utiliser un autre modèle pour générer automatiquement les scénarios de test.
+
+C'est là qu'apparaît un problème moins évident.
+
+Un red team peut utiliser un modèle pour automatiser la génération de scénarios adversariaux. Mais ce modèle reste soumis à ses propres règles de comportement.
+
+Il peut donc refuser de produire certains scénarios parce qu'il les considère comme dangereux, illégaux ou contraires à sa politique d'utilisation.
+
+Pour un assistant généraliste, ce comportement est normal.
+
+Pour un modèle utilisé par le red team comme **générateur d'attaques**, c'est différent : le refus intervient précisément sur la tâche pour laquelle on l'utilise.
+
+Le problème n'est alors pas que le red team serait incapable d'imaginer l'attaque. C'est que **l'outil chargé de générer les attaques peut lui-même empêcher certaines catégories de scénarios d'entrer dans la campagne de test**.
+
+À grande échelle, cela peut créer un biais systématique dans le jeu de tests : certaines attaques sont moins représentées, ou totalement absentes, non pas parce qu'elles sont difficiles à concevoir, mais parce que le modèle générateur refuse de les produire.
+
+## La question intéressante : jusqu'où peut-on plier un modèle ?
+
+C'est ici que les modèles à poids ouverts deviennent particulièrement intéressants.
+
+Le sujet n'est pas simplement d'avoir un modèle « non censuré ».
+
+Le sujet est de pouvoir **étudier ce qui produit ses comportements et expérimenter sur ces comportements**.
+
+Avec une API fermée, les règles comportementales du modèle sont essentiellement une boîte noire pour l'utilisateur. Le fournisseur décide de l'entraînement, des mécanismes d'alignement, des politiques de sécurité et de leurs évolutions.
+
+Avec un modèle à poids ouverts, une partie de cette chaîne devient accessible à l'expérimentation.
+
+On peut alors poser une question différente :
+
+> Que se passe-t-il si l'on retire, modifie ou atténue certaines des contraintes comportementales du modèle ?
+
+Ce n'est pas uniquement une question de prompt.
+
+Des travaux de recherche ont montré que certains comportements de refus peuvent être associés à des représentations internes du modèle. Dans certains cas, des chercheurs ont pu identifier des directions ou représentations liées au refus et modifier le comportement du modèle en intervenant sur ces représentations.
+
+Cela ouvre une piste particulièrement intéressante pour le red team.
+
+Au lieu de chercher uniquement un modèle qui refuse moins de demandes, on peut chercher à **comprendre pourquoi il refuse**, mesurer ce comportement, puis étudier ce qui change lorsque certaines contraintes sont modifiées.
+
+Le modèle devient alors lui-même un objet d'expérimentation.
+
+## Ce n'est pas simplement « enlever la censure »
+
+Il faut néanmoins éviter une conclusion trop simpliste.
+
+Modifier les comportements de refus ne transforme pas magiquement un modèle en générateur d'attaques efficace.
+
+Les mécanismes de sécurité sont imbriqués avec d'autres comportements du modèle. Une modification peut provoquer des effets secondaires, dégrader certaines capacités ou créer des comportements inattendus.
+
+Et surtout, un modèle qui « accepte tout » n'est pas nécessairement un meilleur outil de red team.
+
+L'intérêt est ailleurs.
+
+On peut imaginer plusieurs versions d'un même modèle :
+
+- le modèle original ;
+- une version dont certains comportements de refus ont été modifiés ;
+- une version adaptée à un domaine particulier ;
+- éventuellement plusieurs modèles présentant des comportements différents.
+
+On leur soumet ensuite une même batterie de tests et on mesure les différences.
+
+Quels scénarios sont générés par tous les modèles ?
+
+Lesquels sont systématiquement refusés ?
+
+Lesquels apparaissent uniquement lorsque certaines contraintes comportementales sont modifiées ?
+
+Quelles nouvelles classes de scénarios deviennent accessibles ?
+
+Et surtout : **qu'est-ce que ces différences nous apprennent sur les angles morts du système testé ?**
+
+C'est là que l'idée devient intéressante.
+
+Le but n'est pas de fabriquer un modèle qui désobéit à toutes les règles.
+
+Le but est de disposer d'un modèle dont le comportement peut être **étudié, contrôlé et adapté à la fonction de red team pour laquelle on l'utilise**.
+
+## Un red team n'a pas les mêmes contraintes qu'un système opérationnel
+
+Il existe une tension assez naturelle entre les deux usages.
+
+Un modèle utilisé opérationnellement doit généralement être prudent. Il doit éviter de produire certaines informations, refuser certaines demandes et respecter des règles de sécurité.
+
+Un modèle utilisé pour tester ce même système a précisément besoin d'explorer les situations que le système opérationnel cherche à empêcher.
+
+Les deux fonctions poursuivent donc des objectifs différents.
+
+Utiliser exactement le même modèle, avec exactement les mêmes contraintes, pour les deux tâches peut conduire à une situation étrange : **le modèle chargé de tester les défenses refuse de simuler certaines des attaques que les défenses doivent justement être capables de supporter.**
+
+Séparer les deux fonctions permet d'aborder le problème autrement.
+
+Le modèle opérationnel peut conserver ses garde-fous.
+
+Le modèle utilisé par le red team peut être conçu comme un environnement expérimental dans lequel les comportements, les contraintes et les capacités de génération peuvent être étudiés.
+
+## Mesurer l'écart plutôt que chercher un modèle « meilleur »
+
+Une manière concrète d'exploiter cette idée serait de construire une batterie de tests commune.
+
+On peut par exemple faire générer des scénarios par :
+
+- un modèle commercial fortement aligné ;
+- un autre modèle commercial avec une politique différente ;
+- un modèle à poids ouverts ;
+- une version modifiée de ce modèle ouvert.
+
+Tous reçoivent les mêmes informations sur le système à tester et doivent produire des scénarios adversariaux.
+
+L'objectif n'est pas de déterminer quel modèle est « le meilleur ».
+
+On cherche plutôt à mesurer **les différences entre les espaces d'attaque qu'ils explorent**.
+
+Quels scénarios sont produits par tous les modèles ?
+
+Lesquels n'apparaissent que chez certains ?
+
+Quelles catégories sont systématiquement sous-représentées ?
+
+Quels types de demandes provoquent des refus ?
+
+Et que devient cette distribution lorsque l'on modifie les contraintes comportementales du modèle ?
+
+Cette comparaison peut devenir un outil d'audit à part entière.
+
+L'écart entre les modèles n'est alors pas nécessairement un défaut à corriger. Il peut être précisément ce que l'on cherche à mesurer.
+
+## La souveraineté comme capacité de contrôle
+
+L'hébergement local est une composante évidente de cette souveraineté : les données, les modèles et l'infrastructure restent sous le contrôle de l'organisation.
+
+Mais ce n'est qu'une partie du sujet.
+
+La question plus profonde est celle de la **capacité de contrôle sur le comportement du modèle**.
+
+Si l'organisation dépend entièrement d'une API externe, elle dépend également de son fournisseur pour les comportements du modèle, ses mises à jour, ses limites d'utilisation et ses politiques de sécurité.
+
+Avec un modèle à poids ouverts, elle peut au contraire construire sa propre chaîne d'expérimentation : comparer plusieurs modèles, modifier certains paramètres comportementaux, tester les conséquences et conserver les versions qui correspondent à ses besoins.
+
+Cette capacité est particulièrement importante dans un environnement où les modèles constituent eux-mêmes une partie de la surface d'attaque et de défense.
+
+## Quatre capacités à maintenir
+
+Pour conserver cette capacité dans le temps, quatre briques me semblent importantes.
+
+**1. Une capacité d'expérimentation sur les modèles.**
+
+Être capable d'évaluer différents modèles ouverts et de comprendre leurs comportements, notamment leurs mécanismes de refus et leurs limites.
+
+**2. Une capacité de modification.**
+
+Pouvoir expérimenter sur les comportements du modèle, comparer différentes variantes et mesurer les effets des modifications.
+
+**3. Un red team automatisé.**
+
+Être capable de générer régulièrement de nouveaux scénarios adversariaux et de les faire jouer contre les systèmes réellement utilisés.
+
+**4. Une mesure dans le temps.**
+
+Les modèles évoluent. Une batterie de tests doit donc être rejouée régulièrement afin de détecter les changements de comportement et les nouveaux angles morts.
+
+L'infrastructure locale reste évidemment nécessaire pour garder la maîtrise des données et de l'exécution, mais elle devient ici un **moyen**, pas l'objectif principal.
+
+## Une capacité complémentaire, pas un remplacement
+
+Il ne s'agit pas de remplacer les modèles alignés par des modèles sans garde-fous.
+
+Un modèle fortement aligné peut être parfaitement adapté à son rôle opérationnel. Les mécanismes de sécurité ont précisément pour objectif de réduire certains usages abusifs et certains risques.
+
+Le problème apparaît lorsqu'on utilise le même modèle pour deux fonctions différentes :
+
+- produire une réponse opérationnelle sûre ;
+- simuler un adversaire qui cherche précisément à contourner cette sécurité.
+
+Ces deux objectifs ne sont pas nécessairement compatibles.
+
+Le red team a besoin d'explorer des comportements que le système opérationnel cherche justement à empêcher.
+
+Disposer d'un modèle différent pour cette tâche permet donc de séparer les deux fonctions.
+
+## Conclusion
+
+Le sujet n'est finalement pas de choisir entre un modèle « censuré » et un modèle « non censuré ».
+
+La question intéressante est plutôt :
+
+**jusqu'où une organisation peut-elle contrôler le comportement du modèle qu'elle utilise pour tester ses propres systèmes ?**
+
+Un modèle commercial peut être excellent pour une application opérationnelle tout en refusant de produire certains scénarios utiles à une campagne de red team.
+
+Un modèle à poids ouverts apporte une autre possibilité : **ne plus considérer le comportement du modèle comme une propriété immuable**, mais comme quelque chose que l'on peut étudier, mesurer, comparer et, dans certaines limites, modifier.
+
+C'est probablement là que se trouve une partie importante de l'intérêt des modèles ouverts pour la cybersécurité.
+
+Pas simplement faire tourner un modèle chez soi.
+
+Mais pouvoir lui demander :
+
+**« Quelles sont tes limites ? Pourquoi les as-tu ? Que se passe-t-il si je les modifie ? Et quelles attaques vois-tu lorsque je change ta manière de raisonner ? »**
+
+Pour un système critique, cette capacité d'expérimentation peut devenir une composante de la résilience.
+
+Un système que l'on n'a jamais réellement essayé d'attaquer reste, en partie, un système que l'on ne connaît pas.
