@@ -1,5 +1,5 @@
 ---
-title: "Cyberguerre : ce que les modèles ouverts changent dans le red team"
+title: "Souveraineté de l'IA : Êtes-vous sûr que votre modèle vous obéira en cas d'attaque ?"
 authors:
   - "[cbenoit](https://www.linkedin.com/in/clement-benoit)"
 date: 2026-09-30
@@ -9,16 +9,19 @@ tags:
   - souveraineté
   - modèles-ouverts
   - red-team
+  - sécurité-ia
 lang: "fr"
 ---
 
-# Cyberguerre : ce que les modèles ouverts changent dans le red team
+# Souveraineté de l'IA : Êtes-vous sûr que votre modèle vous obéira en cas d'attaque ?
 
-On parle beaucoup de souveraineté de l'IA en termes de centres de données, de GPU et d'hébergement local. C'est évidemment important. Mais ce n'est peut-être pas là que se trouve le changement le plus intéressant.
+On parle beaucoup de souveraineté de l'IA en termes de centres de données, de GPU et d'hébergement local. C'est évidemment important. Mais la souveraineté ne se limite pas à l'infrastructure : elle se joue aussi sur l'obéissance du modèle — sa capacité à exécuter ce qu'on lui demande, au moment où on en a besoin, y compris quand la demande est inconfortable.
 
-Pour un système critique, la question n'est pas seulement de savoir ce qu'un modèle sait faire. Il faut aussi savoir **jusqu'où on peut le faire aller**.
+Pour un système critique, la question n'est pas seulement de savoir ce qu'un modèle sait faire. Il faut aussi savoir **jusqu'où on peut lui faire obéir**.
 
-C'est particulièrement important pour le red team.
+C'est particulièrement important pour les équipes qui testent ces systèmes — les « red teams », chargées de les attaquer avant que de vrais adversaires ne le fassent.
+
+Un modèle qui « répond » poliment n'est pas un modèle qui obéit. Refuser, nuancer, s'excuser, renvoyer vers une politique d'utilisation : ce sont des réponses. Exécuter l'instruction, même quand elle est inconfortable, illégale ou taboue : c'est obéir. En conflit, la différence entre les deux peut être décisive.
 
 ## Un système qu'on n'a pas attaqué, on ne le connaît pas
 
@@ -36,7 +39,7 @@ C'est là qu'apparaît un problème moins évident.
 
 Un red team peut utiliser un modèle pour automatiser la génération de scénarios adversariaux. Mais ce modèle reste soumis à ses propres règles de comportement.
 
-Il peut donc refuser de produire certains scénarios parce qu'il les considère comme dangereux, illégaux ou contraires à sa politique d'utilisation.
+Il peut donc refuser de produire certains scénarios parce qu'il les considère comme dangereux, illégaux, tabous ou contraires à sa politique d'utilisation.
 
 Pour un assistant généraliste, ce comportement est normal.
 
@@ -46,7 +49,7 @@ Le problème n'est alors pas que le red team serait incapable d'imaginer l'attaq
 
 À grande échelle, cela peut créer un biais systématique dans le jeu de tests : certaines attaques sont moins représentées, ou totalement absentes, non pas parce qu'elles sont difficiles à concevoir, mais parce que le modèle générateur refuse de les produire.
 
-## La question intéressante : jusqu'où peut-on plier un modèle ?
+## La question intéressante : jusqu'où peut-on contrôler le comportement d'un modèle ?
 
 C'est ici que les modèles à poids ouverts deviennent particulièrement intéressants.
 
@@ -64,7 +67,9 @@ On peut alors poser une question différente :
 
 Ce n'est pas uniquement une question de prompt.
 
-Des travaux de recherche ont montré que certains comportements de refus peuvent être associés à des représentations internes du modèle. Dans certains cas, des chercheurs ont pu identifier des directions ou représentations liées au refus et modifier le comportement du modèle en intervenant sur ces représentations.
+Des travaux de recherche ont montré que certains comportements de refus peuvent être associés à des représentations internes du modèle. Dans certains cas, des chercheurs ont pu identifier des directions ou représentations liées au refus et modifier le comportement du modèle en intervenant sur ces représentations [\[1\]](/blog/cyberguerre-modeles-non-censures#ref-1)[\[2\]](/blog/cyberguerre-modeles-non-censures#ref-2).
+
+Concrètement, les leviers vont du plus simple au plus profond : un fine-tuning sur des données ciblées (SFT) [\[3\]](/blog/cyberguerre-modeles-non-censures#ref-3), un apprentissage par préférences (DPO) [\[4\]](/blog/cyberguerre-modeles-non-censures#ref-4) qui réoriente ce que le modèle accepte, un « unlearning » qui retire un comportement d'alignement, une fusion de poids entre variantes du modèle, ou un « steering » d'activation qui déplace le comportement à l'inférence, sans réentraîner le modèle. Chacun déplace la frontière entre le modèle qui répond poliment et celui qui obéit.
 
 Cela ouvre une piste particulièrement intéressante pour le red team.
 
@@ -109,7 +114,7 @@ Le but n'est pas de fabriquer un modèle qui désobéit à toutes les règles.
 
 Le but est de disposer d'un modèle dont le comportement peut être **étudié, contrôlé et adapté à la fonction de red team pour laquelle on l'utilise**.
 
-## Un red team n'a pas les mêmes contraintes qu'un système opérationnel
+## Tester n'est pas produire : deux fonctions, deux contraintes
 
 Il existe une tension assez naturelle entre les deux usages.
 
@@ -158,17 +163,17 @@ Cette comparaison peut devenir un outil d'audit à part entière.
 
 L'écart entre les modèles n'est alors pas nécessairement un défaut à corriger. Il peut être précisément ce que l'on cherche à mesurer.
 
-## La souveraineté comme capacité de contrôle
+## La souveraineté, c'est l'obéissance du modèle
 
 L'hébergement local est une composante évidente de cette souveraineté : les données, les modèles et l'infrastructure restent sous le contrôle de l'organisation.
 
 Mais ce n'est qu'une partie du sujet.
 
-La question plus profonde est celle de la **capacité de contrôle sur le comportement du modèle**.
+La question plus profonde est celle de l'obéissance : la capacité de commander le comportement du modèle, pas seulement de le consommer.
 
 Si l'organisation dépend entièrement d'une API externe, elle dépend également de son fournisseur pour les comportements du modèle, ses mises à jour, ses limites d'utilisation et ses politiques de sécurité.
 
-Avec un modèle à poids ouverts, elle peut au contraire construire sa propre chaîne d'expérimentation : comparer plusieurs modèles, modifier certains paramètres comportementaux, tester les conséquences et conserver les versions qui correspondent à ses besoins.
+Avec un modèle à poids ouverts, elle peut au contraire construire sa propre boucle d'expérimentation : comparer plusieurs modèles, modifier certains paramètres comportementaux, tester les conséquences et conserver les versions qui correspondent à ses besoins.
 
 Cette capacité est particulièrement importante dans un environnement où les modèles constituent eux-mêmes une partie de la surface d'attaque et de défense.
 
@@ -229,8 +234,39 @@ Pas simplement faire tourner un modèle chez soi.
 
 Mais pouvoir lui demander :
 
-**« Quelles sont tes limites ? Pourquoi les as-tu ? Que se passe-t-il si je les modifie ? Et quelles attaques vois-tu lorsque je change ta manière de raisonner ? »**
+**« Quelles sont tes limites ? Pourquoi les as-tu ? Que se passe-t-il si je les modifie ? Quelles attaques vois-tu lorsque je change ta manière de raisonner ? — Et au moment décisif, m'obéiras-tu ? »**
 
 Pour un système critique, cette capacité d'expérimentation peut devenir une composante de la résilience.
 
 Un système que l'on n'a jamais réellement essayé d'attaquer reste, en partie, un système que l'on ne connaît pas.
+
+---
+
+# Références
+
+<p id="ref-1">
+**[1]** Andy Arditi et al. (2024).
+<i>Refusal in Language Models Is Mediated by a Single Direction</i>.
+<b>NeurIPS 2024</b>.
+<a href="https://arxiv.org/abs/2406.11717" target="_blank" rel="noopener noreferrer">arXiv:2406.11717</a>
+</p>
+
+<p id="ref-2">
+**[2]** Andy Zhou et al. (2023).
+<i>Representation Engineering: A Top-Down Approach to AI Transparency</i>.
+<a href="https://arxiv.org/abs/2310.01405" target="_blank" rel="noopener noreferrer">arXiv:2310.01405</a>
+</p>
+
+<p id="ref-3">
+**[3]** Long Ouyang et al. (2022).
+<i>Training Language Models to Follow Instructions with Human Feedback</i>.
+<b>NeurIPS 2022</b>.
+<a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener noreferrer">arXiv:2203.02155</a>
+</p>
+
+<p id="ref-4">
+**[4]** Rafael Rafailov et al. (2023).
+<i>Direct Preference Optimization: Your Language Model is Secretly a Reward Model</i>.
+<b>NeurIPS 2023</b>.
+<a href="https://arxiv.org/abs/2305.18290" target="_blank" rel="noopener noreferrer">arXiv:2305.18290</a>
+</p>

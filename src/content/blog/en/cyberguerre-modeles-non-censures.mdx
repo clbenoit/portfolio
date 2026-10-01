@@ -1,5 +1,5 @@
 ---
-title: "Cyberwarfare: What Open Models Change in Red Teaming"
+title: "AI Sovereignty: Are You Sure Your Model Will Obey You Under Attack?"
 authors:
   - "[cbenoit](https://www.linkedin.com/in/clement-benoit)"
 date: 2026-09-30
@@ -9,16 +9,19 @@ tags:
   - sovereignty
   - open-models
   - red-team
+  - ai-security
 lang: "en"
 ---
 
-# Cyberwarfare: What Open Models Change in Red Teaming
+# AI Sovereignty: Are You Sure Your Model Will Obey You Under Attack?
 
-AI sovereignty is often discussed in terms of data centers, GPUs, and local hosting. This is obviously important. But that may not be where the most interesting change lies.
+AI sovereignty is often discussed in terms of data centers, GPUs, and local hosting. This is obviously important. But sovereignty does not stop at infrastructure: it also hinges on model obedience — its ability to execute what it is asked to do, when it is needed, even when the request is uncomfortable.
 
-For a critical system, the question is not only what a model can do. We also need to know **how far we can make it go**.
+For a critical system, the question is not only what a model can do. We also need to know **how far we can make it obey**.
 
-This is particularly important for red teaming.
+This is particularly important for the teams that test these systems — red teams, charged with attacking them before real adversaries do.
+
+A model that "answers" politely is not a model that obeys. Refusing, hedging, apologizing, pointing to a usage policy: these are answers. Executing the instruction, even when it is uncomfortable, illegal, or taboo: that is obedience. In conflict, the difference between the two can be decisive.
 
 ## A system you have never attacked is a system you do not fully know
 
@@ -36,7 +39,7 @@ This is where a less obvious problem appears.
 
 A red team can use a model to automate the generation of adversarial scenarios. But that model is still subject to its own behavioral rules.
 
-It may therefore refuse to produce certain scenarios because it considers them dangerous, illegal, or contrary to its usage policy.
+It may therefore refuse to produce certain scenarios because it considers them dangerous, illegal, taboo, or contrary to its usage policy.
 
 For a general-purpose assistant, this behavior is normal.
 
@@ -46,7 +49,7 @@ The problem is not that the red team would be unable to imagine the attack. It i
 
 At scale, this can create a systematic bias in the test set: some attacks may be underrepresented, or completely absent, not because they are difficult to design, but because the model generating them refuses to produce them.
 
-## The interesting question: how far can we bend a model?
+## The interesting question: how far can we control a model's behavior?
 
 This is where open-weight models become particularly interesting.
 
@@ -64,7 +67,9 @@ We can then ask a different question:
 
 This is not simply a matter of prompting.
 
-Research has shown that some refusal behaviors can be associated with internal representations of the model. In some cases, researchers have identified directions or representations associated with refusal and modified model behavior by intervening on those representations.
+Research has shown that some refusal behaviors can be associated with internal representations of the model. In some cases, researchers have identified directions or representations associated with refusal and modified model behavior by intervening on those representations [\[1\]](/blog/cyberguerre-modeles-non-censures#ref-1)[\[2\]](/blog/cyberguerre-modeles-non-censures#ref-2).
+
+Concretely, the levers range from the simplest to the deepest: fine-tuning on a targeted dataset (SFT) [\[3\]](/blog/cyberguerre-modeles-non-censures#ref-3), preference-based learning (DPO) [\[4\]](/blog/cyberguerre-modeles-non-censures#ref-4) that reorients what the model accepts, "unlearning" that removes an alignment behavior, weight merging between model variants, or activation steering that shifts behavior at inference time, without retraining the model. Each one moves the boundary between the model that answers politely and the one that obeys.
 
 This opens up a particularly interesting avenue for red teaming.
 
@@ -109,7 +114,7 @@ The goal is not to build a model that disobeys every rule.
 
 The goal is to have a model whose behavior can be **studied, controlled, and adapted to the red-team function for which it is being used**.
 
-## A red team does not have the same constraints as an operational system
+## Testing is not producing: two functions, two constraints
 
 There is a natural tension between these two uses.
 
@@ -158,17 +163,17 @@ This comparison can become an auditing tool in its own right.
 
 The gap between models is not necessarily a flaw to be corrected. It may be precisely what we are trying to measure.
 
-## Sovereignty as control
+## Sovereignty is model obedience
 
 Local hosting is an obvious component of this sovereignty: data, models, and infrastructure remain under the organization's control.
 
 But it is only part of the issue.
 
-The deeper question is the **ability to control the model's behavior**.
+The deeper question is obedience: the ability to command the model's behavior, not merely consume it.
 
 If an organization depends entirely on an external API, it also depends on its provider for the model's behavior, updates, usage limits, and safety policies.
 
-With an open-weight model, it can instead build its own experimentation pipeline: compare several models, modify certain behavioral parameters, test the consequences, and retain the versions that correspond to its needs.
+With an open-weight model, it can instead build its own experimentation loop: compare several models, modify certain behavioral parameters, test the consequences, and retain the versions that correspond to its needs.
 
 This capability is particularly important in an environment where models themselves become part of the attack and defense surface.
 
@@ -229,8 +234,39 @@ Not simply being able to run a model yourself.
 
 But being able to ask it:
 
-**"What are your limits? Why are they there? What happens if I modify them? And what attacks do you see when I change the way you reason?"**
+**"What are your limits? Why are they there? What happens if I modify them? What attacks do you see when I change the way you reason? — And at the decisive moment, will you obey me?"**
 
 For a critical system, this experimental capability can become part of its resilience.
 
 A system that has never truly been tested under attack remains, to some extent, a system we do not know.
+
+---
+
+# References
+
+<p id="ref-1">
+**[1]** Andy Arditi et al. (2024).
+<i>Refusal in Language Models Is Mediated by a Single Direction</i>.
+<b>NeurIPS 2024</b>.
+<a href="https://arxiv.org/abs/2406.11717" target="_blank" rel="noopener noreferrer">arXiv:2406.11717</a>
+</p>
+
+<p id="ref-2">
+**[2]** Andy Zhou et al. (2023).
+<i>Representation Engineering: A Top-Down Approach to AI Transparency</i>.
+<a href="https://arxiv.org/abs/2310.01405" target="_blank" rel="noopener noreferrer">arXiv:2310.01405</a>
+</p>
+
+<p id="ref-3">
+**[3]** Long Ouyang et al. (2022).
+<i>Training Language Models to Follow Instructions with Human Feedback</i>.
+<b>NeurIPS 2022</b>.
+<a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener noreferrer">arXiv:2203.02155</a>
+</p>
+
+<p id="ref-4">
+**[4]** Rafael Rafailov et al. (2023).
+<i>Direct Preference Optimization: Your Language Model is Secretly a Reward Model</i>.
+<b>NeurIPS 2023</b>.
+<a href="https://arxiv.org/abs/2305.18290" target="_blank" rel="noopener noreferrer">arXiv:2305.18290</a>
+</p>
