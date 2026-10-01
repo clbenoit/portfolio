@@ -29,6 +29,17 @@ const SKILLS_EN = [
     ]
   },
   {
+    name: 'Security & Sovereignty',
+    items: [
+      'AI Security (LLM Red Teaming, Prompt Injection, Refusal Evaluation)',
+      'Post-Training (SFT, DPO, Unlearning, Merging, Activation Steering)',
+      'Digital Sovereignty (Open Models, Self-Hosting, Trust Chain)',
+      'Information Security (ISO 27001)',
+      'Data Protection (GDPR)',
+      'Risk Management (Risk Analysis, TARA)'
+    ]
+  },
+  {
     name: 'Computing Systems',
       items: [
         'Docker / Singularity / Kubernetes',
@@ -41,8 +52,7 @@ const SKILLS_EN = [
     name: 'Data Engineering',
     items: [
       'ETL', 'Nextflow', 'Snakemake', 'Airflow', 'n8n', 'Elasticsearch',
-      'Data (Data Wrangling & Delivery)',
-      'ISO 27001'
+      'Data (Data Wrangling & Delivery)'
     ]
   },
   {
@@ -96,6 +106,17 @@ const SKILLS_FR = [
     ]
   },
   {
+    name: 'Sécurité & Souveraineté',
+    items: [
+      "Sécurité de l'IA (Red Teaming LLM, Prompt Injection, Évaluation des Refus)",
+      'Post-Training (SFT, DPO, Unlearning, Merging, Activation Steering)',
+      'Souveraineté Numérique (Modèles Ouverts, Auto-Hébergement, Chaîne de Confiance)',
+      "Sécurité de l'Information (ISO 27001)",
+      'Protection des Données (RGPD)',
+      'Gestion des Risques (Analyse de Risques, TARA)'
+    ]
+  },
+  {
     name: 'Systèmes Informatiques',
       items: [
         'Docker / Singularity / Kubernetes',
@@ -108,8 +129,7 @@ const SKILLS_FR = [
     name: 'Ingénierie des Données',
     items: [
       'ETL', 'Nextflow', 'Snakemake', 'Airflow', 'n8n', 'Elasticsearch',
-      'Données (Wrangling & Delivery)',
-      'ISO 27001'
+      'Données (Wrangling & Delivery)'
     ]
   },
   {
