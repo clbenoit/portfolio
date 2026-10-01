@@ -210,8 +210,7 @@ const EXPERIENCES_EN: RawExperience[] = [
     type: 'traveling',
     content: (
       <ul className="ht-bullets">
-        <li><b>Self-directed intensive study</b> in Machine Learning & Deep Learning through online coursework and personal projects during 8+ months of travel across Europe.</li>
-        <li><b>Adaptability & autonomy</b> — solo logistics, budget, and real-time decision-making across diverse cultural environments.</li>
+        <li>4-month self-directed study in Machine Learning and Deep Learning, carried out on the road — online coursework and personal projects, including <b>reinforcement-learning agents trained to autonomously play the video games DOOM and Snake — while volunteering across Europe via WWOOF</b>; led before ChatGPT put LLMs — and so AI — on the mainstream map, and the foundation for the following years of production AI agents and deep learning.</li>
       </ul>
     ),
   },
@@ -412,8 +411,7 @@ const EXPERIENCES_FR: RawExperience[] = [
     type: 'traveling',
     content: (
       <ul className="ht-bullets">
-        <li><b>Étude intensive en autonomie</b> en Machine Learning & Deep Learning via des cours en ligne et projets personnels durant 8+ mois de voyage à travers l'Europe.</li>
-        <li><b>Adaptabilité & autonomie</b> — logistique en solo, gestion de budget et prise de décision en temps réel dans des environnements culturels variés.</li>
+        <li>Étude intensive de 4 mois en Machine Learning et Deep Learning, menée en voyage — cours en ligne et projets personnels, notamment des <b>agents de reinforcement learning entraînés à jouer en autonomie aux jeux vidéos DOOM et Snake — pendant mon bénévolat à travers l'Europe via WWOOF</b> ; conduite avant que ChatGPT n'ait mis les LLM — et donc l'IA — sur le devant de la scène, et fondation des années suivantes d'agents IA en production et de deep learning.</li>
       </ul>
     ),
   },
