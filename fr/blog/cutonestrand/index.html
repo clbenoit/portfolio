@@ -15,7 +15,7 @@ avec la promesse de traitements améliorés et même de potentielles guérisons 
 Comme son nom l’indique, la présence d’un seul allèle muté pathogène est suffisante pour
 que la maladie apparaisse, certains chercheurs comptent donc sur la technologie CRISPR-Cas9 pour briser l’allèle muté.
 Seul l’allèle sauvage subsiste, et la maladie est ainsi guérie.
-Bien que l’efficacité de cette approche semble prometteuse <a href="/blog/cutonestrand#ref-1">[1]</a> <a href="/blog/cutonestrand#ref-2">[2]</a> <a href="/blog/cutonestrand#ref-3">[3]</a>, plusieurs problèmes doivent encore être résolus, dont deux que nous allons tenter d’aborder dans cet article :</p>
+Bien que l’efficacité de cette approche semble prometteuse <a href="#ref-1">[1]</a> <a href="#ref-2">[2]</a> <a href="#ref-3">[3]</a>, plusieurs problèmes doivent encore être résolus, dont deux que nous allons tenter d’aborder dans cet article :</p>
 <p><strong>Comment la conception de ces traitements de médecine personnalisée peut-elle être efficace et rapide pour chaque patient ?</strong> <br/><br/>
 <strong>Comment cibler spécifiquement l’allèle muté sans endommager l’allèle fonctionnel ni une autre partie du génome ?</strong></p>
 <h2 id="lanalyse-de-données-peut-être-utilisée-pour-créer-une-liste-de-régions-génomiques-intéressantes-pour-la-thérapie-génique">L’analyse de données peut être utilisée pour créer une liste de régions génomiques intéressantes pour la thérapie génique</h2>
@@ -27,7 +27,7 @@ Nous allons donc tenter d’établir une liste exhaustive de toutes les régions
 thérapie génique.</p>
 <ol>
 <li>Nous commençons par sélectionner tous les SNP fréquents dans la population (&gt; 5 %), pour lesquels nous pouvons
-utiliser la base de données gnomAD <a href="/blog/cutonestrand#ref-4">[4]</a>. Nous souhaitons que la liste créée soit utilisable pour traiter le plus grand nombre possible de
+utiliser la base de données gnomAD <a href="#ref-4">[4]</a>. Nous souhaitons que la liste créée soit utilisable pour traiter le plus grand nombre possible de
 patients, nous évitons donc les SNP trop rares.</li>
 <li>Seuls les SNP qui induisent la disparition ou l’apparition du motif <strong>5’-NGG-3’</strong>
 nous permettront de cibler uniquement l’allèle muté tout en préservant le WT. Pour ce faire, nous avons écrit un script interne en Python.</li>
@@ -37,7 +37,7 @@ ajouter les séquences flanquantes à gauche et à droite de nos SNP d’intér�
 pour chacune des positions que nous avons sélectionnées. Nous voulions couper le gène malade efficacement,
 sans altérer d’autres régions du génome.</li>
 </ol>
-<p>Grâce à cette méthode, nous avons pu établir une liste de positions génomiques d’intérêt pour le traitement des myopathies liées au récepteur de la ryanodine de type 1 (RYR1-RM) de type « Autosomal-Dominant-Disorder ». <a href="/blog/cutonestrand#ref-5">[5]</a>
+<p>Grâce à cette méthode, nous avons pu établir une liste de positions génomiques d’intérêt pour le traitement des myopathies liées au récepteur de la ryanodine de type 1 (RYR1-RM) de type « Autosomal-Dominant-Disorder ». <a href="#ref-5">[5]</a>
 Grâce au séquençage de nouvelle génération, il est possible d’obtenir les deux séquences génomiques d’un patient
 à un coût raisonnable. Toutes les positions de notre liste pour lesquelles le patient est hétérozygote sont donc
 candidates à la thérapie génique !</p>
