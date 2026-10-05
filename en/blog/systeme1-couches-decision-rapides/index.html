@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>System 1 for AI: Fast Decision Layers, from Diagnostics to Drones and RAG Systems - Clément BENOIT</title><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><style>.back-arrow[data-astro-cid-3kmfnthz]{color:var(--color-text2);align-items:center;gap:6px;margin-bottom:1.5rem;font-size:.92rem;font-weight:500;text-decoration:none;transition:color .15s;display:inline-flex}.back-arrow[data-astro-cid-3kmfnthz]:hover{color:var(--color-textAccent)}
+</style><link rel="stylesheet" href="/portfolio/_astro/global.BoBSY3ZC.css"><style>.nl-cta[data-astro-cid-4kc4pcc4]{flex-direction:column;align-items:center;gap:12px;max-width:520px;margin:0 auto;display:flex}.nl-cta--compact[data-astro-cid-4kc4pcc4]{border:1px solid var(--color-border);background:var(--color-background);border-radius:10px;width:100%;max-width:480px;margin-top:72px;padding:24px 24px 16px;box-shadow:0 2px 12px #00000014}.nl-cta-field[data-astro-cid-4kc4pcc4]{gap:8px;width:100%;max-width:400px;display:flex}.nl-cta-input[data-astro-cid-4kc4pcc4]{border:1px solid var(--color-border);background:var(--color-background);color:var(--color-text);border-radius:6px;outline:none;flex:1;padding:10px 14px;font-size:15px;transition:border-color .15s}.nl-cta-input[data-astro-cid-4kc4pcc4]:focus{border-color:var(--color-backgroundAccent)}.nl-cta-btn[data-astro-cid-4kc4pcc4]{background:var(--color-backgroundAccent);color:#fff;cursor:pointer;white-space:nowrap;border:none;border-radius:6px;padding:10px 20px;font-size:15px;font-weight:600;transition:background .15s}.nl-cta-btn[data-astro-cid-4kc4pcc4]:hover{background:#4a4ab8}.nl-cta-btn[data-astro-cid-4kc4pcc4]:disabled{opacity:.6;cursor:not-allowed}.nl-cta-status[data-astro-cid-4kc4pcc4]{text-align:center;min-height:20px;margin:0;font-size:14px}.nl-cta-status[data-astro-cid-4kc4pcc4].success{color:#28a745}.nl-cta-status[data-astro-cid-4kc4pcc4].error{color:#dc3545}@media (width<=480px){.nl-cta-field[data-astro-cid-4kc4pcc4]{flex-direction:column}}.nl-cta-tease[data-astro-cid-4kc4pcc4]{color:var(--color-text2);text-align:center;margin:0 0 12px;font-size:14px;line-height:1.5}.nl-cta-note[data-astro-cid-4kc4pcc4]{color:var(--color-text3);text-align:center;margin:0;font-size:12px}
+.blog-layout[data-astro-cid-jwxkszjk]{max-width:760px;margin:0 auto;padding:80px 40px}@media (width<=767px){.blog-layout[data-astro-cid-jwxkszjk]{padding:40px 16px}}.blog-post[data-astro-cid-jwxkszjk]{max-width:720px}.blog-post-content[data-astro-cid-jwxkszjk]{margin-top:24px;font-size:16px;line-height:1.8}.blog-post-content[data-astro-cid-jwxkszjk] h1{color:var(--color-heading);margin-top:0;margin-bottom:.5em}.blog-post-content[data-astro-cid-jwxkszjk] h2,.blog-post-content[data-astro-cid-jwxkszjk] h3{color:var(--color-heading);margin-top:2em;margin-bottom:.5em}.blog-post-content[data-astro-cid-jwxkszjk] p{margin:1em 0}.blog-post-content[data-astro-cid-jwxkszjk] a{color:var(--color-textAccent);text-decoration:none}.blog-post-content[data-astro-cid-jwxkszjk] a:hover{color:var(--color-textAccentHover);text-decoration:underline}.blog-post-content[data-astro-cid-jwxkszjk] img,.blog-post-content[data-astro-cid-jwxkszjk] video{border-radius:8px;max-width:100%;height:auto;margin:1.5em 0}.blog-post-content[data-astro-cid-jwxkszjk] figure{text-align:center;margin:1.5em 0}.blog-post-content[data-astro-cid-jwxkszjk] figcaption{color:var(--color-text3);margin-top:8px;font-size:14px}.blog-post-content[data-astro-cid-jwxkszjk] blockquote{border-left:3px solid var(--color-backgroundAccent);color:var(--color-text2);margin:1.5em 0;padding-left:16px}.blog-post-content[data-astro-cid-jwxkszjk] code{background:var(--color-background3);border-radius:4px;padding:2px 6px;font-size:.9em}.blog-post-content[data-astro-cid-jwxkszjk] pre{background:var(--color-background3);border-radius:8px;padding:16px;font-size:14px;line-height:1.5;overflow-x:auto}.blog-post-content[data-astro-cid-jwxkszjk] pre code{background:0 0;padding:0}.blog-post-tags[data-astro-cid-jwxkszjk]{flex-wrap:wrap;gap:6px;margin-top:12px;display:flex}.blog-tag[data-astro-cid-jwxkszjk]{background:var(--color-backgroundIrisTint);color:var(--color-textAccent);border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500;display:inline-block}
+*,:before,:after{box-sizing:border-box}body{color:var(--color-text);background:var(--color-background);-webkit-font-smoothing:antialiased;margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;line-height:1.6}.minimal-main{width:100%}
+</style></head><body><nav class="top-nav" data-open="false" data-astro-cid-wpvy4v7s><div class="top-nav-inner" data-astro-cid-wpvy4v7s><a href="/portfolio/en/" class="top-nav-title" data-astro-cid-wpvy4v7s>Home</a><button class="hamburger" aria-label="Toggle navigation menu" data-astro-cid-wpvy4v7s><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-wpvy4v7s><line x1="3" y1="6" x2="21" y2="6" data-astro-cid-wpvy4v7s></line><line x1="3" y1="12" x2="21" y2="12" data-astro-cid-wpvy4v7s></line><line x1="3" y1="18" x2="21" y2="18" data-astro-cid-wpvy4v7s></line></svg></button><div class="top-nav-dropdown" data-astro-cid-wpvy4v7s><div class="top-nav-links" data-astro-cid-wpvy4v7s><a href="/portfolio/en/blog/" class="top-nav-link active" data-astro-cid-wpvy4v7s>Blog</a><a href="/portfolio/en/projects/" class="top-nav-link" data-astro-cid-wpvy4v7s>Projects</a><a href="/portfolio/en/contact/" class="top-nav-link" data-astro-cid-wpvy4v7s>Contact</a><a href="/portfolio/en/cv/" class="top-nav-link" data-astro-cid-wpvy4v7s>CV</a><a href="/portfolio/fr/blog/systeme1-couches-decision-rapides/" class="top-nav-link lang-switch" data-current="EN" data-astro-cid-wpvy4v7s>FR</a></div></div><a href="/portfolio/fr/blog/systeme1-couches-decision-rapides/" class="lang-switch-desktop" aria-label="Switch to FR" data-astro-cid-wpvy4v7s>FR</a></div></nav><script type="module">var e=document.querySelector(`.top-nav`);(e?.querySelector(`.hamburger`))?.addEventListener(`click`,()=>{let t=e.getAttribute(`data-open`)===`true`;e.setAttribute(`data-open`,t?`false`:`true`)}),e?.querySelectorAll(`.top-nav-link`).forEach(t=>{t.addEventListener(`click`,()=>{e.setAttribute(`data-open`,`false`)})});</script><script type="module">document.querySelectorAll(`.lang-switch, .lang-switch-desktop`).forEach(e=>{e.addEventListener(`click`,()=>{var e=window.location.pathname.match(/^\/(?:portfolio\/)?(fr|en)\//),t=(e?e[1]:`en`)===`fr`?`en`:`fr`;localStorage.setItem(`lang`,t)})});</script><main class="minimal-main"><div class="blog-layout" data-astro-cid-jwxkszjk><a href="/portfolio/en/blog/" class="back-arrow" aria-label="Back" data-astro-cid-3kmfnthz><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" data-astro-cid-3kmfnthz><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-3kmfnthz></path></svg><span data-astro-cid-3kmfnthz>Back</span></a><article class="blog-post" data-astro-cid-jwxkszjk><time class="blog-post-date" datetime="2026-10-05T00:00:00.000Z" data-astro-cid-jwxkszjk>October 5, 2026</time><div class="blog-post-tags" data-astro-cid-jwxkszjk><span class="blog-tag" data-astro-cid-jwxkszjk>system 1</span><span class="blog-tag" data-astro-cid-jwxkszjk>fast decision layers</span><span class="blog-tag" data-astro-cid-jwxkszjk>classifiers</span><span class="blog-tag" data-astro-cid-jwxkszjk>calibration</span><span class="blog-tag" data-astro-cid-jwxkszjk>reinforcement learning</span><span class="blog-tag" data-astro-cid-jwxkszjk>distillation</span><span class="blog-tag" data-astro-cid-jwxkszjk>edge ai</span><span class="blog-tag" data-astro-cid-jwxkszjk>rag</span><span class="blog-tag" data-astro-cid-jwxkszjk>routing</span><span class="blog-tag" data-astro-cid-jwxkszjk>regulated environments</span><span class="blog-tag" data-astro-cid-jwxkszjk>digital sovereignty</span><span class="blog-tag" data-astro-cid-jwxkszjk>human-in-the-loop</span></div><div class="blog-post-content" data-astro-cid-jwxkszjk><h1 id="system-1-for-ai-fast-decision-layers-from-diagnostics-to-drones-and-rag-systems">System 1 for AI: Fast Decision Layers, from Diagnostics to Drones and RAG Systems</h1>
+<h2 id="introduction">Introduction</h2>
+<p>A LLM is remarkable at reasoning, planning and writing. It is also slow, expensive and dependent on infrastructure. Yet most decisions in a real system don’t need all that reasoning: they need to be made <strong>fast</strong>, <strong>locally</strong> and <strong>cheaply</strong>, and above all the system needs to know when it doesn’t know.</p>
+<p>This article presents the architecture pattern I group under the name <strong>fast decision layers</strong> (“System 1”). I illustrate it across several domains, two of them in depth: unmanned combat aerial systems (UCAS) and RAG systems. I deliberately stay at the level of <strong>architecture and decision engineering</strong>, with one thread running through: what makes these models usable when decisions have consequences and the environment is regulated.</p>
+<h2 id="system-1-and-system-2-where-the-idea-comes-from">System 1 and System 2: where the idea comes from</h2>
+<h3 id="origin-dual-process-theory">Origin: dual-process theory</h3>
+<p>Dual-process theory, popularized by Daniel Kahneman in <em>Thinking, Fast and Slow</em>, distinguishes two modes of thought:</p>
+<ul>
+<li><strong>System 1</strong>: fast, automatic, intuitive, cheap, prone to bias;</li>
+<li><strong>System 2</strong>: slow, deliberate, analytical, effortful, more reliable on novel problems.</li>
+</ul>
+<p>This is a cognitive model, not an anatomical description. Here it serves as an <strong>engineering analogy</strong>.</p>
+<p>But a familiar image captures the idea: <strong>when the doctor taps your knee with a reflex hammer, your leg kicks before your brain has had time to weigh in. The signal is handled by the spinal cord through a single relay and never travels up to the brain: this is the patellar reflex, a fast, local and cheap response that the brain doesn’t need to “deliberate”.</strong></p>
+<h3 id="the-ai-transposition">The AI transposition</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>System 2</th>
+<th>System 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Role</td>
+<td>Deliberation, planning, reasoning</td>
+<td>Reaction, triage, routine decisions</td>
+</tr>
+<tr>
+<td>Typical model</td>
+<td>Large LLM</td>
+<td>Small model + decision head</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>Seconds</td>
+<td>Milliseconds to a few hundred ms</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>High (GPU, tokens)</td>
+<td>Low, embeddable</td>
+</tr>
+<tr>
+<td>Network dependency</td>
+<td>Often yes</td>
+<td>No (local inference)</td>
+</tr>
+<tr>
+<td>Weak spot</td>
+<td>Slow, expensive</td>
+<td>Generalizes poorly out of distribution</td>
+</tr>
+</tbody>
+</table>
+<h3 id="two-families-of-system-1">Two families of System 1</h3>
+<p>The “decision head” can take two forms, and the distinction matters:</p>
+<ul>
+<li>a <strong>policy</strong> trained by reinforcement or imitation learning, suited to sequential decisions (act, then react to what changes);</li>
+<li>a <strong>calibrated classifier</strong> with typed outputs (choice, score, boolean) that returns probabilities rather than text, suited to one-shot decisions (route, filter, adjudicate).</li>
+</ul>
+<p>This second family has recently taken shape, with open and closed models dedicated to typed decisions, non-autoregressive, returning their verdict in a single pass. Laya (open-weight, Apache 2.0) and Jev (closed API) are two examples. Their announced performance should be checked on your own data, but they confirm the direction: <strong>a structured, calibrated verdict beats a confident-sounding sentence</strong>.</p>
+<p>The point isn’t to pit System 1 against System 2 but to <strong>couple</strong> them.</p>
+<h2 id="the-coupling-architecture">The coupling architecture</h2>
+<p>The pattern boils down to four steps:</p>
+<ol>
+<li><strong>A powerful System 2</strong>, on the ground or at the edge, that plans, generates data and acts as teacher;</li>
+<li><strong>Distillation / fine-tuning</strong>: its behavior is transferred to a small model;</li>
+<li><strong>An embedded System 1</strong> that decides in real time through its decision head;</li>
+<li><strong>Escalation</strong>: if confidence falls below a threshold, the decision goes up to System 2 or to the human operator.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>   ┌────────────────────────────┐</span></span>
+<span class="line"><span>   │ System 2 (LLM, ground/edge)│  planning, data generation</span></span>
+<span class="line"><span>   └──────────────┬─────────────┘</span></span>
+<span class="line"><span>                  │ distillation / fine-tuning</span></span>
+<span class="line"><span>                  ▼</span></span>
+<span class="line"><span>   ┌────────────────────────────┐</span></span>
+<span class="line"><span>   │ Embedded System 1          │  ms → hundreds of ms, local inference</span></span>
+<span class="line"><span>   │ (small model + head)       │</span></span>
+<span class="line"><span>   └──────────────┬─────────────┘</span></span>
+<span class="line"><span>                  │ confidence ≥ threshold? ── yes ──▶ fast decision</span></span>
+<span class="line"><span>                  │ no</span></span>
+<span class="line"><span>                  ▼</span></span>
+<span class="line"><span>        escalate: System 2 or operator (human-in-the-loop)</span></span></code></pre>
+<p>Everything rests on two properties, detailed in the next sections: <strong>calibration</strong> and <strong>the right to abstain</strong>.</p>
+<h2 id="calibration-abstention-and-out-of-distribution">Calibration, abstention and out-of-distribution</h2>
+<p>A confidence threshold only makes sense if confidence reflects the real error probability. Three points seem decisive to me:</p>
+<ul>
+<li><strong>Measure calibration</strong>, for instance with a reliability curve, and correct it when needed (temperature scaling, conformal prediction);</li>
+<li><strong>Think in risk/coverage terms</strong>: what share of automatic decisions corresponds to what error rate? The threshold is a business choice, not a technical setting;</li>
+<li><strong>Detect out-of-distribution inputs</strong>: System 1 generalizes poorly, so it must be able to recognize that an input falls outside its validity domain.</li>
+</ul>
+<p>An example from my own molecular diagnostics work, detailed in the <a href="/portfolio/fr/blog/nanodiag/">nanodiag article</a> (in French): on partial Nanopore sequencing data produced by adaptive sampling, deep learning classifiers found the right tumor class, but their confidence stayed systematically degraded, whereas a Random Forest kept maximal confidence. One of the tools, trained on whole-genome data, “hallucinated” on these overly sparse data. Low confidence on partial data can be legitimate, and maximal confidence is not, on its own, proof of robustness: confidence has to be evaluated under real conditions of use, not only on a clean test set.</p>
+<h2 id="deciding-when-to-stop">Deciding when to stop</h2>
+<p>Some decisions aren’t one-shot: information arrives continuously, and the right question becomes “do we know enough to decide?”. A System 1 can monitor the stability of its own verdict and trigger an <strong>early stop</strong> once confidence settles above the threshold.</p>
+<p>The same diagnostics project illustrates this: by analyzing sequencing reads as they are produced, one can spot when accumulated information is sufficient and interrupt the run, which shortens delays and frees shared equipment. The same logic applies in RAG (stop retrieving once the context is sufficient) and in embedded systems (stop collecting once the decision is stable).</p>
+<h2 id="use-case-catalog">Use-case catalog</h2>
+<p>The pattern shows up in very different contexts:</p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Fast decision</th>
+<th>Escalates to</th>
+<th>Dominant constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UCAS</td>
+<td>Link degradation or jamming detection, mode switch</td>
+<td>Operator / System 2</td>
+<td>Latency, local autonomy</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>Sensor-signature classification with confidence score</td>
+<td>Operator</td>
+<td>Reliability, high-confidence error</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>Sensor inconsistency detection, traffic deconfliction</td>
+<td>Operator</td>
+<td>Safety, real time</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>System health, energy, replanning trigger</td>
+<td>System 2 / operator</td>
+<td>Embedded, energy</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>Triage and prioritization of detections shown to the operator</td>
+<td>Operator</td>
+<td>Cognitive load</td>
+</tr>
+<tr>
+<td>Diagnostics</td>
+<td>Classification with rejection, real-time QC, early stopping</td>
+<td>Biologist / physician</td>
+<td>Calibration, traceability</td>
+</tr>
+<tr>
+<td>RAG / agents</td>
+<td>Routing, re-ranking, rewriting, refusal, guardrails</td>
+<td>LLM</td>
+<td>Cost, latency</td>
+</tr>
+<tr>
+<td>Cybersecurity</td>
+<td>Alert triage, adjudication, severity prioritization</td>
+<td>Analyst</td>
+<td>Volume, auditability</td>
+</tr>
+<tr>
+<td>Industry</td>
+<td>Predictive maintenance, inline quality control</td>
+<td>Technician</td>
+<td>Latency, edge</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deep-dive-1-unmanned-aerial-systems-ucas">Deep dive 1: unmanned aerial systems (UCAS)</h2>
+<h3 id="the-problem">The problem</h3>
+<p>A UCAS may operate with a degraded, jammed or severed link. Network round trips and heavy deliberation are luxuries there: the fast layer must be <strong>local, predictable in latency and robust</strong>.</p>
+<h3 id="a-role-of-perception-triage-and-escalation">A role of perception, triage and escalation</h3>
+<p>At the architecture level, the embedded System 1 handles <strong>perception and triage</strong> tasks: reacting to sensor events, classification with a confidence score, anomaly detection, degraded-mode management. It produces a <strong>recommendation or an alert</strong> (continue, do not continue, escalate), never an irreversible action on its own initiative.</p>
+<h3 id="continue-abstain-escalate">Continue, abstain, escalate</h3>
+<p>The guard mechanism is the one described above: below the confidence threshold, or outside the model’s validity domain, the default is <strong>abstention and escalation</strong>. Decisions with serious, irreversible consequences stay under <strong>human authority</strong>: the AI reduces cognitive load and reaction time; it does not replace accountability.</p>
+<h3 id="benchmarking-in-simulation">Benchmarking in simulation</h3>
+<p>Before any deployment, evaluation happens in simulation across varied scenarios, including degraded ones (sensor noise, link loss, out-of-distribution situations):</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>What it measures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latency (p50 / p99)</td>
+<td>Responsiveness, especially in the tail</td>
+</tr>
+<tr>
+<td>Correct-decision rate</td>
+<td>Quality of classification and recommendations</td>
+</tr>
+<tr>
+<td>High-confidence error rate</td>
+<td>The most dangerous errors: the model is wrong while being sure</td>
+</tr>
+<tr>
+<td>Escalation rate</td>
+<td>Load pushed onto the operator or System 2</td>
+</tr>
+<tr>
+<td>Compute / energy cost</td>
+<td>Embedded feasibility</td>
+</tr>
+<tr>
+<td>Out-of-distribution degradation</td>
+<td>Robustness when the world leaves the training set</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>high-confidence error rate</strong> is, in my view, the most important metric: a flattering average accuracy can hide a few self-assured mistakes.</p>
+<h2 id="deep-dive-2-rag-systems">Deep dive 2: RAG systems</h2>
+<p>The same pattern, transposed to a very different context, saves a lot of cost and latency.</p>
+<h3 id="routing-and-cascade">Routing and cascade</h3>
+<p>A small model intercepts each query first. It decides: direct answer, simple retrieval, or escalation to the LLM.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> answer</span><span style="color:#E1E4E8">(query):</span></span>
+<span class="line"><span style="color:#E1E4E8">    route </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fast_router.predict(query)        </span><span style="color:#6A737D"># System 1</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> route.confidence </span><span style="color:#F97583">&gt;=</span><span style="color:#79B8FF"> THRESHOLD</span><span style="color:#F97583"> and</span><span style="color:#E1E4E8"> route.can_answer_cheaply:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> cheap_path(query, route)       </span><span style="color:#6A737D"># no LLM call</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> llm_pipeline(query)                </span><span style="color:#6A737D"># System 2</span></span></code></pre>
+<p>In many deployments, <strong>most queries never reach the LLM</strong> (frequent questions, navigation-style requests, simple lookups). That is where the cost and latency gains come from.</p>
+<h3 id="other-fast-layers-in-a-rag-pipeline">Other fast layers in a RAG pipeline</h3>
+<ul>
+<li><strong>Query rewriting</strong>: a small model rephrases or decomposes the question before retrieval;</li>
+<li><strong>Top-k re-ranking</strong>: a compact cross-encoder reorders passages before they reach the LLM, which shrinks the context and thus the cost;</li>
+<li><strong>Refusal / hallucination detection</strong>: a lightweight classifier checks that the answer is grounded in the passages, or that abstaining is preferable;</li>
+<li><strong>Guardrails</strong>: prompt-injection detection upstream.</li>
+</ul>
+<h3 id="measuring-it">Measuring it</h3>
+<p>I always compare variants on the same question sets: quality (for example with RAGAS: faithfulness, relevance), latency, cost per query, and the share of queries handled without the LLM. A router that saves 60% of calls but degrades faithfulness is not a good router.</p>
+<h2 id="a-classifier-in-a-regulated-environment-what-changes">A classifier in a regulated environment: what changes</h2>
+<p>In regulated environments (healthcare, defense, finance), a high-performing classifier isn’t enough. What makes it deployable is everything around it:</p>
+<ul>
+<li><strong>traceability</strong> of every decision (input, model version, threshold, verdict);</li>
+<li><strong>joint versioning</strong> of model, training data and threshold;</li>
+<li><strong>a frozen validation set</strong> and <strong>revalidation</strong> at every model change;</li>
+<li><strong>drift monitoring</strong> in production, alerting when inputs move away from the training domain;</li>
+<li><strong>strict separation</strong> of development and production environments;</li>
+<li><strong>human validation</strong> of high-stakes decisions, with an escalation path tested like the nominal one;</li>
+<li><strong>an audit log</strong> usable after the fact.</li>
+</ul>
+<p>These requirements may sound heavy for a “small” model. They aren’t: a small, local, versioned System 1 is precisely <strong>easier to validate and audit</strong> than a remote LLM whose behavior shifts with the provider’s updates.</p>
+<h2 id="sovereignty">Sovereignty</h2>
+<p>Local inference removes the dependency on a remote service: no network required, no third party in the decision loop, and a trust chain (weights, data, tooling) that can be audited and controlled.</p>
+<p>Licensing matters as much as technology. In the diagnostics project mentioned above, the reference tool could not be fine-tuned on our own data, for lack of weights usable in a clinical setting: the limit was contractual before being technical. Conversely, an open, self-hosted, fine-tunable and auditable model, like those in the new family of decision models mentioned above, keeps control end to end.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Thinking in System 1 / System 2 comes down to one plain engineering question: <strong>who decides, at what cost, and what happens when we’re not sure?</strong> Whether for a diagnosis, a drone or a RAG pipeline, the answer rests on the same backbone: a fast local model for routine, well-calibrated confidence, a tested escalation mechanism, and a human or a more powerful model for the cases that matter.</p>
+<hr/>
+<h1 id="references">References</h1>
+<p id="ref-1"><p><strong>[1]</strong> D. Kahneman (2011).
+<i>Thinking, Fast and Slow</i>.
+<a href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow" target="_blank" rel="noopener noreferrer">Wikipedia: Thinking, Fast and Slow</a></p></p>
+<p id="ref-2"><p><strong>[2]</strong> G. Hinton et al. (2015).
+<i>Distilling the Knowledge in a Neural Network</i> — knowledge distillation.
+<a href="https://arxiv.org/abs/1503.02531" target="_blank" rel="noopener noreferrer">arXiv:1503.02531</a></p></p>
+<p id="ref-3"><p><strong>[3]</strong> Literature on classification with a reject option and model calibration.
+<a href="https://en.wikipedia.org/wiki/Calibration_(statistics)" target="_blank" rel="noopener noreferrer">Calibration (statistics) — Wikipedia</a></p></p>
+<p id="ref-4"><p><strong>[4]</strong> Convai Innovations.
+<i>Laya</i> — repository and model card (a family of typed decision models, Apache 2.0).
+<a href="https://huggingface.co/convaiinnovations/laya" target="_blank" rel="noopener noreferrer">huggingface.co/convaiinnovations/laya</a></p></p>
+<p id="ref-5"><p><strong>[5]</strong> Exploding Gradients.
+<i>RAGAS</i> — documentation for evaluating RAG pipelines.
+<a href="https://docs.ragas.io/" target="_blank" rel="noopener noreferrer">docs.ragas.io</a></p></p></div></article><form class="nl-cta nl-cta--compact" data-newsletter-cta data-lang="en" novalidate data-astro-cid-4kc4pcc4><p class="nl-cta-tease" data-astro-cid-4kc4pcc4>AI Orchestration in regulated environments — practical field reports, no marketing, no spam.</p><div class="nl-cta-field" data-astro-cid-4kc4pcc4><input type="email" name="email" placeholder="you@email.com" aria-label="Email address" class="nl-cta-input" data-astro-cid-4kc4pcc4><button type="submit" class="nl-cta-btn" data-astro-cid-4kc4pcc4>Subscribe</button></div><p class="nl-cta-status" role="status" aria-live="polite" data-astro-cid-4kc4pcc4></p><p class="nl-cta-note" data-astro-cid-4kc4pcc4>Unsubscribe with one click at any time.</p></form><script type="module">var e=`https://ebook.omicsverse.fr`,t=/^[^\s@]+@[^\s@]+\.[^\s@]+$/,n={fr:{idle:`S'inscrire`,loading:`Inscription…`,ok:`Vous êtes inscrit !`,invalid:`Veuillez saisir une adresse email valide.`,subscribedBtn:`Se désinscrire`,unsubscribing:`Désinscription…`,unsubscribed:`Vous êtes désinscrit.`,unsubscribeError:`Échec de la désinscription. Veuillez réessayer.`},en:{idle:`Subscribe`,loading:`Subscribing…`,ok:`You're subscribed!`,invalid:`Please enter a valid email address.`,subscribedBtn:`Unsubscribe`,unsubscribing:`Unsubscribing…`,unsubscribed:`You've been unsubscribed.`,unsubscribeError:`Unsubscribe failed. Please try again.`}};document.querySelectorAll(`[data-newsletter-cta]`).forEach(function(r){let i=r.dataset.lang||`en`,a=n[i],o=r.querySelector(`input[type="email"]`),s=r.querySelector(`button[type="submit"]`),c=r.querySelector(`.nl-cta-status`);o&&s&&c&&r.addEventListener(`submit`,async n=>{n.preventDefault(),c.className=`nl-cta-status`,c.textContent=``;let l=r.dataset.subscribed;if(l){s.disabled=!0,s.textContent=a.unsubscribing;try{let t=await fetch(e+`/api/newsletter/unsubscribe`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({email:l})}),n=await t.json();if(!t.ok||n.error)throw Error(n.error||`Unexpected response`);delete r.dataset.subscribed,o.value=``,o.disabled=!1,s.textContent=a.idle,c.textContent=a.unsubscribed,c.classList.add(`success`)}catch(e){let t=e instanceof Error?e.message:a.unsubscribeError;c.textContent=t,c.classList.add(`error`),s.textContent=a.subscribedBtn}finally{s.disabled=!1}return}let u=o.value.trim();if(!t.test(u)){c.textContent=a.invalid,c.classList.add(`error`);return}s.disabled=!0,s.setAttribute(`aria-busy`,`true`),s.innerHTML=`<span class="spinner" aria-hidden="true"></span>`+a.loading;try{let t=await fetch(e+`/api/newsletter/subscribe`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({email:u,lang:i})}),n=await t.json();if(!t.ok||n.error)throw Error(n.error||`Unexpected response`);r.dataset.subscribed=u,o.disabled=!0,c.textContent=a.ok,c.classList.add(`success`),s.textContent=a.subscribedBtn}catch(e){let t=e instanceof Error?e.message:`Something went wrong. Please try again.`;c.textContent=t,c.classList.add(`error`),s.textContent=a.idle}finally{s.disabled=!1,s.removeAttribute(`aria-busy`)}})});</script></div></main></body></html>

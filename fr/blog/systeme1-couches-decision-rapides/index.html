@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Système 1 pour l&#39;IA : couches de décision rapides, du diagnostic aux drones et aux systèmes RAG - Clément BENOIT</title><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><style>.back-arrow[data-astro-cid-3kmfnthz]{color:var(--color-text2);align-items:center;gap:6px;margin-bottom:1.5rem;font-size:.92rem;font-weight:500;text-decoration:none;transition:color .15s;display:inline-flex}.back-arrow[data-astro-cid-3kmfnthz]:hover{color:var(--color-textAccent)}
+</style><link rel="stylesheet" href="/portfolio/_astro/global.BoBSY3ZC.css"><style>.nl-cta[data-astro-cid-4kc4pcc4]{flex-direction:column;align-items:center;gap:12px;max-width:520px;margin:0 auto;display:flex}.nl-cta--compact[data-astro-cid-4kc4pcc4]{border:1px solid var(--color-border);background:var(--color-background);border-radius:10px;width:100%;max-width:480px;margin-top:72px;padding:24px 24px 16px;box-shadow:0 2px 12px #00000014}.nl-cta-field[data-astro-cid-4kc4pcc4]{gap:8px;width:100%;max-width:400px;display:flex}.nl-cta-input[data-astro-cid-4kc4pcc4]{border:1px solid var(--color-border);background:var(--color-background);color:var(--color-text);border-radius:6px;outline:none;flex:1;padding:10px 14px;font-size:15px;transition:border-color .15s}.nl-cta-input[data-astro-cid-4kc4pcc4]:focus{border-color:var(--color-backgroundAccent)}.nl-cta-btn[data-astro-cid-4kc4pcc4]{background:var(--color-backgroundAccent);color:#fff;cursor:pointer;white-space:nowrap;border:none;border-radius:6px;padding:10px 20px;font-size:15px;font-weight:600;transition:background .15s}.nl-cta-btn[data-astro-cid-4kc4pcc4]:hover{background:#4a4ab8}.nl-cta-btn[data-astro-cid-4kc4pcc4]:disabled{opacity:.6;cursor:not-allowed}.nl-cta-status[data-astro-cid-4kc4pcc4]{text-align:center;min-height:20px;margin:0;font-size:14px}.nl-cta-status[data-astro-cid-4kc4pcc4].success{color:#28a745}.nl-cta-status[data-astro-cid-4kc4pcc4].error{color:#dc3545}@media (width<=480px){.nl-cta-field[data-astro-cid-4kc4pcc4]{flex-direction:column}}.nl-cta-tease[data-astro-cid-4kc4pcc4]{color:var(--color-text2);text-align:center;margin:0 0 12px;font-size:14px;line-height:1.5}.nl-cta-note[data-astro-cid-4kc4pcc4]{color:var(--color-text3);text-align:center;margin:0;font-size:12px}
+.blog-layout[data-astro-cid-r2afylss]{max-width:760px;margin:0 auto;padding:80px 40px}@media (width<=767px){.blog-layout[data-astro-cid-r2afylss]{padding:40px 16px}}.blog-post[data-astro-cid-r2afylss]{max-width:720px}.blog-post-content[data-astro-cid-r2afylss]{margin-top:24px;font-size:16px;line-height:1.8}.blog-post-content[data-astro-cid-r2afylss] h1{color:var(--color-heading);margin-top:0;margin-bottom:.5em}.blog-post-content[data-astro-cid-r2afylss] h2,.blog-post-content[data-astro-cid-r2afylss] h3{color:var(--color-heading);margin-top:2em;margin-bottom:.5em}.blog-post-content[data-astro-cid-r2afylss] p{margin:1em 0}.blog-post-content[data-astro-cid-r2afylss] a{color:var(--color-textAccent);text-decoration:none}.blog-post-content[data-astro-cid-r2afylss] a:hover{color:var(--color-textAccentHover);text-decoration:underline}.blog-post-content[data-astro-cid-r2afylss] img,.blog-post-content[data-astro-cid-r2afylss] video{border-radius:8px;max-width:100%;height:auto;margin:1.5em 0}.blog-post-content[data-astro-cid-r2afylss] figure{text-align:center;margin:1.5em 0}.blog-post-content[data-astro-cid-r2afylss] figcaption{color:var(--color-text3);margin-top:8px;font-size:14px}.blog-post-content[data-astro-cid-r2afylss] blockquote{border-left:3px solid var(--color-backgroundAccent);color:var(--color-text2);margin:1.5em 0;padding-left:16px}.blog-post-content[data-astro-cid-r2afylss] code{background:var(--color-background3);border-radius:4px;padding:2px 6px;font-size:.9em}.blog-post-content[data-astro-cid-r2afylss] pre{background:var(--color-background3);border-radius:8px;padding:16px;font-size:14px;line-height:1.5;overflow-x:auto}.blog-post-content[data-astro-cid-r2afylss] pre code{background:0 0;padding:0}.blog-post-tags[data-astro-cid-r2afylss]{flex-wrap:wrap;gap:6px;margin-top:12px;display:flex}.blog-tag[data-astro-cid-r2afylss]{background:var(--color-backgroundIrisTint);color:var(--color-textAccent);border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500;display:inline-block}
+*,:before,:after{box-sizing:border-box}body{color:var(--color-text);background:var(--color-background);-webkit-font-smoothing:antialiased;margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;line-height:1.6}.minimal-main{width:100%}
+</style></head><body><nav class="top-nav" data-open="false" data-astro-cid-wpvy4v7s><div class="top-nav-inner" data-astro-cid-wpvy4v7s><a href="/portfolio/fr/" class="top-nav-title" data-astro-cid-wpvy4v7s>Home</a><button class="hamburger" aria-label="Toggle navigation menu" data-astro-cid-wpvy4v7s><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-wpvy4v7s><line x1="3" y1="6" x2="21" y2="6" data-astro-cid-wpvy4v7s></line><line x1="3" y1="12" x2="21" y2="12" data-astro-cid-wpvy4v7s></line><line x1="3" y1="18" x2="21" y2="18" data-astro-cid-wpvy4v7s></line></svg></button><div class="top-nav-dropdown" data-astro-cid-wpvy4v7s><div class="top-nav-links" data-astro-cid-wpvy4v7s><a href="/portfolio/fr/blog/" class="top-nav-link active" data-astro-cid-wpvy4v7s>Blog</a><a href="/portfolio/fr/projects/" class="top-nav-link" data-astro-cid-wpvy4v7s>Projects</a><a href="/portfolio/fr/contact/" class="top-nav-link" data-astro-cid-wpvy4v7s>Contact</a><a href="/portfolio/fr/cv/" class="top-nav-link" data-astro-cid-wpvy4v7s>CV</a><a href="/portfolio/en/blog/systeme1-couches-decision-rapides/" class="top-nav-link lang-switch" data-current="FR" data-astro-cid-wpvy4v7s>EN</a></div></div><a href="/portfolio/en/blog/systeme1-couches-decision-rapides/" class="lang-switch-desktop" aria-label="Switch to EN" data-astro-cid-wpvy4v7s>EN</a></div></nav><script type="module">var e=document.querySelector(`.top-nav`);(e?.querySelector(`.hamburger`))?.addEventListener(`click`,()=>{let t=e.getAttribute(`data-open`)===`true`;e.setAttribute(`data-open`,t?`false`:`true`)}),e?.querySelectorAll(`.top-nav-link`).forEach(t=>{t.addEventListener(`click`,()=>{e.setAttribute(`data-open`,`false`)})});</script><script type="module">document.querySelectorAll(`.lang-switch, .lang-switch-desktop`).forEach(e=>{e.addEventListener(`click`,()=>{var e=window.location.pathname.match(/^\/(?:portfolio\/)?(fr|en)\//),t=(e?e[1]:`en`)===`fr`?`en`:`fr`;localStorage.setItem(`lang`,t)})});</script><main class="minimal-main"><div class="blog-layout" data-astro-cid-r2afylss><a href="/portfolio/fr/blog/" class="back-arrow" aria-label="Back" data-astro-cid-3kmfnthz><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" data-astro-cid-3kmfnthz><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-3kmfnthz></path></svg><span data-astro-cid-3kmfnthz>Back</span></a><article class="blog-post" data-astro-cid-r2afylss><time class="blog-post-date" datetime="2026-10-05T00:00:00.000Z" data-astro-cid-r2afylss>5 octobre 2026</time><div class="blog-post-tags" data-astro-cid-r2afylss><span class="blog-tag" data-astro-cid-r2afylss>système 1</span><span class="blog-tag" data-astro-cid-r2afylss>couches de décision rapides</span><span class="blog-tag" data-astro-cid-r2afylss>classifieurs</span><span class="blog-tag" data-astro-cid-r2afylss>calibration</span><span class="blog-tag" data-astro-cid-r2afylss>apprentissage par renforcement</span><span class="blog-tag" data-astro-cid-r2afylss>distillation</span><span class="blog-tag" data-astro-cid-r2afylss>edge ai</span><span class="blog-tag" data-astro-cid-r2afylss>rag</span><span class="blog-tag" data-astro-cid-r2afylss>routage</span><span class="blog-tag" data-astro-cid-r2afylss>environnements réglementés</span><span class="blog-tag" data-astro-cid-r2afylss>souveraineté numérique</span><span class="blog-tag" data-astro-cid-r2afylss>human-in-the-loop</span></div><div class="blog-post-content" data-astro-cid-r2afylss><h1 id="système-1-pour-lia--couches-de-décision-rapides-du-diagnostic-aux-drones-et-aux-systèmes-rag">Système 1 pour l’IA : couches de décision rapides, du diagnostic aux drones et aux systèmes RAG</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Un LLM est remarquable pour raisonner, planifier et rédiger. Il est aussi lent, coûteux et dépendant d’une infrastructure. Pourtant, la plupart des décisions d’un système réel n’ont pas besoin de tout ce raisonnement : elles doivent être prises <strong>vite</strong>, <strong>localement</strong> et <strong>à moindre coût</strong>, et surtout le système doit savoir quand il ne sait pas.</p>
+<p>Cet article présente le patron d’architecture que je regroupe sous le nom de <strong>couches de décision rapides</strong> (« Système 1 »). Je l’illustre dans plusieurs domaines, dont deux en profondeur : les systèmes aériens de combat sans équipage (UCAS) et les systèmes RAG. Je reste volontairement au niveau de l’<strong>architecture et de l’ingénierie de la décision</strong>, avec un fil conducteur : ce qui rend ces modèles utilisables lorsque les décisions ont des conséquences et que l’environnement est réglementé.</p>
+<h2 id="système-1-et-système-2--doù-vient-lidée">Système 1 et Système 2 : d’où vient l’idée</h2>
+<h3 id="origine--la-théorie-du-double-processus">Origine : la théorie du double processus</h3>
+<p>La théorie du double processus, popularisée par Daniel Kahneman dans <em>Thinking, Fast and Slow</em> (<em>Système 1, Système 2 : les deux vitesses de la pensée</em>), distingue deux modes de pensée :</p>
+<ul>
+<li><strong>Système 1</strong> : rapide, automatique, intuitif, peu coûteux, sujet aux biais ;</li>
+<li><strong>Système 2</strong> : lent, délibéré, analytique, exigeant, plus fiable sur les problèmes nouveaux.</li>
+</ul>
+<p>Il s’agit d’un modèle cognitif, pas d’une description anatomique. Il sert ici d’<strong>analogie d’ingénierie</strong>.</p>
+<p>Mais une image familière en saisit l’idée : <strong>lorsque le médecin tape sur votre genou avec son marteau, la jambe se détend avant que le cerveau n’ait eu le temps d’intervenir. Le signal est traité par la moelle épinière, à un seul relais, sans remonter au cerveau : c’est le réflexe rotulien, une réponse rapide, locale et peu coûteuse, que le cerveau n’a pas besoin de « délibérer »</strong></p>
+<h3 id="la-transposition-à-lia">La transposition à l’IA</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Système 2</th>
+<th>Système 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rôle</td>
+<td>Délibération, planification, raisonnement</td>
+<td>Réaction, triage, décisions de routine</td>
+</tr>
+<tr>
+<td>Modèle typique</td>
+<td>Grand LLM</td>
+<td>Petit modèle + tête de décision</td>
+</tr>
+<tr>
+<td>Latence</td>
+<td>Secondes</td>
+<td>Millisecondes à quelques centaines de ms</td>
+</tr>
+<tr>
+<td>Coût</td>
+<td>Élevé (GPU, tokens)</td>
+<td>Faible, embarquable</td>
+</tr>
+<tr>
+<td>Dépendance réseau</td>
+<td>Souvent oui</td>
+<td>Non (inférence locale)</td>
+</tr>
+<tr>
+<td>Point faible</td>
+<td>Lent, coûteux</td>
+<td>Généralise mal hors distribution</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deux-familles-de-système-1">Deux familles de Système 1</h3>
+<p>La « tête de décision » peut prendre deux formes, et la distinction compte :</p>
+<ul>
+<li>une <strong>politique</strong> entraînée par apprentissage par renforcement ou par imitation, adaptée aux décisions séquentielles (agir, puis réagir à ce qui change) ;</li>
+<li>un <strong>classifieur calibré</strong> à sorties typées (choix, score, booléen) qui renvoie des probabilités plutôt que du texte, adapté aux décisions ponctuelles (router, filtrer, arbitrer).</li>
+</ul>
+<p>Cette seconde famille a pris forme récemment, avec des modèles ouverts et fermés dédiés aux décisions typées, non autorégressifs, qui rendent leur verdict en une seule passe. Laya (poids ouverts, Apache 2.0) et Jev (API fermée) en sont deux exemples. Leurs performances annoncées doivent être vérifiées sur vos propres données, mais ils confirment la direction : <strong>un verdict structuré et calibré vaut mieux qu’une phrase prononcée avec aplomb</strong>.</p>
+<p>L’enjeu n’est pas d’opposer Système 1 et Système 2 mais de les <strong>coupler</strong>.</p>
+<h2 id="larchitecture-de-couplage">L’architecture de couplage</h2>
+<p>Le patron se résume en quatre étapes :</p>
+<ol>
+<li><strong>Un Système 2 puissant</strong>, au sol ou en périphérie, qui planifie, génère des données et joue le rôle de professeur ;</li>
+<li><strong>Distillation / fine-tuning</strong> : son comportement est transféré à un petit modèle ;</li>
+<li><strong>Un Système 1 embarqué</strong> qui décide en temps réel grâce à sa tête de décision ;</li>
+<li><strong>Escalade</strong> : si la confiance passe sous un seuil, la décision remonte au Système 2 ou à l’opérateur humain.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>   ┌────────────────────────────┐</span></span>
+<span class="line"><span>   │ Système 2 (LLM, sol/edge)  │  planification, génération de données</span></span>
+<span class="line"><span>   └──────────────┬─────────────┘</span></span>
+<span class="line"><span>                  │ distillation / fine-tuning</span></span>
+<span class="line"><span>                  ▼</span></span>
+<span class="line"><span>   ┌────────────────────────────┐</span></span>
+<span class="line"><span>   │ Système 1 embarqué         │  ms → centaines de ms, inférence locale</span></span>
+<span class="line"><span>   │ (petit modèle + tête)      │</span></span>
+<span class="line"><span>   └──────────────┬─────────────┘</span></span>
+<span class="line"><span>                  │ confiance ≥ seuil ? ── oui ──▶ décision rapide</span></span>
+<span class="line"><span>                  │ non</span></span>
+<span class="line"><span>                  ▼</span></span>
+<span class="line"><span>        escalade : Système 2 ou opérateur (human-in-the-loop)</span></span></code></pre>
+<p>Tout repose sur deux propriétés, détaillées dans les sections suivantes : la <strong>calibration</strong> et <strong>le droit de s’abstenir</strong>.</p>
+<h2 id="calibration-abstention-et-hors-distribution">Calibration, abstention et hors-distribution</h2>
+<p>Un seuil de confiance n’a de sens que si la confiance reflète la probabilité d’erreur réelle. Trois points me paraissent décisifs :</p>
+<ul>
+<li><strong>Mesurer la calibration</strong>, par exemple avec une courbe de fiabilité, et la corriger si nécessaire (temperature scaling, prédiction conforme) ;</li>
+<li><strong>Raisonner en termes de risque/couverture</strong> : quelle part de décisions automatiques correspond à quel taux d’erreur ? Le seuil est un choix métier, pas un réglage technique ;</li>
+<li><strong>Détecter les entrées hors distribution</strong> : le Système 1 généralise mal, il doit donc savoir reconnaître qu’une entrée sort de son domaine de validité.</li>
+</ul>
+<p>Un exemple issu de mes propres travaux en diagnostic moléculaire, détaillé dans l’<a href="/portfolio/fr/blog/nanodiag/">article nanodiag</a> (en français) : sur des données Nanopore partielles produites par échantillonnage adaptatif, des classifieurs de deep learning trouvaient la bonne classe tumorale, mais leur confiance restait systématiquement dégradée, alors qu’une Random Forest conservait une confiance maximale. L’un des outils, entraîné sur des données de génome entier, « hallucinait » sur ces données trop parcellaires. Une faible confiance sur des données partielles peut être légitime, et une confiance maximale n’est pas, à elle seule, une preuve de robustesse : la confiance doit être évaluée en conditions réelles d’utilisation, pas seulement sur un jeu de test propre.</p>
+<h2 id="savoir-quand-sarrêter">Savoir quand s’arrêter</h2>
+<p>Certaines décisions ne sont pas ponctuelles : l’information arrive en continu, et la bonne question devient « en sait-on assez pour décider ? ». Un Système 1 peut surveiller la stabilité de son propre verdict et déclencher un <strong>arrêt anticipé</strong> dès que la confiance se stabilise au-dessus du seuil.</p>
+<p>Le même projet de diagnostic en donne une illustration : en analysant les reads de séquençage à mesure qu’ils sont produits, on peut repérer le moment où l’information accumulée est suffisante et interrompre le run, ce qui raccourcit les délais et libère un équipement partagé. La même logique s’applique en RAG (cesser de récupérer dès que le contexte est suffisant) et dans les systèmes embarqués (cesser de collecter dès que la décision est stable).</p>
+<h2 id="catalogue-de-cas-dusage">Catalogue de cas d’usage</h2>
+<p>Le patron apparaît dans des contextes très différents :</p>
+<table>
+<thead>
+<tr>
+<th>Domaine</th>
+<th>Décision rapide</th>
+<th>Escalade vers</th>
+<th>Contrainte dominante</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UCAS</td>
+<td>Détection de dégradation ou de brouillage du lien, changement de mode</td>
+<td>Opérateur / Système 2</td>
+<td>Latence, autonomie locale</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>Classification de signatures capteurs avec score de confiance</td>
+<td>Opérateur</td>
+<td>Fiabilité, erreur à haute confiance</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>Détection d’incohérences capteurs, déconfliction du trafic</td>
+<td>Opérateur</td>
+<td>Sécurité, temps réel</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>État du système, énergie, déclenchement de replanification</td>
+<td>Système 2 / opérateur</td>
+<td>Embarqué, énergie</td>
+</tr>
+<tr>
+<td>UCAS</td>
+<td>Triage et priorisation des détections présentées à l’opérateur</td>
+<td>Opérateur</td>
+<td>Charge cognitive</td>
+</tr>
+<tr>
+<td>Diagnostic</td>
+<td>Classification avec rejet, contrôle qualité en temps réel, arrêt anticipé</td>
+<td>Biologiste / médecin</td>
+<td>Calibration, traçabilité</td>
+</tr>
+<tr>
+<td>RAG / agents</td>
+<td>Routage, re-ranking, réécriture, refus, garde-fous</td>
+<td>LLM</td>
+<td>Coût, latence</td>
+</tr>
+<tr>
+<td>Cybersécurité</td>
+<td>Triage des alertes, arbitrage, priorisation par sévérité</td>
+<td>Analyste</td>
+<td>Volume, auditabilité</td>
+</tr>
+<tr>
+<td>Industrie</td>
+<td>Maintenance prédictive, contrôle qualité en ligne</td>
+<td>Technicien</td>
+<td>Latence, edge</td>
+</tr>
+</tbody>
+</table>
+<h2 id="approfondissement-1--les-systèmes-aériens-sans-équipage-ucas">Approfondissement 1 : les systèmes aériens sans équipage (UCAS)</h2>
+<h3 id="le-problème">Le problème</h3>
+<p>Un UCAS peut opérer avec un lien dégradé, brouillé ou coupé. Les allers-retours réseau et la délibération lourde y sont des luxes : la couche rapide doit être <strong>locale, prévisible en latence et robuste</strong>.</p>
+<h3 id="un-rôle-de-perception-de-triage-et-descalade">Un rôle de perception, de triage et d’escalade</h3>
+<p>Au niveau de l’architecture, le Système 1 embarqué prend en charge des tâches de <strong>perception et de triage</strong> : réagir aux événements capteurs, classifier avec un score de confiance, détecter des anomalies, gérer les modes dégradés. Il produit une <strong>recommandation ou une alerte</strong> (continuer, ne pas continuer, escalader), jamais une action irréversible de sa propre initiative.</p>
+<h3 id="continuer-sabstenir-escalader">Continuer, s’abstenir, escalader</h3>
+<p>Le mécanisme de garde est celui décrit plus haut : sous le seuil de confiance, ou hors du domaine de validité du modèle, le comportement par défaut est <strong>l’abstention et l’escalade</strong>. Les décisions aux conséquences graves et irréversibles restent sous <strong>autorité humaine</strong> : l’IA réduit la charge cognitive et le temps de réaction ; elle ne remplace pas la responsabilité.</p>
+<h3 id="évaluation-en-simulation">Évaluation en simulation</h3>
+<p>Avant tout déploiement, l’évaluation se fait en simulation sur des scénarios variés, y compris dégradés (bruit capteur, perte de lien, situations hors distribution) :</p>
+<table>
+<thead>
+<tr>
+<th>Métrique</th>
+<th>Ce qu’elle mesure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latence (p50 / p99)</td>
+<td>Réactivité, surtout dans la queue de distribution</td>
+</tr>
+<tr>
+<td>Taux de bonnes décisions</td>
+<td>Qualité des classifications et des recommandations</td>
+</tr>
+<tr>
+<td>Taux d’erreur à haute confiance</td>
+<td>Les erreurs les plus dangereuses : le modèle se trompe en étant sûr de lui</td>
+</tr>
+<tr>
+<td>Taux d’escalade</td>
+<td>Charge reportée sur l’opérateur ou le Système 2</td>
+</tr>
+<tr>
+<td>Coût de calcul / énergie</td>
+<td>Faisabilité embarquée</td>
+</tr>
+<tr>
+<td>Dégradation hors distribution</td>
+<td>Robustesse quand le monde sort du jeu d’entraînement</td>
+</tr>
+</tbody>
+</table>
+<p>Le <strong>taux d’erreur à haute confiance</strong> est, à mon avis, la métrique la plus importante : une exactitude moyenne flatteuse peut cacher quelques erreurs commises avec assurance.</p>
+<h2 id="approfondissement-2--les-systèmes-rag">Approfondissement 2 : les systèmes RAG</h2>
+<p>Le même patron, transposé à un contexte très différent, fait économiser beaucoup de coût et de latence.</p>
+<h3 id="routage-et-cascade">Routage et cascade</h3>
+<p>Un petit modèle intercepte chaque requête en premier. Il décide : réponse directe, récupération simple, ou escalade vers le LLM.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> answer</span><span style="color:#E1E4E8">(query):</span></span>
+<span class="line"><span style="color:#E1E4E8">    route </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fast_router.predict(query)        </span><span style="color:#6A737D"># System 1</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> route.confidence </span><span style="color:#F97583">&gt;=</span><span style="color:#79B8FF"> THRESHOLD</span><span style="color:#F97583"> and</span><span style="color:#E1E4E8"> route.can_answer_cheaply:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> cheap_path(query, route)       </span><span style="color:#6A737D"># no LLM call</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> llm_pipeline(query)                </span><span style="color:#6A737D"># System 2</span></span></code></pre>
+<p>Dans de nombreux déploiements, <strong>la plupart des requêtes n’atteignent jamais le LLM</strong> (questions fréquentes, requêtes de type navigation, recherches simples). C’est de là que viennent les gains de coût et de latence.</p>
+<h3 id="autres-couches-rapides-dans-un-pipeline-rag">Autres couches rapides dans un pipeline RAG</h3>
+<ul>
+<li><strong>Réécriture de requête</strong> : un petit modèle reformule ou décompose la question avant la récupération ;</li>
+<li><strong>Re-ranking du top-k</strong> : un cross-encoder compact réordonne les passages avant qu’ils n’atteignent le LLM, ce qui réduit le contexte et donc le coût ;</li>
+<li><strong>Détection de refus / d’hallucination</strong> : un classifieur léger vérifie que la réponse est ancrée dans les passages, ou qu’il vaut mieux s’abstenir ;</li>
+<li><strong>Garde-fous</strong> : détection d’injection de prompt en amont.</li>
+</ul>
+<h3 id="la-mesure">La mesure</h3>
+<p>Je compare toujours les variantes sur les mêmes jeux de questions : qualité (par exemple avec RAGAS : fidélité, pertinence), latence, coût par requête, et part des requêtes traitées sans le LLM. Un routeur qui économise 60 % des appels mais dégrade la fidélité n’est pas un bon routeur.</p>
+<h2 id="un-classifieur-en-environnement-réglementé--ce-qui-change">Un classifieur en environnement réglementé : ce qui change</h2>
+<p>Dans les environnements réglementés (santé, défense, finance), un classifieur performant ne suffit pas. Ce qui le rend déployable, c’est tout ce qui l’entoure :</p>
+<ul>
+<li>la <strong>traçabilité</strong> de chaque décision (entrée, version du modèle, seuil, verdict) ;</li>
+<li>le <strong>versionnement conjoint</strong> du modèle, des données d’entraînement et du seuil ;</li>
+<li>un <strong>jeu de validation figé</strong> et une <strong>revalidation</strong> à chaque changement de modèle ;</li>
+<li>la <strong>surveillance de la dérive</strong> en production, avec alerte quand les entrées s’éloignent du domaine d’entraînement ;</li>
+<li>une <strong>séparation stricte</strong> des environnements de développement et de production ;</li>
+<li>la <strong>validation humaine</strong> des décisions à fort enjeu, avec un chemin d’escalade testé comme le chemin nominal ;</li>
+<li>un <strong>journal d’audit</strong> exploitable a posteriori.</li>
+</ul>
+<p>Ces exigences peuvent sembler lourdes pour un « petit » modèle. Elles ne le sont pas : un Système 1 petit, local et versionné est précisément <strong>plus facile à valider et à auditer</strong> qu’un LLM distant dont le comportement évolue au gré des mises à jour du fournisseur.</p>
+<h2 id="souveraineté">Souveraineté</h2>
+<p>L’inférence locale supprime la dépendance à un service distant : pas de réseau requis, pas de tiers dans la boucle de décision, et une chaîne de confiance (poids, données, outillage) qui peut être auditée et maîtrisée.</p>
+<p>La licence compte autant que la technologie. Dans le projet de diagnostic mentionné plus haut, l’outil de référence n’a pas pu être fine-tuné sur nos propres données, faute de poids utilisables en contexte clinique : la limite était contractuelle avant d’être technique. À l’inverse, un modèle ouvert, auto-hébergeable, fine-tunable et auditable, comme ceux de la nouvelle famille de modèles de décision évoquée plus haut, garde la maîtrise de bout en bout.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Penser en Système 1 / Système 2 revient à poser une question d’ingénierie simple : <strong>qui décide, à quel coût, et que se passe-t-il quand on n’est pas sûr ?</strong> Qu’il s’agisse d’un diagnostic, d’un drone ou d’un pipeline RAG, la réponse repose sur la même ossature : un modèle local rapide pour la routine, une confiance bien calibrée, un mécanisme d’escalade testé, et un humain ou un modèle plus puissant pour les cas qui comptent.</p>
+<hr/>
+<h1 id="références">Références</h1>
+<p id="ref-1"><p><strong>[1]</strong> D. Kahneman (2011).
+<i>Thinking, Fast and Slow</i> — Édition française : <i>Système 1, Système 2 : les deux vitesses de la pensée</i>.
+<a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_1_/_Syst%C3%A8me_2_:_Les_deux_vitesses_de_la_pens%C3%A9e" target="_blank" rel="noopener noreferrer">Wikipédia : Système 1 / Système 2 : Les deux vitesses de la pensée</a></p></p>
+<p id="ref-2"><p><strong>[2]</strong> G. Hinton et al. (2015).
+<i>Distilling the Knowledge in a Neural Network</i> — travaux sur la distillation de connaissances.
+<a href="https://arxiv.org/abs/1503.02531" target="_blank" rel="noopener noreferrer">arXiv:1503.02531</a></p></p>
+<p id="ref-3"><p><strong>[3]</strong> Littérature sur la classification avec option de rejet et la calibration des modèles.
+<a href="https://en.wikipedia.org/wiki/Calibration_(statistics)" target="_blank" rel="noopener noreferrer">Calibration (statistics) — Wikipedia</a></p></p>
+<p id="ref-4"><p><strong>[4]</strong> Convai Innovations.
+<i>Laya</i> — dépôt et model card (famille de modèles de décision typés, Apache 2.0).
+<a href="https://huggingface.co/convaiinnovations/laya" target="_blank" rel="noopener noreferrer">huggingface.co/convaiinnovations/laya</a></p></p>
+<p id="ref-5"><p><strong>[5]</strong> Exploding Gradients.
+<i>RAGAS</i> — documentation pour l’évaluation des pipelines RAG.
+<a href="https://docs.ragas.io/" target="_blank" rel="noopener noreferrer">docs.ragas.io</a></p></p></div></article><form class="nl-cta nl-cta--compact" data-newsletter-cta data-lang="fr" novalidate data-astro-cid-4kc4pcc4><p class="nl-cta-tease" data-astro-cid-4kc4pcc4>Orchestration IA en environnements réglementés — rapports de terrain, sans marketing, sans spam.</p><div class="nl-cta-field" data-astro-cid-4kc4pcc4><input type="email" name="email" placeholder="vous@email.com" aria-label="Adresse email" class="nl-cta-input" data-astro-cid-4kc4pcc4><button type="submit" class="nl-cta-btn" data-astro-cid-4kc4pcc4>S&#39;inscrire</button></div><p class="nl-cta-status" role="status" aria-live="polite" data-astro-cid-4kc4pcc4></p><p class="nl-cta-note" data-astro-cid-4kc4pcc4>Désabonnement en 1 clic à tout moment.</p></form><script type="module">var e=`https://ebook.omicsverse.fr`,t=/^[^\s@]+@[^\s@]+\.[^\s@]+$/,n={fr:{idle:`S'inscrire`,loading:`Inscription…`,ok:`Vous êtes inscrit !`,invalid:`Veuillez saisir une adresse email valide.`,subscribedBtn:`Se désinscrire`,unsubscribing:`Désinscription…`,unsubscribed:`Vous êtes désinscrit.`,unsubscribeError:`Échec de la désinscription. Veuillez réessayer.`},en:{idle:`Subscribe`,loading:`Subscribing…`,ok:`You're subscribed!`,invalid:`Please enter a valid email address.`,subscribedBtn:`Unsubscribe`,unsubscribing:`Unsubscribing…`,unsubscribed:`You've been unsubscribed.`,unsubscribeError:`Unsubscribe failed. Please try again.`}};document.querySelectorAll(`[data-newsletter-cta]`).forEach(function(r){let i=r.dataset.lang||`en`,a=n[i],o=r.querySelector(`input[type="email"]`),s=r.querySelector(`button[type="submit"]`),c=r.querySelector(`.nl-cta-status`);o&&s&&c&&r.addEventListener(`submit`,async n=>{n.preventDefault(),c.className=`nl-cta-status`,c.textContent=``;let l=r.dataset.subscribed;if(l){s.disabled=!0,s.textContent=a.unsubscribing;try{let t=await fetch(e+`/api/newsletter/unsubscribe`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({email:l})}),n=await t.json();if(!t.ok||n.error)throw Error(n.error||`Unexpected response`);delete r.dataset.subscribed,o.value=``,o.disabled=!1,s.textContent=a.idle,c.textContent=a.unsubscribed,c.classList.add(`success`)}catch(e){let t=e instanceof Error?e.message:a.unsubscribeError;c.textContent=t,c.classList.add(`error`),s.textContent=a.subscribedBtn}finally{s.disabled=!1}return}let u=o.value.trim();if(!t.test(u)){c.textContent=a.invalid,c.classList.add(`error`);return}s.disabled=!0,s.setAttribute(`aria-busy`,`true`),s.innerHTML=`<span class="spinner" aria-hidden="true"></span>`+a.loading;try{let t=await fetch(e+`/api/newsletter/subscribe`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({email:u,lang:i})}),n=await t.json();if(!t.ok||n.error)throw Error(n.error||`Unexpected response`);r.dataset.subscribed=u,o.disabled=!0,c.textContent=a.ok,c.classList.add(`success`),s.textContent=a.subscribedBtn}catch(e){let t=e instanceof Error?e.message:`Something went wrong. Please try again.`;c.textContent=t,c.classList.add(`error`),s.textContent=a.idle}finally{s.disabled=!1,s.removeAttribute(`aria-busy`)}})});</script></div></main></body></html>
