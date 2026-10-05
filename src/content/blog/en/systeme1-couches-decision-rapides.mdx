@@ -1,0 +1,225 @@
+---
+title: "System 1 for AI: Fast Decision Layers, from Diagnostics to Drones and RAG Systems"
+authors:
+  - "[cbenoit](https://www.linkedin.com/in/clement-benoit)"
+date: 2026-10-05
+tags: [ "system 1", "fast decision layers", "classifiers", "calibration", "reinforcement learning", "distillation", "edge ai", "rag", "routing", "regulated environments", "digital sovereignty", "human-in-the-loop" ]
+lang: "en"
+---
+
+# System 1 for AI: Fast Decision Layers, from Diagnostics to Drones and RAG Systems
+
+## Introduction
+
+A LLM is remarkable at reasoning, planning and writing. It is also slow, expensive and dependent on infrastructure. Yet most decisions in a real system don't need all that reasoning: they need to be made **fast**, **locally** and **cheaply**, and above all the system needs to know when it doesn't know.
+
+This article presents the architecture pattern I group under the name **fast decision layers** ("System 1"). I illustrate it across several domains, two of them in depth: unmanned combat aerial systems (UCAS) and RAG systems. I deliberately stay at the level of **architecture and decision engineering**, with one thread running through: what makes these models usable when decisions have consequences and the environment is regulated.
+
+## System 1 and System 2: where the idea comes from
+
+### Origin: dual-process theory
+
+Dual-process theory, popularized by Daniel Kahneman in *Thinking, Fast and Slow*, distinguishes two modes of thought:
+
+- **System 1**: fast, automatic, intuitive, cheap, prone to bias;
+- **System 2**: slow, deliberate, analytical, effortful, more reliable on novel problems.
+
+This is a cognitive model, not an anatomical description. Here it serves as an **engineering analogy**.
+
+But a familiar image captures the idea: **when the doctor taps your knee with a reflex hammer, your leg kicks before your brain has had time to weigh in. The signal is handled by the spinal cord through a single relay and never travels up to the brain: this is the patellar reflex, a fast, local and cheap response that the brain doesn't need to "deliberate".**
+
+### The AI transposition
+
+| | System 2 | System 1 |
+|---|---|---|
+| Role | Deliberation, planning, reasoning | Reaction, triage, routine decisions |
+| Typical model | Large LLM | Small model + decision head |
+| Latency | Seconds | Milliseconds to a few hundred ms |
+| Cost | High (GPU, tokens) | Low, embeddable |
+| Network dependency | Often yes | No (local inference) |
+| Weak spot | Slow, expensive | Generalizes poorly out of distribution |
+
+### Two families of System 1
+
+The "decision head" can take two forms, and the distinction matters:
+
+- a **policy** trained by reinforcement or imitation learning, suited to sequential decisions (act, then react to what changes);
+- a **calibrated classifier** with typed outputs (choice, score, boolean) that returns probabilities rather than text, suited to one-shot decisions (route, filter, adjudicate).
+
+This second family has recently taken shape, with open and closed models dedicated to typed decisions, non-autoregressive, returning their verdict in a single pass. Laya (open-weight, Apache 2.0) and Jev (closed API) are two examples. Their announced performance should be checked on your own data, but they confirm the direction: **a structured, calibrated verdict beats a confident-sounding sentence**.
+
+The point isn't to pit System 1 against System 2 but to **couple** them.
+
+## The coupling architecture
+
+The pattern boils down to four steps:
+
+1. **A powerful System 2**, on the ground or at the edge, that plans, generates data and acts as teacher;
+2. **Distillation / fine-tuning**: its behavior is transferred to a small model;
+3. **An embedded System 1** that decides in real time through its decision head;
+4. **Escalation**: if confidence falls below a threshold, the decision goes up to System 2 or to the human operator.
+
+```text
+   ┌────────────────────────────┐
+   │ System 2 (LLM, ground/edge)│  planning, data generation
+   └──────────────┬─────────────┘
+                  │ distillation / fine-tuning
+                  ▼
+   ┌────────────────────────────┐
+   │ Embedded System 1          │  ms → hundreds of ms, local inference
+   │ (small model + head)       │
+   └──────────────┬─────────────┘
+                  │ confidence ≥ threshold? ── yes ──▶ fast decision
+                  │ no
+                  ▼
+        escalate: System 2 or operator (human-in-the-loop)
+```
+
+Everything rests on two properties, detailed in the next sections: **calibration** and **the right to abstain**.
+
+## Calibration, abstention and out-of-distribution
+
+A confidence threshold only makes sense if confidence reflects the real error probability. Three points seem decisive to me:
+
+- **Measure calibration**, for instance with a reliability curve, and correct it when needed (temperature scaling, conformal prediction);
+- **Think in risk/coverage terms**: what share of automatic decisions corresponds to what error rate? The threshold is a business choice, not a technical setting;
+- **Detect out-of-distribution inputs**: System 1 generalizes poorly, so it must be able to recognize that an input falls outside its validity domain.
+
+An example from my own molecular diagnostics work, detailed in the [nanodiag article](/portfolio/fr/blog/nanodiag/) (in French): on partial Nanopore sequencing data produced by adaptive sampling, deep learning classifiers found the right tumor class, but their confidence stayed systematically degraded, whereas a Random Forest kept maximal confidence. One of the tools, trained on whole-genome data, "hallucinated" on these overly sparse data. Low confidence on partial data can be legitimate, and maximal confidence is not, on its own, proof of robustness: confidence has to be evaluated under real conditions of use, not only on a clean test set.
+
+## Deciding when to stop
+
+Some decisions aren't one-shot: information arrives continuously, and the right question becomes "do we know enough to decide?". A System 1 can monitor the stability of its own verdict and trigger an **early stop** once confidence settles above the threshold.
+
+The same diagnostics project illustrates this: by analyzing sequencing reads as they are produced, one can spot when accumulated information is sufficient and interrupt the run, which shortens delays and frees shared equipment. The same logic applies in RAG (stop retrieving once the context is sufficient) and in embedded systems (stop collecting once the decision is stable).
+
+## Use-case catalog
+
+The pattern shows up in very different contexts:
+
+| Domain | Fast decision | Escalates to | Dominant constraint |
+|---|---|---|---|
+| UCAS | Link degradation or jamming detection, mode switch | Operator / System 2 | Latency, local autonomy |
+| UCAS | Sensor-signature classification with confidence score | Operator | Reliability, high-confidence error |
+| UCAS | Sensor inconsistency detection, traffic deconfliction | Operator | Safety, real time |
+| UCAS | System health, energy, replanning trigger | System 2 / operator | Embedded, energy |
+| UCAS | Triage and prioritization of detections shown to the operator | Operator | Cognitive load |
+| Diagnostics | Classification with rejection, real-time QC, early stopping | Biologist / physician | Calibration, traceability |
+| RAG / agents | Routing, re-ranking, rewriting, refusal, guardrails | LLM | Cost, latency |
+| Cybersecurity | Alert triage, adjudication, severity prioritization | Analyst | Volume, auditability |
+| Industry | Predictive maintenance, inline quality control | Technician | Latency, edge |
+
+## Deep dive 1: unmanned aerial systems (UCAS)
+
+### The problem
+
+A UCAS may operate with a degraded, jammed or severed link. Network round trips and heavy deliberation are luxuries there: the fast layer must be **local, predictable in latency and robust**.
+
+### A role of perception, triage and escalation
+
+At the architecture level, the embedded System 1 handles **perception and triage** tasks: reacting to sensor events, classification with a confidence score, anomaly detection, degraded-mode management. It produces a **recommendation or an alert** (continue, do not continue, escalate), never an irreversible action on its own initiative.
+
+### Continue, abstain, escalate
+
+The guard mechanism is the one described above: below the confidence threshold, or outside the model's validity domain, the default is **abstention and escalation**. Decisions with serious, irreversible consequences stay under **human authority**: the AI reduces cognitive load and reaction time; it does not replace accountability.
+
+### Benchmarking in simulation
+
+Before any deployment, evaluation happens in simulation across varied scenarios, including degraded ones (sensor noise, link loss, out-of-distribution situations):
+
+| Metric | What it measures |
+|---|---|
+| Latency (p50 / p99) | Responsiveness, especially in the tail |
+| Correct-decision rate | Quality of classification and recommendations |
+| High-confidence error rate | The most dangerous errors: the model is wrong while being sure |
+| Escalation rate | Load pushed onto the operator or System 2 |
+| Compute / energy cost | Embedded feasibility |
+| Out-of-distribution degradation | Robustness when the world leaves the training set |
+
+The **high-confidence error rate** is, in my view, the most important metric: a flattering average accuracy can hide a few self-assured mistakes.
+
+## Deep dive 2: RAG systems
+
+The same pattern, transposed to a very different context, saves a lot of cost and latency.
+
+### Routing and cascade
+
+A small model intercepts each query first. It decides: direct answer, simple retrieval, or escalation to the LLM.
+
+```python
+def answer(query):
+    route = fast_router.predict(query)        # System 1
+    if route.confidence >= THRESHOLD and route.can_answer_cheaply:
+        return cheap_path(query, route)       # no LLM call
+    return llm_pipeline(query)                # System 2
+```
+
+In many deployments, **most queries never reach the LLM** (frequent questions, navigation-style requests, simple lookups). That is where the cost and latency gains come from.
+
+### Other fast layers in a RAG pipeline
+
+- **Query rewriting**: a small model rephrases or decomposes the question before retrieval;
+- **Top-k re-ranking**: a compact cross-encoder reorders passages before they reach the LLM, which shrinks the context and thus the cost;
+- **Refusal / hallucination detection**: a lightweight classifier checks that the answer is grounded in the passages, or that abstaining is preferable;
+- **Guardrails**: prompt-injection detection upstream.
+
+### Measuring it
+
+I always compare variants on the same question sets: quality (for example with RAGAS: faithfulness, relevance), latency, cost per query, and the share of queries handled without the LLM. A router that saves 60% of calls but degrades faithfulness is not a good router.
+
+## A classifier in a regulated environment: what changes
+
+In regulated environments (healthcare, defense, finance), a high-performing classifier isn't enough. What makes it deployable is everything around it:
+
+- **traceability** of every decision (input, model version, threshold, verdict);
+- **joint versioning** of model, training data and threshold;
+- **a frozen validation set** and **revalidation** at every model change;
+- **drift monitoring** in production, alerting when inputs move away from the training domain;
+- **strict separation** of development and production environments;
+- **human validation** of high-stakes decisions, with an escalation path tested like the nominal one;
+- **an audit log** usable after the fact.
+
+These requirements may sound heavy for a "small" model. They aren't: a small, local, versioned System 1 is precisely **easier to validate and audit** than a remote LLM whose behavior shifts with the provider's updates.
+
+## Sovereignty
+
+Local inference removes the dependency on a remote service: no network required, no third party in the decision loop, and a trust chain (weights, data, tooling) that can be audited and controlled.
+
+Licensing matters as much as technology. In the diagnostics project mentioned above, the reference tool could not be fine-tuned on our own data, for lack of weights usable in a clinical setting: the limit was contractual before being technical. Conversely, an open, self-hosted, fine-tunable and auditable model, like those in the new family of decision models mentioned above, keeps control end to end.
+
+## Conclusion
+
+Thinking in System 1 / System 2 comes down to one plain engineering question: **who decides, at what cost, and what happens when we're not sure?** Whether for a diagnosis, a drone or a RAG pipeline, the answer rests on the same backbone: a fast local model for routine, well-calibrated confidence, a tested escalation mechanism, and a human or a more powerful model for the cases that matter.
+
+---
+
+# References
+
+<p id="ref-1">
+**[1]** D. Kahneman (2011).
+<i>Thinking, Fast and Slow</i>.
+<a href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow" target="_blank" rel="noopener noreferrer">Wikipedia: Thinking, Fast and Slow</a>
+</p>
+
+<p id="ref-2">
+**[2]** G. Hinton et al. (2015).
+<i>Distilling the Knowledge in a Neural Network</i> — knowledge distillation.
+<a href="https://arxiv.org/abs/1503.02531" target="_blank" rel="noopener noreferrer">arXiv:1503.02531</a>
+</p>
+
+<p id="ref-3">
+**[3]** Literature on classification with a reject option and model calibration.
+<a href="https://en.wikipedia.org/wiki/Calibration_(statistics)" target="_blank" rel="noopener noreferrer">Calibration (statistics) — Wikipedia</a>
+</p>
+
+<p id="ref-4">
+**[4]** Convai Innovations.
+<i>Laya</i> — repository and model card (a family of typed decision models, Apache 2.0).
+<a href="https://huggingface.co/convaiinnovations/laya" target="_blank" rel="noopener noreferrer">huggingface.co/convaiinnovations/laya</a>
+</p>
+
+<p id="ref-5">
+**[5]** Exploding Gradients.
+<i>RAGAS</i> — documentation for evaluating RAG pipelines.
+<a href="https://docs.ragas.io/" target="_blank" rel="noopener noreferrer">docs.ragas.io</a>
+</p>

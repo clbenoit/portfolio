@@ -1,0 +1,225 @@
+---
+title: "Système 1 pour l'IA : couches de décision rapides, du diagnostic aux drones et aux systèmes RAG"
+authors:
+  - "[cbenoit](https://www.linkedin.com/in/clement-benoit)"
+date: 2026-10-05
+tags: [ "système 1", "couches de décision rapides", "classifieurs", "calibration", "apprentissage par renforcement", "distillation", "edge ai", "rag", "routage", "environnements réglementés", "souveraineté numérique", "human-in-the-loop" ]
+lang: "fr"
+---
+
+# Système 1 pour l'IA : couches de décision rapides, du diagnostic aux drones et aux systèmes RAG
+
+## Introduction
+
+Un LLM est remarquable pour raisonner, planifier et rédiger. Il est aussi lent, coûteux et dépendant d'une infrastructure. Pourtant, la plupart des décisions d'un système réel n'ont pas besoin de tout ce raisonnement : elles doivent être prises **vite**, **localement** et **à moindre coût**, et surtout le système doit savoir quand il ne sait pas.
+
+Cet article présente le patron d'architecture que je regroupe sous le nom de **couches de décision rapides** (« Système 1 »). Je l'illustre dans plusieurs domaines, dont deux en profondeur : les systèmes aériens de combat sans équipage (UCAS) et les systèmes RAG. Je reste volontairement au niveau de l'**architecture et de l'ingénierie de la décision**, avec un fil conducteur : ce qui rend ces modèles utilisables lorsque les décisions ont des conséquences et que l'environnement est réglementé.
+
+## Système 1 et Système 2 : d'où vient l'idée
+
+### Origine : la théorie du double processus
+
+La théorie du double processus, popularisée par Daniel Kahneman dans *Thinking, Fast and Slow* (*Système 1, Système 2 : les deux vitesses de la pensée*), distingue deux modes de pensée :
+
+- **Système 1** : rapide, automatique, intuitif, peu coûteux, sujet aux biais ;
+- **Système 2** : lent, délibéré, analytique, exigeant, plus fiable sur les problèmes nouveaux.
+
+Il s'agit d'un modèle cognitif, pas d'une description anatomique. Il sert ici d'**analogie d'ingénierie**.
+
+Mais une image familière en saisit l'idée : **lorsque le médecin tape sur votre genou avec son marteau, la jambe se détend avant que le cerveau n'ait eu le temps d'intervenir. Le signal est traité par la moelle épinière, à un seul relais, sans remonter au cerveau : c'est le réflexe rotulien, une réponse rapide, locale et peu coûteuse, que le cerveau n'a pas besoin de « délibérer »**
+
+### La transposition à l'IA
+
+| | Système 2 | Système 1 |
+|---|---|---|
+| Rôle | Délibération, planification, raisonnement | Réaction, triage, décisions de routine |
+| Modèle typique | Grand LLM | Petit modèle + tête de décision |
+| Latence | Secondes | Millisecondes à quelques centaines de ms |
+| Coût | Élevé (GPU, tokens) | Faible, embarquable |
+| Dépendance réseau | Souvent oui | Non (inférence locale) |
+| Point faible | Lent, coûteux | Généralise mal hors distribution |
+
+### Deux familles de Système 1
+
+La « tête de décision » peut prendre deux formes, et la distinction compte :
+
+- une **politique** entraînée par apprentissage par renforcement ou par imitation, adaptée aux décisions séquentielles (agir, puis réagir à ce qui change) ;
+- un **classifieur calibré** à sorties typées (choix, score, booléen) qui renvoie des probabilités plutôt que du texte, adapté aux décisions ponctuelles (router, filtrer, arbitrer).
+
+Cette seconde famille a pris forme récemment, avec des modèles ouverts et fermés dédiés aux décisions typées, non autorégressifs, qui rendent leur verdict en une seule passe. Laya (poids ouverts, Apache 2.0) et Jev (API fermée) en sont deux exemples. Leurs performances annoncées doivent être vérifiées sur vos propres données, mais ils confirment la direction : **un verdict structuré et calibré vaut mieux qu'une phrase prononcée avec aplomb**.
+
+L'enjeu n'est pas d'opposer Système 1 et Système 2 mais de les **coupler**.
+
+## L'architecture de couplage
+
+Le patron se résume en quatre étapes :
+
+1. **Un Système 2 puissant**, au sol ou en périphérie, qui planifie, génère des données et joue le rôle de professeur ;
+2. **Distillation / fine-tuning** : son comportement est transféré à un petit modèle ;
+3. **Un Système 1 embarqué** qui décide en temps réel grâce à sa tête de décision ;
+4. **Escalade** : si la confiance passe sous un seuil, la décision remonte au Système 2 ou à l'opérateur humain.
+
+```text
+   ┌────────────────────────────┐
+   │ Système 2 (LLM, sol/edge)  │  planification, génération de données
+   └──────────────┬─────────────┘
+                  │ distillation / fine-tuning
+                  ▼
+   ┌────────────────────────────┐
+   │ Système 1 embarqué         │  ms → centaines de ms, inférence locale
+   │ (petit modèle + tête)      │
+   └──────────────┬─────────────┘
+                  │ confiance ≥ seuil ? ── oui ──▶ décision rapide
+                  │ non
+                  ▼
+        escalade : Système 2 ou opérateur (human-in-the-loop)
+```
+
+Tout repose sur deux propriétés, détaillées dans les sections suivantes : la **calibration** et **le droit de s'abstenir**.
+
+## Calibration, abstention et hors-distribution
+
+Un seuil de confiance n'a de sens que si la confiance reflète la probabilité d'erreur réelle. Trois points me paraissent décisifs :
+
+- **Mesurer la calibration**, par exemple avec une courbe de fiabilité, et la corriger si nécessaire (temperature scaling, prédiction conforme) ;
+- **Raisonner en termes de risque/couverture** : quelle part de décisions automatiques correspond à quel taux d'erreur ? Le seuil est un choix métier, pas un réglage technique ;
+- **Détecter les entrées hors distribution** : le Système 1 généralise mal, il doit donc savoir reconnaître qu'une entrée sort de son domaine de validité.
+
+Un exemple issu de mes propres travaux en diagnostic moléculaire, détaillé dans l'[article nanodiag](/portfolio/fr/blog/nanodiag/) (en français) : sur des données Nanopore partielles produites par échantillonnage adaptatif, des classifieurs de deep learning trouvaient la bonne classe tumorale, mais leur confiance restait systématiquement dégradée, alors qu'une Random Forest conservait une confiance maximale. L'un des outils, entraîné sur des données de génome entier, « hallucinait » sur ces données trop parcellaires. Une faible confiance sur des données partielles peut être légitime, et une confiance maximale n'est pas, à elle seule, une preuve de robustesse : la confiance doit être évaluée en conditions réelles d'utilisation, pas seulement sur un jeu de test propre.
+
+## Savoir quand s'arrêter
+
+Certaines décisions ne sont pas ponctuelles : l'information arrive en continu, et la bonne question devient « en sait-on assez pour décider ? ». Un Système 1 peut surveiller la stabilité de son propre verdict et déclencher un **arrêt anticipé** dès que la confiance se stabilise au-dessus du seuil.
+
+Le même projet de diagnostic en donne une illustration : en analysant les reads de séquençage à mesure qu'ils sont produits, on peut repérer le moment où l'information accumulée est suffisante et interrompre le run, ce qui raccourcit les délais et libère un équipement partagé. La même logique s'applique en RAG (cesser de récupérer dès que le contexte est suffisant) et dans les systèmes embarqués (cesser de collecter dès que la décision est stable).
+
+## Catalogue de cas d'usage
+
+Le patron apparaît dans des contextes très différents :
+
+| Domaine | Décision rapide | Escalade vers | Contrainte dominante |
+|---|---|---|---|
+| UCAS | Détection de dégradation ou de brouillage du lien, changement de mode | Opérateur / Système 2 | Latence, autonomie locale |
+| UCAS | Classification de signatures capteurs avec score de confiance | Opérateur | Fiabilité, erreur à haute confiance |
+| UCAS | Détection d'incohérences capteurs, déconfliction du trafic | Opérateur | Sécurité, temps réel |
+| UCAS | État du système, énergie, déclenchement de replanification | Système 2 / opérateur | Embarqué, énergie |
+| UCAS | Triage et priorisation des détections présentées à l'opérateur | Opérateur | Charge cognitive |
+| Diagnostic | Classification avec rejet, contrôle qualité en temps réel, arrêt anticipé | Biologiste / médecin | Calibration, traçabilité |
+| RAG / agents | Routage, re-ranking, réécriture, refus, garde-fous | LLM | Coût, latence |
+| Cybersécurité | Triage des alertes, arbitrage, priorisation par sévérité | Analyste | Volume, auditabilité |
+| Industrie | Maintenance prédictive, contrôle qualité en ligne | Technicien | Latence, edge |
+
+## Approfondissement 1 : les systèmes aériens sans équipage (UCAS)
+
+### Le problème
+
+Un UCAS peut opérer avec un lien dégradé, brouillé ou coupé. Les allers-retours réseau et la délibération lourde y sont des luxes : la couche rapide doit être **locale, prévisible en latence et robuste**.
+
+### Un rôle de perception, de triage et d'escalade
+
+Au niveau de l'architecture, le Système 1 embarqué prend en charge des tâches de **perception et de triage** : réagir aux événements capteurs, classifier avec un score de confiance, détecter des anomalies, gérer les modes dégradés. Il produit une **recommandation ou une alerte** (continuer, ne pas continuer, escalader), jamais une action irréversible de sa propre initiative.
+
+### Continuer, s'abstenir, escalader
+
+Le mécanisme de garde est celui décrit plus haut : sous le seuil de confiance, ou hors du domaine de validité du modèle, le comportement par défaut est **l'abstention et l'escalade**. Les décisions aux conséquences graves et irréversibles restent sous **autorité humaine** : l'IA réduit la charge cognitive et le temps de réaction ; elle ne remplace pas la responsabilité.
+
+### Évaluation en simulation
+
+Avant tout déploiement, l'évaluation se fait en simulation sur des scénarios variés, y compris dégradés (bruit capteur, perte de lien, situations hors distribution) :
+
+| Métrique | Ce qu'elle mesure |
+|---|---|
+| Latence (p50 / p99) | Réactivité, surtout dans la queue de distribution |
+| Taux de bonnes décisions | Qualité des classifications et des recommandations |
+| Taux d'erreur à haute confiance | Les erreurs les plus dangereuses : le modèle se trompe en étant sûr de lui |
+| Taux d'escalade | Charge reportée sur l'opérateur ou le Système 2 |
+| Coût de calcul / énergie | Faisabilité embarquée |
+| Dégradation hors distribution | Robustesse quand le monde sort du jeu d'entraînement |
+
+Le **taux d'erreur à haute confiance** est, à mon avis, la métrique la plus importante : une exactitude moyenne flatteuse peut cacher quelques erreurs commises avec assurance.
+
+## Approfondissement 2 : les systèmes RAG
+
+Le même patron, transposé à un contexte très différent, fait économiser beaucoup de coût et de latence.
+
+### Routage et cascade
+
+Un petit modèle intercepte chaque requête en premier. Il décide : réponse directe, récupération simple, ou escalade vers le LLM.
+
+```python
+def answer(query):
+    route = fast_router.predict(query)        # System 1
+    if route.confidence >= THRESHOLD and route.can_answer_cheaply:
+        return cheap_path(query, route)       # no LLM call
+    return llm_pipeline(query)                # System 2
+```
+
+Dans de nombreux déploiements, **la plupart des requêtes n'atteignent jamais le LLM** (questions fréquentes, requêtes de type navigation, recherches simples). C'est de là que viennent les gains de coût et de latence.
+
+### Autres couches rapides dans un pipeline RAG
+
+- **Réécriture de requête** : un petit modèle reformule ou décompose la question avant la récupération ;
+- **Re-ranking du top-k** : un cross-encoder compact réordonne les passages avant qu'ils n'atteignent le LLM, ce qui réduit le contexte et donc le coût ;
+- **Détection de refus / d'hallucination** : un classifieur léger vérifie que la réponse est ancrée dans les passages, ou qu'il vaut mieux s'abstenir ;
+- **Garde-fous** : détection d'injection de prompt en amont.
+
+### La mesure
+
+Je compare toujours les variantes sur les mêmes jeux de questions : qualité (par exemple avec RAGAS : fidélité, pertinence), latence, coût par requête, et part des requêtes traitées sans le LLM. Un routeur qui économise 60 % des appels mais dégrade la fidélité n'est pas un bon routeur.
+
+## Un classifieur en environnement réglementé : ce qui change
+
+Dans les environnements réglementés (santé, défense, finance), un classifieur performant ne suffit pas. Ce qui le rend déployable, c'est tout ce qui l'entoure :
+
+- la **traçabilité** de chaque décision (entrée, version du modèle, seuil, verdict) ;
+- le **versionnement conjoint** du modèle, des données d'entraînement et du seuil ;
+- un **jeu de validation figé** et une **revalidation** à chaque changement de modèle ;
+- la **surveillance de la dérive** en production, avec alerte quand les entrées s'éloignent du domaine d'entraînement ;
+- une **séparation stricte** des environnements de développement et de production ;
+- la **validation humaine** des décisions à fort enjeu, avec un chemin d'escalade testé comme le chemin nominal ;
+- un **journal d'audit** exploitable a posteriori.
+
+Ces exigences peuvent sembler lourdes pour un « petit » modèle. Elles ne le sont pas : un Système 1 petit, local et versionné est précisément **plus facile à valider et à auditer** qu'un LLM distant dont le comportement évolue au gré des mises à jour du fournisseur.
+
+## Souveraineté
+
+L'inférence locale supprime la dépendance à un service distant : pas de réseau requis, pas de tiers dans la boucle de décision, et une chaîne de confiance (poids, données, outillage) qui peut être auditée et maîtrisée.
+
+La licence compte autant que la technologie. Dans le projet de diagnostic mentionné plus haut, l'outil de référence n'a pas pu être fine-tuné sur nos propres données, faute de poids utilisables en contexte clinique : la limite était contractuelle avant d'être technique. À l'inverse, un modèle ouvert, auto-hébergeable, fine-tunable et auditable, comme ceux de la nouvelle famille de modèles de décision évoquée plus haut, garde la maîtrise de bout en bout.
+
+## Conclusion
+
+Penser en Système 1 / Système 2 revient à poser une question d'ingénierie simple : **qui décide, à quel coût, et que se passe-t-il quand on n'est pas sûr ?** Qu'il s'agisse d'un diagnostic, d'un drone ou d'un pipeline RAG, la réponse repose sur la même ossature : un modèle local rapide pour la routine, une confiance bien calibrée, un mécanisme d'escalade testé, et un humain ou un modèle plus puissant pour les cas qui comptent.
+
+---
+
+# Références
+
+<p id="ref-1">
+**[1]** D. Kahneman (2011).
+<i>Thinking, Fast and Slow</i> — Édition française : <i>Système 1, Système 2 : les deux vitesses de la pensée</i>.
+<a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_1_/_Syst%C3%A8me_2_:_Les_deux_vitesses_de_la_pens%C3%A9e" target="_blank" rel="noopener noreferrer">Wikipédia : Système 1 / Système 2 : Les deux vitesses de la pensée</a>
+</p>
+
+<p id="ref-2">
+**[2]** G. Hinton et al. (2015).
+<i>Distilling the Knowledge in a Neural Network</i> — travaux sur la distillation de connaissances.
+<a href="https://arxiv.org/abs/1503.02531" target="_blank" rel="noopener noreferrer">arXiv:1503.02531</a>
+</p>
+
+<p id="ref-3">
+**[3]** Littérature sur la classification avec option de rejet et la calibration des modèles.
+<a href="https://en.wikipedia.org/wiki/Calibration_(statistics)" target="_blank" rel="noopener noreferrer">Calibration (statistics) — Wikipedia</a>
+</p>
+
+<p id="ref-4">
+**[4]** Convai Innovations.
+<i>Laya</i> — dépôt et model card (famille de modèles de décision typés, Apache 2.0).
+<a href="https://huggingface.co/convaiinnovations/laya" target="_blank" rel="noopener noreferrer">huggingface.co/convaiinnovations/laya</a>
+</p>
+
+<p id="ref-5">
+**[5]** Exploding Gradients.
+<i>RAGAS</i> — documentation pour l'évaluation des pipelines RAG.
+<a href="https://docs.ragas.io/" target="_blank" rel="noopener noreferrer">docs.ragas.io</a>
+</p>
