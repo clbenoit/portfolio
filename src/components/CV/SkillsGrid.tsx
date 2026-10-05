@@ -23,6 +23,7 @@ const SKILLS_EN = [
       'Retrieval Augmented Generation (RAG)',
       'RAGAS',
       'Agentic AI Systems',
+      'Fast-Model Decision Layers (System 1, Routing, Re-ranking, Edge Inference)',
       'Algorithm Benchmarking',
       'PyTorch', 'scikit-learn', 'OpenCV',
       'LangChain', 'LangGraph', 'LlamaIndex', 'Haystack', 'OpenAI API'
@@ -100,6 +101,7 @@ const SKILLS_FR = [
       'Retrieval Augmented Generation (RAG)',
       'RAGAS',
       'Systèmes IA Agentiques',
+      'Couches de Décision Rapides (System 1, Routage, Re-ranking, Inférence Edge)',
       'Benchmark d\'Algorithmes',
       'PyTorch', 'scikit-learn', 'OpenCV',
       'LangChain', 'LangGraph', 'LlamaIndex', 'Haystack', 'OpenAI API'
