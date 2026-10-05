@@ -15,13 +15,13 @@ lang: "fr"
 
 ## Le contexte
 
-Depuis dix ans, la classification moléculaire des tumeurs du système nerveux central repose sur les profils de méthylation (puces Illumina 450K/EPIC), interprétés via le classifieur de référence développé par le DKFZ (Heidelberg) [\[1\]](/blog/nanodiag#ref-1). Cette dépendance à des plateformes propriétaires et à un outil centralisé — dont le passage récent à un modèle payant a inquiété de nombreux laboratoires — pousse à chercher des alternatives ouvertes et souveraines.
+Depuis dix ans, la classification moléculaire des tumeurs du système nerveux central repose sur les profils de méthylation (puces Illumina 450K/EPIC), interprétés via le classifieur de référence développé par le DKFZ (Heidelberg) [\[1\]](#ref-1). Cette dépendance à des plateformes propriétaires et à un outil centralisé — dont le passage récent à un modèle payant a inquiété de nombreux laboratoires — pousse à chercher des alternatives ouvertes et souveraines.
 
-Le séquençage Nanopore ouvre une piste sérieuse : des outils comme [Sturgeon](https://github.com/UMCUGenetics/sturgeon) classifient directement à partir des signaux de méthylation natifs de l'ADN, avec des performances proches des approches historiques [\[3\]](/blog/nanodiag#ref-3) — mais ils sont entraînés sur du séquençage génome entier (WGS). Or en clinique, séquencer tout le génome coûte cher et prend du temps : l'**Adaptive Sampling**, qui ne conserve en temps réel que les molécules correspondant à un panel ciblé plutôt que de lire le génome uniformément, permet d'aller plus vite et moins cher. Les auteurs de Sturgeon montrent justement que l'Adaptive Sampling améliore les performances de leur classifieur — mais ils ne publient pas le panel utilisé pour cet enrichissement.
+Le séquençage Nanopore ouvre une piste sérieuse : des outils comme [Sturgeon](https://github.com/UMCUGenetics/sturgeon) classifient directement à partir des signaux de méthylation natifs de l'ADN, avec des performances proches des approches historiques [\[3\]](#ref-3) — mais ils sont entraînés sur du séquençage génome entier (WGS). Or en clinique, séquencer tout le génome coûte cher et prend du temps : l'**Adaptive Sampling**, qui ne conserve en temps réel que les molécules correspondant à un panel ciblé plutôt que de lire le génome uniformément, permet d'aller plus vite et moins cher. Les auteurs de Sturgeon montrent justement que l'Adaptive Sampling améliore les performances de leur classifieur — mais ils ne publient pas le panel utilisé pour cet enrichissement.
 
 **D'où notre question :** peut-on concevoir nous-mêmes ce panel d'enrichissement ciblé, de façon à préserver la performance diagnostique tout en s'intégrant aux contraintes de notre plateforme mutualisée ?
 
-Ce travail s'inscrit aussi dans un enjeu national : selon le Livre Blanc de la FFGH, 46 % de la population française pourrait un jour nécessiter un examen génétique, et la France doit se doter d'infrastructures souveraines et interopérables [\[4\]](/blog/nanodiag#ref-4).
+Ce travail s'inscrit aussi dans un enjeu national : selon le Livre Blanc de la FFGH, 46 % de la population française pourrait un jour nécessiter un examen génétique, et la France doit se doter d'infrastructures souveraines et interopérables [\[4\]](#ref-4).
 
 ## Trouver le bon panel
 
@@ -33,7 +33,7 @@ Nous avons donc reconstruit le panel à partir des ~450 000 CpGs des puces Illum
 
 ## Rétablir une classification robuste
 
-Sur nos échantillons de validation, quatre approches convergeaient vers les mêmes conclusions : Sturgeon, NanoDX, PanNanoDX (sa variante pan-cancer), et les modèles Random Forest, état de l'art du diagnostic en 2023 [\[5\]](/blog/nanodiag#ref-5). Le Random Forest atteignait même 100 % de confiance.
+Sur nos échantillons de validation, quatre approches convergeaient vers les mêmes conclusions : Sturgeon, NanoDX, PanNanoDX (sa variante pan-cancer), et les modèles Random Forest, état de l'art du diagnostic en 2023 [\[5\]](#ref-5). Le Random Forest atteignait même 100 % de confiance.
 
 <figure>
   <img src="/portfolio/robin.png" alt="Description" />
@@ -50,7 +50,7 @@ Une piste naturelle pour regagner la robustesse encore manquante aux classifieur
 
 **Les profils CNV.** La classification seule ne suffit pas : les variations de nombre de copies (CNV) sont une couche d'information diagnostique essentielle. Les premières versions du panel créaient des zones sur- ou sous-représentées ; après optimisation, les profils CNV sont devenus comparables à ceux obtenus en génome entier.
 
-**Le statut MGMT.** La méthylation du promoteur MGMT est un facteur prédictif établi de la réponse au traitement des glioblastomes [\[2\]](/blog/nanodiag#ref-2). Or les régions exploitées par les outils de référence (Rapid-CNS2, DKFZ) ne correspondaient pas totalement à celles de notre premier design, d'où des résultats discordants. Conclusion : **un panel optimisé pour la classification n'est pas automatiquement optimisé pour MGMT.** Une phase d'optimisation dédiée a permis d'obtenir un panel unique satisfaisant simultanément classification, CNV et MGMT.
+**Le statut MGMT.** La méthylation du promoteur MGMT est un facteur prédictif établi de la réponse au traitement des glioblastomes [\[2\]](#ref-2). Or les régions exploitées par les outils de référence (Rapid-CNS2, DKFZ) ne correspondaient pas totalement à celles de notre premier design, d'où des résultats discordants. Conclusion : **un panel optimisé pour la classification n'est pas automatiquement optimisé pour MGMT.** Une phase d'optimisation dédiée a permis d'obtenir un panel unique satisfaisant simultanément classification, CNV et MGMT.
 
 ## Ouverture : un assistant LLM + RAG dans ROBIN
 

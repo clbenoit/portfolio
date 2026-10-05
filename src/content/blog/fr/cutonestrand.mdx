@@ -26,7 +26,7 @@ Les [troubles autosomiques dominants](https://www.genome.gov/genetics-glossary/A
 Comme son nom l'indique, la présence d'un seul allèle muté pathogène est suffisante pour
 que la maladie apparaisse, certains chercheurs comptent donc sur la technologie CRISPR-Cas9 pour briser l'allèle muté. 
 Seul l'allèle sauvage subsiste, et la maladie est ainsi guérie. 
-Bien que l'efficacité de cette approche semble prometteuse [\[1\]](/blog/cutonestrand#ref-1) [\[2\]](/blog/cutonestrand#ref-2) [\[3\]](/blog/cutonestrand#ref-3), plusieurs problèmes doivent encore être résolus, dont deux que nous allons tenter d'aborder dans cet article :
+Bien que l'efficacité de cette approche semble prometteuse [\[1\]](#ref-1) [\[2\]](#ref-2) [\[3\]](#ref-3), plusieurs problèmes doivent encore être résolus, dont deux que nous allons tenter d'aborder dans cet article :
 
 **Comment la conception de ces traitements de médecine personnalisée peut-elle être efficace et rapide pour chaque patient ?** <br/><br/>
 **Comment cibler spécifiquement l'allèle muté sans endommager l'allèle fonctionnel ni une autre partie du génome ?**
@@ -40,7 +40,7 @@ la séquence d'ADN cible correspondante dans le génome doit se trouver à côt�
 Nous allons donc tenter d'établir une liste exhaustive de toutes les régions génomiques qui pourraient être utilisées pour cette
 thérapie génique.
 1) Nous commençons par sélectionner tous les SNP fréquents dans la population (> 5 %), pour lesquels nous pouvons
-utiliser la base de données gnomAD [\[4\]](/blog/cutonestrand#ref-4). Nous souhaitons que la liste créée soit utilisable pour traiter le plus grand nombre possible de
+utiliser la base de données gnomAD [\[4\]](#ref-4). Nous souhaitons que la liste créée soit utilisable pour traiter le plus grand nombre possible de
 patients, nous évitons donc les SNP trop rares.
 2) Seuls les SNP qui induisent la disparition ou l'apparition du motif **5'-NGG-3'**
 nous permettront de cibler uniquement l'allèle muté tout en préservant le WT. Pour ce faire, nous avons écrit un script interne en Python.
@@ -50,7 +50,7 @@ ajouter les séquences flanquantes à gauche et à droite de nos SNP d'intérêt
 pour chacune des positions que nous avons sélectionnées. Nous voulions couper le gène malade efficacement,
 sans altérer d'autres régions du génome.
 
-Grâce à cette méthode, nous avons pu établir une liste de positions génomiques d'intérêt pour le traitement des myopathies liées au récepteur de la ryanodine de type 1 (RYR1-RM) de type « Autosomal-Dominant-Disorder ». [\[5\]](/blog/cutonestrand#ref-5)
+Grâce à cette méthode, nous avons pu établir une liste de positions génomiques d'intérêt pour le traitement des myopathies liées au récepteur de la ryanodine de type 1 (RYR1-RM) de type « Autosomal-Dominant-Disorder ». [\[5\]](#ref-5)
 Grâce au séquençage de nouvelle génération, il est possible d'obtenir les deux séquences génomiques d'un patient
 à un coût raisonnable. Toutes les positions de notre liste pour lesquelles le patient est hétérozygote sont donc
 candidates à la thérapie génique !
