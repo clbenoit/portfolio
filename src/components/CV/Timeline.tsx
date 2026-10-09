@@ -178,10 +178,10 @@ const EXPERIENCES_EN: RawExperience[] = [
     content: (
       <ul className="ht-bullets">
         <li>Designed and operate in production a <b>sovereign, self-hosted AI infrastructure</b>: LLM/ML model serving on Kubernetes & Docker, REST APIs, scalable LLMOps, FinOps; modular architecture, versioning and documentation.</li>
-        <li>Designed agentic workflows integrating RAG, memory and human-in-the-loop (LangChain, LangGraph, n8n), with monitoring and automation of the AI services.</li>
+        <li>Designed agentic workflows integrating RAG, memory and human-in-the-loop (LangChain, LangGraph, n8n) with monitoring and automation of the AI services, including an E2E RAG pipeline tailored to our needs: RAG databases queryable by our development agents, with profile-based permissions shared between humans and agents — a single profile grants access to the same RAG collections, whether used agentically or via web chat.</li>
         <li>Co-designed with the company Popoyoko a custom harness for AI-assisted development, usable on Desktop and Mobile environments for agentic control, optimized for STT/TTS, with end-to-end ownership and sovereignty of the model data flows. (Private repository.)</li>
-        <li>Designed an E2E RAG pipeline tailored to our needs — RAG databases queryable by our development agents, with a strict agentic permission-management system — plus a user-facing web app for the RAG system.</li>
         <li><b>Cross-functional coordination and technical leadership</b> of a <b>6+ developer collective</b> on AI and cloud services: scalable architecture, code review, prioritization and time-to-market optimization. <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> · <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a> · <a href="https://dev.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">dev.omicsverse.fr</a>.</li>
+        <li>Self-Hosted Proof-of-Stake Infrastructure & Liquid Staking Services (2024 – 2025): full-node hosting and liquid staking services for collective members, using the <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a> protocol.</li>
       </ul>
     ),
   },
@@ -207,8 +207,7 @@ const EXPERIENCES_EN: RawExperience[] = [
         <li>Authored quality documentation and SOPs for NF EN ISO 15189 accreditation — <b>COFRAC audit passed with zero non-conformities</b>.</li>
         <li>Designed and owned 7 internal web applications (4 data analysis, 3 lab operations, incl. variant interpretation interfaces), <b>adopted across the platform's ~40-user base</b>.</li>
         <li>Deployed all pipelines on sovereign on-premises infrastructure; administered a fleet of 10+ wet- and dry-lab instruments (AVITI, NextSeq 550 ×2, Ion S5, GridION).</li>
-        <li><b>Self-Hosted Proof-of-Stake Infrastructure & Liquid Staking Services (2024 – 2025)</b>: full-node hosting and liquid staking services for collective members, using the <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a> protocol.</li>
-        <li><b>OmicsVerse Portal — Open Source (2022 – 2024)</b>: omics databases and web exploration interfaces — database construction from nf-core pipeline outputs, data engineering and modeling, user training. <a href="https://clbenoit.github.io/portfolio/en/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">portfolio projects</a> · <a href="https://omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">omicsverse.fr</a>.</li>
+        <li>OmicsVerse Portal — Open Source: omics databases and web exploration interfaces — database construction from nf-core pipeline outputs, data engineering and modeling, user training. <a href="https://clbenoit.github.io/portfolio/en/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">portfolio projects</a> · <a href="https://omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -241,7 +240,7 @@ const EXPERIENCES_EN: RawExperience[] = [
     content: (
       <ul className="ht-bullets">
         <li>Performed <b>70+ statistical analyses across 3 research projects</b> over 3 years, contributing to multiple peer-reviewed publications (<b>npj Precision Oncology, Nature, Current Oncology</b>) in precision oncology, single-cell epigenomics and melanoma research.</li>
-        <li>Developed and operationalised 3 <a href="https://clbenoit.github.io/portfolio/en/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">R Shiny applications</a> for omics data analysis and visualisation, <b>enabling non-technical researchers to explore large-scale biological results interactively.</b></li>
+        <li>Developed and operationalised 3 R Shiny applications for omics data analysis and visualisation, <b>enabling non-technical researchers to explore large-scale biological results interactively.</b> <a href="https://github.com/bioinfo-pf-curie/bioshiny-modules-library" target="_blank" rel="noopener noreferrer" className="ht-link">bioinfo-pf-curie/bioshiny-modules-library</a> · <a href="https://github.com/bioinfo-pf-curie/cookieCrispR" target="_blank" rel="noopener noreferrer" className="ht-link">bioinfo-pf-curie/cookieCrispR</a>.</li>
         <li>Built <a href="https://github.com/orgs/bioinfo-pf-curie/repositories" target="_blank" rel="noopener noreferrer" className="ht-link">automated omics analysis pipelines</a> for bulk & single-cell RNA-Seq, ChIP-Seq, ATAC-Seq, and targeted gene panels.</li>
         <li>Benchmarked existing pipelines to guide platform tooling choices; developed 2 reproducible bioinformatics pipelines.</li>
         <li><b>Trained 120+ biologists and clinicians</b> in data analysis with Python/R and common bioinformatics tools.</li>
@@ -383,10 +382,10 @@ const EXPERIENCES_FR: RawExperience[] = [
     content: (
       <ul className="ht-bullets">
         <li>Conception et exploitation en production d'une <b>infrastructure IA self-hosted souveraine</b> : serving de modèles LLM/ML sur Kubernetes & Docker, API REST, LLMOps scalable, FinOps ; architecture modulaire, versionnement et documentation.</li>
-        <li>Conception de workflows agentiques intégrant RAG, mémoire, human-in-the-loop, LangChain, LangGraph, n8n, avec monitoring et automatisation des services IA.</li>
+        <li>Conception de workflows agentiques intégrant RAG, mémoire et human-in-the-loop (LangChain, LangGraph, n8n) avec monitoring et automatisation des services IA, dont un pipeline RAG E2E adapté à nos besoins : bases de données RAG interrogeables par nos agents de développement, avec une gestion des droits au sens large — profils partagés entre humains et agents, un même profil donnant accès aux mêmes collections RAG, en usage agentique comme en chat web.</li>
         <li>Co-conception avec l'entreprise Popoyoko d'un Harness sur mesure pour le développement assisté par IA, utilisable sur environnements Desktop et Mobile pour le contrôle agentique, optimisé STT/TTS, avec maîtrise de bout en bout et souveraineté de la chaîne de flux de données des modèles. (repo privé)</li>
-        <li>Conception d'un pipeline RAG E2E adapté à nos besoins, bases de données RAG interrogeables par nos agents de développement avec un système de gestion des droits agentiques strict ; conception d'une web app utilisateur pour le système RAG.</li>
         <li><b>Coordination transverse et leadership technique</b> d'un <b>collectif de 6+ développeurs</b> sur les services IA et cloud : architecture scalable, revue de code, priorisation et optimisation du time-to-market. <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> · <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a> · <a href="https://dev.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">dev.omicsverse.fr</a>.</li>
+        <li>Infrastructure Proof-of-Stake self-hosted & Liquid Staking Services (2024 – 2025) : hébergement de nœuds complets Proof-of-Stake et services de liquid staking pour les membres du collectif, utilisant le protocole <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a>.</li>
       </ul>
     ),
   },
@@ -412,8 +411,7 @@ const EXPERIENCES_FR: RawExperience[] = [
         <li>Rédaction de la documentation qualité et des SOP pour l'accréditation NF EN ISO 15189 — <b>audit COFRAC réussi avec zéro non-conformité</b>.</li>
         <li>Conception et responsabilité de 7 applications web internes (4 d'analyse de données, 3 d'opérations de laboratoire, dont interfaces d'interprétation de variants), <b>adoptées par les ~40 utilisateurs de la plateforme</b>.</li>
         <li>Déploiement de tous les pipelines sur infrastructure souveraine on-premise ; administration d'un parc de 10+ instruments de laboratoire humide et sec (AVITI, NextSeq 550 ×2, Ion S5, GridION).</li>
-        <li><b>Infrastructure Proof-of-Stake self-hosted & Liquid Staking Services (2024 – 2025)</b> : hébergement de nœuds complets Proof-of-Stake et services de liquid staking pour les membres du collectif, utilisant le protocole <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a>.</li>
-        <li><b>OmicsVerse Portal — Open-source (2022 – 2024)</b> : bases de données omiques et interfaces web d'exploration — construction des BDD à partir des sorties de pipelines nf-core, ingénierie et modélisation de la donnée, formation des utilisateurs. <a href="https://clbenoit.github.io/portfolio/fr/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">projets du portfolio</a> · <a href="https://omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">omicsverse.fr</a>.</li>
+        <li>OmicsVerse Portal — Open-source : bases de données omiques et interfaces web d'exploration — construction des BDD à partir des sorties de pipelines nf-core, ingénierie et modélisation de la donnée, formation des utilisateurs. <a href="https://clbenoit.github.io/portfolio/fr/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">projets du portfolio</a> · <a href="https://omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -446,7 +444,7 @@ const EXPERIENCES_FR: RawExperience[] = [
     content: (
       <ul className="ht-bullets">
         <li>Réalisation de <b>70+ analyses statistiques sur 3 projets de recherche</b> en 3 ans, contribuant à plusieurs publications scientifiques (<b>npj Precision Oncology, Nature, Current Oncology</b>) en oncologie de précision, épigénomique single-cell et recherche sur le mélanome.</li>
-        <li>Développement et mise en production de 3 <a href="https://clbenoit.github.io/portfolio/fr/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">applications R Shiny</a> pour l'analyse et la visualisation de données omiques, <b>permettant aux chercheurs non-informaticiens d'explorer de manière interactive des résultats biologiques à grande échelle.</b></li>
+        <li>Développement et mise en production de 3 applications R Shiny d'analyse et de visualisation de données omiques, <b>permettant aux chercheurs non-informaticiens d'explorer de manière interactive des résultats biologiques à grande échelle.</b> <a href="https://github.com/bioinfo-pf-curie/bioshiny-modules-library" target="_blank" rel="noopener noreferrer" className="ht-link">bioinfo-pf-curie/bioshiny-modules-library</a> · <a href="https://github.com/bioinfo-pf-curie/cookieCrispR" target="_blank" rel="noopener noreferrer" className="ht-link">bioinfo-pf-curie/cookieCrispR</a>.</li>
         <li>Construction de <a href="https://github.com/orgs/bioinfo-pf-curie/repositories" target="_blank" rel="noopener noreferrer" className="ht-link">pipelines d'analyse omique automatisés</a> pour RNA-Seq bulk & single-cell, ChIP-Seq, ATAC-Seq et panels de gènes ciblés.</li>
         <li>Benchmark de pipelines existants pour orienter les choix d'outils de la plateforme ; développement de 2 pipelines bioinformatiques reproductibles.</li>
         <li><b>Formation de 120+ biologistes et cliniciens</b> à l'analyse de données avec Python/R et aux outils bioinformatiques courants.</li>
