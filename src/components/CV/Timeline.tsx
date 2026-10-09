@@ -95,10 +95,14 @@ const MONTHS_FR = {
   juil:6, aou:7, 'août':7, aout:7, sep:8, oct:9, nov:10, 'déc':11, dec:11,
 };
 
-/** Try to match a month abbreviation in both English and French maps. */
-function resolveMonth(m3: string): number | null {
-  if (m3 in MONTHS) return MONTHS[m3];
-  if (m3 in MONTHS_FR) return MONTHS_FR[m3];
+/** Try to match a month abbreviation (3- or 4-char prefix) in both English and French maps. */
+function resolveMonth(name: string): number | null {
+  const s = String(name).toLowerCase();
+  for (let n = 3; n <= Math.min(s.length, 4); n++) {
+    const p = s.slice(0, n);
+    if (p in MONTHS) return MONTHS[p];
+    if (p in MONTHS_FR) return MONTHS_FR[p];
+  }
   return null;
 }
 
@@ -107,7 +111,7 @@ function yearToFloat(label: string | null): number | null {
   if (!label) return null;
   const m = String(label).trim().match(/^([a-zÀ-ÿ]{3,9})\s+(\d{4})$/i);
   if (m) {
-    const ml = m[1].toLowerCase().slice(0, 3);
+    const ml = m[1].toLowerCase();
     const yr = Number(m[2]);
     const monthIdx = resolveMonth(ml);
     return monthIdx !== null && !isNaN(yr) ? yr + monthIdx / 12 : yr;
@@ -120,13 +124,15 @@ function monthFromLabel(label: string | null): number | null {
   if (!label) return null;
   const m = String(label).trim().match(/^([a-zÀ-ÿ]{3,9})\s+\d{4}$/i);
   if (m) {
-    const ml = m[1].toLowerCase().slice(0, 3);
+    const ml = m[1].toLowerCase();
     return resolveMonth(ml);
   }
   return null;
 }
 
-/** Parse "Start - End" into { start, end, present, point, startMonth, endMonth }. */
+/** Parse "Start - End" into { start, end, present, point, startMonth, endMonth }.
+ *  Closed ranges are end-exclusive: `end` is the start of the month after the last
+ *  covered month (bare-year end = full year), so the bar length matches the badge. */
 function parseRange(label: string, nowYearFloat: number): RangeResult {
   const s = String(label || '');
   const present = /present|now|présent$/i.test(s);
@@ -137,7 +143,11 @@ function parseRange(label: string, nowYearFloat: number): RangeResult {
   const startMonth = monthFromLabel(startLabel);
   let end = endLabel ? yearToFloat(endLabel) : start;
   let endMonth = endLabel ? monthFromLabel(endLabel) : startMonth;
-  if (present) { end = nowYearFloat; endMonth = Math.round((nowYearFloat - Math.floor(nowYearFloat)) * 12); }
+  if (present) {
+    end = nowYearFloat; endMonth = Math.round((nowYearFloat - Math.floor(nowYearFloat)) * 12);
+  } else if (endLabel && end !== null) {
+    end = end + (endMonth === null ? 1 : 1 / 12);
+  }
   return {
     start: start ?? end ?? nowYearFloat,
     end: end ?? start ?? nowYearFloat,
@@ -155,21 +165,23 @@ function parseRange(label: string, nowYearFloat: number): RangeResult {
 
 const EXPERIENCES_EN: RawExperience[] = [
   {
-    id: 'coordinator',
-    displayRange: 'January 2026 - Present',
-    startLabel: 'January 2026',
+    id: 'cnc-collective',
+    displayRange: 'January 2025 - Present',
+    startLabel: 'January 2025',
     endLabel: 'Present',
-    title: 'Coordinator',
+    title: 'Self-Hosted AI Infrastructure & Automation',
     subtitle: 'CNC Collective',
-    location: 'Grenoble',
+    location: 'Grenoble, Paris, Decentralized',
     displayOrder: 0,
     type: 'work',
     isCurrent: true,
     content: (
       <ul className="ht-bullets">
-        <li>Coordinator of a <b>6+ member collaborative developer collective</b> focused on distributed technologies and scalable application architecture.</li>
-        <li>Provided to members: Proof-of-Stake full-node hosting and liquid staking services powered by the <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a> protocol.</li>
-        <li><b>Cross-functional team coordination and technical leadership</b> across the collective's services: <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> and <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a>.</li>
+        <li>Designed and operate in production a <b>sovereign, self-hosted AI infrastructure</b>: LLM/ML model serving on Kubernetes & Docker, REST APIs, scalable LLMOps, FinOps; modular architecture, versioning and documentation.</li>
+        <li>Designed agentic workflows integrating RAG, memory and human-in-the-loop (LangChain, LangGraph, n8n), with monitoring and automation of the AI services.</li>
+        <li>Co-designed with the company Popoyoko a custom harness for AI-assisted development, usable on Desktop and Mobile environments for agentic control, optimized for STT/TTS, with end-to-end ownership and sovereignty of the model data flows. (Private repository.)</li>
+        <li>Designed an E2E RAG pipeline tailored to our needs — RAG databases queryable by our development agents, with a strict agentic permission-management system — plus a user-facing web app for the RAG system.</li>
+        <li><b>Cross-functional coordination and technical leadership</b> of a <b>6+ developer collective</b> on AI and cloud services: scalable architecture, code review, prioritization and time-to-market optimization. <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> · <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a> · <a href="https://dev.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">dev.omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -195,6 +207,8 @@ const EXPERIENCES_EN: RawExperience[] = [
         <li>Authored quality documentation and SOPs for NF EN ISO 15189 accreditation — <b>COFRAC audit passed with zero non-conformities</b>.</li>
         <li>Designed and owned 7 internal web applications (4 data analysis, 3 lab operations, incl. variant interpretation interfaces), <b>adopted across the platform's ~40-user base</b>.</li>
         <li>Deployed all pipelines on sovereign on-premises infrastructure; administered a fleet of 10+ wet- and dry-lab instruments (AVITI, NextSeq 550 ×2, Ion S5, GridION).</li>
+        <li><b>Self-Hosted Proof-of-Stake Infrastructure & Liquid Staking Services (2024 – 2025)</b>: full-node hosting and liquid staking services for collective members, using the <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a> protocol.</li>
+        <li><b>OmicsVerse Portal — Open Source (2022 – 2024)</b>: omics databases and web exploration interfaces — database construction from nf-core pipeline outputs, data engineering and modeling, user training. <a href="https://clbenoit.github.io/portfolio/en/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">portfolio projects</a> · <a href="https://omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -356,21 +370,23 @@ const EXPERIENCES_EN: RawExperience[] = [
 
 const EXPERIENCES_FR: RawExperience[] = [
   {
-    id: 'coordinator',
-    displayRange: 'Janvier 2026 - Présent',
-    startLabel: 'Janvier 2026',
+    id: 'cnc-collective',
+    displayRange: 'Janvier 2025 - Présent',
+    startLabel: 'Janvier 2025',
     endLabel: 'Présent',
-    title: 'Coordinateur',
+    title: 'Infrastructure IA self-hosted & automatisation',
     subtitle: 'CNC Collective',
-    location: 'Grenoble',
+    location: 'Grenoble, Paris, Décentralisé',
     displayOrder: 0,
     type: 'work',
     isCurrent: true,
     content: (
       <ul className="ht-bullets">
-        <li>Coordinateur d'un <b>collectif de développement collaboratif de 6+ membres</b> axé sur les technologies distribuées et l'architecture d'applications scalables.</li>
-        <li>Services fournis aux membres : hébergement de nœuds complets Proof-of-Stake et services de liquid staking basés sur le protocole <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a>.</li>
-        <li><b>Coordination d'équipe transverse et leadership technique</b> sur les services du collectif : <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> et <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a>.</li>
+        <li>Conception et exploitation en production d'une <b>infrastructure IA self-hosted souveraine</b> : serving de modèles LLM/ML sur Kubernetes & Docker, API REST, LLMOps scalable, FinOps ; architecture modulaire, versionnement et documentation.</li>
+        <li>Conception de workflows agentiques intégrant RAG, mémoire, human-in-the-loop, LangChain, LangGraph, n8n, avec monitoring et automatisation des services IA.</li>
+        <li>Co-conception avec l'entreprise Popoyoko d'un Harness sur mesure pour le développement assisté par IA, utilisable sur environnements Desktop et Mobile pour le contrôle agentique, optimisé STT/TTS, avec maîtrise de bout en bout et souveraineté de la chaîne de flux de données des modèles. (repo privé)</li>
+        <li>Conception d'un pipeline RAG E2E adapté à nos besoins, bases de données RAG interrogeables par nos agents de développement avec un système de gestion des droits agentiques strict ; conception d'une web app utilisateur pour le système RAG.</li>
+        <li><b>Coordination transverse et leadership technique</b> d'un <b>collectif de 6+ développeurs</b> sur les services IA et cloud : architecture scalable, revue de code, priorisation et optimisation du time-to-market. <a href="https://ai.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">ai.omicsverse.fr</a> · <a href="https://cloud.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">cloud.omicsverse.fr</a> · <a href="https://dev.omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">dev.omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -396,6 +412,8 @@ const EXPERIENCES_FR: RawExperience[] = [
         <li>Rédaction de la documentation qualité et des SOP pour l'accréditation NF EN ISO 15189 — <b>audit COFRAC réussi avec zéro non-conformité</b>.</li>
         <li>Conception et responsabilité de 7 applications web internes (4 d'analyse de données, 3 d'opérations de laboratoire, dont interfaces d'interprétation de variants), <b>adoptées par les ~40 utilisateurs de la plateforme</b>.</li>
         <li>Déploiement de tous les pipelines sur infrastructure souveraine on-premise ; administration d'un parc de 10+ instruments de laboratoire humide et sec (AVITI, NextSeq 550 ×2, Ion S5, GridION).</li>
+        <li><b>Infrastructure Proof-of-Stake self-hosted & Liquid Staking Services (2024 – 2025)</b> : hébergement de nœuds complets Proof-of-Stake et services de liquid staking pour les membres du collectif, utilisant le protocole <a href="https://stakewise.io" target="_blank" rel="noopener noreferrer" className="ht-link">StakeWise V3</a>.</li>
+        <li><b>OmicsVerse Portal — Open-source (2022 – 2024)</b> : bases de données omiques et interfaces web d'exploration — construction des BDD à partir des sorties de pipelines nf-core, ingénierie et modélisation de la donnée, formation des utilisateurs. <a href="https://clbenoit.github.io/portfolio/fr/projects/" target="_blank" rel="noopener noreferrer" className="ht-link">projets du portfolio</a> · <a href="https://omicsverse.fr" target="_blank" rel="noopener noreferrer" className="ht-link">omicsverse.fr</a>.</li>
       </ul>
     ),
   },
@@ -556,13 +574,13 @@ const EXPERIENCES_FR: RawExperience[] = [
 ];
 
 /** Deterministic "now" for SSG builds. Bump when the CV is edited. */
-const ROLLOUT_YEAR = 2027 + 1/12; // February 2027
+const ROLLOUT_YEAR = 2026 + 9/12; // October 2026
 
 // ---- Duration labels ----
 
 const DURATION = {
-  fr: { y: 'an', ys: 'ans', m: 'mois' },
-  en: { y: 'year', ys: 'years', m: 'months' },
+  fr: { y: 'an', ys: 'ans', m: 'mois', m1: 'mois' },
+  en: { y: 'year', ys: 'years', m: 'months', m1: 'month' },
 };
 
 /** Format a duration in years/months (inclusive: the end month is counted). */
@@ -572,7 +590,7 @@ export function formatDuration(exp: EnrichedExperience, lang: string = 'en'): st
   const sm = startMonth ?? 0;
   const em = endMonth ?? (present ? Math.round((end - Math.floor(end)) * 12) : 11);
   const sy = Math.floor(start);
-  const ey = Math.floor(end);
+  const ey = Math.floor(end - 1e-9); // end is exclusive → last covered year
   let totalMonths = (ey - sy) * 12 + (em - sm) + 1;
   if (present) {
     const nowMonths = Math.round((end - start) * 12);
@@ -582,9 +600,9 @@ export function formatDuration(exp: EnrichedExperience, lang: string = 'en'): st
   const y = Math.floor(totalMonths / 12);
   const m = totalMonths % 12;
   const L = DURATION[lang] || DURATION.en;
-  if (y === 0) return `${m} ${L.m}`;
+  if (y === 0) return `${m} ${m === 1 ? L.m1 : L.m}`;
   if (m === 0) return `${y} ${y > 1 ? L.ys : L.y}`;
-  return `${y} ${y > 1 ? L.ys : L.y} ${m} ${L.m}`;
+  return `${y} ${y > 1 ? L.ys : L.y} ${m} ${m === 1 ? L.m1 : L.m}`;
 }
 
 // Pre-compute numeric bounds for every entry (module-level, once per locale).

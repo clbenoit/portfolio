@@ -169,7 +169,7 @@ const SKILLS_FR = [
   }
 ];
 
-const AUTOPLAY_INTERVAL = 2500;   // 3s per category
+const AUTOPLAY_INTERVAL = 5000;   // 5s per category (2x former 2.5s interval)
 const RESUME_DELAY = 7000;        // resume autoplay 9s after user interaction
 
 interface SkillCategory {
