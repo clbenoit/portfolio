@@ -1,0 +1,126 @@
+---
+title: "CNC Collective"
+description: "Sovereign self-hosted AI infrastructure, cloud services & agentic development by a 6+ developer collective."
+category: "cnc"
+lang: "en"
+---
+
+# CNC Collective
+
+<div>
+  <h3>
+    <i>Sovereign self-hosted AI infrastructure, cloud services &amp; agentic development — a collective, not a company.</i>
+  </h3>
+</div>
+
+**CNC (Chartreuse Node Crew)** is a **6+ developer collective** (Grenoble, Paris, decentralized) that I
+**co-founded**, for which I provide **cross-functional coordination and technical leadership**: scalable
+architecture, code review, prioritization and time-to-market optimization.
+The members are **full-stack, data and infrastructure** developers working in a decentralized
+remote setup: each one contributes to the collective's services in the **shared monorepo**
+(development platform documented below), in their own isolated scope.
+See the [CNC card in the CV](/portfolio/en/cv/).
+
+## The collective's services
+
+The collective **develops and operates in production, for its members**:
+
+| Service | Role |
+|---|---|
+| [ai.omicsverse.fr](https://ai.omicsverse.fr) | Self-hosted AI infrastructure: LLM/ML model serving, REST API, fine-tuning |
+| [cloud.omicsverse.fr](https://cloud.omicsverse.fr) | Cloud services: enterprise Nextcloud, secure collaboration |
+| [dev.omicsverse.fr](https://dev.omicsverse.fr) | Development platform: agentic harness for AI-assisted development |
+
+The services are used **in agentic use as in web chat**: our development agents are
+first-class clients, with the same profiles and the same permissions as human members.
+Access currently restricted to the collective's members — **public opening soon**.
+
+## Development platform — monorepo & warmess (dev.omicsverse.fr)
+
+The collective's services are developed in a **shared monorepo** (Bun workspaces) that
+centralizes applications, component library and development tooling:
+
+- `projects/` — the collective's applications (AI platform, internal tools)
+- `packages/ui` — shared React 19 UI kit (Panda CSS) + design tokens
+- `core/` — CLI, launchers, preview gateway (each worktree served on a single port) and the **warmess** harness
+- Agent-first conventions: `dev` → `main` trunk, zone and work branches, **no GitHub PRs** — deterministic rebases and direct merges driven by dedicated agents
+
+### warmess — the development agents' harness (co-designed with Popoyoko)
+
+A custom harness **on top of OpenCode (Manager)**, optimized for **development agent autonomy**,
+usable on **Desktop and Mobile** (**STT/TTS** optimized):
+
+- **Git history as a graph**: every commit is a node (React Flow), branches are lanes, merges fan out — the state of the repository is visible at a glance
+- **Isolated agent contexts ("scopes")**: one click on a branch spawns a git worktree, a work branch and a dedicated OpenCode session — branches are always created by the harness, never by the agents
+- **Deterministic git operations**: the harness runs the rebases itself (temporary worktree, `push --force-with-lease`); an agent steps in only on conflicts. Merges are driven by an isolated agent following deterministic rules (fast-forward for a single commit, merge commit otherwise, then the work branch is deleted)
+- **Session-less scopes**: worktree + branch + subtask list, no AI session — each subtask can be launched as a **child scope** (a branch cut from the parent's own branch), and an agent can be attached at any time
+- **Real-time control**: live status (running / stalled / delegating), conversation viewable and answered from the UI, per-context system prompt editing, abort / resume
+- **End-to-end sovereignty**: self-hosted LLM (vLLM), single authentication shared with the platform — the chain of model data flows stays under the collective's control
+
+[dev.omicsverse.fr](https://dev.omicsverse.fr) (private repository)
+
+## Self-hosted AI infrastructure & automation (January 2025 – present)
+
+<video
+  autoPlay
+  loop
+  muted
+  playsInline
+  disablePictureInPicture
+  disableRemotePlayback
+  style={{ maxWidth: "100%", height: "auto" }}
+>
+  <source src="/portfolio/ai.webm" type="video/webm" />
+</video>
+
+Designed and operated in production a **sovereign, self-hosted AI infrastructure**:
+
+- LLM/ML model serving on **Kubernetes &amp; Docker**, REST API and web interface for interactive model testing
+- Scalable **LLMOps** and **FinOps**; modular architecture, versioning and documentation
+- Fine-tuning and custom model adaptation; member authentication &amp; secure management
+- HPC &amp; Cloud ready (Singularity, High Performance Computing)
+- Advanced data science (inferential statistics, graph theory)
+- Blockchain-enabled AI (on-chain data analysis and smart contract interaction)
+- High-uptime monitoring and distributed systems reliability
+
+### Agentic workflows
+
+- Workflows integrating **RAG, memory and human-in-the-loop** (LangChain, LangGraph, n8n), with monitoring and automation of the AI services
+- **E2E RAG pipeline** tailored to our needs: RAG databases queryable by our development agents, with a broad-scope permissions model — **profiles shared between humans and agents**: a single profile grants access to the same RAG collections, in agentic use as in web chat
+
+### Development platform
+
+The development harness (co-designed with Popoyoko) and the collective's monorepo are
+documented in the "Development platform — monorepo & warmess" section above.
+
+## Cloud services (January 2025 – present)
+
+<video
+  autoPlay
+  loop
+  muted
+  playsInline
+  disablePictureInPicture
+  disableRemotePlayback
+  style={{ maxWidth: "100%", height: "auto" }}
+>
+  <source src="/portfolio/cloud.webm" type="video/webm" />
+</video>
+
+An **enterprise-grade Nextcloud instance** for secure collaboration:
+
+- Secure file storage &amp; synchronization; team collaboration tools
+- Privacy-first architecture; centralized team management
+- Experimental decentralized storage via **IPFS** integration
+- Integration with the AI services at [ai.omicsverse.fr](https://ai.omicsverse.fr)
+
+## Proof-of-Stake & liquid staking (2024 – 2025)
+
+Historical sub-period of the collective: full-node **Proof-of-Stake** hosting and
+**liquid staking** services for members on the [StakeWise V3](https://stakewise.io)
+protocol — a **two-year** service-providing period.
+
+**Outcomes** — Over the two-year service-providing period, **~90% of the members** who
+used the service **exited in gains**; the remainder (~10%) is attributable to a novice
+client whose keys were corrupted. It was then superseded by the collective's pivot
+to AI infrastructure (January 2025 – ).

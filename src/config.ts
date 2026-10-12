@@ -42,10 +42,8 @@ export const sidebar = [
     ],
   },
   {
-    text: 'Web3 Engineering Group (CNC)',
-    items: [
-      { text: 'CNC AI Models', href: '/portfolio/projects/cnc-ai/' },
-      { text: 'CNC Cloud Services', href: '/portfolio/projects/cnc-cloud/' },
-    ],
+    text: 'CNC Collective',
+    href: '/portfolio/projects/cnc-collective/',
+    link: true,
   },
 ];

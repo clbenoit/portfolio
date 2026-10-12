@@ -17,13 +17,19 @@ const cncProjects = projects.filter(p => p.data.category === 'cnc');
   </video>
 
   <p>L'objectif initial du portail <a href="https://omicsverse.fr">OmicsVerse</a> est d'héberger des versions de démonstration des différentes applications de données que je crée.</p>
+  <p>Les bases de données sont construites à partir des sorties de pipelines nf-core : ingénierie et modélisation de la donnée, formation des utilisateurs.</p>
   <p>Le code source des applications et la documentation pour les administrateurs sont disponibles sur mon <a href="https://github.com/clbenoit">github</a>.</p>
   <p>Les sections et pages suivantes hébergeront la documentation détaillée pour les utilisateurs.</p>
   <p>Si vous avez une application de données à orientation génomique à héberger, n'hésitez pas à me contacter, sous réserve de ressources disponibles.</p>
 
   <ul>
     {omicsApps.map(p => (
-      <li><a href={`/portfolio/fr/projects/${p.id}/`}>{p.data.title}</a></li>
+      <li>
+        <a href={`/portfolio/fr/projects/${p.id}/`}>{p.data.title}</a>
+        {p.data.description && (
+          <div class="project-list-desc">{p.data.description}</div>
+        )}
+      </li>
     ))}
   </ul>
 
@@ -44,51 +50,19 @@ const cncProjects = projects.filter(p => p.data.category === 'cnc');
     <li>Développer une expertise collective plutôt que de l'externaliser.</li>
   </ul>
 
-  <h2>Chartreuse Node Crew</h2>
+  <h2>CNC Collective</h2>
 
-  <p>Co-fondateur et responsable d'une équipe de développement Web3 collaborative. Cette initiative rassemble des développeurs passionnés pour explorer et construire des applications décentralisées.</p>
+  <p><b>CNC (Chartreuse Node Crew)</b> est un collectif de 6+ développeurs (Grenoble, Paris, décentralisé) que je cofonde, avec coordination transverse et leadership technique : architecture scalable, revue de code, priorisation et optimisation du time-to-market. Le collectif développe et opère en production pour ses membres une <b>infrastructure IA self-hosted souveraine</b> (serving de modèles LLM/ML, workflows agentiques), des <b>services cloud</b> et une <b>plateforme de développement</b> (harness agentique). Avant ce pivot, il a fourni pendant deux ans (2024 – 2025) un service de liquid staking : ~90 % des membres en sont sortis en gains.</p>
 
-  <p><b>Domaines d'expertise :</b> Développement de smart contracts, protocoles DeFi, architecture blockchain</p>
-
-  <h3>Modèles IA CNC</h3>
-
-  <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback style="max-width: 100%; height: auto">
-    <source src="/portfolio/ai.webm" type="video/webm" />
-  </video>
-
-  <p>Modèles d'IA accessibles hébergés sur une <a href="https://ai.omicsverse.fr">plateforme dédiée</a> pour les <em>membres du CNC crew</em></p>
-
-  <p><b>Fonctionnalités :</b></p>
   <ul>
-    <li>Interface web pour des tests interactifs de modèles</li>
-    <li>API REST pour un accès programmatique</li>
-    <li>Modèles de langage et ML à la pointe</li>
-    <li>Authentification utilisateur et gestion sécurisée</li>
-    <li>Fine-tuning et adaptation de modèles personnalisés</li>
-    <li>LLMOps évolutif avec Kubernetes et Docker</li>
-    <li>Prêt pour HPC et Cloud (Singularity, calcul haute performance)</li>
-    <li>Data science avancée (statistiques inférentielles et théorie des graphes)</li>
-    <li>IA activée par blockchain (analyse on-chain et interaction smart contracts)</li>
-    <li>Surveillance haute disponibilité et fiabilité des systèmes distribués</li>
-    <li>Intégration avec nos services Cloud sur <a href="https://cloud.omicsverse.fr">cloud.omicsverse.fr</a></li>
-  </ul>
-
-  <h3>Services Cloud CNC</h3>
-
-  <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback style="max-width: 100%; height: auto">
-    <source src="/portfolio/cloud.webm" type="video/webm" />
-  </video>
-
-  <p>Instance <a href="https://cloud.omicsverse.fr">Nextcloud</a> de qualité professionnelle pour une collaboration sécurisée.</p>
-
-  <p><b>Fonctionnalités :</b></p>
-  <ul>
-    <li>Stockage sécurisé de fichiers et synchronisation</li>
-    <li>Outils de collaboration d'équipe</li>
-    <li>Architecture respectueuse de la vie privée</li>
-    <li>Gestion centralisée des équipes</li>
-    <li>Stockage décentralisé expérimental via intégration IPFS</li>
-    <li>Intégration avec nos services IA sur <a href="https://ai.omicsverse.fr">ai.omicsverse.fr</a></li>
+    {cncProjects.map(p => (
+      <li>
+        <a href={`/portfolio/fr/projects/${p.id}/`}>{p.data.title}</a>
+        {p.data.description && (
+          <div class="project-list-desc">{p.data.description}</div>
+        )}
+      </li>
+    ))}
   </ul>
 
   <h2>Références</h2>
@@ -112,3 +86,11 @@ const cncProjects = projects.filter(p => p.data.category === 'cnc');
     <a href="https://spyro-soft.com/blog/healthcare/ce-marking-for-medical-device-software" target="_blank" rel="noopener noreferrer">URL</a>
   </p>
 </DefaultLayout>
+
+<style>
+  .project-list-desc {
+    color: var(--color-text3);
+    font-size: 0.9em;
+    margin-top: 2px;
+  }
+</style>
