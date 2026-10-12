@@ -45,5 +45,12 @@ export const sidebar = [
     text: 'CNC Collective',
     href: '/portfolio/projects/cnc-collective/',
     link: true,
+    items: [
+      { text: 'Services', href: '/portfolio/projects/cnc-collective/#services' },
+      { text: 'Development platform (warmess)', href: '/portfolio/projects/cnc-collective/#plateforme' },
+      { text: 'AI infrastructure & automation', href: '/portfolio/projects/cnc-collective/#infra-ia' },
+      { text: 'Cloud services', href: '/portfolio/projects/cnc-collective/#cloud' },
+      { text: 'PoS & liquid staking', href: '/portfolio/projects/cnc-collective/#pos' },
+    ],
   },
 ];

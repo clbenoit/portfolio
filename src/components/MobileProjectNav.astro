@@ -10,7 +10,7 @@ const { lang = 'en' } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 type Chip = { text: string; href: string };
-type Section = { text: string; items: Chip[] };
+type Section = { text: string; href?: string; items: Chip[] };
 
 const newsletterHref = localizedHref('/portfolio/newsletter/', lang);
 const newsletterChip: Chip = { text: 'Newsletter', href: newsletterHref };
@@ -29,16 +29,22 @@ if (isOverview) {
   ];
 } else {
   const currentSection = allSections.find(s =>
-    s.items.some(item => currentPath === localizedHref(item.href, lang))
+    s.items.some(item => currentPath === localizedHref(item.href, lang)) ||
+    (s.href ? currentPath === localizedHref(s.href, lang) : false)
   );
   if (currentSection) {
     const items = currentSection.items.map(item => ({
       text: item.text,
       href: localizedHref(item.href, lang),
     }));
-    const active = items.find(item => currentPath === item.href)!;
-    const siblings = items.filter(item => currentPath !== item.href);
-    chips = [active, newsletterChip, ...siblings];
+    // Section with its own page link (CNC Collective): the page link is the active
+    // chip, the anchor items are siblings (fragments never match currentPath).
+    const sectionChip = currentSection.href
+      ? { text: currentSection.text, href: localizedHref(currentSection.href, lang) }
+      : undefined;
+    const active = sectionChip ?? items.find(item => currentPath === item.href);
+    const siblings = sectionChip ? items : items.filter(item => currentPath !== item.href);
+    chips = active ? [active, newsletterChip, ...siblings] : [newsletterChip];
   } else {
     chips = [newsletterChip];
   }
