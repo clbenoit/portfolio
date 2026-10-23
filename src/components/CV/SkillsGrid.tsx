@@ -18,6 +18,7 @@ const SKILLS_EN = [
     name: 'AI & Machine Learning',
     items: [
       'Machine Learning', 'Deep Learning',
+      'Gradient Boosting Machines (XGBoost, LightGBM, CatBoost)',
       'AI/ML Development', 'MLOps / AI Ops',
       'GenAI & LLMs',
       'Retrieval Augmented Generation (RAG)',
@@ -96,6 +97,7 @@ const SKILLS_FR = [
     name: 'IA & Machine Learning',
     items: [
       'Machine Learning', 'Deep Learning',
+      'Gradient Boosting Machines (XGBoost, LightGBM, CatBoost)',
       'Développement IA/ML', 'MLOps / AI Ops',
       'GenAI & LLMs',
       'Retrieval Augmented Generation (RAG)',
